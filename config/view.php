@@ -22,4 +22,8 @@ return [
     'taglib_begin'  => '{',
     // 标签库标签结束标记
     'taglib_end'    => '}',
+    // 布局模板开关
+    'layout_on'     => false,
+    // 布局模板名称
+    'layout_name'   => '',//layout/default
 ];

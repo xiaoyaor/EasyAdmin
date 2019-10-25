@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{$config.language}">
+    <head>
+        {include file="common/meta" /}
+    </head>
+
+    <body class="inside-header inside-aside ">
+        <div id="main" role="main">
+            <div class="tab-content tab-addtabs">
+                <div id="content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <section class="content-header hide">
+                                <h1>
+                                    {:__('Dashboard')}
+                                    <small>{:__('Control panel')}</small>
+                                </h1>
+                            </section>
+                            <div class="content">
+                                {__CONTENT__}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {include file="common/script" /}
+    </body>
+</html>
