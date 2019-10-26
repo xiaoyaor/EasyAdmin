@@ -64,7 +64,13 @@ class Index extends Backend
     {
         $url = Request::get('url', 'index/index');
         if ($this->auth->isLogin()) {
-            $this->success(__("You've logged in, do not login again"), $url);
+            $data=[
+                'url' =>$url,
+                'id' =>$this->auth->id,
+                'username' =>$this->auth->username,
+                'avatar' =>$this->auth->avatar,
+            ];
+            $this->success(__("You've logged in, do not login again"), $url,$data);
         }
         if (Request::isPost()) {
             $username = Request::post('username');
