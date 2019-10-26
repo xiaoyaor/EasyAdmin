@@ -195,7 +195,7 @@ class Auth extends \fast\Auth
                 return false;
             }
         }
-        if (!isset($admin['loginip']) || $admin['loginip'] != request()->ip(0, false)) {
+        if (!isset($admin['loginip']) || $admin['loginip'] != request()->ip()) {
             return false;
         }
         $this->logined = true;
@@ -373,7 +373,7 @@ class Auth extends \fast\Auth
     public function getSidebar($params = [], $fixedPage = 'dashboard')
     {
         // 边栏开始
-        Event::listen("admin_sidebar_begin", $params);
+        Event::trigger("admin_sidebar_begin", $params);
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];

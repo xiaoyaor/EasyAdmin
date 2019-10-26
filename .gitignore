@@ -5,3 +5,4 @@
 .env
 /启动.bat
 /composer.lock
+/public/storage/
