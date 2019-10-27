@@ -24,6 +24,10 @@ composer update topthink/framework
 
 请访问 [极易官网](https://www.easyadmin.vip)。
 
+## QQ群
+
+EasyAdmin交流群:[863713643](//shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129)
+
 ## 文档
 
 [极易开发手册](https://doc.easyadmin.vip)。
