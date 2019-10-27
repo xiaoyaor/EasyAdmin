@@ -1,6 +1,6 @@
 # EasyAdmin(极易后台开发框架)
 
->thinkPHP 6.0+AdminLTE 开发的后台开发框架
+## 环境
 
 > 运行环境要求PHP7.1+。
 
@@ -26,7 +26,7 @@ composer update topthink/framework
 
 ## 文档
 
-[极易开发手册](https://doc.easyadmin.vip))
+[极易开发手册](https://doc.easyadmin.vip)。
 
 ## 版权信息
 
