@@ -48,7 +48,7 @@ class Ajax extends Backend
      */
     public function upload()
     {
-        Config::set(['json'],'default_return_type');
+        Config::set(['default_return_type'=>'json'],'app');
         $file = request()->file('file');
         if (empty($file)) {
             $this->error(__('No file upload or server upload limit exceeded'));
@@ -140,10 +140,8 @@ class Ajax extends Backend
             $attachment = new Attachment();
             $attachment->data(array_filter($params));
             $attachment->save();
-            Event::listen("upload_after", $attachment);
-            $this->success(__('Upload successful'), null, [
-                'url' => $httpPath
-            ]);
+            Event::trigger("upload_after", $attachment);
+            $this->success(__('Upload successful'), null, ['url' => $httpPath]);
         } else {
             // 上传失败获取错误信息
             //$this->error($file->getError());
