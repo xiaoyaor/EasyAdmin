@@ -8,7 +8,7 @@ use think\facade\Config;
 use think\facade\Event;
 use think\facade\Request;
 use think\Validate;
-use liliuwei\think\Jump;
+use xiaoyaor\think\Jump;
 use think\facade\View;
 use think\facade\Session;
 

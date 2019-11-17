@@ -31,7 +31,7 @@ class Addon extends Backend
      */
     public function index()
     {
-        require_once (root_path().'vendor\zzstudio\think-addons\src\helper.php');
+        require_once (root_path().'vendor\xiaoyaor\think-addons\src\helper.php');
         $addons = get_addon_list();
         foreach ($addons as $k => &$v) {
             $config = get_addon_config($v['name']);

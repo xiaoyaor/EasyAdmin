@@ -11,7 +11,7 @@ use think\facade\Session;
 use think\facade\Validate;
 use think\facade\View;
 use think\facade\Event;
-use liliuwei\think\Jump;
+use xiaoyaor\think\Jump;
 
 /**
  * 后台控制器基类

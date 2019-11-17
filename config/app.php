@@ -33,11 +33,7 @@ return [
     // 应用映射（自动多应用模式有效）
     'app_map'          => [],
     // 域名绑定（自动多应用模式有效）
-    'domain_bind' => [
-//        'm.030.project.com'         =>  'wap',    //  blog子域名绑定到blog应用
-//        'admin.030.project.com'     =>  'admin',  //  完整域名绑定
-//        '*'                         =>  'index',  // 二级泛域名绑定到home应用
-    ],
+    'domain_bind' => [],
     // 禁止URL访问的应用列表（自动多应用模式有效）
     'deny_app_list'    => ['common'],
 

@@ -12,7 +12,7 @@
 ## 安装
 
 ~~~
-composer create-project topthink/think tp 6.0.*-dev
+composer create-project xiaoyaor/easyadmin tp 6.0.*-dev
 ~~~
 
 如果需要更新框架使用
