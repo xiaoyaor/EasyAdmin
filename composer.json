@@ -1,18 +1,19 @@
 {
-    "name": "topthink/think",
-    "description": "the new thinkphp framework",
+    "name": "xiaoyaor/EasyAdmin",
+    "description": "an easy thinkphp framework",
     "type": "project",
     "keywords": [
         "framework",
         "thinkphp",
+        "easyadmin",
         "ORM"
     ],
-    "homepage": "http://thinkphp.cn/",
+    "homepage": "http://www.easyadmin.vip/",
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "liu21st",
-            "email": "liu21st@gmail.com"
+            "name": "xiaoyaor",
+            "email": "747976016@qq.com"
         }
     ],
     "require": {
