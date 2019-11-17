@@ -3,6 +3,7 @@
 namespace {%controllerNamespace%};
 
 use app\common\controller\Backend;
+use think\facade\View;
 
 /**
  * {%tableComment%}

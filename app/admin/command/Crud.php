@@ -3,16 +3,15 @@
 namespace app\admin\command;
 
 use fast\Form;
-use think\Config;
+use think\facade\Config;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
 use think\console\Output;
-use think\Db;
+use think\facade\Db;
 use think\Exception;
 use think\exception\ErrorException;
-use think\Lang;
-use think\Loader;
+use think\facade\Lang;
 
 class Crud extends Command
 {
@@ -185,7 +184,7 @@ class Crud extends Command
 
     protected function execute(Input $input, Output $output)
     {
-        $adminPath = dirname(__DIR__) . DS;
+        $adminPath = dirname(__DIR__) . DIRECTORY_SEPARATOR;
         //数据库
         $db = $input->getOption('db');
         //表名
@@ -293,9 +292,8 @@ class Crud extends Command
 
         $this->reservedField = array_merge($this->reservedField, [$this->createTimeField, $this->updateTimeField, $this->deleteTimeField]);
 
-        $dbconnect = Db::connect($db);
-        $dbname = Config::get($db . '.database');
-        $prefix = Config::get($db . '.prefix');
+        $dbname = Config::get($db . '.connections.mysql.database');
+        $prefix = Config::get($db . '.connections.mysql.prefix');
 
         //模块
         $moduleName = 'admin';
@@ -306,11 +304,11 @@ class Crud extends Command
         $modelName = $table = stripos($table, $prefix) === 0 ? substr($table, strlen($prefix)) : $table;
         $modelTableType = 'table';
         $modelTableTypeName = $modelTableName = $modelName;
-        $modelTableInfo = $dbconnect->query("SHOW TABLE STATUS LIKE '{$modelTableName}'", [], true);
+        $modelTableInfo = Db::query("SHOW TABLE STATUS LIKE '{$modelTableName}'", []);
         if (!$modelTableInfo) {
             $modelTableType = 'name';
             $modelTableName = $prefix . $modelName;
-            $modelTableInfo = $dbconnect->query("SHOW TABLE STATUS LIKE '{$modelTableName}'", [], true);
+            $modelTableInfo = Db::query("SHOW TABLE STATUS LIKE '{$modelTableName}'", []);
             if (!$modelTableInfo) {
                 throw new Exception("table not found");
             }
@@ -327,11 +325,11 @@ class Crud extends Command
                 $relationName = stripos($relationTable, $prefix) === 0 ? substr($relationTable, strlen($prefix)) : $relationTable;
                 $relationTableType = 'table';
                 $relationTableTypeName = $relationTableName = $relationName;
-                $relationTableInfo = $dbconnect->query("SHOW TABLE STATUS LIKE '{$relationTableName}'", [], true);
+                $relationTableInfo = Db::query("SHOW TABLE STATUS LIKE '{$relationTableName}'", []);
                 if (!$relationTableInfo) {
                     $relationTableType = 'name';
                     $relationTableName = $prefix . $relationName;
-                    $relationTableInfo = $dbconnect->query("SHOW TABLE STATUS LIKE '{$relationTableName}'", [], true);
+                    $relationTableInfo = Db::query("SHOW TABLE STATUS LIKE '{$relationTableName}'", []);
                     if (!$relationTableInfo) {
                         throw new Exception("relation table not found");
                     }
@@ -363,7 +361,7 @@ class Crud extends Command
                     //关联模式
                     'relationMode'          => isset($relationMode[$index]) ? $relationMode[$index] : 'belongsto',
                     //关联表外键
-                    'relationForeignKey'    => isset($relationForeignKey[$index]) ? $relationForeignKey[$index] : Loader::parseName($relationName) . '_id',
+                    'relationForeignKey'    => isset($relationForeignKey[$index]) ? $relationForeignKey[$index] : $this->parseName($relationName) . '_id',
                     //关联表主键
                     'relationPrimaryKey'    => isset($relationPrimaryKey[$index]) ? $relationPrimaryKey[$index] : '',
                 ];
@@ -371,7 +369,7 @@ class Crud extends Command
         }
 
         //根据表名匹配对应的Fontawesome图标
-        $iconPath = ROOT_PATH . str_replace('/', DS, '/public/assets/libs/font-awesome/less/variables.less');
+        $iconPath = ROOT_PATH() . str_replace('/', DIRECTORY_SEPARATOR, '/public/assets/libs/font-awesome/less/variables.less');
         $iconName = is_file($iconPath) && stripos(file_get_contents($iconPath), '@fa-var-' . $table . ':') ? 'fa fa-' . $table : 'fa fa-circle-o';
 
         //控制器
@@ -383,25 +381,25 @@ class Crud extends Command
 
         //处理基础文件名，取消所有下划线并转换为小写
         $baseNameArr = $controllerArr;
-        $baseFileName = Loader::parseName(array_pop($baseNameArr), 0);
+        $baseFileName = $this->parseName(array_pop($baseNameArr), 0);
         array_push($baseNameArr, $baseFileName);
-        $controllerBaseName = strtolower(implode(DS, $baseNameArr));
+        $controllerBaseName = strtolower(implode(DIRECTORY_SEPARATOR, $baseNameArr));
         $controllerUrl = strtolower(implode('/', $baseNameArr));
 
         //视图文件
         $viewArr = $controllerArr;
         $lastValue = array_pop($viewArr);
-        $viewArr[] = Loader::parseName($lastValue, 0);
+        $viewArr[] = $this->parseName($lastValue, 0);
         array_unshift($viewArr, 'view');
-        $viewDir = $adminPath . strtolower(implode(DS, $viewArr)) . DS;
+        $viewDir = $adminPath . strtolower(implode(DIRECTORY_SEPARATOR, $viewArr)) . DIRECTORY_SEPARATOR;
 
         //最终将生成的文件路径
-        $javascriptFile = ROOT_PATH . 'public' . DS . 'assets' . DS . 'js' . DS . 'backend' . DS . $controllerBaseName . '.js';
+        $javascriptFile = ROOT_PATH() . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . $controllerBaseName . '.js';
         $addFile = $viewDir . 'add.html';
         $editFile = $viewDir . 'edit.html';
         $indexFile = $viewDir . 'index.html';
         $recyclebinFile = $viewDir . 'recyclebin.html';
-        $langFile = $adminPath . 'lang' . DS . Lang::detect() . DS . $controllerBaseName . '.php';
+        $langFile = $adminPath . 'lang' . DIRECTORY_SEPARATOR . Lang::detect(request()) . DIRECTORY_SEPARATOR . $controllerBaseName . '.php';
 
         //是否为删除模式
         $delete = $input->getOption('delete');
@@ -466,7 +464,7 @@ class Crud extends Command
             . "WHERE TABLE_SCHEMA = ? AND table_name = ? "
             . "ORDER BY ORDINAL_POSITION";
         //加载主表的列
-        $columnList = $dbconnect->query($sql, [$dbname, $modelTableName]);
+        $columnList = Db::query($sql, [$dbname, $modelTableName]);
         $fieldArr = [];
         foreach ($columnList as $k => $v) {
             $fieldArr[] = $v['COLUMN_NAME'];
@@ -474,7 +472,7 @@ class Crud extends Command
 
         // 加载关联表的列
         foreach ($relations as $index => &$relation) {
-            $relationColumnList = $dbconnect->query($sql, [$dbname, $relation['relationTableName']]);
+            $relationColumnList = Db::query($sql, [$dbname, $relation['relationTableName']]);
 
             $relationFieldList = [];
             foreach ($relationColumnList as $k => $v) {
@@ -535,7 +533,7 @@ class Crud extends Command
                     throw new Exception('table [' . $modelTableName . '] must be contain field [' . $relationPrimaryKey . ']');
                 }
             } else {
-                $relationForeignKey = $relation['relationForeignKey'] ? $relation['relationForeignKey'] : Loader::parseName($relation['relationName']) . "_id";
+                $relationForeignKey = $relation['relationForeignKey'] ? $relation['relationForeignKey'] : $this->parseName($relation['relationName']) . "_id";
                 $relationPrimaryKey = $relation['relationPrimaryKey'] ? $relation['relationPrimaryKey'] : $relation['relationPriKey'];
                 if (!in_array($relationForeignKey, $fieldArr)) {
                     throw new Exception('table [' . $modelTableName . '] must be contain field [' . $relationForeignKey . ']');
@@ -785,7 +783,7 @@ class Crud extends Command
                         $javascriptList[] = $this->getJsColumn($field, $v['DATA_TYPE'], $inputType && in_array($inputType, ['select', 'checkbox', 'radio']) ? '_text' : '', $itemArr);
                     }
                     if ($this->headingFilterField && $this->headingFilterField == $field && $itemArr) {
-                        $headingHtml = $this->getReplacedStub('html/heading-html', ['field' => $field, 'fieldName' => Loader::parseName($field, 1, false)]);
+                        $headingHtml = $this->getReplacedStub('html/heading-html', ['field' => $field, 'fieldName' => $this->parseName($field, 1, false)]);
                     }
                     //排序方式,如果有指定排序字段,否则按主键排序
                     $order = $field == $this->sortField ? $this->sortField : $order;
@@ -836,7 +834,7 @@ class Crud extends Command
 
             $modelInit = '';
             if ($priKey != $order) {
-                $modelInit = $this->getReplacedStub('mixins' . DS . 'modelinit', ['order' => $order]);
+                $modelInit = $this->getReplacedStub('mixins' . DIRECTORY_SEPARATOR . 'modelinit', ['order' => $order]);
             }
 
             $data = [
@@ -862,7 +860,7 @@ class Crud extends Command
                 'editList'                => $editList,
                 'javascriptList'          => $javascriptList,
                 'langList'                => $langList,
-                'sofeDeleteClassPath'     => in_array($this->deleteTimeField, $fieldArr) ? "use traits\model\SoftDelete;" : '',
+                'sofeDeleteClassPath'     => in_array($this->deleteTimeField, $fieldArr) ? "use think\model\concern\SoftDelete;" : '',
                 'softDelete'              => in_array($this->deleteTimeField, $fieldArr) ? "use SoftDelete;" : '',
                 'modelAutoWriteTimestamp' => in_array($this->createTimeField, $fieldArr) || in_array($this->updateTimeField, $fieldArr) ? "'int'" : 'false',
                 'createTime'              => in_array($this->createTimeField, $fieldArr) ? "'{$this->createTimeField}'" : 'false',
@@ -902,7 +900,7 @@ class Crud extends Command
                     unset($relation['relationColumnList'], $relation['relationFieldList'], $relation['relationTableInfo']);
 
                     //构造关联模型的方法
-                    $relationMethodList[] = $this->getReplacedStub('mixins' . DS . 'modelrelationmethod', $relation);
+                    $relationMethodList[] = $this->getReplacedStub('mixins' . DIRECTORY_SEPARATOR . 'modelrelationmethod', $relation);
 
                     //如果设置了显示主表字段，则必须显式将关联表字段显示
                     if ($fields) {
@@ -988,7 +986,7 @@ class Crud extends Command
     }
 EOD;
         $controllerAssignList[] = <<<EOD
-        \$this->view->assign("{$fieldList}", \$this->model->{$methodName}());
+        View::assign("{$fieldList}", \$this->model->{$methodName}());
 EOD;
     }
 
@@ -998,7 +996,7 @@ EOD;
             return;
         }
         $attrField = ucfirst($this->getCamelizeName($field));
-        $getAttr[] = $this->getReplacedStub("mixins" . DS . $inputType, ['field' => $field, 'methodName' => "get{$attrField}TextAttr", 'listMethodName' => "get{$attrField}List"]);
+        $getAttr[] = $this->getReplacedStub("mixins" . DIRECTORY_SEPARATOR . $inputType, ['field' => $field, 'methodName' => "get{$attrField}TextAttr", 'listMethodName' => "get{$attrField}List"]);
     }
 
     protected function setAttr(&$setAttr, $field, $inputType = '')
@@ -1107,7 +1105,7 @@ EOD;
     {
         $arr = [];
         if (!$name) {
-            $parseName = Loader::parseName($table, 1);
+            $parseName = $this->parseName($table, 1);
             $parseArr = [$table];
         } else {
             $name = str_replace(['.', '/', '\\'], '/', $name);
@@ -1120,10 +1118,10 @@ EOD;
         if (in_array(strtolower($parseName), $this->internalKeywords)) {
             throw new Exception('Unable to use internal variable:' . $parseName);
         }
-        $appNamespace = Config::get('app_namespace');
+        $appNamespace = Config::get('app.app_namespace')?Config::get('app.app_namespace'):'app';
         $parseNamespace = "{$appNamespace}\\{$module}\\{$type}" . ($arr ? "\\" . implode("\\", $arr) : "");
-        $moduleDir = APP_PATH . $module . DS;
-        $parseFile = $moduleDir . $type . DS . ($arr ? implode(DS, $arr) . DS : '') . $parseName . '.php';
+        $moduleDir = APP_PATH() . $module . DIRECTORY_SEPARATOR;
+        $parseFile = $moduleDir . $type . DIRECTORY_SEPARATOR . ($arr ? implode(DIRECTORY_SEPARATOR, $arr) . DIRECTORY_SEPARATOR : '') . $parseName . '.php';
         return [$parseNamespace, $parseName, $parseFile, $parseArr];
     }
 
@@ -1182,7 +1180,7 @@ EOD;
      */
     protected function getStub($name)
     {
-        return __DIR__ . DS . 'Crud' . DS . 'stubs' . DS . $name . '.stub';
+        return __DIR__ . DIRECTORY_SEPARATOR . 'Crud' . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . $name . '.stub';
     }
 
     protected function getLangItem($field, $content)
@@ -1475,5 +1473,27 @@ EOD;
     protected function getFieldListName($field)
     {
         return $this->getCamelizeName($field) . 'List';
+    }
+
+    /**
+     * 字符串命名风格转换
+     * type 0 将 Java 风格转换为 C 的风格 1 将 C 风格转换为 Java 的风格
+     * @access public
+     * @param  string  $name    字符串
+     * @param  integer $type    转换类型
+     * @param  bool    $ucfirst 首字母是否大写（驼峰规则）
+     * @return string
+     */
+    public static function parseName($name, $type = 0, $ucfirst = true)
+    {
+        if ($type) {
+            $name = preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+                return strtoupper($match[1]);
+            }, $name);
+
+            return $ucfirst ? ucfirst($name) : lcfirst($name);
+        }
+
+        return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
     }
 }

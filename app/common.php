@@ -180,12 +180,12 @@ if (!function_exists('copydirs')) {
                 new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
             if ($item->isDir()) {
-                $sontDir = $dest . DS . $iterator->getSubPathName();
+                $sontDir = $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
                 if (!is_dir($sontDir)) {
                     mkdir($sontDir, 0755, true);
                 }
             } else {
-                copy($item, $dest . DS . $iterator->getSubPathName());
+                copy($item, $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
             }
         }
     }

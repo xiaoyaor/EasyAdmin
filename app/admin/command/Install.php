@@ -3,12 +3,12 @@
 namespace app\admin\command;
 
 use PDO;
-use think\Config;
+use think\facade\Config;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
 use think\console\Output;
-use think\Db;
+use think\facade\Db;
 use think\Exception;
 
 class Install extends Command
@@ -17,7 +17,7 @@ class Install extends Command
 
     protected function configure()
     {
-        $config = Config::get('database');
+        $config = Config::get('database.connections.mysql');
         $this
             ->setName('install')
             ->addOption('hostname', 'a', Option::VALUE_OPTIONAL, 'mysql hostname', $config['hostname'])
@@ -75,7 +75,7 @@ class Install extends Command
         file_put_contents($installLockFile, 1);
 
         //后台入口文件
-        $adminFile = ROOT_PATH . 'public' . DS . 'admin.php';
+        $adminFile = root_path() . 'public' . DIRECTORY_SEPARATOR . 'admin.php';
 
         $dbConfigFile = APP_PATH . 'database.php';
         $config = @file_get_contents($dbConfigFile);
@@ -95,7 +95,7 @@ class Install extends Command
         if (is_file($adminFile)) {
             $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $adminName = substr(str_shuffle(str_repeat($x, ceil(10 / strlen($x)))), 1, 10) . '.php';
-            rename($adminFile, ROOT_PATH . 'public' . DS . $adminName);
+            rename($adminFile, root_path() . 'public' . DIRECTORY_SEPARATOR . $adminName);
             $output->highlight("Admin url:http://www.yoursite.com/{$adminName}");
         }
         $output->highlight("Admin username:admin");

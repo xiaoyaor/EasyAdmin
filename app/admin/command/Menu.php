@@ -5,14 +5,15 @@ namespace app\admin\command;
 use app\admin\model\AuthRule;
 use ReflectionClass;
 use ReflectionMethod;
-use think\Cache;
-use think\Config;
+use think\facade\Cache;
+use think\facade\Config;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
 use think\console\Output;
 use think\Exception;
-use think\Loader;
+use think\Event;
+use think\facade\Lang;
 
 class Menu extends Command
 {
@@ -33,7 +34,7 @@ class Menu extends Command
     protected function execute(Input $input, Output $output)
     {
         $this->model = new AuthRule();
-        $adminPath = dirname(__DIR__) . DS;
+        $adminPath = dirname(__DIR__) . DIRECTORY_SEPARATOR;
         //控制器名
         $controller = $input->getOption('controller') ?: '';
         if (!$controller) {
@@ -54,15 +55,15 @@ class Menu extends Command
             $list = $this->model->where(function ($query) use ($controller, $equal) {
                 foreach ($controller as $index => $item) {
                     if (stripos($item, '_') !== false) {
-                        $item = Loader::parseName($item, 1);
+                        $item = $this->parseName($item, 1);
                     }
                     if (stripos($item, '/') !== false) {
                         $controllerArr = explode('/', $item);
                         end($controllerArr);
                         $key = key($controllerArr);
-                        $controllerArr[$key] = Loader::parseName($controllerArr[$key]);
+                        $controllerArr[$key] = $this->parseName($controllerArr[$key]);
                     } else {
-                        $controllerArr = [Loader::parseName($item)];
+                        $controllerArr = [$this->parseName($item)];
                     }
                     $item = str_replace('_', '\_', implode('/', $controllerArr));
                     if ($equal) {
@@ -88,7 +89,7 @@ class Menu extends Command
             }
             AuthRule::destroy($ids);
 
-            Cache::rm("__menu__");
+            Cache::delete("__menu__");
             $output->info("Delete Successed");
             return;
         }
@@ -96,7 +97,7 @@ class Menu extends Command
         if (!in_array('all-controller', $controller)) {
             foreach ($controller as $index => $item) {
                 if (stripos($item, '_') !== false) {
-                    $item = Loader::parseName($item, 1);
+                    $item = $this->parseName($item, 1);
                 }
                 if (stripos($item, '/') !== false) {
                     $controllerArr = explode('/', $item);
@@ -106,7 +107,7 @@ class Menu extends Command
                 } else {
                     $controllerArr = [ucfirst($item)];
                 }
-                $adminPath = dirname(__DIR__) . DS . 'controller' . DS . implode(DS, $controllerArr) . '.php';
+                $adminPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $controllerArr) . '.php';
                 if (!is_file($adminPath)) {
                     $output->error("controller not found");
                     return;
@@ -116,14 +117,14 @@ class Menu extends Command
         } else {
             $authRuleList = AuthRule::select();
             //生成权限规则备份文件
-            file_put_contents(RUNTIME_PATH . 'authrule.json', json_encode(collection($authRuleList)->toArray()));
+            file_put_contents(RUNTIME_PATH() . 'authrule.json', json_encode(collection($authRuleList)->toArray()));
 
             $this->model->where('id', '>', 0)->delete();
-            $controllerDir = $adminPath . 'controller' . DS;
+            $controllerDir = $adminPath . 'controller' . DIRECTORY_SEPARATOR;
             // 扫描新的节点信息并导入
             $treelist = $this->import($this->scandir($controllerDir));
         }
-        Cache::rm("__menu__");
+        Cache::delete("__menu__");
         $output->info("Build Successed!");
     }
 
@@ -138,8 +139,8 @@ class Menu extends Command
         $cdir = scandir($dir);
         foreach ($cdir as $value) {
             if (!in_array($value, array(".", ".."))) {
-                if (is_dir($dir . DS . $value)) {
-                    $result[$value] = $this->scandir($dir . DS . $value);
+                if (is_dir($dir . DIRECTORY_SEPARATOR . $value)) {
+                    $result[$value] = $this->scandir($dir . DIRECTORY_SEPARATOR . $value);
                 } else {
                     $result[] = $value;
                 }
@@ -188,19 +189,19 @@ class Menu extends Command
             $key = 0;
             $controllerArr = [ucfirst($controller)];
         }
-        $classSuffix = Config::get('controller_suffix') ? ucfirst(Config::get('url_controller_layer')) : '';
+        $classSuffix = Config::get('route.controller_suffix') ? ucfirst(Config::get('route.controller_layer')) : '';
         $className = "\\app\\admin\\controller\\" . implode("\\", $controllerArr) . $classSuffix;
 
         $pathArr = $controllerArr;
-        array_unshift($pathArr, '', 'application', 'admin', 'controller');
-        $classFile = ROOT_PATH . implode(DS, $pathArr) . $classSuffix . ".php";
+        array_unshift($pathArr, '', 'app', 'admin', 'controller');
+        $classFile = root_path() . implode(DIRECTORY_SEPARATOR, $pathArr) . $classSuffix . ".php";
         $classContent = file_get_contents($classFile);
-        $uniqueName = uniqid("FastAdmin") . $classSuffix;
+        $uniqueName = uniqid("EasyAdmin") . $classSuffix;
         $classContent = str_replace("class " . $controllerArr[$key] . $classSuffix . " ", 'class ' . $uniqueName . ' ', $classContent);
         $classContent = preg_replace("/namespace\s(.*);/", 'namespace ' . __NAMESPACE__ . ";", $classContent);
 
         //临时的类文件
-        $tempClassFile = __DIR__ . DS . $uniqueName . ".php";
+        $tempClassFile = __DIR__ . DIRECTORY_SEPARATOR . $uniqueName . ".php";
         file_put_contents($tempClassFile, $classContent);
         $className = "\\app\\admin\\command\\" . $uniqueName;
         //反射机制调用类的注释和方法名
@@ -220,13 +221,13 @@ class Menu extends Command
         $modelRegexArr = ["/\\\$this\->model\s*=\s*model\(['|\"](\w+)['|\"]\);/", "/\\\$this\->model\s*=\s*new\s+([a-zA-Z\\\]+);/"];
         $modelRegex = preg_match($modelRegexArr[0], $classContent) ? $modelRegexArr[0] : $modelRegexArr[1];
         preg_match_all($modelRegex, $classContent, $matches);
-        if (isset($matches[1]) && isset($matches[1][0]) && $matches[1][0]) {
-            \think\Request::instance()->module('admin');
-            $model = model($matches[1][0]);
-            if (in_array('trashed', get_class_methods($model))) {
-                $withSofeDelete = true;
-            }
-        }
+//        if (isset($matches[1]) && isset($matches[1][0]) && $matches[1][0]) {
+//            \think\Request::instance()->module('admin');
+//            $model = model($matches[1][0]);
+//            if (in_array('trashed', get_class_methods($model))) {
+//                $withSofeDelete = true;
+//            }
+//        }
         //忽略的类
         if (stripos($classComment, "@internal") !== false) {
             return;
@@ -249,7 +250,7 @@ class Menu extends Command
         $controllerTitle = trim(preg_replace(array('/^\/\*\*(.*)[\n\r\t]/u', '/[\s]+\*\//u', '/\*\s@(.*)/u', '/[\s|\*]+/u'), '', $classComment));
 
         //导入中文语言包
-        \think\Lang::load(dirname(__DIR__) . DS . 'lang/zh-cn.php');
+        Lang::load(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'lang/zh-cn.php');
 
         //先导入菜单的数据
         $pid = 0;
@@ -266,17 +267,16 @@ class Menu extends Command
             $icon = (!isset($controllerArr[$key]) ? $controllerIcon : 'fa fa-list');
             $remark = (!isset($controllerArr[$key]) ? $controllerRemark : '');
             $title = $title ? $title : $v;
-            $rulemodel = $this->model->get(['name' => $name]);
+            $rulemodel = $this->model->where(['name' => $name])->find();
             if (!$rulemodel) {
-                $this->model
-                    ->data(['pid' => $pid, 'name' => $name, 'title' => $title, 'icon' => $icon, 'remark' => $remark, 'ismenu' => 1, 'status' => 'normal'])
-                    ->isUpdate(false)
-                    ->save();
+                //echo '不存在分类则新建。';
+                $this->model->save(['pid' => $pid, 'name' => $name, 'title' => $title, 'icon' => $icon, 'remark' => $remark, 'ismenu' => 1, 'status' => 'normal']);
                 $pid = $this->model->id;
             } else {
                 $pid = $rulemodel->id;
             }
         }
+        //echo '输出分类ID：'.$pid;
         $ruleArr = [];
         foreach ($methods as $m => $n) {
             //过滤特殊的类
@@ -288,7 +288,7 @@ class Menu extends Command
                 continue;
             }
             //只匹配符合的方法
-            if (!preg_match('/^(\w+)' . Config::get('action_suffix') . '/', $n->name, $matchtwo)) {
+            if (!preg_match('/^(\w+)' . Config::get('route.action_suffix') . '/', $n->name, $matchtwo)) {
                 unset($methods[$m]);
                 continue;
             }
@@ -307,7 +307,10 @@ class Menu extends Command
 
             $ruleArr[] = array('id' => $id, 'pid' => $pid, 'name' => $name . "/" . strtolower($n->name), 'icon' => 'fa fa-circle-o', 'title' => $title, 'ismenu' => 0, 'status' => 'normal');
         }
-        $this->model->isUpdate(false)->saveAll($ruleArr);
+        //print_r($ruleArr);
+        //echo '保存所有子分类数据';
+        $model = new AuthRule();
+        $model->saveAll($ruleArr);
     }
 
     //获取主键
@@ -320,4 +323,27 @@ class Menu extends Command
             return $id ? $id : null;
         }
     }
+
+    /**
+     * 字符串命名风格转换
+     * type 0 将 Java 风格转换为 C 的风格 1 将 C 风格转换为 Java 的风格
+     * @access public
+     * @param  string  $name    字符串
+     * @param  integer $type    转换类型
+     * @param  bool    $ucfirst 首字母是否大写（驼峰规则）
+     * @return string
+     */
+    public static function parseName($name, $type = 0, $ucfirst = true)
+    {
+        if ($type) {
+            $name = preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+                return strtoupper($match[1]);
+            }, $name);
+
+            return $ucfirst ? ucfirst($name) : lcfirst($name);
+        }
+
+        return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+    }
+
 }

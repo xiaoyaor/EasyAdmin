@@ -3,7 +3,7 @@
 namespace app\admin\command;
 
 use app\admin\command\Api\library\Builder;
-use think\Config;
+use think\facade\Config;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
@@ -31,25 +31,25 @@ class Api extends Command
 
     protected function execute(Input $input, Output $output)
     {
-        $apiDir = __DIR__ . DS . 'Api' . DS;
+        $apiDir = __DIR__ . DIRECTORY_SEPARATOR . 'Api' . DIRECTORY_SEPARATOR;
 
         $force = $input->getOption('force');
         $url = $input->getOption('url');
         $language = $input->getOption('language');
         $language = $language ? $language : 'zh-cn';
-        $langFile = $apiDir . 'lang' . DS . $language . '.php';
+        $langFile = $apiDir . 'lang' . DIRECTORY_SEPARATOR . $language . '.php';
         if (!is_file($langFile)) {
             throw new Exception('language file not found');
         }
         $lang = include_once $langFile;
         // 目标目录
-        $output_dir = ROOT_PATH . 'public' . DS;
+        $output_dir = ROOT_PATH() . 'public' . DIRECTORY_SEPARATOR;
         $output_file = $output_dir . $input->getOption('output');
         if (is_file($output_file) && !$force) {
             throw new Exception("api index file already exists!\nIf you need to rebuild again, use the parameter --force=true ");
         }
         // 模板文件
-        $template_dir = $apiDir . 'template' . DS;
+        $template_dir = $apiDir . 'template' . DIRECTORY_SEPARATOR;
         $template_file = $template_dir . $input->getOption('template');
         if (!is_file($template_file)) {
             throw new Exception('template file not found');
@@ -63,7 +63,7 @@ class Api extends Command
         // 模块
         $module = $input->getOption('module');
 
-        $moduleDir = APP_PATH . $module . DS;
+        $moduleDir = APP_PATH . $module . DIRECTORY_SEPARATOR;
         if (!is_dir($moduleDir)) {
             throw new Exception('module not found');
         }
@@ -81,7 +81,7 @@ class Api extends Command
             }
         }
 
-        $controllerDir = $moduleDir . Config::get('url_controller_layer') . DS;
+        $controllerDir = $moduleDir . Config::get('url_controller_layer') . DIRECTORY_SEPARATOR;
         $files = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($controllerDir),
             \RecursiveIteratorIterator::LEAVES_ONLY

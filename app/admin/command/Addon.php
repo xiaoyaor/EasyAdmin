@@ -4,14 +4,15 @@ namespace app\admin\command;
 
 use think\addons\AddonException;
 use think\addons\Service;
-use think\Config;
+use think\facade\Config;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
 use think\console\Output;
-use think\Db;
+use think\facade\Db;
 use think\Exception;
 use think\exception\PDOException;
+use think\facade\Env;
 
 class Addon extends Command
 {
@@ -46,7 +47,7 @@ class Addon extends Command
         //token
         $token = $input->getOption('token') ?: '';
 
-        include dirname(__DIR__) . DS . 'common.php';
+        include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'common.php';
 
         if (!$name) {
             throw new Exception('Addon name could not be empty');
@@ -58,7 +59,7 @@ class Addon extends Command
         // 查询一次SQL,判断连接是否正常
         Db::execute("SELECT 1");
 
-        $addonDir = ADDON_PATH . $name . DS;
+        $addonDir = ADDON_PATH . $name . DIRECTORY_SEPARATOR;
         switch ($action) {
             case 'create':
                 //非覆盖模式时如果存在则报错
@@ -70,12 +71,12 @@ class Addon extends Command
                     rmdirs($addonDir);
                 }
                 mkdir($addonDir, 0755, true);
-                mkdir($addonDir . DS . 'controller', 0755, true);
+                mkdir($addonDir . DIRECTORY_SEPARATOR . 'controller', 0755, true);
                 $menuList = \app\common\library\Menu::export($name);
                 $createMenu = $this->getCreateMenu($menuList);
-                $prefix = Config::get('database.prefix');
                 $createTableSql = '';
                 try {
+                    $prefix = Env::get('database.prefix');
                     $result = Db::query("SHOW CREATE TABLE `" . $prefix . $name . "`;");
                     if (isset($result[0]) && isset($result[0]['Create Table'])) {
                         $createTableSql = $result[0]['Create Table'];
@@ -96,7 +97,7 @@ class Addon extends Command
                 $this->writeToFile("addon", $data, $addonDir . ucfirst($name) . '.php');
                 $this->writeToFile("config", $data, $addonDir . 'config.php');
                 $this->writeToFile("info", $data, $addonDir . 'info.ini');
-                $this->writeToFile("controller", $data, $addonDir . 'controller' . DS . 'Index.php');
+                $this->writeToFile("controller", $data, $addonDir . 'controller' . DIRECTORY_SEPARATOR . 'Index.php');
                 if ($createTableSql) {
                     $createTableSql = str_replace("`" . $prefix, '`__PREFIX__', $createTableSql);
                     file_put_contents($addonDir . 'install.sql', $createTableSql);
@@ -226,7 +227,7 @@ class Addon extends Command
                     throw new Exception(__('Addon info version incorrect'));
                 }
 
-                $addonTmpDir = RUNTIME_PATH . 'addons' . DS;
+                $addonTmpDir = RUNTIME_PATH . 'addons' . DIRECTORY_SEPARATOR;
                 if (!is_dir($addonTmpDir)) {
                     @mkdir($addonTmpDir, 0755, true);
                 }
@@ -244,7 +245,7 @@ class Addon extends Command
                 foreach ($files as $name => $file) {
                     if (!$file->isDir()) {
                         $filePath = $file->getRealPath();
-                        $relativePath = str_replace(DS, '/', substr($filePath, strlen($addonDir)));
+                        $relativePath = str_replace(DIRECTORY_SEPARATOR, '/', substr($filePath, strlen($addonDir)));
                         if (!in_array($file->getFilename(), ['.git', '.DS_Store', 'Thumbs.db'])) {
                             $zip->addFile($filePath, $relativePath);
                         }
@@ -260,27 +261,27 @@ class Addon extends Command
                     'publicDir' => ['public/assets/addons', 'public/assets/js/backend']
                 ];
                 $paths = [];
-                $appPath = str_replace('/', DS, APP_PATH);
-                $rootPath = str_replace('/', DS, ROOT_PATH);
+                $appPath = str_replace('/', DIRECTORY_SEPARATOR, APP_PATH);
+                $rootPath = str_replace('/', DIRECTORY_SEPARATOR, root_path());
                 foreach ($movePath as $k => $items) {
                     switch ($k) {
                         case 'adminOnlySelfDir':
                             foreach ($items as $v) {
-                                $v = str_replace('/', DS, $v);
-                                $oldPath = $appPath . $v . DS . $name;
-                                $newPath = $rootPath . "addons" . DS . $name . DS . "application" . DS . $v . DS . $name;
+                                $v = str_replace('/', DIRECTORY_SEPARATOR, $v);
+                                $oldPath = $appPath . $v . DIRECTORY_SEPARATOR . $name;
+                                $newPath = $rootPath . "addons" . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . $v . DIRECTORY_SEPARATOR . $name;
                                 $paths[$oldPath] = $newPath;
                             }
                             break;
                         case 'adminAllSubDir':
                             foreach ($items as $v) {
-                                $v = str_replace('/', DS, $v);
+                                $v = str_replace('/', DIRECTORY_SEPARATOR, $v);
                                 $vPath = $appPath . $v;
                                 $list = scandir($vPath);
                                 foreach ($list as $_v) {
-                                    if (!in_array($_v, ['.', '..']) && is_dir($vPath . DS . $_v)) {
-                                        $oldPath = $appPath . $v . DS . $_v . DS . $name;
-                                        $newPath = $rootPath . "addons" . DS . $name . DS . "application" . DS . $v . DS . $_v . DS . $name;
+                                    if (!in_array($_v, ['.', '..']) && is_dir($vPath . DIRECTORY_SEPARATOR . $_v)) {
+                                        $oldPath = $appPath . $v . DIRECTORY_SEPARATOR . $_v . DIRECTORY_SEPARATOR . $name;
+                                        $newPath = $rootPath . "addons" . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . $v . DIRECTORY_SEPARATOR . $_v . DIRECTORY_SEPARATOR . $name;
                                         $paths[$oldPath] = $newPath;
                                     }
                                 }
@@ -288,9 +289,9 @@ class Addon extends Command
                             break;
                         case 'publicDir':
                             foreach ($items as $v) {
-                                $v = str_replace('/', DS, $v);
-                                $oldPath = $rootPath . $v . DS . $name;
-                                $newPath = $rootPath . 'addons' . DS . $name . DS . $v . DS . $name;
+                                $v = str_replace('/', DIRECTORY_SEPARATOR, $v);
+                                $oldPath = $rootPath . $v . DIRECTORY_SEPARATOR . $name;
+                                $newPath = $rootPath . 'addons' . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . $v . DIRECTORY_SEPARATOR . $name;
                                 $paths[$oldPath] = $newPath;
                             }
                             break;
@@ -303,7 +304,7 @@ class Addon extends Command
                                 $list = scandir($newPath);
                                 foreach ($list as $_v) {
                                     if (!in_array($_v, ['.', '..'])) {
-                                        $file = $newPath . DS . $_v;
+                                        $file = $newPath . DIRECTORY_SEPARATOR . $_v;
                                         @chmod($file, 0777);
                                         @unlink($file);
                                     }

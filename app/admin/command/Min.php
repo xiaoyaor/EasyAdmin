@@ -47,8 +47,8 @@ class Min extends Command
         $moduleArr = $module == 'all' ? ['frontend', 'backend'] : [$module];
         $resourceArr = $resource == 'all' ? ['js', 'css'] : [$resource];
 
-        $minPath = __DIR__ . DS . 'Min' . DS;
-        $publicPath = ROOT_PATH . 'public' . DS;
+        $minPath = __DIR__ . DIRECTORY_SEPARATOR . 'Min' . DIRECTORY_SEPARATOR;
+        $publicPath = root_path() . 'public' . DIRECTORY_SEPARATOR;
         $tempFile = $minPath . 'temp.js';
 
         $nodeExec = '';
@@ -84,10 +84,10 @@ class Min extends Command
                     'jsBaseUrl'   => $this->options['jsBaseUrl'],
                     'cssBaseName' => str_replace('{module}', $mod, $this->options['cssBaseName']),
                     'cssBaseUrl'  => $this->options['cssBaseUrl'],
-                    'jsBasePath'  => str_replace(DS, '/', ROOT_PATH . $this->options['jsBaseUrl']),
-                    'cssBasePath' => str_replace(DS, '/', ROOT_PATH . $this->options['cssBaseUrl']),
+                    'jsBasePath'  => str_replace(DIRECTORY_SEPARATOR, '/', root_path() . $this->options['jsBaseUrl']),
+                    'cssBasePath' => str_replace(DIRECTORY_SEPARATOR, '/', root_path() . $this->options['cssBaseUrl']),
                     'optimize'    => $optimize,
-                    'ds'          => DS,
+                    'ds'          => DIRECTORY_SEPARATOR,
                 ];
 
                 //源文件
@@ -157,6 +157,6 @@ class Min extends Command
      */
     protected function getStub($name)
     {
-        return __DIR__ . DS . 'Min' . DS . 'stubs' . DS . $name . '.stub';
+        return __DIR__ . DIRECTORY_SEPARATOR . 'Min' . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . $name . '.stub';
     }
 }

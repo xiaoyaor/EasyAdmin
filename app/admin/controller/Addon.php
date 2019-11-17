@@ -4,10 +4,9 @@ namespace app\admin\controller;
 
 use app\common\controller\Backend;
 use fast\Http;
-use think\addons\AddonException;
 use think\addons\Service;
-use think\Cache;
-use think\Config;
+use think\facade\Cache;
+use think\facade\Config;
 use think\Exception;
 use think\facade\View;
 
@@ -32,15 +31,16 @@ class Addon extends Backend
      */
     public function index()
     {
-        require_once (str_replace('public','',$_SERVER['DOCUMENT_ROOT']).'/extend/yulinzhihou/fastadmin-addons/src/common.php');
+        require_once (root_path().'vendor\zzstudio\think-addons\src\helper.php');
         $addons = get_addon_list();
         foreach ($addons as $k => &$v) {
             $config = get_addon_config($v['name']);
             $v['config'] = $config ? 1 : 0;
             $v['url'] = str_replace(request()->server('SCRIPT_NAME'), '', $v['url']);
         }
-        $this->assignconfig(['addons' => $addons]);
-        View::assign(['api_url' => (new \think\Config)->get('app.PHPadmin.api_url')]);
+        $this->assignconfig('addons',$addons);
+        $address=Config::get('app.EasyAdmin.api_url');
+        View::assign(['api_url' => $address]);
         return View::fetch();
     }
 
@@ -97,7 +97,7 @@ class Addon extends Backend
             }
         }
         View::assign("addon", ['info' => $info, 'config' => $config, 'tips' => $tips]);
-        $configFile = ADDON_PATH . $name . DS . 'config.html';
+        $configFile = ADDON_PATH . $name . DIRECTORY_SEPARATOR . 'config.html';
         $viewFile = is_file($configFile) ? $configFile : '';
         return View::fetch($viewFile);
     }
@@ -179,7 +179,7 @@ class Addon extends Backend
             $action = $action == 'enable' ? $action : 'disable';
             //调用启用、禁用的方法
             Service::$action($name, $force);
-            Cache::rm('__menu__');
+            Cache::delete('__menu__');
             $this->success(__('Operate successful'));
         } catch (AddonException $e) {
             $this->result($e->getData(), $e->getCode(), __($e->getMessage()));
@@ -196,14 +196,14 @@ class Addon extends Backend
         Config::set('default_return_type', 'json');
 
         $file = request()->file('file');
-        $addonTmpDir = RUNTIME_PATH . 'addons' . DS;
+        $addonTmpDir = RUNTIME_PATH . 'addons' . DIRECTORY_SEPARATOR;
         if (!is_dir($addonTmpDir)) {
             @mkdir($addonTmpDir, 0755, true);
         }
         $info = $file->rule('uniqid')->validate(['size' => 10240000, 'ext' => 'zip'])->move($addonTmpDir);
         if ($info) {
             $tmpName = substr($info->getFilename(), 0, stripos($info->getFilename(), '.'));
-            $tmpAddonDir = ADDON_PATH . $tmpName . DS;
+            $tmpAddonDir = ADDON_PATH . $tmpName . DIRECTORY_SEPARATOR;
             $tmpFile = $addonTmpDir . $info->getSaveName();
             try {
                 Service::unzip($tmpName);
@@ -223,7 +223,7 @@ class Addon extends Backend
                     throw new Exception(__('Addon name incorrect'));
                 }
 
-                $newAddonDir = ADDON_PATH . $name . DS;
+                $newAddonDir = ADDON_PATH . $name . DIRECTORY_SEPARATOR;
                 if (is_dir($newAddonDir)) {
                     throw new Exception(__('Addon already exists'));
                 }
@@ -272,7 +272,7 @@ class Addon extends Backend
     public function upgrade()
     {
         $name = request()->post("name");
-        $addonTmpDir = RUNTIME_PATH . 'addons' . DS;
+        $addonTmpDir = RUNTIME_PATH . 'addons' . DIRECTORY_SEPARATOR;
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }
@@ -317,7 +317,7 @@ class Addon extends Backend
         $onlineaddons = Cache::get("onlineaddons");
         if (!is_array($onlineaddons)) {
             $onlineaddons = [];
-            $result = Http::sendRequest(config('easyadmin.api_url') . '/addon/index');
+            $result = Http::sendRequest(Config::get('app.EasyAdmin.api_url') . '/addon/index');
             if ($result['ret']) {
                 $json = (array)json_decode($result['msg'], true);
                 $rows = isset($json['rows']) ? $json['rows'] : [];
@@ -348,7 +348,7 @@ class Addon extends Backend
                 $v['screenshots'] = [];
                 $v['releaselist'] = [];
             }
-            $v['url'] = addon_url($v['name']);
+            $v['url'] = addons_url($v['name']);
             $v['url'] = str_replace(request()->server('SCRIPT_NAME'), '', $v['url']);
             $v['createtime'] = filemtime(ADDON_PATH . $v['name']);
             if ($filter && isset($filter['category_id']) && is_numeric($filter['category_id']) && $filter['category_id'] != $v['category_id']) {
@@ -363,6 +363,8 @@ class Addon extends Backend
         $result = array("total" => $total, "rows" => $list);
 
         $callback = request()->get('callback') ? "jsonp" : "json";
-        return $callback($result);
+        $call=$callback($result);
+        return $call;
     }
+
 }
