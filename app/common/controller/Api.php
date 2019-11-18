@@ -2,21 +2,21 @@
 
 namespace app\common\controller;
 
+use app\BaseController;
 use app\common\library\Auth;
-use think\Config;
+use think\facade\Config;
 use think\exception\HttpResponseException;
 use think\exception\ValidateException;
-use think\Hook;
+use think\Validate;
 use think\Lang;
-use think\Loader;
-use think\Request;
+use think\facade\Request;
 use think\Response;
-use think\Route;
+use think\facade\Route;
 
 /**
  * API控制器基类
  */
-class Api
+class Api extends BaseController
 {
 
     /**
@@ -70,6 +70,7 @@ class Api
      */
     public function __construct(Request $request = null)
     {
+        parent::__construct(app());
         $this->request = is_null($request) ? Request::instance() : $request;
 
         // 控制器初始化
@@ -120,7 +121,7 @@ class Api
         $actionname = strtolower($this->request->action());
 
         // token
-        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', \think\Cookie::get('token')));
+        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', \think\facade\Cookie::get('token')));
 
         $path = str_replace('.', '/', $controllername) . '/' . $actionname;
         // 设置当前请求的URI
@@ -164,7 +165,7 @@ class Api
      */
     protected function loadlang($name)
     {
-        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
+        Lang::load(app_path() . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
     }
 
     /**
@@ -269,54 +270,4 @@ class Api
         return $this;
     }
 
-    /**
-     * 验证数据
-     * @access protected
-     * @param  array        $data     数据
-     * @param  string|array $validate 验证器名或者验证规则数组
-     * @param  array        $message  提示信息
-     * @param  bool         $batch    是否批量验证
-     * @param  mixed        $callback 回调方法（闭包）
-     * @return array|string|true
-     * @throws ValidateException
-     */
-    protected function validate($data, $validate, $message = [], $batch = false, $callback = null)
-    {
-        if (is_array($validate)) {
-            $v = Loader::validate();
-            $v->rule($validate);
-        } else {
-            // 支持场景
-            if (strpos($validate, '.')) {
-                list($validate, $scene) = explode('.', $validate);
-            }
-
-            $v = Loader::validate($validate);
-
-            !empty($scene) && $v->scene($scene);
-        }
-
-        // 批量验证
-        if ($batch || $this->batchValidate) {
-            $v->batch(true);
-        }
-        // 设置错误信息
-        if (is_array($message)) {
-            $v->message($message);
-        }
-        // 使用回调验证
-        if ($callback && is_callable($callback)) {
-            call_user_func_array($callback, [$v, &$data]);
-        }
-
-        if (!$v->check($data)) {
-            if ($this->failException) {
-                throw new ValidateException($v->getError());
-            }
-
-            return $v->getError();
-        }
-
-        return true;
-    }
 }

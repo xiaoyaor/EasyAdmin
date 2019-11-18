@@ -5,7 +5,7 @@ namespace app\admin\controller\auth;
 use app\admin\model\AuthRule;
 use app\common\controller\Backend;
 use fast\Tree;
-use think\Cache;
+use think\facade\Cache;
 use think\facade\View;
 
 /**
@@ -82,7 +82,7 @@ class Rule extends Backend
                 if ($result === false) {
                     $this->error($this->model->getError());
                 }
-                Cache::rm('__menu__');
+                Cache::delete('__menu__');
                 $this->success();
             }
             $this->error();
@@ -143,7 +143,7 @@ class Rule extends Backend
             $delIds = array_unique($delIds);
             $count = $this->model->where('id', 'in', $delIds)->delete();
             if ($count) {
-                Cache::rm('__menu__');
+                Cache::delete('__menu__');
                 $this->success();
             }
         }

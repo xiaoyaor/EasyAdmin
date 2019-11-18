@@ -1120,7 +1120,7 @@ EOD;
         }
         $appNamespace = Config::get('app.app_namespace')?Config::get('app.app_namespace'):'app';
         $parseNamespace = "{$appNamespace}\\{$module}\\{$type}" . ($arr ? "\\" . implode("\\", $arr) : "");
-        $moduleDir = APP_PATH() . $module . DIRECTORY_SEPARATOR;
+        $moduleDir = base_path() . $module . DIRECTORY_SEPARATOR;
         $parseFile = $moduleDir . $type . DIRECTORY_SEPARATOR . ($arr ? implode(DIRECTORY_SEPARATOR, $arr) . DIRECTORY_SEPARATOR : '') . $parseName . '.php';
         return [$parseNamespace, $parseName, $parseFile, $parseArr];
     }
