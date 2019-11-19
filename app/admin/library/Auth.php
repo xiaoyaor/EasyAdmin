@@ -190,7 +190,7 @@ class Auth extends \fast\Auth
         }
         //判断是否同一时间同一账号只能在一个地方登录
         if (Config::get('easyadmin.login_unique')) {
-            $my = Admin::get($admin['id']);
+            $my = Admin::find($admin['id']);
             if (!$my || $my['token'] != $admin['token']) {
                 return false;
             }
@@ -236,7 +236,7 @@ class Auth extends \fast\Auth
     {
         $uid = is_null($uid) ? $this->id : $uid;
 
-        return $uid != $this->id ? Admin::get(intval($uid)) : Session::get('admin');
+        return $uid != $this->id ? Admin::find(intval($uid)) : Session::get('admin');
     }
 
     public function getRuleIds($uid = null)

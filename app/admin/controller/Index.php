@@ -19,7 +19,7 @@ use think\facade\Session;
 class Index extends Backend
 {
     use Jump;
-    protected $noNeedLogin = ['login'];
+    protected $noNeedLogin = ['login','captcha'];
     protected $noNeedRight = ['index', 'logout'];
 
     //构造方法
@@ -87,12 +87,17 @@ class Index extends Backend
                 'password'  => $password,
                 '__token__' => $token,
             ];
-            if (Config::get('app.EasyAdmin')) {
-                $rule['captcha'] = 'require|captcha';
-                $data['captcha'] = Request::post('captcha');
+
+            if (Config::get('app.EasyAdmin.login_captcha')){
+                $captcha=Request::post('captcha') ;
+                if(!captcha_check($captcha)){
+                    Config::set(['default_return_type'=>'json'],'app');
+                    $this->error('验证失败');
+                }
             }
-            $validate = new Validate($rule, [], ['username' => __('Username'), 'password' => __('Password'), 'captcha' => __('Captcha')]);
-            $result = $validate->check($data);
+
+            $validate = new Validate();
+            $result = $validate->check($data,$rule);
             if (!$result) {
                 $this->error($validate->getError(), $url, '');
             }
@@ -129,6 +134,15 @@ class Index extends Backend
         $this->auth->logout();
         Event::trigger("admin_logout_after", request());
         $this->success(__('Logout successful'), 'index/login');
+    }
+
+    /*
+     * 验证码
+     *
+     */
+    public function captcha()
+    {
+        return captcha();
     }
 
 }
