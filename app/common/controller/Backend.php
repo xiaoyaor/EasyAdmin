@@ -121,7 +121,9 @@ class Backend extends BaseController
     /**
      * 构造方法
      */
-    public function __construct(){
+    public function __construct()
+    {
+        parent::__construct(app());
         // 控制器初始化
         $this->_initialize();
     }

@@ -4,11 +4,11 @@ namespace app\common\controller;
 
 use app\BaseController;
 use app\common\library\Auth;
-use think\Config;
-use think\Controller;
-use think\Hook;
+use think\facade\Config;
+use think\facade\Event;
+use think\facade\Cookie;
+use think\facade\View;
 use think\Lang;
-use think\Loader;
 use think\Validate;
 
 /**
@@ -22,6 +22,11 @@ class Frontend extends BaseController
      * @var string
      */
     protected $layout = '';
+
+    /**
+     * 配置文件
+     */
+    protected $config = [];
 
     /**
      * 无需登录的方法,同时也就不需要鉴权了
@@ -46,17 +51,17 @@ class Frontend extends BaseController
         //移除HTML标签
         $this->request->filter('trim,strip_tags,htmlspecialchars');
         $modulename = $this->request->module();
-        $controllername = Loader::parseName($this->request->controller());
+        $controllername = parseName($this->request->controller());
         $actionname = strtolower($this->request->action());
 
         // 如果有使用模板布局
         if ($this->layout) {
-            $this->view->engine->layout('layout/' . $this->layout);
+            view()->engine->layout('layout/' . $this->layout);
         }
         $this->auth = Auth::instance();
 
         // token
-        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', \think\Cookie::get('token')));
+        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
 
         $path = str_replace('.', '/', $controllername) . '/' . $actionname;
         // 设置当前请求的URI
@@ -83,7 +88,7 @@ class Frontend extends BaseController
             }
         }
 
-        $this->view->assign('user', $this->auth->getUser());
+        View::assign('user', $this->auth->getUser());
 
         // 语言检测
         $lang = strip_tags($this->request->langset());
@@ -93,7 +98,7 @@ class Frontend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        Hook::listen("upload_config_init", $upload);
+        Event::listen("upload_config_init", $upload);
 
         // 配置信息
         $config = [
@@ -124,7 +129,7 @@ class Frontend extends BaseController
      */
     protected function loadlang($name)
     {
-        Lang::load(APP_PATH . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
+        \think\facade\Lang::load(app_path() .  '/lang/' . \think\facade\Config::get('lang.default_lang') . '/' . str_replace('.', '/', $name) . '.php');
     }
 
     /**
@@ -134,7 +139,11 @@ class Frontend extends BaseController
      */
     protected function assignconfig($name, $value = '')
     {
-        $this->view->config = array_merge($this->view->config ? $this->view->config : [], is_array($name) ? $name : [$name => $value]);
+        if ($value){
+            $this->config=array_merge($this->config,[$name => $value]);
+        }
+        View::assign("config", $this->config);
+        //View::config = array_merge(View::config ? View::config : [], is_array($name) ? $name : [$name => $value]);
     }
 
     /**

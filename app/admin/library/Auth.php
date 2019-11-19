@@ -105,7 +105,7 @@ class Auth extends \fast\Auth
         }
         list($id, $keeptime, $expiretime, $key) = explode('|', $keeplogin);
         if ($id && $keeptime && $expiretime && $key && $expiretime > time()) {
-            $admin = Admin::get($id);
+            $admin = Admin::find($id);
             if (!$admin || !$admin->token) {
                 return false;
             }
@@ -113,7 +113,7 @@ class Auth extends \fast\Auth
             if ($key != md5(md5($id) . md5($keeptime) . md5($expiretime) . $admin->token)) {
                 return false;
             }
-            $ip = request()->ip(0, false);
+            $ip = request()->ip();
             //IP有变动
             if ($admin->loginip != $ip) {
                 return false;

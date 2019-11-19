@@ -5,6 +5,7 @@ namespace app\api\controller;
 use app\common\controller\Api;
 use app\common\library\Ems as Emslib;
 use app\common\model\User;
+use think\facade\Event;
 
 /**
  * 邮箱验证码接口
@@ -18,7 +19,7 @@ class Ems extends Api
     public function _initialize()
     {
         parent::_initialize();
-        \think\Hook::add('ems_send', function($params) {
+        Event::add('ems_send', function($params) {
             $obj = \app\common\library\Email::instance();
             $result = $obj
                     ->to($params->email)

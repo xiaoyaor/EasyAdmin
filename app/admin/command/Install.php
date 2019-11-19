@@ -70,14 +70,14 @@ class Install extends Command
         $instance->execute("SELECT 1");
 
         // 调用原生PDO对象进行批量查询
-        $instance->getPdo()->exec($sql);
+        $instance->execute($sql);
 
         file_put_contents($installLockFile, 1);
 
         //后台入口文件
         $adminFile = root_path() . 'public' . DIRECTORY_SEPARATOR . 'admin.php';
 
-        $dbConfigFile = APP_PATH . 'database.php';
+        $dbConfigFile = config_path() . 'database.php';
         $config = @file_get_contents($dbConfigFile);
         $callback = function ($matches) use ($hostname, $hostport, $username, $password, $database, $prefix) {
             $field = $matches[1];

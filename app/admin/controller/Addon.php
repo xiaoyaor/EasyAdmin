@@ -193,18 +193,18 @@ class Addon extends Backend
      */
     public function local()
     {
-        Config::set('default_return_type', 'json');
+        Config::set(['default_return_type'=>'json'],'app');
 
         $file = request()->file('file');
-        $addonTmpDir = RUNTIME_PATH . 'addons' . DIRECTORY_SEPARATOR;
+        $addonTmpDir = runtime_path() . 'addons' . DIRECTORY_SEPARATOR;
         if (!is_dir($addonTmpDir)) {
             @mkdir($addonTmpDir, 0755, true);
         }
-        $info = $file->rule('uniqid')->validate(['size' => 10240000, 'ext' => 'zip'])->move($addonTmpDir);
+        $info = $file->move($addonTmpDir,$file->getOriginalName());
         if ($info) {
             $tmpName = substr($info->getFilename(), 0, stripos($info->getFilename(), '.'));
             $tmpAddonDir = ADDON_PATH . $tmpName . DIRECTORY_SEPARATOR;
-            $tmpFile = $addonTmpDir . $info->getSaveName();
+            $tmpFile = $addonTmpDir . $info->getFilename();
             try {
                 Service::unzip($tmpName);
                 unset($info);
@@ -214,7 +214,7 @@ class Addon extends Backend
                     throw new Exception(__('Addon info file was not found'));
                 }
 
-                $config = Config::load($infoFile, '', $tmpName);
+                $config = (new \think\Config)->load($infoFile , $tmpName);
                 $name = isset($config['name']) ? $config['name'] : '';
                 if (!$name) {
                     throw new Exception(__('Addon info file data incorrect'));
@@ -225,7 +225,7 @@ class Addon extends Backend
 
                 $newAddonDir = ADDON_PATH . $name . DIRECTORY_SEPARATOR;
                 if (is_dir($newAddonDir)) {
-                    throw new Exception(__('Addon already exists'));
+                    //throw new Exception(__('Addon already exists'));
                 }
 
                 //重命名插件文件夹
@@ -241,7 +241,7 @@ class Addon extends Backend
                     //执行插件的安装方法
                     $class = get_addon_class($name);
                     if (class_exists($class)) {
-                        $addon = new $class();
+                        $addon = new $class(app());
                         $addon->install();
                     }
 
@@ -272,7 +272,7 @@ class Addon extends Backend
     public function upgrade()
     {
         $name = request()->post("name");
-        $addonTmpDir = RUNTIME_PATH . 'addons' . DIRECTORY_SEPARATOR;
+        $addonTmpDir = runtime_path() . 'addons' . DIRECTORY_SEPARATOR;
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }

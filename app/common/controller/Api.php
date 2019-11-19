@@ -4,6 +4,7 @@ namespace app\common\controller;
 
 use app\BaseController;
 use app\common\library\Auth;
+use think\facade\Event;
 use think\facade\Config;
 use think\exception\HttpResponseException;
 use think\exception\ValidateException;
@@ -68,10 +69,9 @@ class Api extends BaseController
      * @access public
      * @param Request $request Request 对象
      */
-    public function __construct(Request $request = null)
+    public function __construct()
     {
         parent::__construct(app());
-        $this->request = is_null($request) ? Request::instance() : $request;
 
         // 控制器初始化
         $this->_initialize();
@@ -92,36 +92,36 @@ class Api extends BaseController
      */
     protected function _initialize()
     {
-        if (Config::get('url_domain_deploy')) {
-            $domain = Route::rules('domain');
-            if (isset($domain['api'])) {
-                if (isset($_SERVER['HTTP_ORIGIN'])) {
-                    header("Access-Control-Allow-Origin: " . $this->request->server('HTTP_ORIGIN'));
-                    header('Access-Control-Allow-Credentials: true');
-                    header('Access-Control-Max-Age: 86400');
-                }
-                if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-                    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
-                        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-                    }
-                    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
-                        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-                    }
-                }
-            }
-        }
+//        if (Config::get('url_domain_deploy')) {
+//            $domain = Route::rules('domain');
+//            if (isset($domain['api'])) {
+//                if (isset($_SERVER['HTTP_ORIGIN'])) {
+//                    header("Access-Control-Allow-Origin: " . Request::server('HTTP_ORIGIN'));
+//                    header('Access-Control-Allow-Credentials: true');
+//                    header('Access-Control-Max-Age: 86400');
+//                }
+//                if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+//                    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+//                        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+//                    }
+//                    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+//                        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+//                    }
+//                }
+//            }
+//        }
 
         //移除HTML标签
-        $this->request->filter('trim,strip_tags,htmlspecialchars');
+        Request::filter('trim,strip_tags,htmlspecialchars');
 
         $this->auth = Auth::instance();
 
-        $modulename = $this->request->module();
-        $controllername = strtolower($this->request->controller());
-        $actionname = strtolower($this->request->action());
+        $modulename = app('http')->getName();
+        $controllername = strtolower(Request::controller());
+        $actionname = strtolower(Request::action());
 
         // token
-        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', \think\facade\Cookie::get('token')));
+        $token = Request::server('HTTP_TOKEN', Request::request('token', \think\facade\Cookie::get('token')));
 
         $path = str_replace('.', '/', $controllername) . '/' . $actionname;
         // 设置当前请求的URI
@@ -151,9 +151,9 @@ class Api extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        Hook::listen("upload_config_init", $upload);
+        Event::listen("upload_config_init", $upload);
 
-        Config::set('upload', array_merge(Config::get('upload'), $upload));
+        Config::set( array_merge(Config::get('upload'), $upload),'upload');
 
         // 加载当前控制器语言包
         $this->loadlang($controllername);
@@ -165,7 +165,7 @@ class Api extends BaseController
      */
     protected function loadlang($name)
     {
-        Lang::load(app_path() . $this->request->module() . '/lang/' . $this->request->langset() . '/' . str_replace('.', '/', $name) . '.php');
+        \think\facade\Lang::load(app_path() .  '/lang/' . Config::get('lang.default_lang') . '/' . str_replace('.', '/', $name) . '.php');
     }
 
     /**
@@ -214,7 +214,7 @@ class Api extends BaseController
             'data' => $data,
         ];
         // 如果未设置类型则自动判断
-        $type = $type ? $type : ($this->request->param(config('var_jsonp_handler')) ? 'jsonp' : $this->responseType);
+        $type = $type ? $type : (Request::param(config('var_jsonp_handler')) ? 'jsonp' : $this->responseType);
 
         if (isset($header['statuscode'])) {
             $code = $header['statuscode'];
@@ -241,7 +241,7 @@ class Api extends BaseController
                 $options['only'] = explode(',', $options['only']);
             }
 
-            if (!in_array($this->request->action(), $options['only'])) {
+            if (!in_array(Request::action(), $options['only'])) {
                 return;
             }
         } elseif (isset($options['except'])) {
@@ -249,7 +249,7 @@ class Api extends BaseController
                 $options['except'] = explode(',', $options['except']);
             }
 
-            if (in_array($this->request->action(), $options['except'])) {
+            if (in_array(Request::action(), $options['except'])) {
                 return;
             }
         }
