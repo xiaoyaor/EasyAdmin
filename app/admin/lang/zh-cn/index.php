@@ -54,4 +54,5 @@ return [
     'Forum'                                                      => '交流社区',
     'QQ qun'                                                     => 'QQ交流群',
     'Captcha'                                                    => '验证码',
+    'Captcha fault'                                              => '验证码错误',
 ];

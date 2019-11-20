@@ -39,7 +39,7 @@ class Addon extends Backend
             $v['url'] = str_replace(request()->server('SCRIPT_NAME'), '', $v['url']);
         }
         $this->assignconfig('addons',$addons);
-        $address=Config::get('app.EasyAdmin.api_url');
+        $address=Config::get('easyadmin.api_url');
         View::assign(['api_url' => $address]);
         return View::fetch();
     }
@@ -317,7 +317,7 @@ class Addon extends Backend
         $onlineaddons = Cache::get("onlineaddons");
         if (!is_array($onlineaddons)) {
             $onlineaddons = [];
-            $result = Http::sendRequest(Config::get('app.EasyAdmin.api_url') . '/addon/index');
+            $result = Http::sendRequest(Config::get('easyadmin.api_url') . '/addon/index');
             if ($result['ret']) {
                 $json = (array)json_decode($result['msg'], true);
                 $rows = isset($json['rows']) ? $json['rows'] : [];

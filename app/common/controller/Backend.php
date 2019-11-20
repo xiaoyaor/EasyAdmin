@@ -219,8 +219,8 @@ class Backend extends BaseController
             'jsname'         => 'backend/' . str_replace('.', '/', $controllername),
             'moduleurl'      => rtrim(url("/{$modulename}", [], false), '/'),
             'language'       => $lang,
-            'easyadmin'      => Config::get('app.EasyAdmin'),
-            'api_url'      => Config::get('app.EasyAdmin.api_url'),
+            'easyadmin'      => Config::get('easyadmin'),
+            'api_url'      => Config::get('easyadmin.api_url'),
             'referer'        => Session::get("referer")
         ];
         //$config = array_merge($config, Config::get("app.view_replace_str"));

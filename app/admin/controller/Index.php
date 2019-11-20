@@ -88,11 +88,11 @@ class Index extends Backend
                 '__token__' => $token,
             ];
 
-            if (Config::get('app.EasyAdmin.login_captcha')){
+            if (Config::get('easyadmin.login_captcha')){
                 $captcha=Request::post('captcha') ;
                 if(!captcha_check($captcha)){
                     Config::set(['default_return_type'=>'json'],'app');
-                    $this->error('验证失败');
+                    $this->error(__('Captcha fault'));
                 }
             }
 
@@ -108,7 +108,6 @@ class Index extends Backend
             } else {
                 $msg = $this->auth->getError();
                 $msg = $msg ? $msg : __('Username or password is incorrect');
-                //$this->error($msg, $url, ['token' => token()]);
                 $this->error($msg, $url, '');
             }
         }
@@ -117,12 +116,13 @@ class Index extends Backend
         if ($this->auth->autologin()) {
             $this->redirect($url);
         }
-        $background = Config::get('app.EasyAdmin.login_background');
-        //$background = stripos($background, 'http') === 0 ? $background : config('app.site') . $background;
+
+        $background = Config::get('easyadmin.login_background');
+        $background = stripos($background, 'http') === 0 ? $background : config('site.cdnurl') . $background;
         View::assign('background', $background);
         View::assign('title', __('Login'));
-        View::assign('EasyAdmin', Config::get('app.EasyAdmin'));
-        Event::listen("admin_login_init", request());
+        View::assign('easyadmin', Config::get('easyadmin'));
+        Event::trigger("adminLoginInit", request());
         return View::fetch();
     }
 
