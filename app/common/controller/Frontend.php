@@ -139,11 +139,7 @@ class Frontend extends BaseController
      */
     protected function assignconfig($name, $value = '')
     {
-        if ($value){
-            $this->config=array_merge($this->config,[$name => $value]);
-        }
-        View::assign("config", $this->config);
-        //View::config = array_merge(View::config ? View::config : [], is_array($name) ? $name : [$name => $value]);
+        View::assign("config", array_merge($this->config,[$name => $value]));
     }
 
     /**

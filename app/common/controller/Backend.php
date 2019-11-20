@@ -223,9 +223,8 @@ class Backend extends BaseController
             'api_url'      => Config::get('easyadmin.api_url'),
             'referer'        => Session::get("referer")
         ];
-        //$config = array_merge($config, Config::get("app.view_replace_str"));
+        $this->config = array_merge($this->config, Config::get("app.view_replace_str"));
 
-        //Config::set('upload', array_merge(Config::get('upload'), $upload));
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
         //设置layout
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
@@ -259,11 +258,7 @@ class Backend extends BaseController
      */
     protected function assignconfig($name, $value = '')
     {
-        if ($value){
-            $this->config=array_merge($this->config,[$name => $value]);
-        }
-        View::assign("config", $this->config);
-        //$this->view->config = array_merge($this->view->config ? $this->view->config : [], is_array($name) ? $name : [$name => $value]);
+        View::assign("config", array_merge($this->config,[$name => $value]));
     }
 
     /**
