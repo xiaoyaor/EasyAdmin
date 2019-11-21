@@ -345,17 +345,36 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
             function change_skin(cls) {
                 if (!$("body").hasClass(cls)) {
                     $("body").removeClass(my_skins.join(' ')).addClass(cls);
-                    localStorage.setItem('skin', cls);
+                    //localStorage.setItem('skin', cls);
                     var cssfile = Config.site.cdnurl + "/assets/css/skins/" + cls + ".css";
                     $('head').append('<link rel="stylesheet" href="' + cssfile + '" type="text/css" />');
+                    send_skin(cls);
                 }
                 return false;
             }
 
+            function send_skin(cls) {
+                $.ajax({
+                    url: '/admin/index/changeSkin',
+                    type: 'post',
+                    data: {'skin': cls},
+                    dataType: 'json',
+                    success: function (ret) {
+                        console.log(ret.msg)
+                    },
+                    error: function (e) {
+                        console.log(e.msg)
+                    }
+                });
+                return false;
+            }
+
             function setup() {
-                var tmp = localStorage.getItem('skin');
-                if (tmp && $.inArray(tmp, my_skins) != -1)
-                    change_skin(tmp);
+
+                ////取消localStorage存储的skin信息
+                // var tmp = localStorage.getItem('skin');
+                // if (tmp && $.inArray(tmp, my_skins) != -1)
+                //     change_skin(tmp);
 
                 // 皮肤切换
                 $("[data-skin]").on('click', function (e) {

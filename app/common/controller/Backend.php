@@ -523,19 +523,4 @@ class Backend extends BaseController
         return json(['list' => $list, 'total' => $total]);
     }
 
-    /**
-     * 刷新Token
-     */
-    protected function token()
-    {
-        $token = request()->post('__token__');
-
-        //验证Token
-        if (!Validate::is($token, "token", ['__token__' => $token])) {
-            $this->error(__('Token verification error'), '', ['__token__' => request()->buildToken()]);
-        }
-
-        //刷新Token
-        request()->buildToken();
-    }
 }

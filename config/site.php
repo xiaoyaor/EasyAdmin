@@ -4,7 +4,6 @@ return array (
   'name' => 'EasyAdmin',
   'beian' => '',
   'cdnurl' => '',
-  'version' => '0.0.0.1',
   'version' => '1.0.1',
   'timezone' => 'Asia/Shanghai',
   'forbiddenip' => '',
@@ -36,4 +35,5 @@ return array (
   'mail_smtp_pass' => 'password',
   'mail_verify_type' => '2',
   'mail_from' => '10000@qq.com',
+  'skin' => 'skin-blue',
 );

@@ -150,7 +150,7 @@ class Config extends Backend
     public function del($ids = "")
     {
         $name = request()->post('name');
-        $config = ConfigModel::getByName($name);
+        $config = ConfigModel::find(['name'=>$name]);
         if ($name && $config) {
             try {
                 $config->delete();
@@ -169,21 +169,8 @@ class Config extends Backend
      */
     protected function refreshFile()
     {
-        $config = [];
-        foreach ($this->model->select() as $k => $v) {
-            $value = $v->toArray();
-            if (in_array($value['type'], ['selects', 'checkbox', 'images', 'files'])) {
-                $value['value'] = explode(',', $value['value']);
-            }
-            if ($value['type'] == 'array') {
-                $value['value'] = (array)json_decode($value['value'], true);
-            }
-            $config[$value['name']] = $value['value'];
-        }
-        file_put_contents(
-            root_path('app') . 'extra' . DIRECTORY_SEPARATOR . 'site.php',
-            '<?php' . "\n\nreturn " . var_export($config, true) . ";"
-        );
+
+        change_site();
     }
 
     /**

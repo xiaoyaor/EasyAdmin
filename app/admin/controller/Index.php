@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\admin\model\AdminLog;
 use app\common\controller\Backend;
+use app\common\model\Config as ConfigModel;
 use think\facade\Config;
 use think\facade\Event;
 use think\facade\Request;
@@ -37,19 +38,19 @@ class Index extends Backend
      */
     public function index()
     {
+        //菜单标识
+        $flag=[
+            'dashboard' => 'hot','addon' => ['new', 'red', 'badge'],'auth/rule' => __('Menu'),'general' => ['new', 'purple']
+        ];
         //左侧菜单
-        list($menulist, $navlist, $fixedmenu, $referermenu) = $this->auth->getSidebar([
-            'dashboard' => 'hot',
-            'addon'     => ['new', 'red', 'badge'],
-            'auth/rule' => __('Menu'),
-            'general'   => ['new', 'purple'],
-        ], Config::get('app.fixedpage'));//View::site['fixedpage']
+        list($menulist, $navlist, $fixedmenu, $referermenu) = $this->auth->getSidebar($flag, Config::get('site.fixedpage'));
         $action = Request::request('action');
         if (Request::isPost()) {
             if ($action == 'refreshmenu') {
                 $this->success('', null, ['menulist' => $menulist, 'navlist' => $navlist]);
             }
         }
+        View::assign('skin', Config::get('site.skin'));
         View::assign('menulist', $menulist);
         View::assign('navlist', $navlist);
         View::assign('fixedmenu', $fixedmenu);
@@ -145,6 +146,24 @@ class Index extends Backend
     public function captcha()
     {
         return captcha();
+    }
+
+    /*
+     * 切换皮肤
+     *
+     */
+    function changeSkin()
+    {
+        if (request()->isPost()) {
+            $skin = request()->post("skin");
+            if ($skin != Config::get('site.skin') && $skin!=''){
+                change_site('skin',$skin);
+                $this->success('切换皮肤成功');
+            }
+            else{
+                $this->success('');
+            }
+        }
     }
 
 }

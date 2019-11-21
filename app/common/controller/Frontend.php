@@ -10,13 +10,14 @@ use think\facade\Cookie;
 use think\facade\View;
 use think\Lang;
 use think\Validate;
+use xiaoyaor\think\Jump;
 
 /**
  * 前台控制器基类
  */
 class Frontend extends BaseController
 {
-
+    use Jump;
     /**
      * 布局模板
      * @var string
@@ -137,19 +138,4 @@ class Frontend extends BaseController
         View::assign("config", array_merge(View::instance()->config,[$name => $value]));
     }
 
-    /**
-     * 刷新Token
-     */
-    protected function token()
-    {
-        $token = $this->request->post('__token__');
-
-        //验证Token
-        if (!Validate::is($token, "token", ['__token__' => $token])) {
-            $this->error(__('Token verification error'), '', ['__token__' => $this->request->token()]);
-        }
-
-        //刷新Token
-        $this->request->token();
-    }
 }

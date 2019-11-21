@@ -14,8 +14,6 @@ return [
     'with_route'       => true,
     // 是否启用事件
     'with_event'       => true,
-    // 是否启用事件
-    'fixedpage'       => 'dashboard',
     // 默认应用
     'default_app'      => 'index',
     // 默认时区

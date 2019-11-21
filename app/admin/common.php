@@ -1,5 +1,7 @@
 <?php
 // 这是系统自动生成的公共文件
+use app\common\model\Config as ConfigModel;
+use think\facade\Config;
 use think\facade\Request;
 use think\Model;
 use app\common\model\Category;
@@ -179,5 +181,35 @@ if (!function_exists('build_heading')) {
             $result = '<div class="panel-heading">' . $result . '</div>';
         }
         return $result;
+    }
+}
+
+if (!function_exists('change_site')) {
+
+    /**
+     * @param string $key
+     * @param string $val
+     * @return bool
+     */
+    function change_site($key='',$val='')
+    {
+        $model = new ConfigModel();
+        $config = [];
+        foreach ($model->select() as $k => $v) {
+            $value = $v->toArray();
+            if (in_array($value['type'], ['selects', 'checkbox', 'images', 'files'])) {
+                $value['value'] = explode(',', $value['value']);
+            }
+            if ($value['type'] == 'array') {
+                $value['value'] = (array)json_decode($value['value'], true);
+            }
+            $config[$value['name']] = $value['value'];
+            if ($key != '' && $value['name'] == $key){
+                $config[$value['name']] = $val;
+                (new ConfigModel())::where(['name'=>$key])->save(['value'=>$val]);
+            }
+        }
+        file_put_contents(root_path() . 'config' . DIRECTORY_SEPARATOR . 'site.php','<?php' . "\n\nreturn " . var_export($config, true) . ";");
+        return true;
     }
 }
