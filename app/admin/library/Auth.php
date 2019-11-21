@@ -445,7 +445,7 @@ class Auth extends \fast\Auth
 
         $select_id = $selected ? $selected['id'] : 0;
         $menu = $nav = '';
-        if (Config::get('easyadmin.multiplenav')) {
+        if (Config::get('site.multiplenav')) {
             $topList = [];
             foreach ($ruleList as $index => $item) {
                 if (!$item['pid']) {

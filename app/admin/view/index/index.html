@@ -5,7 +5,7 @@
         {include file="common/meta" /}
     </head>
     <link href="/assets/css/skins/{$skin}.css?v={:time()}" rel="stylesheet">
-    <body class="hold-transition {$skin} sidebar-mini fixed " id="tabs">
+    <body class="hold-transition {$skin} sidebar-mini fixed  {if $site.multiplenav}multiplenav{/if}" id="tabs">
         <div class="wrapper">
 
             <!-- 头部区域 -->

@@ -188,7 +188,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
                 }
             });
 
-            var multiplenav = Config.easyadmin.multiplenav;
+            var multiplenav = Config.multiplenav;
             var firstnav = $("#firstnav .nav-addtabs");
             var nav = multiplenav ? $("#secondnav .nav-addtabs") : firstnav;
 
@@ -287,7 +287,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
             if ($("ul.sidebar-menu li.active a").size() > 0) {
                 $("ul.sidebar-menu li.active a").trigger("click");
             } else {
-                if (Config.easyadmin.multiplenav) {
+                if (Config.multiplenav) {
                     $("li:first > a", firstnav).trigger("click");
                 } else {
                     $("ul.sidebar-menu li a[url!='javascript:;']:first").trigger("click");

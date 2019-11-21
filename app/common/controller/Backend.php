@@ -188,7 +188,7 @@ class Backend extends BaseController
         // 设置面包屑导航数据
         $breadcrumb = $this->auth->getBreadCrumb($path);
         array_pop($breadcrumb);
-        view()->breadcrumb = $breadcrumb;
+        View::assign('breadcrumb' , $breadcrumb);
 
         // 如果有使用模板布局//待定
         if ($this->layout) {
@@ -198,6 +198,18 @@ class Backend extends BaseController
         // 语言检测
         $lang = strip_tags(Config::get("lang.default_lang"));
 
+        if($this->request->get('act')){
+            $multiplenav=$this->request->get('act');
+            if ($multiplenav=='switch-multiplenav-on'){
+                Config::set(['multiplenav' => 1],'site');
+                change_site('multiplenav',1);
+            }
+            else if ($multiplenav=='switch-multiplenav-off'){
+                Config::set(['multiplenav' => 0],'site');
+                change_site('multiplenav',0);
+            }
+        }
+        Config::set(['multiplenav' => (int)Config::get("site.multiplenav")],'site');
         $site = Config::get("site");
 
         $upload = \app\common\model\Config::upload();
@@ -217,6 +229,7 @@ class Backend extends BaseController
             'language'       => $lang,
             'easyadmin'      => Config::get('easyadmin'),
             'api_url'      => Config::get('easyadmin.api_url'),
+            'multiplenav'      => Config::get('site.multiplenav'),
             'referer'        => Session::get("referer")
         ];
         $config = array_merge($config, Config::get("app.view_replace_str"));

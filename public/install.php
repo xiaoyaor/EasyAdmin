@@ -44,7 +44,7 @@ function write_ini_file($assoc_arr, $path)
         {
             if(!is_array($elem))
             {
-                $content .= $key." = \"".$elem."\"\n";
+                $content .= $key." = ".$elem."\n";
             }
             else
             {
@@ -55,11 +55,11 @@ function write_ini_file($assoc_arr, $path)
                     {
                         for($i=0;$i<count($elem2);$i++)
                         {
-                            $content .= $key2."[] = \"".$elem2[$i]."\"\n";
+                            $content .= $key2."[] = ".$elem2[$i]."\n";
                         }
                     }
                     else if($elem2=="") $content .= $key2." = \n";
-                    else $content .= $key2." = \"".$elem2."\"\n";
+                    else $content .= $key2." = ".$elem2."\n";
                 }
             }
             $content .= "\n";
