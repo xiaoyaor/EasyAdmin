@@ -42,10 +42,6 @@ class Backend extends BaseController
      * @var Auth
      */
     protected $auth = null;
-    /**
-     * 配置文件
-     */
-    protected $config = [];
 
     /**
      * 模型对象
@@ -210,7 +206,7 @@ class Backend extends BaseController
         Event::listen("upload_config_init", $upload);
 
         // 配置信息
-        $this->config = [
+        $config = [
             'site'           => array_intersect_key($site, array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
             'upload'         => $upload,
             'modulename'     => $modulename,
@@ -223,19 +219,19 @@ class Backend extends BaseController
             'api_url'      => Config::get('easyadmin.api_url'),
             'referer'        => Session::get("referer")
         ];
-        $this->config = array_merge($this->config, Config::get("app.view_replace_str"));
+        $config = array_merge($config, Config::get("app.view_replace_str"));
 
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
         //设置layout
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         // 配置信息后
-        Event::listen("config_init", $this->config);
+        Event::trigger("config_init", $config);
         //加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置
         View::assign('site', $site);
         //渲染配置信息
-        View::assign('config', $this->config);
+        View::assign('config', $config);
         //渲染权限对象
         View::assign('auth', $this->auth);
         //渲染管理员对象
@@ -258,7 +254,7 @@ class Backend extends BaseController
      */
     protected function assignconfig($name, $value = '')
     {
-        View::assign("config", array_merge($this->config,[$name => $value]));
+        View::assign("config", array_merge(View::instance()->config,[$name => $value]));
     }
 
     /**

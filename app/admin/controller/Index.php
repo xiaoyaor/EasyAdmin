@@ -23,7 +23,9 @@ class Index extends Backend
     protected $noNeedRight = ['index', 'logout'];
 
     //构造方法
-    public function __construct(){
+    public function __construct()
+    {
+        parent::__construct();
         // 控制器初始化
         parent::_initialize();
         Config::set(['layout_on'=>'','layout_name'=>''],'view');

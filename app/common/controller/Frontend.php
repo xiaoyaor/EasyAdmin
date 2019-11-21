@@ -24,11 +24,6 @@ class Frontend extends BaseController
     protected $layout = '';
 
     /**
-     * 配置文件
-     */
-    protected $config = [];
-
-    /**
      * 无需登录的方法,同时也就不需要鉴权了
      * @var array
      */
@@ -111,16 +106,16 @@ class Frontend extends BaseController
             'moduleurl'      => rtrim(url("/{$modulename}", '', false), '/'),
             'language'       => $lang
         ];
-        $config = array_merge($config, Config::get("view_replace_str"));
+        $config = array_merge($config, Config::get("app.view_replace_str"));
 
-        Config::set('upload', array_merge(Config::get('upload'), $upload));
+        Config::set(array_merge(Config::get('upload'), $upload), 'upload');
 
         // 配置信息后
-        Hook::listen("config_init", $config);
+        Event::trigger("config_init", $config);
         // 加载当前控制器语言包
         $this->loadlang($controllername);
-        $this->assign('site', $site);
-        $this->assign('config', $config);
+        View::assign('site', $site);
+        View::assign('config', $config);
     }
 
     /**
@@ -139,7 +134,7 @@ class Frontend extends BaseController
      */
     protected function assignconfig($name, $value = '')
     {
-        View::assign("config", array_merge($this->config,[$name => $value]));
+        View::assign("config", array_merge(View::instance()->config,[$name => $value]));
     }
 
     /**
