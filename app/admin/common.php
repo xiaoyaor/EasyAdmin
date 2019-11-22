@@ -5,8 +5,8 @@ use think\facade\Config;
 use think\facade\Request;
 use think\Model;
 use app\common\model\Category;
-use fast\Form;
-use fast\Tree;
+use easy\Form;
+use easy\Tree;
 use think\facade\Db;
 
 if (!function_exists('collection')) {

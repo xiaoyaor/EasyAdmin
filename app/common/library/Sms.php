@@ -35,7 +35,7 @@ class Sms
         where(['mobile' => $mobile, 'event' => $event])
             ->order('id', 'DESC')
             ->find();
-        Event::class->listen('sms_get', $sms, null, true);
+        Event::class->trigger('sms_get', $sms, null, true);
         return $sms ? $sms : null;
     }
 

@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\Backend;
-use fast\Random;
+use easy\Random;
 use think\addons\Service;
 use think\facade\Cache;
 use think\facade\Config;
@@ -218,16 +218,12 @@ class Ajax extends Backend
         $type = request()->request("type");
         switch ($type) {
             case 'all':
-                rmdirs(runtime_path(''));
-                Cache::clear();
-                break;
             case 'content':
-                rmdirs(runtime_path('cache'), false);
                 Cache::clear();
                 if ($type == 'content')
                     break;
             case 'template':
-                rmdirs(runtime_path('temp'), false);
+                rmdirs(runtime_path() . 'temp' .DIRECTORY_SEPARATOR, false);
                 if ($type == 'template')
                     break;
             case 'addons':
@@ -236,7 +232,7 @@ class Ajax extends Backend
                     break;
         }
 
-        //\think\Hook::listen("wipecache_after");
+        Event::trigger("wipecache_after");
         $this->success();
     }
 

@@ -23,7 +23,7 @@ class Dashboard extends Backend
     public function index()
     {
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
-        $seventtime = \fast\Date::unixtime('day', -7);
+        $seventtime = \easy\Date::unixtime('day', -7);
         $paylist = $createlist = [];
         for ($i = 0; $i < 7; $i++)
         {
@@ -33,9 +33,8 @@ class Dashboard extends Backend
         }
         $hooks = config('addons.hooks');
         $uploadmode = isset($hooks['upload_config_init']) && $hooks['upload_config_init'] ? implode(',', $hooks['upload_config_init']) : 'local';
-        //$addonComposerCfg = ROOT_PATH() . '/vendor/karsonzhang/fastadmin-addons/composer.json';
-        //Config::parse($addonComposerCfg, "json");
-        $config = Config::get("composer");
+        $addonComposerCfg = root_path() . '\vendor\xiaoyaor\think-addons\composer.json';
+        $config = Config::load($addonComposerCfg, "json");
         $addonVersion = isset($config['version']) ? $config['version'] : __('Unknown');
         View::assign([
             'totaluser'        => 35200,

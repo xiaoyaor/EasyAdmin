@@ -204,7 +204,7 @@ class Config extends Backend
             if (!Validate::is($receiver, "email")) {
                 $this->error(__('Please input correct email'));
             }
-            \think\Config::set('site', array_merge(\think\Config::get('site'), $row));
+            \think\facade\Config::set(array_merge(\think\facade\Config::get('site'), $row),'site');
             $email = new Email;
             $result = $email
                 ->to($receiver)

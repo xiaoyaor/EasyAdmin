@@ -5,7 +5,7 @@ namespace app\admin\controller\auth;
 use app\admin\model\AuthGroup;
 use app\admin\model\AuthRule;
 use app\common\controller\Backend;
-use fast\Tree;
+use easy\Tree;
 use think\facade\Request;
 use think\facade\View;
 

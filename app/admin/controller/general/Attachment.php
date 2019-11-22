@@ -4,6 +4,7 @@ namespace app\admin\controller\general;
 
 use app\common\controller\Backend;
 use app\common\model\Attachment as AttachmentModel;
+use think\facade\Event;
 use think\facade\Request;
 use think\facade\View;
 
@@ -106,7 +107,7 @@ class Attachment extends Backend
     public function del($ids = "")
     {
         if ($ids) {
-            \think\Hook::add('upload_delete', function ($params) {
+            Event::listen('upload_delete', function ($params) {
                 $attachmentFile = root_path() . '/public' . $params['url'];
                 if (is_file($attachmentFile)) {
                     @unlink($attachmentFile);
@@ -114,7 +115,7 @@ class Attachment extends Backend
             });
             $attachmentlist = $this->model->where('id', 'in', $ids)->select();
             foreach ($attachmentlist as $attachment) {
-                \think\Hook::listen("upload_delete", $attachment);
+                Event::trigger("upload_delete", $attachment);
                 $attachment->delete();
             }
             $this->success();

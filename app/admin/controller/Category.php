@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use app\common\controller\Backend;
 use app\common\model\Category as CategoryModel;
 use app\Request;
-use fast\Tree;
+use easy\Tree;
 use think\facade\Config;
 use think\facade\View;
 

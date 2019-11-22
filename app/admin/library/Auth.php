@@ -3,8 +3,8 @@
 namespace app\admin\library;
 
 use app\admin\model\Admin;
-use fast\Random;
-use fast\Tree;
+use easy\Random;
+use easy\Tree;
 use Overtrue\Pinyin\Pinyin;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -15,7 +15,7 @@ use think\facade\Event;
 use think\facade\Request;
 use think\facade\Session;
 
-class Auth extends \fast\Auth
+class Auth extends \easy\Auth
 {
     protected $_error = '';
     protected $requestUri = '';

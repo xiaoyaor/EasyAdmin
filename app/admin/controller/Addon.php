@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\Backend;
-use fast\Http;
+use easy\Http;
 use think\addons\Service;
 use think\facade\Cache;
 use think\facade\Config;

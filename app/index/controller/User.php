@@ -62,7 +62,7 @@ class User extends Frontend
      */
     public function _empty($name)
     {
-        $data = Hook::listen("user_request_empty", $name);
+        $data = Event::trigger("user_request_empty", $name);
         foreach ($data as $index => $datum) {
             View::assign($datum);
         }

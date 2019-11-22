@@ -5,7 +5,7 @@ namespace app\api\controller;
 use app\common\controller\Api;
 use app\common\library\Ems;
 use app\common\library\Sms;
-use fast\Random;
+use easy\Random;
 use think\Validate;
 
 /**

@@ -19,7 +19,7 @@ class Ems extends Api
     public function _initialize()
     {
         parent::_initialize();
-        Event::add('ems_send', function($params) {
+        Event::listen('ems_send', function($params) {
             $obj = \app\common\library\Email::instance();
             $result = $obj
                     ->to($params->email)

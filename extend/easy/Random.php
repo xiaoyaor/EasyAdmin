@@ -1,6 +1,6 @@
 <?php
 
-namespace fast;
+namespace easy;
 
 /**
  * 随机生成类

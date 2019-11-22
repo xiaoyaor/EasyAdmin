@@ -4,7 +4,7 @@ namespace app\admin\controller\auth;
 
 use app\admin\model\AuthRule;
 use app\common\controller\Backend;
-use fast\Tree;
+use easy\Tree;
 use think\facade\Cache;
 use think\facade\View;
 

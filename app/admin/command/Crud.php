@@ -2,7 +2,7 @@
 
 namespace app\admin\command;
 
-use fast\Form;
+use easy\Form;
 use think\facade\Config;
 use think\console\Command;
 use think\console\Input;

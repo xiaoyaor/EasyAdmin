@@ -151,7 +151,7 @@ class Backend extends BaseController
         if (!$this->auth->match($this->noNeedLogin)) {
             //检测是否登录
             if (!$this->auth->isLogin()) {
-                Event::listen('admin_nologin', $this);
+                Event::trigger('admin_nologin', $this);
                 $url = Session::get('referer');
                 $url = $url ? $url : request()->url();
                 if ($url == '/') {
@@ -164,7 +164,7 @@ class Backend extends BaseController
             if (!$this->auth->match($this->noNeedRight)) {
                 // 判断控制器和方法判断是否有对应权限
                 if (!$this->auth->check($path)) {
-                    Event::listen('admin_nopermission', $this);
+                    Event::trigger('admin_nopermission', $this);
                     $this->error(__('You have no permission'), '');
                 }
             }
@@ -215,7 +215,7 @@ class Backend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        Event::listen("upload_config_init", $upload);
+        Event::trigger("upload_config_init", $upload);
 
         // 配置信息
         $config = [

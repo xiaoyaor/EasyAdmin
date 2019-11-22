@@ -25,8 +25,8 @@ class Addon extends Command
             ->addOption('action', 'c', Option::VALUE_REQUIRED, 'action(create/enable/disable/install/uninstall/refresh/upgrade/package/move)', 'create')
             ->addOption('force', 'f', Option::VALUE_OPTIONAL, 'force override', null)
             ->addOption('release', 'r', Option::VALUE_OPTIONAL, 'addon release version', null)
-            ->addOption('uid', 'u', Option::VALUE_OPTIONAL, 'fastadmin uid', null)
-            ->addOption('token', 't', Option::VALUE_OPTIONAL, 'fastadmin token', null)
+            ->addOption('uid', 'u', Option::VALUE_OPTIONAL, 'easyadmin uid', null)
+            ->addOption('token', 't', Option::VALUE_OPTIONAL, 'easyadmin token', null)
             ->addOption('local', 'l', Option::VALUE_OPTIONAL, 'local package', null)
             ->setDescription('Addon manager');
     }

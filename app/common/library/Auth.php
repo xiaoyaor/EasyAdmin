@@ -4,7 +4,7 @@ namespace app\common\library;
 
 use app\common\model\User;
 use app\common\model\UserRule;
-use fast\Random;
+use easy\Random;
 use think\Exception;
 use think\facade\Event;
 use think\facade\Validate;
@@ -289,8 +289,8 @@ class Auth
                 $time = time();
 
                 //判断连续登录和最大连续登录
-                if ($user->logintime < \fast\Date::unixtime('day')) {
-                    $user->successions = $user->logintime < \fast\Date::unixtime('day', -1) ? 1 : $user->successions + 1;
+                if ($user->logintime < \easy\Date::unixtime('day')) {
+                    $user->successions = $user->logintime < \easy\Date::unixtime('day', -1) ? 1 : $user->successions + 1;
                     $user->maxsuccessions = max($user->successions, $user->maxsuccessions);
                 }
 

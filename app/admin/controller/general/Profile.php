@@ -6,7 +6,7 @@ use app\admin\model\Admin;
 use app\admin\model\AdminLog;
 use app\common\controller\Backend;
 use app\common\model\Config as ConfigModel;
-use fast\Random;
+use easy\Random;
 use think\facade\Request;
 use think\facade\View;
 use think\facade\Session;

@@ -1,6 +1,6 @@
 <?php
 
-namespace fast;
+namespace easy;
 
 /**
  * 字符串类

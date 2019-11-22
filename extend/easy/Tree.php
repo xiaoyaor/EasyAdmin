@@ -1,6 +1,6 @@
 <?php
 
-namespace fast;
+namespace easy;
 
 use think\facade\Config;
 

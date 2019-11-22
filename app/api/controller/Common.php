@@ -5,8 +5,9 @@ namespace app\api\controller;
 use app\common\controller\Api;
 use app\common\model\Area;
 use app\common\model\Version;
-use fast\Random;
-use think\Config;
+use easy\Random;
+use think\facade\Config;
+use think\facade\Event;
 
 /**
  * 公共接口
@@ -128,7 +129,7 @@ class Common extends Api
             $attachment = model("attachment");
             $attachment->data(array_filter($params));
             $attachment->save();
-            \think\Hook::listen("upload_after", $attachment);
+            Event::trigger("upload_after", $attachment);
             $this->success(__('Upload successful'), [
                 'url' => $uploadDir . $splInfo->getSaveName()
             ]);

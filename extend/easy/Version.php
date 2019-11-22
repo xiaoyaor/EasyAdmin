@@ -1,6 +1,6 @@
 <?php
 
-namespace fast;
+namespace easy;
 
 /**
  * 版本检测和对比

@@ -12,7 +12,7 @@
 // | 修改者: anuo (本权限类在原3.2.3的基础上修改过来的)
 // +----------------------------------------------------------------------
 
-namespace fast;
+namespace easy;
 
 use think\facade\Db;
 use think\facade\Session;

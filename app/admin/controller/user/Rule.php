@@ -4,7 +4,7 @@ namespace app\admin\controller\user;
 
 use app\admin\model\UserRule;
 use app\common\controller\Backend;
-use fast\Tree;
+use easy\Tree;
 use think\facade\View;
 
 /**

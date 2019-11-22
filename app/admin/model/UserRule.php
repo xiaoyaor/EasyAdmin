@@ -3,7 +3,7 @@
 namespace app\admin\model;
 
 use app\common\model\MoneyLog;
-use fast\Tree;
+use easy\Tree;
 use think\Model;
 
 class UserRule extends Model
