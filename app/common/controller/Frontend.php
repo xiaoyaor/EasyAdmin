@@ -41,18 +41,29 @@ class Frontend extends BaseController
      * @var Auth
      */
     protected $auth = null;
+    /**
+     * 构造方法
+     */
+    public function __construct()
+    {
+        parent::__construct(app());
+        // 控制器初始化
+        $this->_initialize();
+    }
 
     public function _initialize()
     {
         //移除HTML标签
         $this->request->filter('trim,strip_tags,htmlspecialchars');
-        $modulename = $this->request->module();
-        $controllername = parseName($this->request->controller());
-        $actionname = strtolower($this->request->action());
+        $this->app     = app();
+        $this->request = $this->app->request;
+        $modulename = app('http')->getName();
+        $controllername = strtolower(request()->controller());
+        $actionname = strtolower(request()->action());
 
         // 如果有使用模板布局
         if ($this->layout) {
-            view()->engine->layout('layout/' . $this->layout);
+            //view()->engine->layout('layout/' . $this->layout);
         }
         $this->auth = Auth::instance();
 
@@ -87,7 +98,7 @@ class Frontend extends BaseController
         View::assign('user', $this->auth->getUser());
 
         // 语言检测
-        $lang = strip_tags($this->request->langset());
+        $lang = strip_tags(Config::get("lang.default_lang"));
 
         $site = Config::get("site");
 
@@ -104,18 +115,23 @@ class Frontend extends BaseController
             'controllername' => $controllername,
             'actionname'     => $actionname,
             'jsname'         => 'frontend/' . str_replace('.', '/', $controllername),
-            'moduleurl'      => rtrim(url("/{$modulename}", '', false), '/'),
+            'moduleurl'      => rtrim("/{$modulename}", '/'),
             'language'       => $lang
         ];
-        $config = array_merge($config, Config::get("app.view_replace_str"));
 
         Config::set(array_merge(Config::get('upload'), $upload), 'upload');
+
+        //设置layout
+        Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
 
         // 配置信息后
         Event::trigger("config_init", $config);
         // 加载当前控制器语言包
         $this->loadlang($controllername);
+        //渲染站点配置
         View::assign('site', $site);
+        //框架信息
+        View::assign('easyadmin', Config::get("easyadmin"));
         View::assign('config', $config);
     }
 

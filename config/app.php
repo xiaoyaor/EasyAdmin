@@ -22,12 +22,6 @@ return [
     'default_return_type'    => 'html',
     // 默认AJAX 数据返回格式,可选json xml ...
     'default_ajax_return'    => 'json',
-    // 视图输出字符串内容替换,留空则会自动进行计算
-    'view_replace_str'       => [
-        '__PUBLIC__' => '',
-        '__ROOT__'   => '',
-        '__CDN__'    => '',
-    ],
     // 应用映射（自动多应用模式有效）
     'app_map'          => [],
     // 域名绑定（自动多应用模式有效）

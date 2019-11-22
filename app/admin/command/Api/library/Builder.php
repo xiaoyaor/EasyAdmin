@@ -31,7 +31,7 @@ class Builder
     public function __construct($classes = [])
     {
         $this->classes = array_merge($this->classes, $classes);
-        $this->view = new \think\View(Config::get('template'), Config::get('view_replace_str'));
+        $this->view = new \think\View(Config::get('template'), Config::get('view.tpl_replace_string'));
     }
 
     protected function extractAnnotations()

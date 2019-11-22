@@ -7,11 +7,7 @@ use think\facade\Env;
 
 return [
     // 框架名称
-    'frame_name'   => 'EasyAdmin',
-    // 框架名称
-    'frame_url'   => 'https://www.EasyAdmin.vip',
-    // 插件市场
-    'market_url'   => 'https://market.EasyAdmin.vip',
+    'name'   => 'EasyAdmin',
     //是否开启前台会员中心
     'usercenter'          => true,
     //登录验证码
@@ -26,6 +22,20 @@ return [
     'checkupdate'         => false,
     //版本号
     'version'             => '1.0.0.20190705_beta',
+    //框架名称
+    'url'   => 'https://www.easyadmin.vip',
+    //官方文档
+    'doc_url'   => 'https://doc.easyadmin.vip',
+    //交流社区
+    'ask_url'   => 'https://ask.easyadmin.vip',
+    //Gitee开源
+    'gitee_url'   => 'https://gitee.easyadmin.vip',
+    //Github开源
+    'github_url'   => 'https://github.com/xiaoyaor/EasyAdmin',
+    //插件市场
+    'store_url'   => 'https://store.easyadmin.vip',
     //API接口地址
-    'api_url'             => 'https://api.easyadmin.vip',
+    'api_url'     => 'https://api.easyadmin.vip',
+    //QQ交流群
+    'QQqun'   => 'https://shang.qq.com/wpa/qunwpa?idkey=46c326e570d0f97cfae1f8257ae82322192ec8841c79b2136446df0b3b62028c',
 ];

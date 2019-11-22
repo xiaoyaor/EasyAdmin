@@ -1,6 +1,6 @@
 <?php
-$cdnurl = function_exists('config') ? config('view_replace_str.__CDN__') : '';
-$publicurl = function_exists('config') ? config('view_replace_str.__PUBLIC__') : '/';
+$cdnurl = function_exists('config') ? config('view.tpl_replace_string.__CDN__') : '';
+$publicurl = function_exists('config') ? config('view.tpl_replace_string.__PUBLIC__') : '/';
 $debug = function_exists('config') ? config('app_debug') : false;
 
 $lang = [

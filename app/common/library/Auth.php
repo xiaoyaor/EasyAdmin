@@ -7,7 +7,7 @@ use app\common\model\UserRule;
 use fast\Random;
 use think\Exception;
 use think\facade\Event;
-use think\Validate;
+use think\facade\Validate;
 use think\facade\Db;
 use think\facade\Request;
 use think\facade\Config;
@@ -90,7 +90,7 @@ class Auth
         }
         $user_id = intval($data['user_id']);
         if ($user_id > 0) {
-            $user = User::get($user_id);
+            $user = User::find($user_id);
             if (!$user) {
                 $this->setError('Account not exist');
                 return false;
@@ -104,7 +104,7 @@ class Auth
             $this->_token = $token;
 
             //初始化成功的事件
-            Event::listen("user_init_successed", $this->_user);
+            Event::trigger("user_init_successed", $this->_user);
 
             return true;
         } else {
@@ -169,14 +169,14 @@ class Auth
         try {
             $user = User::create($params, true);
 
-            $this->_user = User::get($user->id);
+            $this->_user = User::find($user->id);
 
             //设置Token
             $this->_token = Random::uuid();
             Token::set($this->_token, $user->id, $this->keeptime);
 
             //注册成功的事件
-            Event::listen("user_register_successed", $this->_user, $data);
+            Event::trigger("user_register_successed", $this->_user, $data);
             Db::commit();
         } catch (Exception $e) {
             $this->setError($e->getMessage());
@@ -196,7 +196,7 @@ class Auth
     public function login($account, $password)
     {
         $field = Validate::is($account, 'email') ? 'email' : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
-        $user = User::get([$field => $account]);
+        $user = User::where([$field => $account])->find();
         if (!$user) {
             $this->setError('Account is incorrect');
             return false;
@@ -233,7 +233,7 @@ class Auth
         //删除Token
         Token::delete($this->_token);
         //注销成功的事件
-        Event::listen("user_logout_successed", $this->_user);
+        Event::trigger("user_logout_successed", $this->_user);
         return true;
     }
 
@@ -260,7 +260,7 @@ class Auth
 
                 Token::delete($this->_token);
                 //修改密码成功的事件
-                Event::listen("user_changepwd_successed", $this->_user);
+                Event::trigger("user_changepwd_successed", $this->_user);
                 Db::commit();
             } catch (Exception $e) {
                 Db::rollback();
@@ -281,7 +281,7 @@ class Auth
      */
     public function direct($user_id)
     {
-        $user = User::get($user_id);
+        $user = User::find($user_id);
         if ($user) {
             Db::startTrans();
             try {
@@ -309,7 +309,7 @@ class Auth
                 $this->_logined = true;
 
                 //登录成功的事件
-                Event::listen("user_login_successed", $this->_user);
+                Event::trigger("user_login_successed", $this->_user);
                 Db::commit();
             } catch (Exception $e) {
                 Db::rollback();
@@ -449,7 +449,7 @@ class Auth
             // 删除会员指定的所有Token
             Token::clear($user_id);
 
-            Event::listen("user_delete_successed", $user);
+            Event::trigger("user_delete_successed", $user);
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();

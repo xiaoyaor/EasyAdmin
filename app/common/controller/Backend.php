@@ -209,7 +209,7 @@ class Backend extends BaseController
                 change_site('multiplenav',0);
             }
         }
-        Config::set(['multiplenav' => (int)Config::get("site.multiplenav")],'site');
+        Config::set(['multiplenav' => (boolean)Config::get("site.multiplenav")],'site');
         $site = Config::get("site");
 
         $upload = \app\common\model\Config::upload();
@@ -232,7 +232,6 @@ class Backend extends BaseController
             'multiplenav'      => Config::get('site.multiplenav'),
             'referer'        => Session::get("referer")
         ];
-        $config = array_merge($config, Config::get("app.view_replace_str"));
 
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
         //设置layout
@@ -243,6 +242,8 @@ class Backend extends BaseController
         $this->loadlang($controllername);
         //渲染站点配置
         View::assign('site', $site);
+        //框架信息
+        View::assign('easyadmin', Config::get("easyadmin"));
         //渲染配置信息
         View::assign('config', $config);
         //渲染权限对象

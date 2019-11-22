@@ -2,9 +2,8 @@
 
 namespace app\common\behavior;
 
-use think\Config;
-use think\Lang;
-use think\Loader;
+use think\facade\Config;
+use think\facade\Lang;
 
 class Common
 {
@@ -16,16 +15,16 @@ class Common
         // 如果修改了index.php入口地址，则需要手动修改cdnurl的值
         $url = preg_replace("/\/(\w+)\.php$/i", '', $request->root());
         // 如果未设置__CDN__则自动匹配得出
-        if (!Config::get('view_replace_str.__CDN__')) {
-            Config::set('view_replace_str.__CDN__', $url);
+        if (!Config::get('view.tpl_replace_string.__CDN__')) {
+            Config::set('view.tpl_replace_string.__CDN__', $url);
         }
         // 如果未设置__PUBLIC__则自动匹配得出
-        if (!Config::get('view_replace_str.__PUBLIC__')) {
-            Config::set('view_replace_str.__PUBLIC__', $url . '/');
+        if (!Config::get('view.tpl_replace_string.__PUBLIC__')) {
+            Config::set('view.tpl_replace_string.__PUBLIC__', $url . '/');
         }
         // 如果未设置__ROOT__则自动匹配得出
-        if (!Config::get('view_replace_str.__ROOT__')) {
-            Config::set('view_replace_str.__ROOT__', preg_replace("/\/public\/$/", '', $url . '/'));
+        if (!Config::get('view.tpl_replace_string.__ROOT__')) {
+            Config::set('view.tpl_replace_string.__ROOT__', preg_replace("/\/public\/$/", '', $url . '/'));
         }
         // 如果未设置cdnurl则自动匹配得出
         if (!Config::get('site.cdnurl')) {

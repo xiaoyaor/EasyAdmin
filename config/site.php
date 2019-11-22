@@ -36,5 +36,5 @@ return array (
   'mail_verify_type' => '2',
   'mail_from' => '10000@qq.com',
   'skin' => 'skin-green',
-  'multiplenav' => 0,
+  'multiplenav' => '0',
 );

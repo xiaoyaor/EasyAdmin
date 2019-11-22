@@ -3,6 +3,7 @@
 namespace app\common\library\token\driver;
 
 use app\common\library\token\Driver;
+use think\facade\Db;
 
 /**
  * Token操作类
@@ -32,9 +33,9 @@ class Mysql extends Driver
             $this->options = array_merge($this->options, $options);
         }
         if ($this->options['connection']) {
-            $this->handler = \think\Db::connect($this->options['connection'])->name($this->options['table']);
+            $this->handler = Db::connect($this->options['connection'])->name($this->options['table']);
         } else {
-            $this->handler = \think\Db::name($this->options['table']);
+            $this->handler = Db::name($this->options['table']);
         }
     }
 

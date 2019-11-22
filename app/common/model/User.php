@@ -52,7 +52,7 @@ class User extends Model
      */
     public function getGroupAttr($value, $data)
     {
-        return UserGroup::get($data['group_id']);
+        return UserGroup::find($data['group_id']);
     }
 
     /**
@@ -87,7 +87,7 @@ class User extends Model
      */
     public static function money($money, $user_id, $memo)
     {
-        $user = self::get($user_id);
+        $user = self::find($user_id);
         if ($user && $money != 0) {
             $before = $user->money;
             $after = $user->money + $money;
@@ -106,7 +106,7 @@ class User extends Model
      */
     public static function score($score, $user_id, $memo)
     {
-        $user = self::get($user_id);
+        $user = self::find($user_id);
         if ($user && $score != 0) {
             $before = $user->score;
             $after = $user->score + $score;
