@@ -202,11 +202,11 @@ class Backend extends BaseController
             $multiplenav=$this->request->get('act');
             if ($multiplenav=='switch-multiplenav-on'){
                 Config::set(['multiplenav' => 1],'site');
-                change_site('multiplenav',1);
+                change_site('multiplenav','1');
             }
             else if ($multiplenav=='switch-multiplenav-off'){
                 Config::set(['multiplenav' => 0],'site');
-                change_site('multiplenav',0);
+                change_site('multiplenav','0');
             }
         }
         Config::set(['multiplenav' => (boolean)Config::get("site.multiplenav")],'site');
