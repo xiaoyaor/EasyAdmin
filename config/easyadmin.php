@@ -21,7 +21,7 @@ return [
     //自动检测更新
     'checkupdate'         => false,
     //版本号
-    'version'             => '0.0.4.20191122_beta',
+    'version'             => '0.0.5.20191122_dev',
     //框架名称
     'url'   => 'https://www.easyadmin.vip',
     //官方文档
