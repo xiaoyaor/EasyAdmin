@@ -85,7 +85,7 @@ $link = array(
     'gitee' => 'https://gitee.com/',
     'github' => 'https://github.com/xiaoyaor/EasyAdmin',
     'home'  => 'https://www.easyadmin.vip?ref=install',
-    'forum' => 'https://forum.easyadmin.vip?ref=install',
+    'ask' => 'https://ask.easyadmin.vip?ref=install',
     'doc'   => 'https://doc.easyadmin.vip?ref=install',
 );
 
@@ -124,11 +124,11 @@ if (is_file($lockFile)) {
                 if ($open_basedir) {
                     $dirArr = explode(PATH_SEPARATOR, $open_basedir);
                     if ($dirArr && in_array(__DIR__, $dirArr)) {
-                        $errInfo = '当前服务器因配置了open_basedir，导致无法读取父目录<br><a href="https://forum.easyadmin.vip/thread/1145?ref=install" target="_blank">点击查看解决办法</a>';
+                        $errInfo = '当前服务器因配置了open_basedir，导致无法读取父目录<br><a href="https://ask.easyadmin.vip/thread/1145?ref=install" target="_blank">点击查看解决办法</a>';
                     }
                 }
                 if (!$errInfo) {
-                    $errInfo = '当前权限不足，无法写入配置文件app/database.php<br><a href="https://forum.easyadmin.vip/thread/1145?ref=install" target="_blank">点击查看解决办法</a>';
+                    $errInfo = '当前权限不足，无法写入配置文件app/database.php<br><a href="https://ask.easyadmin.vip/thread/1145?ref=install" target="_blank">点击查看解决办法</a>';
                 }
             } else {
                 $dirArr = [];
@@ -432,7 +432,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     <div>
 
         <p>若你在安装中遇到麻烦可点击 <a href="<?php echo $link['doc']; ?>" target="_blank">安装文档</a> <a
-                    href="<?php echo $link['forum']; ?>" target="_blank">问答社区</a> <a
+                    href="<?php echo $link['ask']; ?>" target="_blank">问答社区</a> <a
                     href="<?php echo $link['qqun']; ?>">QQ交流群</a></p>
         <!--<p><?php echo $sitename; ?>还支持在命令行php think install一键安装</p>-->
 

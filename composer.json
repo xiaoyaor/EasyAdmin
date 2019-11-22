@@ -25,7 +25,7 @@
         "phpoffice/phpspreadsheet": "^1.9",
         "overtrue/pinyin": "^4.0",
         "xiaoyaor/thinkphp-jump": "1.0.2",
-        "xiaoyaor/think-addons": "0.04"
+        "xiaoyaor/think-addons": "1.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",
