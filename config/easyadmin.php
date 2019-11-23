@@ -20,6 +20,8 @@ return [
     'login_background'    => "/assets/img/loginbg.jpg",
     //自动检测更新
     'checkupdate'         => false,
+    // 是否开启多语言
+    'lang_switch_on'         => true,
     //版本号
     'version'             => '0.0.6.20191122_dev',
     //框架名称
