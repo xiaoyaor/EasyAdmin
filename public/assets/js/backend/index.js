@@ -355,7 +355,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
 
             function send_skin(cls) {
                 $.ajax({
-                    url: '/admin/index/changeSkin',
+                    url: 'index/changeSkin',
                     type: 'post',
                     data: {'skin': cls},
                     dataType: 'json',
