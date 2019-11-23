@@ -69,7 +69,6 @@ class Profile extends Backend
     public function update()
     {
         if (request()->isPost()) {
-            $this->token();
             $params = request()->post("row/a");
             $params = array_filter(array_intersect_key(
                 $params,
