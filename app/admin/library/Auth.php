@@ -373,7 +373,7 @@ class Auth extends \easy\Auth
     public function getSidebar($params = [], $fixedPage = 'dashboard')
     {
         // 边栏开始
-        Event::trigger("admin_sidebar_begin", $params);
+        event_trigger("admin_sidebar_begin", $params);
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];

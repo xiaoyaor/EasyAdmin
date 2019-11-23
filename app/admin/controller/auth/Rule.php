@@ -96,7 +96,7 @@ class Rule extends Backend
      */
     public function edit($ids = null)
     {
-        $row = $this->model->find(['id' => $ids]);
+        $row = $this->model->find($ids);
         if (!$row) {
             $this->error(__('No Results were found'));
         }

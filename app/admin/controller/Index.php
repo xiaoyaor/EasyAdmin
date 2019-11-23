@@ -65,6 +65,7 @@ class Index extends Backend
      */
     public function login()
     {
+        event_trigger("log_dev", ['name'=>'有人在试图登录','ip'=>$this->request->ip()]);
         $url = Request::get('url', 'index/index');
         if ($this->auth->isLogin()) {
             $data=[
@@ -106,7 +107,7 @@ class Index extends Backend
             }
             $result = $this->auth->login($username, $password, $keeplogin ? 86400 : 0);
             if ($result === true) {
-                Event::trigger("admin_login_after", request());
+                event_trigger("admin_login_after", request());
                 $this->success(__('Login successful'), $url, ['url' => $url, 'id' => $this->auth->id, 'username' => $username, 'avatar' => $this->auth->avatar]);
             } else {
                 $msg = $this->auth->getError();
@@ -125,7 +126,7 @@ class Index extends Backend
         View::assign('background', $background);
         View::assign('title', __('Login'));
         View::assign('easyadmin', Config::get('easyadmin'));
-        Event::trigger("adminLoginInit", request());
+        event_trigger("adminLoginInit", request());
         return View::fetch();
     }
 
@@ -135,7 +136,7 @@ class Index extends Backend
     public function logout()
     {
         $this->auth->logout();
-        Event::trigger("admin_logout_after", request());
+        event_trigger("admin_logout_after", request());
         $this->success(__('Logout successful'), 'index/login');
     }
 

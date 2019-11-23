@@ -150,7 +150,7 @@ class Config extends Backend
     public function del($ids = "")
     {
         $name = request()->post('name');
-        $config = ConfigModel::find(['name'=>$name]);
+        $config = ConfigModel::getByName($name);
         if ($name && $config) {
             try {
                 $config->delete();

@@ -151,7 +151,7 @@ class Backend extends BaseController
         if (!$this->auth->match($this->noNeedLogin)) {
             //检测是否登录
             if (!$this->auth->isLogin()) {
-                Event::trigger('admin_nologin', $this);
+                event_trigger('admin_nologin', $this);
                 $url = Session::get('referer');
                 $url = $url ? $url : request()->url();
                 if ($url == '/') {
@@ -164,7 +164,7 @@ class Backend extends BaseController
             if (!$this->auth->match($this->noNeedRight)) {
                 // 判断控制器和方法判断是否有对应权限
                 if (!$this->auth->check($path)) {
-                    Event::trigger('admin_nopermission', $this);
+                    event_trigger('admin_nopermission', $this);
                     $this->error(__('You have no permission'), '');
                 }
             }
@@ -190,11 +190,6 @@ class Backend extends BaseController
         array_pop($breadcrumb);
         View::assign('breadcrumb' , $breadcrumb);
 
-        // 如果有使用模板布局//待定
-        if ($this->layout) {
-            //view()->engine->layout('layout/' . $this->layout);
-        }
-
         // 语言检测
         $lang = strip_tags(Config::get("lang.default_lang"));
 
@@ -215,7 +210,7 @@ class Backend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        Event::trigger("upload_config_init", $upload);
+        event_trigger("upload_config_init", $upload);
 
         // 配置信息
         $config = [
@@ -237,7 +232,7 @@ class Backend extends BaseController
         //设置layout
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         // 配置信息后
-        Event::trigger("config_init", $config);
+        event_trigger("config_init", $config);
         //加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置

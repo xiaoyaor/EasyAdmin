@@ -104,7 +104,7 @@ class Auth
             $this->_token = $token;
 
             //初始化成功的事件
-            Event::trigger("user_init_successed", $this->_user);
+            event_trigger("user_init_successed", $this->_user);
 
             return true;
         } else {
@@ -176,7 +176,7 @@ class Auth
             Token::set($this->_token, $user->id, $this->keeptime);
 
             //注册成功的事件
-            Event::trigger("user_register_successed", $this->_user, $data);
+            event_trigger("user_register_successed", $this->_user, $data);
             Db::commit();
         } catch (Exception $e) {
             $this->setError($e->getMessage());
@@ -233,7 +233,7 @@ class Auth
         //删除Token
         Token::delete($this->_token);
         //注销成功的事件
-        Event::trigger("user_logout_successed", $this->_user);
+        event_trigger("user_logout_successed", $this->_user);
         return true;
     }
 
@@ -260,7 +260,7 @@ class Auth
 
                 Token::delete($this->_token);
                 //修改密码成功的事件
-                Event::trigger("user_changepwd_successed", $this->_user);
+                event_trigger("user_changepwd_successed", $this->_user);
                 Db::commit();
             } catch (Exception $e) {
                 Db::rollback();
@@ -309,7 +309,7 @@ class Auth
                 $this->_logined = true;
 
                 //登录成功的事件
-                Event::trigger("user_login_successed", $this->_user);
+                event_trigger("user_login_successed", $this->_user);
                 Db::commit();
             } catch (Exception $e) {
                 Db::rollback();
@@ -438,7 +438,7 @@ class Auth
      */
     public function delete($user_id)
     {
-        $user = User::get($user_id);
+        $user = User::find($user_id);
         if (!$user) {
             return false;
         }
@@ -449,7 +449,7 @@ class Auth
             // 删除会员指定的所有Token
             Token::clear($user_id);
 
-            Event::trigger("user_delete_successed", $user);
+            event_trigger("user_delete_successed", $user);
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();

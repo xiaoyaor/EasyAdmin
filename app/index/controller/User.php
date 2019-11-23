@@ -36,20 +36,20 @@ class User extends Frontend
         }
 
         //监听注册登录注销的事件
-        Event::listen('user_login_successed', function ($user) use ($auth) {
+        event_listen('user_login_successed', function ($user) use ($auth) {
             $expire = input('post.keeplogin') ? 30 * 86400 : 0;
             Cookie::set('uid', $user->id, $expire);
             Cookie::set('token', $auth->getToken(), $expire);
         });
-        Event::listen('user_register_successed', function ($user) use ($auth) {
+        event_listen('user_register_successed', function ($user) use ($auth) {
             Cookie::set('uid', $user->id);
             Cookie::set('token', $auth->getToken());
         });
-        Event::listen('user_delete_successed', function ($user) use ($auth) {
+        event_listen('user_delete_successed', function ($user) use ($auth) {
             Cookie::delete('uid');
             Cookie::delete('token');
         });
-        Event::listen('user_logout_successed', function ($user) use ($auth) {
+        event_listen('user_logout_successed', function ($user) use ($auth) {
             Cookie::delete('uid');
             Cookie::delete('token');
         });
@@ -62,7 +62,7 @@ class User extends Frontend
      */
     public function _empty($name)
     {
-        $data = Event::trigger("user_request_empty", $name);
+        $data = event_trigger("user_request_empty", $name);
         foreach ($data as $index => $datum) {
             View::assign($datum);
         }

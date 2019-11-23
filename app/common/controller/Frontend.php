@@ -61,13 +61,7 @@ class Frontend extends BaseController
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
-        // 如果有使用模板布局
-        if ($this->layout) {
-            //view()->engine->layout('layout/' . $this->layout);
-        }
         $this->auth = Auth::instance();
-
-        // token
         $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
 
         $path = str_replace('.', '/', $controllername) . '/' . $actionname;
@@ -105,7 +99,7 @@ class Frontend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        Event::listen("upload_config_init", $upload);
+        event_listen("upload_config_init", $upload);
 
         // 配置信息
         $config = [
@@ -125,7 +119,7 @@ class Frontend extends BaseController
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
 
         // 配置信息后
-        Event::trigger("config_init", $config);
+        event_trigger("config_init", $config);
         // 加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置

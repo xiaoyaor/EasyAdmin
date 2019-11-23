@@ -4,6 +4,7 @@
 
 use think\facade\Config;
 use think\facade\Db;
+use think\facade\Event;
 use think\facade\Lang;
 
 if (!function_exists('__')) {
@@ -375,5 +376,37 @@ if (!function_exists('hsv2rgb')) {
             floor($g * 255),
             floor($b * 255)
         ];
+    }
+}
+
+if (!function_exists('event_listen')) {
+    /**
+     * 注册事件监听
+     * @param string $event    事件名称
+     * @param mixed  $listener 监听操作（或者类名）
+     * @param bool   $first    是否优先执行
+     * @return mixed
+     */
+    function event_listen(string $event, $listener, bool $first = false)
+    {
+        $result = Event::listen($event, $listener, $first);
+
+        return $result;
+    }
+}
+
+if (!function_exists('event_trigger')) {
+    /**
+     * 触发事件
+     * @param string $event 钩子名称
+     * @param array|null $params 传入参数
+     * @param bool $once 是否只返回一个结果
+     * @return mixed
+     */
+    function event_trigger($event, $params = null, bool $once = false)
+    {
+        $result = Event::trigger($event, $params, $once);
+
+        return join('', $result);
     }
 }
