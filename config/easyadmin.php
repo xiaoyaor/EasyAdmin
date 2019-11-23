@@ -29,7 +29,7 @@ return [
     //交流社区
     'ask_url'   => 'https://ask.easyadmin.vip',
     //Gitee开源
-    'gitee_url'   => 'https://gitee.easyadmin.vip',
+    'gitee_url'   => 'https://gitee.com/gitshenyin/EasyAdmin',
     //Github开源
     'github_url'   => 'https://github.com/xiaoyaor/EasyAdmin',
     //插件市场
