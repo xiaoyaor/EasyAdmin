@@ -99,7 +99,7 @@ class Frontend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        event_listen("upload_config_init", $upload);
+        event_listen("uploadConfigInit", $upload);
 
         // 配置信息
         $config = [
@@ -119,7 +119,7 @@ class Frontend extends BaseController
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
 
         // 配置信息后
-        event_trigger("config_init", $config);
+        event_trigger("configInit", $config);
         // 加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置

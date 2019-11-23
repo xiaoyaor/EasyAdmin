@@ -129,7 +129,7 @@ class Common extends Api
             $attachment = model("attachment");
             $attachment->data(array_filter($params));
             $attachment->save();
-            event_trigger("upload_after", $attachment);
+            event_trigger("uploadAfter", $attachment);
             $this->success(__('Upload successful'), [
                 'url' => $uploadDir . $splInfo->getSaveName()
             ]);

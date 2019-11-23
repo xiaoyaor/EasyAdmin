@@ -128,7 +128,7 @@ class Backend extends BaseController
     {
         $this->app     = app();
         $this->request = $this->app->request;
-        $modulename = app('http')->getName();
+        $modulename = get_modulename(Config::get('app.app_map'));
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
@@ -151,7 +151,7 @@ class Backend extends BaseController
         if (!$this->auth->match($this->noNeedLogin)) {
             //检测是否登录
             if (!$this->auth->isLogin()) {
-                event_trigger('admin_nologin', $this);
+                event_trigger('adminNologin', $this);
                 $url = Session::get('referer');
                 $url = $url ? $url : request()->url();
                 if ($url == '/') {
@@ -164,7 +164,7 @@ class Backend extends BaseController
             if (!$this->auth->match($this->noNeedRight)) {
                 // 判断控制器和方法判断是否有对应权限
                 if (!$this->auth->check($path)) {
-                    event_trigger('admin_nopermission', $this);
+                    event_trigger('adminNopermission', $this);
                     $this->error(__('You have no permission'), '');
                 }
             }
@@ -175,12 +175,12 @@ class Backend extends BaseController
             $url = preg_replace_callback("/([\?|&]+)ref=addtabs(&?)/i", function ($matches) {
                 return $matches[2] == '&' ? $matches[1] : '';
             }, request()->url());
-            if (Config::get('url_domain_deploy')) {
-                if (stripos($url, request()->server('SCRIPT_NAME')) === 0) {
-                    $url = substr($url, strlen(request()->server('SCRIPT_NAME')));
-                }
-                $url = url($url, [], false);
-            }
+//            if (Config::get('app.app_map')) {
+//                if (stripos($url, request()->server('SCRIPT_NAME')) === 0) {
+//                    $url = substr($url, strlen(request()->server('SCRIPT_NAME')));
+//                }
+//                $url = url($url, [], false);
+//            }
             $this->redirect('index/index',  302, ['referer' => $url]);
             exit;
         }
@@ -210,7 +210,7 @@ class Backend extends BaseController
         $upload = \app\common\model\Config::upload();
 
         // 上传信息配置后
-        event_trigger("upload_config_init", $upload);
+        event_trigger("uploadConfigInit", $upload);
 
         // 配置信息
         $config = [
@@ -232,7 +232,7 @@ class Backend extends BaseController
         //设置layout
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         // 配置信息后
-        event_trigger("config_init", $config);
+        event_trigger("configInit", $config);
         //加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置

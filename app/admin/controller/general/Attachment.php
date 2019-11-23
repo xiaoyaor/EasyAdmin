@@ -107,7 +107,7 @@ class Attachment extends Backend
     public function del($ids = "")
     {
         if ($ids) {
-            event_listen('upload_delete', function ($params) {
+            event_listen('uploadDelete', function ($params) {
                 $attachmentFile = root_path() . '/public' . $params['url'];
                 if (is_file($attachmentFile)) {
                     @unlink($attachmentFile);
@@ -115,7 +115,7 @@ class Attachment extends Backend
             });
             $attachmentlist = $this->model->where('id', 'in', $ids)->select();
             foreach ($attachmentlist as $attachment) {
-                event_trigger("upload_delete", $attachment);
+                event_trigger("uploadDelete", $attachment);
                 $attachment->delete();
             }
             $this->success();

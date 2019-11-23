@@ -18,6 +18,9 @@ define('ROOT_PATH', __DIR__ . DS . '..' . DS);
 // 定义应用目录
 define('APP_PATH', ROOT_PATH . 'app' . DS);
 
+// 定义应用目录
+define('CONFIG_PATH', ROOT_PATH . 'config' . DS);
+
 // 安装包目录
 define('INSTALL_PATH', APP_PATH . 'admin' . DS . 'command' . DS . 'Install' . DS);
 
@@ -239,12 +242,20 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $newPassword = md5(md5($adminPassword) . $newSalt);
         $pdo->query("UPDATE {$mysqlPrefix}admin SET username = '{$adminUsername}', email = '{$adminEmail}',password = '{$newPassword}', salt = '{$newSalt}' WHERE username = 'admin'");
 
-        $adminName = '';
-        if (is_file($adminFile)) {
-            $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $adminName = substr(str_shuffle(str_repeat($x, ceil(10 / strlen($x)))), 1, 10) . '.php';
-            rename($adminFile, ROOT_PATH . 'public' . DS . $adminName);
+        $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $adminName = substr(str_shuffle(str_repeat($x, ceil(10 / strlen($x)))), 1, 10);
+        //检测能否读取配置文件
+        $app = @file_get_contents(CONFIG_PATH . 'app.php');
+        if (!$app) {
+            throw new Exception("无法读取config/app.php文件，请检查是否有读权限");
         }
+        $app = str_replace("XnZUrsbCijk", $adminName, $app);
+        //检测能否成功写入配置文件
+        $result = @file_put_contents(CONFIG_PATH . 'app.php', $app);
+        if (!$result) {
+            throw new Exception("无法写入到config/app.php文件，请检查是否有写权限");
+        }
+
         echo "success|{$adminName}";
     } catch (PDOException $e) {
         $err = $e->getMessage();
@@ -529,7 +540,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                 $("#success").text("安装成功！开始你的<?php echo $sitename; ?>之旅吧！").show();
 
                                 $buttons = $(".form-buttons", form);
-                                $('<a class="btn" href="/admin/index/login.html">访问后台</a><a class="btn" href="./">访问首页</a>').appendTo($buttons);
+                                $('<a class="btn" href="./">访问首页</a>').appendTo($buttons);
 
                                 if (typeof retArr[1] !== 'undefined' && retArr[1] !== '') {
                                     var url = location.href.replace(/install\.php/, retArr[1]);

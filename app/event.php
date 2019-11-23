@@ -2,7 +2,7 @@
 // 事件定义文件
 return [
     'bind'      => [
-        'admin_login_after' => 'app\listener\admin_login_after',
+        'adminLoginAfter' => 'app\listener\adminLoginAfter',
     ],
 
     'listen'    => [
@@ -11,10 +11,9 @@ return [
         'HttpEnd'  => [],
         'LogLevel' => [],
         'LogWrite' => [],
-        'admin_login_after' => ['app\listener\admin_login_after'],
+        'admin_login_after' => ['app\listener\adminLoginAfter'],
     ],
 
     'subscribe' => [
-        //'app\listener\admin_login_after',
     ],
 ];

@@ -6,7 +6,7 @@ namespace app\listener;
 
 use app\admin\model\AdminLog;
 
-class admin_login_after
+class adminLoginAfter
 {
     /**
      * 事件监听处理

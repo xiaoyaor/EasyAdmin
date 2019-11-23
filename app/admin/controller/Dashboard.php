@@ -22,6 +22,7 @@ class Dashboard extends Backend
      */
     public function index()
     {
+        $modulename = get_modulename(Config::get('app.app_map'));
         Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         $seventtime = \easy\Date::unixtime('day', -7);
         $paylist = $createlist = [];
@@ -54,6 +55,7 @@ class Dashboard extends Backend
             'uploadmode'       => $uploadmode
         ]);
         $site=Config::get('site');
+        View::assign('modulename',$modulename);
         View::assign('site',$site);
         View::assign('json_site',json_encode($site));
 

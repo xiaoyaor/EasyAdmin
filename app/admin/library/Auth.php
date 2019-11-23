@@ -373,11 +373,11 @@ class Auth extends \easy\Auth
     public function getSidebar($params = [], $fixedPage = 'dashboard')
     {
         // 边栏开始
-        event_trigger("admin_sidebar_begin", $params);
+        event_trigger("adminSidebarBegin", $params);
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];
-        $module = app('http')->getName();
+        $modulename = get_modulename(Config::get('app.app_map'));
         // 生成菜单的badge
         foreach ($params as $k => $v) {
             $url = $k;
@@ -421,7 +421,7 @@ class Auth extends \easy\Auth
                 continue;
             }
             $v['icon'] = $v['icon'] . ' fa-fw';
-            $v['url'] = '/' . $module . '/' . $v['name'];
+            $v['url'] = '/' . $modulename . '/' . $v['name'];
             $v['badge'] = isset($badgeList[$v['name']]) ? $badgeList[$v['name']] : '';
             $v['py'] = $pinyin->abbr($v['title'], '');
             $v['pinyin'] = $pinyin->permalink($v['title'], '');

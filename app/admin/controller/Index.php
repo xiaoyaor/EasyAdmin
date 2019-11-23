@@ -65,7 +65,6 @@ class Index extends Backend
      */
     public function login()
     {
-        event_trigger("log_dev", ['name'=>'有人在试图登录','ip'=>$this->request->ip()]);
         $url = Request::get('url', 'index/index');
         if ($this->auth->isLogin()) {
             $data=[
@@ -107,7 +106,7 @@ class Index extends Backend
             }
             $result = $this->auth->login($username, $password, $keeplogin ? 86400 : 0);
             if ($result === true) {
-                event_trigger("admin_login_after", request());
+                event_trigger("adminLoginAfter", request());
                 $this->success(__('Login successful'), $url, ['url' => $url, 'id' => $this->auth->id, 'username' => $username, 'avatar' => $this->auth->avatar]);
             } else {
                 $msg = $this->auth->getError();
@@ -136,7 +135,7 @@ class Index extends Backend
     public function logout()
     {
         $this->auth->logout();
-        event_trigger("admin_logout_after", request());
+        event_trigger("adminLogoutAfter", request());
         $this->success(__('Logout successful'), 'index/login');
     }
 

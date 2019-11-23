@@ -140,7 +140,7 @@ class Ajax extends Backend
             $attachment = new Attachment();
             $attachment->data(array_filter($params));
             $attachment->save();
-            event_trigger("upload_after", $attachment);
+            event_trigger("uploadAfter", $attachment);
             $this->success(__('Upload successful'), null, ['url' => $httpPath]);
         } else {
             // 上传失败获取错误信息
@@ -232,7 +232,7 @@ class Ajax extends Backend
                     break;
         }
 
-        event_trigger("wipecache_after");
+        event_trigger("wipecacheAfter");
         $this->success();
     }
 

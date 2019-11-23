@@ -213,3 +213,22 @@ if (!function_exists('change_site')) {
         return true;
     }
 }
+
+if (!function_exists('get_modulename')) {
+
+    /**
+     * @param array $list
+     * @return string
+     */
+    function get_modulename($list)
+    {
+        if (is_array($list)){
+            foreach ($list as $key => $value){
+                if($value=='admin'){
+                    return $key;
+                }
+            }
+        }
+        return 'admin';
+    }
+}
