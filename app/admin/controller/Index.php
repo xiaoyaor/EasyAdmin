@@ -39,9 +39,7 @@ class Index extends Backend
     public function index()
     {
         //菜单标识
-        $flag=[
-            //'dashboard' => 'hot','addon' => ['new', 'red', 'badge'],'auth/rule' => __('Menu'),'general' => ['new', 'purple']
-        ];
+        Config::get('easyadmin.show.menu_flag')?$flag=['dashboard' => 'hot','addon' => ['new', 'red', 'badge'],'auth/rule' => __('Menu'),'general' => ['new', 'purple']]:$flag=[];
         //左侧菜单
         list($menulist, $navlist, $fixedmenu, $referermenu) = $this->auth->getSidebar($flag, Config::get('site.fixedpage'));
         $action = Request::request('action');

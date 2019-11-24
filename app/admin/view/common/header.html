@@ -24,24 +24,51 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
+                <!--菜单模式切换-->
+                {if $easyadmin.show.head_switch}
                 <li class="hidden-xs" data-toggle="tooltip" data-placement="right" title="切换为{if $site.multiplenav}二{else}一{/if}级菜单模式">
                     <a href="{:url('index/index')}?act=switch-multiplenav-{if $site.multiplenav}off{else}on{/if}" style="padding-top:14px;padding-bottom:14px;">
                         <i class="fa fa-toggle-{if $site.multiplenav}on{else}off{/if}" style="font-size:20px;"></i>
                     </a>
                 </li>
+                {/if}
 
+                <!--相关链接-->
+                {if $easyadmin.show.head_links}
+                <li>
+                    <a href="javascript:;" data-toggle="dropdown" title="相关链接">
+                        <i class="fa fa-sitemap"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{$easyadmin.url}" target="_blank">官方网站</a></li>
+                        <li><a href="{$easyadmin.store_url}" target="_blank">插件市场</a></li>
+                        <li><a href="{$easyadmin.doc_url}" target="_blank">官方文档</a></li>
+                        <li><a href="{$easyadmin.ask_url}" target="_blank">交流社区</a></li>
+                        <li><a href="{$easyadmin.gitee_url}" target="_blank">Gitee开源</a></li>
+                        <li><a href="{$easyadmin.github_url}" target="_blank">Github开源</a></li>
+                        <li><a href="{$easyadmin.QQqun}" target="_blank">QQ交流群</a></li>
+                    </ul>
+                </li>
+                {/if}
+
+                <!--首页-->
+                {if $easyadmin.show.head_home}
                 <li>
                     <a href="/" target="_blank"><i class="fa fa-home" style="font-size:14px;"></i></a>
                 </li>
+                {/if}
 
-                <!-- 账号信息下拉框 -->
+                <!-- 检测更新 -->
+                {if $easyadmin.show.head_update}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="checkupdate" title="{:__('Check for updates')}">
                         <i class="fa fa-refresh"></i>
                     </a>
                 </li>
+                {/if}
 
                 <!-- 清除缓存 -->
+                {if $easyadmin.show.head_cache}
                 <li>
                     <a href="javascript:;" data-toggle="dropdown" title="{:__('Wipe cache')}">
                         <i class="fa fa-trash"></i>
@@ -54,8 +81,10 @@
                         <li><a href="javascript:;" data-type="addons"><i class="fa fa-rocket"></i> {:__('Wipe addons cache')}</a></li>
                     </ul>
                 </li>
+                {/if}
 
                 <!-- 多语言列表 -->
+                {if $easyadmin.show.head_lan}
                 {if $easyadmin.lang_switch_on}
                 <li class="hidden-xs">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i></a>
@@ -69,13 +98,17 @@
                     </ul>
                 </li>
                 {/if}
+                {/if}
 
                 <!-- 全屏按钮 -->
+                {if $easyadmin.show.head_max}
                 <li class="hidden-xs">
                     <a href="#" data-toggle="fullscreen"><i class="fa fa-arrows-alt"></i></a>
                 </li>
+                {/if}
 
                 <!-- 账号信息下拉框 -->
+                {if $easyadmin.show.head_user}
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{$admin.avatar|cdnurl}" class="user-image" alt="{$admin.nickname}">
@@ -92,6 +125,7 @@
                             </p>
                         </li>
                         <!-- Menu Body -->
+                        {if $easyadmin.show.head_links}
                         <li class="user-body">
                             <div class="row">
                                 <div class="col-xs-4 text-center">
@@ -105,6 +139,7 @@
                                 </div>
                             </div>
                         </li>
+                        {/if}
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
@@ -118,10 +153,15 @@
                         </li>
                     </ul>
                 </li>
+                {/if}
+
                 <!-- 控制栏切换按钮 -->
+                {if $easyadmin.show.head_skin}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
+                {/if}
+
             </ul>
         </div>
     </div>
