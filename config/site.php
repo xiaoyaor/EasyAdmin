@@ -35,6 +35,6 @@ return array (
   'mail_smtp_pass' => 'password',
   'mail_verify_type' => '2',
   'mail_from' => '10000@qq.com',
-  'skin' => 'skin-black',
+  'skin' => 'skin-forest',
   'multiplenav' => '0',
 );

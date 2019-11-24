@@ -29,7 +29,7 @@ body {
   background-color: #fff0;
 }
 .skin-forest .main-header .navbar .nav > li > a {
-  color: #333;
+  color: #b8c7ce;
 }
 .skin-forest .main-header .navbar .nav > li > a:hover,
 .skin-forest .main-header .navbar .nav > li > a:active,
@@ -39,7 +39,7 @@ body {
 .skin-forest .main-header .navbar .nav .open > a:focus,
 .skin-forest .main-header .navbar .nav > .active > a {
   background: #fff0;
-  color: #999;
+  color: #fff;
 }
 .skin-forest .main-header .navbar .sidebar-toggle {
   color: #333;
@@ -62,7 +62,7 @@ body {
 }
 .skin-forest .main-header > .logo {
   background-color: #fff0;
-  color: #333;
+  color: #fff;
   border-bottom: 0 solid transparent;
   border-right: 1px solid #fff0;
 }
