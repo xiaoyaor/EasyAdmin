@@ -39,5 +39,5 @@ return [
     //API接口地址
     'api_url'     => 'https://api.easyadmin.vip',
     //QQ交流群
-    'QQqun'   => 'https://shang.qq.com/wpa/qunwpa?idkey=46c326e570d0f97cfae1f8257ae82322192ec8841c79b2136446df0b3b62028c',
+    'QQqun'   => 'https://shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129',
 ];
