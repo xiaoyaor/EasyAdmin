@@ -23,7 +23,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => true,
     //版本号
-    'version'             => '0.0.6.20191122_dev',
+    'version'             => '0.0.7.20191124_dev',
     //框架名称
     'url'   => 'https://www.easyadmin.vip',
     //官方文档
