@@ -30,6 +30,7 @@ return [
     'Please try again after 1 day'                               => '请于1天后再尝试登录',
     'Login successful'                                           => '登录成功!',
     'Logout successful'                                          => '退出成功!',
+    'Login failure'                                              => '登录失败!',
     'Verification code is incorrect'                             => '验证码不正确',
     'Wipe cache completed'                                       => '清除缓存成功',
     'Wipe cache failed'                                          => '清除缓存失败',

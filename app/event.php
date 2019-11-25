@@ -3,7 +3,8 @@
 return [
     'bind'      => [
         'AdminLoginAfter' => 'app\listener\AdminLoginAfter',
-        'AdminNoLoginAfter' => 'app\listener\AdminNoLoginAfter',
+        'AdminLoginErrorAfter' => 'app\listener\AdminLoginErrorAfter',
+        'AdminLogoutAfter' => 'app\listener\AdminLogoutAfter',
     ],
 
     'listen'    => [
@@ -13,7 +14,8 @@ return [
         'LogLevel' => [],
         'LogWrite' => [],
         'AdminLoginAfter' => ['app\listener\AdminLoginAfter'],
-        'AdminNoLoginAfter' => ['app\listener\AdminNoLoginAfter'],
+        'AdminLoginErrorAfter' => ['app\listener\AdminLoginErrorAfter'],
+        'AdminLogoutAfter' => ['app\listener\AdminLogoutAfter'],
     ],
 
     'subscribe' => [

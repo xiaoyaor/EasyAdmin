@@ -454,7 +454,7 @@
                             <div class="box-body">
                                 <ul class="nav nav-pills nav-stacked">
                                     {foreach $loglist as $key => $log}
-                                    <li><a href="#" class="text-black">[{$log.ip}][{$log.title}]:{$log.content}<span class="pull-right"> {$log.createtime|date='Y-m-d H:i:s'}</span></a></li>
+                                    <li><a href="#" class="text-black">[{$log.ip}]:{$log.content}<span class="pull-right"> {$log.createtime|date='m-d H:i:s'}</span></a></li>
                                     {/foreach}
                                 </ul>
                             </div>

@@ -107,7 +107,7 @@ class Index extends Backend
                 event_trigger("AdminLoginAfter", request());
                 $this->success(__('Login successful'), $url, ['url' => $url, 'id' => $this->auth->id, 'username' => $username, 'avatar' => $this->auth->avatar]);
             } else {
-                event_trigger("AdminNoLoginAfter", request());
+                event_trigger("AdminLoginErrorAfter", request());
                 $msg = $this->auth->getError();
                 $msg = $msg ? $msg : __('Username or password is incorrect');
                 $this->error($msg, $url, '');
@@ -133,8 +133,8 @@ class Index extends Backend
      */
     public function logout()
     {
+        event_trigger("AdminLogoutAfter", request());
         $this->auth->logout();
-        event_trigger("adminLogoutAfter", request());
         $this->success(__('Logout successful'), 'index/login');
     }
 

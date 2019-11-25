@@ -5,7 +5,7 @@ namespace app\listener;
 
 use app\admin\model\AdminLog;
 
-class AdminNoLoginAfter
+class AdminLoginErrorAfter
 {
     /**
      * 事件监听处理
@@ -15,7 +15,7 @@ class AdminNoLoginAfter
     public function handle($event)
     {
         AdminLog::setTitle(__('Login'));
-        AdminLog::setContent($event->param('username').__('login fail'));
+        AdminLog::setContent(__('Login failure').'['.$event->param('username').']');
         AdminLog::record();
     }    
 }
