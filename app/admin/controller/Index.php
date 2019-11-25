@@ -104,9 +104,10 @@ class Index extends Backend
             }
             $result = $this->auth->login($username, $password, $keeplogin ? 86400 : 0);
             if ($result === true) {
-                event_trigger("adminLoginAfter", request());
+                event_trigger("AdminLoginAfter", request());
                 $this->success(__('Login successful'), $url, ['url' => $url, 'id' => $this->auth->id, 'username' => $username, 'avatar' => $this->auth->avatar]);
             } else {
+                event_trigger("AdminNoLoginAfter", request());
                 $msg = $this->auth->getError();
                 $msg = $msg ? $msg : __('Username or password is incorrect');
                 $this->error($msg, $url, '');

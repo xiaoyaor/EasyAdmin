@@ -6,7 +6,7 @@ namespace app\listener;
 
 use app\admin\model\AdminLog;
 
-class adminLoginAfter
+class AdminLoginAfter
 {
     /**
      * 事件监听处理
@@ -16,7 +16,7 @@ class adminLoginAfter
     public function handle($event)
     {
         AdminLog::setTitle(__('Login'));
-        AdminLog::setContent(__('Login'));
+        AdminLog::setContent($event->param('username').__('login sucess'));
         AdminLog::record();
     }
 }

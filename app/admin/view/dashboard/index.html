@@ -309,7 +309,7 @@
                                     <h5>{:__('Attachment count')}</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <h1 class="no-margins">1043</h1>
+                                    <h1 class="no-margins">{$attachmentcount}</h1>
                                     <div class="stat-percent font-bold text-gray"><i class="fa fa-modx"></i> 2592</div>
                                     <small>{:__('Attachment count tips')}</small>
                                 </div>
@@ -322,13 +322,13 @@
                             <div class="panel-body">
                                 <div class="ibox-title">
                                     <span class="label label-primary pull-right">{:__('Real time')}</span>
-                                    <h5>{:__('Article count')}</h5>
+                                    <h5>{:__('User count')}</h5>
                                 </div>
                                 <div class="ibox-content">
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h1 class="no-margins">1234</h1>
+                                            <h1 class="no-margins">{$admincount}</h1>
                                             <div class="font-bold"><i class="fa fa-commenting"></i>
                                                 <small>{:__('Comment count')}</small>
                                             </div>
@@ -349,7 +349,7 @@
                             <div class="panel-body">
                                 <div class="ibox-title">
                                     <span class="label label-primary pull-right">{:__('Real time')}</span>
-                                    <h5>{:__('News count')}</h5>
+                                    <h5>{:__('Score count')}</h5>
                                 </div>
                                 <div class="ibox-content">
 
@@ -377,28 +377,47 @@
                     <div class="col-lg-4">
                         <div class="box box-danger">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{:__('Recent news')}</h3>
+                                <h3 class="box-title">{:__('Newest User')}</h3>
 
                                 <div class="box-tools pull-right">
                                 </div>
                             </div>
                             <div class="box-body">
                                 <ul class="products-list product-list-in-box">
+                                    {foreach $userlist as $key => $user}
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="{$user.avatar?$user.avatar:'/assets/img/avatar.png'}" style="height:40px;width:40px;">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="#" class="product-title">
+                                                {$user.username}
+                                                <span class="label label-success pull-right">new!</span>
+                                            </a>
+                                            <span class="product-description">
+                                              {$user.nickname}-{$user.email}-{$user.mobile}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    {/foreach}
+
                                     {for start="1" end="8"}
+                                    {if $i>count($userlist)}
                                     <li class="item">
                                         <div class="product-img">
                                             <img src="/assets/img/avatar.png" style="height:40px;width:40px;">
                                         </div>
                                         <div class="product-info">
-                                            <a href="{$easyadmin.url}" target="_blank" class="product-title">
-                                                {$easyadmin.name}
-                                                <span class="label label-{:$i%3===0?'warning':($i%2===0?'success':'info')} pull-right">开源免费</span>
+                                            <a href="#" class="product-title">
+                                                用户名称
+                                                <span class="label label-info pull-right">无</span>
                                             </a>
                                             <span class="product-description">
-                                              一款基于ThinkPHP6+Bootstrap的极速后台开发框架
+                                              用户昵称-邮箱-手机
                                             </span>
                                         </div>
                                     </li>
+                                    {/if}
                                     {/for}
                                 </ul>
                             </div>
@@ -407,24 +426,16 @@
                     <div class="col-lg-4">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{:__('Recent discussion')}</h3>
+                                <h3 class="box-title">{:__('Recent log')}</h3>
 
                                 <div class="box-tools pull-right">
                                 </div>
                             </div>
                             <div class="box-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="{$easyadmin.url}" target="_blank">一款基于ThinkPHP5+Bootstrap的极速后台开发框架<span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">一键生成CRUD控制器模型和视图 <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">一键压缩打包JS和CSS文件 <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 3%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">一键生成控制器菜单和规则 <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 8%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">一键生成API接口文档 <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">强大的插件扩展功能，在线安装卸载升级插件 <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 10%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">通用的会员模块和API模块 <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 2%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">共用同一账号体系的Web端会员中心权限验证和API接口会员权限验证 <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 6%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">二级域名部署支持，同时域名支持绑定到插件 <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">多语言支持，服务端及客户端支持 <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                                    <li><a href="{$easyadmin.url}" target="_blank">基于Bootstrap开发，自适应手机、平板、PC <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
+                                    {foreach $loglist as $key => $log}
+                                    <li><a href="#" class="text-black">[{$log.ip}][{$log.title}]:{$log.content}<span class="pull-right"> {$log.createtime|date='Y-m-d H:i:s'}</span></a></li>
+                                    {/foreach}
                                 </ul>
                             </div>
                         </div>
@@ -436,28 +447,28 @@
                                 <table class="table table-striped">
                                     <tbody>
                                     <tr>
+                                        <td>{:__('Software')}</td>
+                                        <td>{$_SERVER.SERVER_SOFTWARE}</td>
+                                    </tr>
+                                    <tr>
                                         <td width="140">{:__('EasyAdmin version')}</td>
                                         <td>{$Think.config.easyadmin.version} <a href="javascript:;" class="btn btn-xs btn-checkversion">检查最新版</a></td>
                                     </tr>
                                     <tr>
-                                        <td>{:__('easyadmin addon version')}</td>
-                                        <td>{$addonversion}</td>
+                                        <td>{:__('Thinkphp version')}</td>
+                                        <td>{$easyadmin.tp_version}</td>
                                     </tr>
                                     <tr>
-                                        <td>{:__('Thinkphp version')}</td>
-                                        <td>{app_version}</td>
+                                        <td>{:__('easyadmin addon version')}</td>
+                                        <td>{$easyadmin.addon_version}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Sapi name')}</td>
-                                        <td>{:php_sapi_name()}</td>
+                                        <td>{:phpversion()}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Debug mode')}</td>
-                                        <td>{$Think.config.app_debug?__('Yes'):__('No')}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{:__('Software')}</td>
-                                        <td>{$Think.server.SERVER_SOFTWARE}</td>
+                                        <td>{:think\\facade\\Env::get('APP_DEBUG')?'是':'否'}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Upload mode')}</td>
@@ -465,11 +476,11 @@
                                     </tr>
                                     <tr>
                                         <td>{:__('Upload url')}</td>
-                                        <td>{upload.uploadurl}</td>
+                                        <td>{$config.upload.uploadurl}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Upload Cdn url')}</td>
-                                        <td>{upload.cdnurl}</td>
+                                        <td>{$config.upload.cdnurl}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Timezone')}</td>
@@ -481,7 +492,7 @@
                                     </tr>
                                     <tr>
                                         <td>{:__('Language')}</td>
-                                        <td>{lang.default_lang}</td>
+                                        <td>{$config.language}</td>
                                     </tr>
                                     </tbody>
                                 </table>

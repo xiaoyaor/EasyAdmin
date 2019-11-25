@@ -146,6 +146,8 @@ return [
     'You can choose up to %d file%s'                        => '你最多还可以选择%d个文件',
     'An unexpected error occurred'                          => '发生了一个意外错误,程序猿正在紧急处理中',
     'This page will be re-directed in %s seconds'           => '页面将在 %s 秒后自动跳转',
+    'login sucess'                                          => '登录成功',
+    'login fail'                                            => '登录失败',
     //菜单
     'Dashboard'                                             => '控制台',
     'General'                                               => '常规管理',

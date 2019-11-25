@@ -24,6 +24,10 @@ return [
     'lang_switch_on'         => true,
     //版本号
     'version'             => '0.0.7.20191124_dev',
+    //版本号
+    'tp_version'   => '6.0.0',
+    //版本号
+    'addon_version'      => '1.0.1',
     //后台功能按键开启
     'show'             => [
         //头部

@@ -34,6 +34,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'avatar', title: __('Avatar'), events: Table.api.events.image, formatter: Table.api.formatter.image, operate: false},
                         {field: 'level', title: __('Level'), operate: 'BETWEEN', sortable: true},
                         {field: 'gender', title: __('Gender'), visible: false, searchList: {1: __('Male'), 0: __('Female')}},
+                        {field: 'money', title: __('Money'), operate: 'BETWEEN', sortable: true},
                         {field: 'score', title: __('Score'), operate: 'BETWEEN', sortable: true},
                         {field: 'successions', title: __('Successions'), visible: false, operate: 'BETWEEN', sortable: true},
                         {field: 'maxsuccessions', title: __('Maxsuccessions'), visible: false, operate: 'BETWEEN', sortable: true},

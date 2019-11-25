@@ -2,9 +2,14 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Admin;
+use app\admin\model\AdminLog;
 use app\common\controller\Backend;
+use app\common\model\Attachment;
+use app\common\model\User;
 use think\facade\Config;
 use think\facade\View;
+use think\facade\Env;
 
 /**
  * 控制台
@@ -42,8 +47,14 @@ class Dashboard extends Backend
         $addonComposerCfg = root_path() . '\vendor\xiaoyaor\think-addons\composer.json';
         $config = Config::load($addonComposerCfg, "json");
         $addonVersion = isset($config['version']) ? $config['version'] : __('Unknown');
+        $userlist=User::where('id','>','0')->order('id desc')->limit(7)->select();
+        $adminloglist=AdminLog::where('id','>','0')->order('id desc')->limit(11)->select();
+        View::assign('userlist',$userlist);
+        View::assign('loglist',$adminloglist);
         View::assign([
-            'totaluser'        => 35200,
+            'totaluser'        => User::count(),
+            'attachmentcount'  => Attachment::count(),
+            'admincount'  => Admin::count(),
             'totalviews'       => 219390,
             'totalorder'       => 32143,
             'totalorderamount' => 174800,
@@ -59,11 +70,7 @@ class Dashboard extends Backend
             'app_version'       => app()::VERSION,
             'uploadmode'       => $uploadmode
         ]);
-        $site=Config::get('site');
         View::assign('modulename',$modulename);
-        View::assign('site',$site);
-        View::assign('json_site',json_encode($site));
-
         return View::fetch();
     }
 
