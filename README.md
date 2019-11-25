@@ -19,10 +19,17 @@ composer create-project xiaoyaor/easyadmin ea 0.0.*
 ~~~
 composer update topthink/framework
 ~~~
+##截图
+![截图](screenshort.jpg)
 
 ## 官网
 
 请访问 [极易官网](https://www.easyadmin.vip)。
+
+## 开源地址
+Gitee：<a href="https://gitee.com/gitshenyin/EasyAdmin" target="_blank">访问Gitee</a>
+
+Github：<a href="https://github.com/xiaoyaor/EasyAdmin" target="_blank">访问Github</a>
 
 ## QQ群
 

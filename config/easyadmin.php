@@ -23,7 +23,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => true,
     //版本号
-    'version'             => '0.0.7.20191124_dev',
+    'version'             => '0.0.8.20191125_dev',
     //后台功能按键开启
     'show'             => [
         //头部
