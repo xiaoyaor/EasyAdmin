@@ -12,7 +12,6 @@ class Validate extends Api
 {
 
     protected $noNeedLogin = '*';
-    protected $layout = '';
     protected $error = null;
 
     public function _initialize()

@@ -14,7 +14,6 @@ class Ajax extends Frontend
 
     protected $noNeedLogin = ['lang'];
     protected $noNeedRight = ['*'];
-    protected $layout = '';
 
     /**
      * 加载语言包

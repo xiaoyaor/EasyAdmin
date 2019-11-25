@@ -15,7 +15,13 @@ use think\facade\View;
 class Dashboard extends Backend
 {
 
-    protected $layout_name = 'default';
+    //构造方法
+    public function __construct()
+    {
+        parent::__construct();
+        Config::set(['layout_on'=>'','layout_name'=>''],'view');
+    }
+
     /**
      * 查看
      * @throws \Exception
@@ -23,7 +29,6 @@ class Dashboard extends Backend
     public function index()
     {
         $modulename = get_modulename(Config::get('app.app_map'));
-        Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         $seventtime = \easy\Date::unixtime('day', -7);
         $paylist = $createlist = [];
         for ($i = 0; $i < 7; $i++)

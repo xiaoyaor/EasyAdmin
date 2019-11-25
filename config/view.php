@@ -31,5 +31,5 @@ return [
     // 布局模板开关
     'layout_on'     => false,
     // 布局模板名称
-    'layout_name'   => '',//layout/default
+    'layout_name'   => '',
 ];

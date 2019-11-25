@@ -18,11 +18,6 @@ use xiaoyaor\think\Jump;
 class Frontend extends BaseController
 {
     use Jump;
-    /**
-     * 布局模板
-     * @var string
-     */
-    protected $layout = '';
 
     /**
      * 无需登录的方法,同时也就不需要鉴权了

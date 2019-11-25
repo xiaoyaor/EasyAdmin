@@ -1,3 +1,4 @@
+{layout name="layout/default" /}
 <style type="text/css">
     .sm-st {
         background: #fff;
@@ -160,6 +161,7 @@
         {:build_heading(null, false)}
         <ul class="nav nav-tabs">
             <li class="active"><a href="#one" data-toggle="tab">{:__('Dashboard')}</a></li>
+            {:hook('addonsDashboardExtendHtml','title')}
             <li><a href="#two" data-toggle="tab">{:__('Custom')}</a></li>
         </ul>
     </div>
@@ -488,6 +490,7 @@
                     </div>
                 </div>
             </div>
+            {:hook('addonsDashboardExtendHtml','content')}
             <div class="tab-pane fade" id="two">
                 <div class="row">
                     <div class="col-xs-12">

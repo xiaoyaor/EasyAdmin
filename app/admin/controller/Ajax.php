@@ -21,7 +21,6 @@ class Ajax extends Backend
 
     protected $noNeedLogin = ['lang'];
     protected $noNeedRight = ['*'];
-    protected $layout = '';
 
     public function _initialize()
     {

@@ -32,12 +32,6 @@ class Backend extends BaseController
     protected $noNeedRight = [];
 
     /**
-     * 布局模板
-     * @var string
-     */
-    protected $layout = 'default';
-
-    /**
      * 权限控制类
      * @var Auth
      */
@@ -205,13 +199,12 @@ class Backend extends BaseController
             }
         }
         Config::set(['multiplenav' => (boolean)Config::get("site.multiplenav")],'site');
+        //站点信息
         $site = Config::get("site");
-
+        //上传信息
         $upload = \app\common\model\Config::upload();
-
-        // 上传信息配置后
+        // 上传信息配置后触发
         event_trigger("uploadConfigInit", $upload);
-
         // 配置信息
         $config = [
             'site'           => array_intersect_key($site, array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
@@ -229,8 +222,6 @@ class Backend extends BaseController
         ];
 
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
-        //设置layout
-        Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
         // 配置信息后
         event_trigger("configInit", $config);
         //加载当前控制器语言包
