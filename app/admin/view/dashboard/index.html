@@ -170,39 +170,57 @@
             <div class="tab-pane fade active in" id="one">
 
                 <div class="row">
-                    <div class="col-sm-3 col-xs-6">
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <span class="sm-st-icon st-green"><i class="fa fa-address-book"></i></span>
+                            <div class="sm-st-info">
+                                <span>{$admincount}</span>
+                                {:__('Total admin')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <span class="sm-st-icon st-violet"><i class="fa fa-book"></i></span>
+                            <div class="sm-st-info">
+                                <span>{$categorycount}</span>
+                                {:__('Total category')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <span class="sm-st-icon st-blue"><i class="fa fa-file"></i></span>
+                            <div class="sm-st-info">
+                                <span>{$attachmentcount}</span>
+                                {:__('Total attachment')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
                         <div class="sm-st clearfix">
                             <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
                             <div class="sm-st-info">
-                                <span>{$totaluser}</span>
+                                <span>{$usercount}</span>
                                 {:__('Total user')}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-xs-6">
+                    <div class="col-sm-2 col-xs-6">
                         <div class="sm-st clearfix">
-                            <span class="sm-st-icon st-violet"><i class="fa fa-book"></i></span>
+                            <span class="sm-st-icon pink"><i class="fa fa-cny"></i></span>
                             <div class="sm-st-info">
-                                <span>{$totalviews}</span>
-                                {:__('Total view')}
+                                <span>{$totalmoney}</span>
+                                {:__('Total money')}
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-xs-6">
+                    <div class="col-sm-2 col-xs-6">
                         <div class="sm-st clearfix">
-                            <span class="sm-st-icon st-blue"><i class="fa fa-shopping-bag"></i></span>
+                            <span class="sm-st-icon yellow-b"><i class="fa fa-money"></i></span>
                             <div class="sm-st-info">
-                                <span>{$totalorder}</span>
-                                {:__('Total order')}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-6">
-                        <div class="sm-st clearfix">
-                            <span class="sm-st-icon st-green"><i class="fa fa-cny"></i></span>
-                            <div class="sm-st-info">
-                                <span>{$totalorderamount}</span>
-                                {:__('Total order amount')}
+                                <span>{$totalscore}</span>
+                                {:__('Total score')}
                             </div>
                         </div>
                     </div>
@@ -237,20 +255,20 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-6  stat-col">
-                                        <div class="stat-icon"><i class="fa fa-line-chart"></i></div>
+                                        <div class="stat-icon"><i class="fa fa-users"></i></div>
                                         <div class="stat">
-                                            <div class="value"> {$todayorder}</div>
-                                            <div class="name"> {:__('Today order')}</div>
+                                            <div class="value"> {$yestodayusersignup}</div>
+                                            <div class="name"> {:__('Yestoday user signup')}</div>
                                         </div>
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success" style="width: 25%"></div>
                                         </div>
                                     </div>
                                     <div class="col-xs-6  stat-col">
-                                        <div class="stat-icon"><i class="fa fa-users"></i></div>
+                                        <div class="stat-icon"><i class="fa fa-line-chart"></i></div>
                                         <div class="stat">
-                                            <div class="value"> {$unsettleorder}</div>
-                                            <div class="name"> {:__('Unsettle order')}</div>
+                                            <div class="value"> {$yestodayuserlogin}</div>
+                                            <div class="name"> {:__('Yestoday login')}</div>
                                         </div>
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success" style="width: 25%"></div>
@@ -294,9 +312,10 @@
                                     <h5>{:__('Category count')}</h5>
                                 </div>
                                 <div class="panel-content">
-                                    <h1 class="no-margins">1234</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234</div>
-                                    <small>{:__('Category count tips')}</small>
+                                    <h1 class="no-margins">{$categorycount}</h1>
+                                    <div class="font-bold"><i class="fa fa-sort"></i>
+                                        <small>{:__('Category count tips')}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -310,8 +329,9 @@
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins">{$attachmentcount}</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-modx"></i> 2592</div>
-                                    <small>{:__('Attachment count tips')}</small>
+                                    <div class="font-bold"><i class="fa fa-file"></i>
+                                        <small>{:__('Attachment count tips')}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -330,13 +350,13 @@
                                         <div class="col-md-6">
                                             <h1 class="no-margins">{$admincount}</h1>
                                             <div class="font-bold"><i class="fa fa-commenting"></i>
-                                                <small>{:__('Comment count')}</small>
+                                                <small>{:__('admin count')}</small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <h1 class="no-margins">6754</h1>
+                                            <h1 class="no-margins">{$usercount}</h1>
                                             <div class="font-bold"><i class="fa fa-heart"></i>
-                                                <small>{:__('Like count')}</small>
+                                                <small>{:__('users count')}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -349,21 +369,21 @@
                             <div class="panel-body">
                                 <div class="ibox-title">
                                     <span class="label label-primary pull-right">{:__('Real time')}</span>
-                                    <h5>{:__('Score count')}</h5>
+                                    <h5>{:__('jifen count')}</h5>
                                 </div>
                                 <div class="ibox-content">
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h1 class="no-margins">5302</h1>
+                                            <h1 class="no-margins">{$totalmoney}</h1>
                                             <div class="font-bold"><i class="fa fa-commenting"></i>
-                                                <small>{:__('Comment count')}</small>
+                                                <small>{:__('money count')}</small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <h1 class="no-margins">8205</h1>
+                                            <h1 class="no-margins">{$totalscore}</h1>
                                             <div class="font-bold"><i class="fa fa-user"></i>
-                                                <small>{:__('Like count')}</small>
+                                                <small>{:__('score count')}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -456,11 +476,11 @@
                                     </tr>
                                     <tr>
                                         <td>{:__('Thinkphp version')}</td>
-                                        <td>{$easyadmin.tp_version}</td>
+                                        <td>{$app_version}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('easyadmin addon version')}</td>
-                                        <td>{$easyadmin.addon_version}</td>
+                                        <td>{$addonversion}</td>
                                     </tr>
                                     <tr>
                                         <td>{:__('Sapi name')}</td>
@@ -514,8 +534,8 @@
 </div>
 <script>
     var Orderdata = {
-        column: {:json_encode(array_keys($paylist))},
-        paydata: {:json_encode(array_values($paylist))},
-        createdata: {:json_encode(array_values($createlist))},
+        column: {:json_encode(array_keys($signuplist))},
+        paydata: {:json_encode(array_values($signuplist))},
+        createdata: {:json_encode(array_values($loginlist))},
     };
 </script>
