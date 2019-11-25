@@ -20,7 +20,7 @@ composer create-project xiaoyaor/easyadmin ea 0.0.*
 composer update topthink/framework
 ~~~
 ##截图
-![截图](screenshort.jpg)
+![截图](https://raw.githubusercontent.com/xiaoyaor/EasyAdmin/master/screenshort.png)
 
 ## 官网
 
