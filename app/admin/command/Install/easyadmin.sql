@@ -164,16 +164,16 @@ CREATE TABLE `ea_auth_rule` (
 -- ----------------------------
 INSERT INTO `ea_auth_rule` VALUES ('1', 'file', '0', 'dashboard', 'Dashboard', 'fa fa-dashboard', '', 'Dashboard tips', '1', '1497429920', '1497429920', '143', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('2', 'file', '0', 'general', 'General', 'fa fa-cogs', '', '', '1', '1497429920', '1497430169', '137', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('3', 'file', '0', 'category', 'Category', 'fa fa-leaf', '', 'Category tips', '1', '1497429920', '1497429920', '119', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('3', 'file', '2', 'category', '分类管理', 'fa fa-leaf', '', 'Category tips', '1', '1497429920', '1574670470', '54', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('4', 'file', '0', 'addon', 'Addon', 'fa fa-rocket', '', 'Addon tips', '1', '1502035509', '1502035509', '0', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('5', 'file', '0', 'auth', 'Auth', 'fa fa-group', '', '', '1', '1497429920', '1497430092', '99', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('6', 'file', '2', 'general.config', 'Config', 'fa fa-cog', '', 'Config tips', '1', '1497429920', '1497430683', '60', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('7', 'file', '2', 'general.attachment', 'Attachment', 'fa fa-file-image-o', '', 'Attachment tips', '1', '1497429920', '1497430699', '53', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('8', 'file', '2', 'general.profile', 'Profile', 'fa fa-user', '', '', '1', '1497429920', '1497429920', '34', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('8', 'file', '2', 'general.profile', '个人资料', 'fa fa-user', '', '', '1', '1497429920', '1574672019', '34', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('9', 'file', '5', 'auth.admin', 'Admin', 'fa fa-user', '', 'Admin tips', '1', '1497429920', '1497430320', '118', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('10', 'file', '5', 'auth.adminlog', 'Admin log', 'fa fa-list-alt', '', 'Admin log tips', '1', '1497429920', '1497430307', '113', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('11', 'file', '5', 'auth.group', 'Group', 'fa fa-group', '', 'Group tips', '1', '1497429920', '1497429920', '109', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('12', 'file', '5', 'auth.rule', 'Rule', 'fa fa-bars', '', 'Rule tips', '1', '1497429920', '1497430581', '104', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('10', 'file', '5', 'auth.adminlog', '管理员日志', 'fa fa-list-alt', '', 'Admin log tips', '1', '1497429920', '1574670901', '113', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('11', 'file', '5', 'auth.group', '角色分组', 'fa fa-group', '', 'Group tips', '1', '1497429920', '1574670773', '109', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('12', 'file', '5', 'auth.rule', '菜单规则', 'fa fa-bars', '', 'Rule tips', '1', '1497429920', '1574670754', '104', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('13', 'file', '1', 'dashboard/index', 'View', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '136', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('14', 'file', '1', 'dashboard/add', 'Add', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '135', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('15', 'file', '1', 'dashboard/del', 'Delete', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '133', 'normal');
@@ -201,7 +201,7 @@ INSERT INTO `ea_auth_rule` VALUES ('36', 'file', '3', 'category/add', 'Add', 'fa
 INSERT INTO `ea_auth_rule` VALUES ('37', 'file', '3', 'category/edit', 'Edit', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '140', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('38', 'file', '3', 'category/del', 'Delete', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '139', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('39', 'file', '3', 'category/multi', 'Multi', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '138', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('40', 'file', '9', 'auth.admin/index', 'View', 'fa fa-circle-o', '', 'Admin tips', '0', '1497429920', '1497429920', '117', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('40', 'file', '9', 'auth.admin/index', 'View', 'fa fa-circle-o', '', 'Admin tips', '0', '1497429920', '1574397985', '117', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('41', 'file', '9', 'auth.admin/add', 'Add', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '116', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('42', 'file', '9', 'auth.admin/edit', 'Edit', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '115', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('43', 'file', '9', 'auth.admin/del', 'Delete', 'fa fa-circle-o', '', '', '0', '1497429920', '1497429920', '114', 'normal');
@@ -227,7 +227,7 @@ INSERT INTO `ea_auth_rule` VALUES ('62', 'file', '4', 'addon/uninstall', 'Uninst
 INSERT INTO `ea_auth_rule` VALUES ('63', 'file', '4', 'addon/config', 'Setting', 'fa fa-circle-o', '', '', '0', '1502035509', '1502035509', '0', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('64', 'file', '4', 'addon/refresh', 'Refresh', 'fa fa-circle-o', '', '', '0', '1502035509', '1502035509', '0', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('65', 'file', '4', 'addon/multi', 'Multi', 'fa fa-circle-o', '', '', '0', '1502035509', '1502035509', '0', 'normal');
-INSERT INTO `ea_auth_rule` VALUES ('66', 'file', '0', 'user', 'User', 'fa fa-list', '', '', '1', '1516374729', '1516374729', '0', 'normal');
+INSERT INTO `ea_auth_rule` VALUES ('66', 'file', '0', 'user', '会员管理', 'fa fa-list', '', '', '1', '1516374729', '1574641632', '88', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('67', 'file', '66', 'user.user', 'User', 'fa fa-user', '', '', '1', '1516374729', '1516374729', '0', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('68', 'file', '67', 'user.user.index', 'View', 'fa fa-circle-o', '', '', '0', '1516374729', '1516374729', '0', 'normal');
 INSERT INTO `ea_auth_rule` VALUES ('69', 'file', '67', 'user.user.edit', 'Edit', 'fa fa-circle-o', '', '', '0', '1516374729', '1516374729', '0', 'normal');
@@ -327,7 +327,7 @@ INSERT INTO `ea_config` VALUES ('14', 'mail_smtp_user', 'email', 'Mail smtp user
 INSERT INTO `ea_config` VALUES ('15', 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
 INSERT INTO `ea_config` VALUES ('16', 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
 INSERT INTO `ea_config` VALUES ('17', 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
-INSERT INTO `ea_config` VALUES ('18', 'skin', 'basic', '皮肤', '选择皮肤', 'select', 'skin-red', '{\"skin-blue\":\"蓝黑\",\"skin-white\":\"白黑\",\"skin-purple\":\"紫黑\",\"skin-green\":\"绿黑\",\"skin-red\":\"红黑\",\"skin-yellow\":\"黄黑\",\"skin-blue-light\":\"蓝白\",\"skin-white-light\":\"白白\",\"skin-purple-light\":\"紫白\",\"skin-green-light\":\"绿白\",\"skin-red-light\":\"红白\",\"skin-yellow-light\":\"黄白\"}', '', '');
+INSERT INTO `ea_config` VALUES ('18', 'skin', 'basic', '皮肤', '选择皮肤', 'select', 'skin-black', '{\"skin-blue\":\"蓝黑\",\"skin-black\":\"纯黑\",\"skin-purple\":\"紫黑\",\"skin-green\":\"绿黑\",\"skin-red\":\"红黑\",\"skin-yellow\":\"黄黑\",\"skin-blue-light\":\"蓝白\",\"skin-white-light\":\"纯白\",\"skin-purple-light\":\"紫白\",\"skin-green-light\":\"绿白\",\"skin-red-light\":\"红白\",\"skin-yellow-light\":\"黄白\",\"skin-blue-full\":\"纯蓝\",\"skin-silver-full\":\"纯银\",\"skin-purple-full\":\"纯紫\",\"skin-green-full\":\"纯绿\",\"skin-red-full\":\"纯红\",\"skin-yellow-full\":\"纯黄\",\"skin-season\":\"海洋\",\"skin-earth\":\"大地\",\"skin-universe\":\"宇宙\",\"skin-mountain\":\"高山\",\"skin-snow\":\"雪花\",\"skin-forest\":\"森林\"}', '', '');
 INSERT INTO `ea_config` VALUES ('19', 'multiplenav', 'basic', '多级菜单导航', '是否启用多级菜单导航', 'switch', '0', '', '', '');
 
 -- ----------------------------
