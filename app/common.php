@@ -6,6 +6,7 @@ use think\facade\Config;
 use think\facade\Db;
 use think\facade\Event;
 use think\facade\Lang;
+use think\Model;
 
 if (!function_exists('__')) {
 
@@ -376,6 +377,23 @@ if (!function_exists('hsv2rgb')) {
             floor($g * 255),
             floor($b * 255)
         ];
+    }
+}
+
+if (!function_exists('collection')) {
+    /**
+     * 数组转换为数据集对象
+     * @param array $resultSet 数据集数组
+     * @return \think\model\Collection|\think\Collection
+     */
+    function collection($resultSet)
+    {
+        $item = current($resultSet);
+        if ($item instanceof Model) {
+            return \think\model\Collection::make($resultSet);
+        } else {
+            return \think\Collection::make($resultSet);
+        }
     }
 }
 
