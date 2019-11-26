@@ -6,25 +6,58 @@
  * @author xiaoyaor
  * @website https://www.easyadmin.vip
  */
-// error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-// ini_set('display_errors', '1');
+//报错等级
+//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+//开启错误提示
+//ini_set('display_errors', '1');
 
-// 定义目录分隔符
-define('DS', DIRECTORY_SEPARATOR);
-
-// 定义根目录
-define('ROOT_PATH', __DIR__ . DS . '..' . DS);
+// 检测public目录是否存在
+if(substr_compare(__DIR__, 'public', -6)!=0){
+    $checkDirs = [
+        'app',
+        'vendor',
+        'assets' . DIRECTORY_SEPARATOR . 'libs'
+    ];
+    // 定义根目录
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR );
+}else{
+    $checkDirs = [
+        'app',
+        'vendor',
+        'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'libs'
+    ];
+    // 定义根目录
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+}
 
 // 定义应用目录
-define('APP_PATH', ROOT_PATH . 'app' . DS);
-
+define('APP_PATH', ROOT_PATH . 'app' . DIRECTORY_SEPARATOR);
 // 定义应用目录
-define('CONFIG_PATH', ROOT_PATH . 'config' . DS);
-
+define('CONFIG_PATH', ROOT_PATH . 'config' . DIRECTORY_SEPARATOR);
 // 安装包目录
-define('INSTALL_PATH', APP_PATH . 'admin' . DS . 'command' . DS . 'Install' . DS);
+define('INSTALL_PATH', APP_PATH . 'admin' . DIRECTORY_SEPARATOR . 'command' . DIRECTORY_SEPARATOR . 'Install' . DIRECTORY_SEPARATOR);
 
-// 判断文件或目录是否有写的权限
+//错误信息
+$errInfo = '';
+//程序名称
+$sitename = "EasyAdmin";
+
+// 锁定的文件
+$lockFile = INSTALL_PATH . 'install.lock';
+//数据库配置文件
+$dbConfigFile = APP_PATH . '../'.'config/'.'database.php';
+$dbConfigFileEnv = APP_PATH . '../.env';
+
+$link = array(
+    'qqun'  => "https://shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129",
+    'gitee' => 'https://gitee.com/',
+    'github' => 'https://github.com/xiaoyaor/EasyAdmin',
+    'home'  => 'https://www.easyadmin.vip?ref=install',
+    'ask' => 'https://ask.easyadmin.vip?ref=install',
+    'doc'   => 'https://doc.easyadmin.vip?ref=install',
+);
+
+//判断文件或目录是否有写的权限
 function is_really_writable($file)
 {
     if (DIRECTORY_SEPARATOR == '/' AND @ ini_get("safe_mode") == false) {
@@ -43,30 +76,30 @@ function write_ini_file($assoc_arr, $path)
 {
     $content = "";
 
-        foreach ($assoc_arr as $key=>$elem)
+    foreach ($assoc_arr as $key=>$elem)
+    {
+        if(!is_array($elem))
         {
-            if(!is_array($elem))
-            {
-                $content .= $key." = ".$elem."\n";
-            }
-            else
-            {
-                $content .= "[".$key."]\n";
-                foreach ($elem as $key2=>$elem2)
-                {
-                    if(is_array($elem2))
-                    {
-                        for($i=0;$i<count($elem2);$i++)
-                        {
-                            $content .= $key2."[] = ".$elem2[$i]."\n";
-                        }
-                    }
-                    else if($elem2=="") $content .= $key2." = \n";
-                    else $content .= $key2." = ".$elem2."\n";
-                }
-            }
-            $content .= "\n";
+            $content .= $key." = ".$elem."\n";
         }
+        else
+        {
+            $content .= "[".$key."]\n";
+            foreach ($elem as $key2=>$elem2)
+            {
+                if(is_array($elem2))
+                {
+                    for($i=0;$i<count($elem2);$i++)
+                    {
+                        $content .= $key2."[] = ".$elem2[$i]."\n";
+                    }
+                }
+                else if($elem2=="") $content .= $key2." = \n";
+                else $content .= $key2." = ".$elem2."\n";
+            }
+        }
+        $content .= "\n";
+    }
 
     if (!$handle = fopen($path, 'w'))
     {
@@ -80,45 +113,16 @@ function write_ini_file($assoc_arr, $path)
     return true;
 }
 
-
-$sitename = "EasyAdmin";
-
-$link = array(
-    'qqun'  => "https://shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129",
-    'gitee' => 'https://gitee.com/',
-    'github' => 'https://github.com/xiaoyaor/EasyAdmin',
-    'home'  => 'https://www.easyadmin.vip?ref=install',
-    'ask' => 'https://ask.easyadmin.vip?ref=install',
-    'doc'   => 'https://doc.easyadmin.vip?ref=install',
-);
-
-// 检测目录是否存在
-$checkDirs = [
-    'app',
-    'vendor',
-    'public' . DS . 'assets' . DS . 'libs'
-];
-//缓存目录
-$runtimeDir = APP_PATH . 'runtime';
-
-//错误信息
-$errInfo = '';
-
-//数据库配置文件
-$dbConfigFile = APP_PATH . '../'.'config/'.'database.php';
-$dbConfigFileEnv = APP_PATH . '../.env';
-
-//后台入口文件
-$adminFile = ROOT_PATH . 'public' . DS . 'admin.php';
-
-// 锁定的文件
-$lockFile = INSTALL_PATH . 'install.lock';
 if (is_file($lockFile)) {
     $errInfo = "当前已经安装{$sitename}，如果需要重新安装，请手动移除app/admin/command/Install/install.lock文件";
-} else {
+}
+else
+{
     if (version_compare(PHP_VERSION, '7.1.0', '<')) {
         $errInfo = "当前版本(" . PHP_VERSION . ")过低，请使用PHP7.1以上版本";
-    } else {
+    }
+    else
+    {
         if (!extension_loaded("PDO")) {
             $errInfo = "当前未开启PDO，无法进行安装";
         } else {
@@ -266,6 +270,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 ?>
+
 <!doctype html>
 <html>
 <head>

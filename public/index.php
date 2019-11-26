@@ -12,14 +12,27 @@
 // [ 应用入口文件 ]
 namespace think;
 
+/**
+ * 判断根目录是否为public
+ * @return string
+ */
+function prefix(){
+    if(substr_compare(__DIR__, 'public', -6)==0){
+        return '/..';
+    }
+    return '';
+};
+
+$prefix=prefix();
+
 // 判断是否安装EasyAdmin
-if (!is_file(__DIR__ . '/../app/admin/command/Install/install.lock'))
+if (!is_file(__DIR__ . $prefix .'/app/admin/command/Install/install.lock'))
 {
     header("location:/install.php");
     exit;
 }
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . $prefix .'/vendor/autoload.php';
 
 // 执行HTTP应用并响应
 $http = (new App())->http;
