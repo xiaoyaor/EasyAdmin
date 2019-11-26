@@ -7,7 +7,7 @@ use app\common\library\Email;
 use app\common\model\Config as ConfigModel;
 use think\Exception;
 use think\facade\View;
-use think\Validate;
+use think\facade\Validate;
 
 /**
  * 系统配置
