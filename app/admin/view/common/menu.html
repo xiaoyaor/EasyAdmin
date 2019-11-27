@@ -1,7 +1,7 @@
 <!-- 左侧菜单栏 -->
 <section class="sidebar">
     <!-- 管理员信息 -->
-    {if $easyadmin.show.side_user}
+    {if $site.side_user}
     <div class="user-panel hidden-xs">
         <div class="pull-left image">
             <a href="general.profile.html?ref=addtabs" class="addtabsit"><img src="{$admin.avatar}" class="img-circle" /></a>
@@ -14,7 +14,7 @@
     {/if}
 
     <!-- 菜单搜索 -->
-    {if $easyadmin.show.side_search}
+    {if $site.side_search}
     <form action="" method="get" class="sidebar-form" onsubmit="return false;">
         <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="{:__('Search menu')}">
@@ -40,7 +40,7 @@
         {$menulist|RAW}
 
         <!--以下4行可以删除或改成自己的链接,但建议你在你的网站上添加一个EasyAdmin的链接-->
-        {if $easyadmin.show.side_links}
+        {if $site.side_links}
         <li class="header" data-rel="external">{:__('Links')}</li>
         <li data-rel="external"><a href="{$easyadmin.doc_url}" target="_blank"><i class="fa fa-list text-red"></i> <span>{:__('Docs')}</span></a></li>
         <li data-rel="external"><a href="{$easyadmin.ask_url}" target="_blank"><i class="fa fa-comment text-yellow"></i> <span>{:__('Forum')}</span></a></li>

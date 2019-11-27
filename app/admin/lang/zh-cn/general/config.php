@@ -14,6 +14,7 @@ return [
     'User'                        => '会员配置',
     'Example'                     => '示例分组',
     'Extend'                      => '扩展属性',
+    'Control'                     => '显示配置',
     'String'                      => '字符',
     'Text'                        => '文本',
     'Editor'                      => '编辑器',

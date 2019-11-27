@@ -213,7 +213,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $EnvData = array(
             'APP_DEBUG' => 'true',
             'APP' => array(
-                'DEFAULT_TIMEZONE' => 'sia/Shanghai',
+                'DEFAULT_TIMEZONE' => 'Asia/Shanghai',
             ),
             'DATABASE' => array(
                 'TYPE'     => 'mysql',

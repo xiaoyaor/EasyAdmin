@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav">
 
                 <!--菜单模式切换-->
-                {if $easyadmin.show.head_switch}
+                {if $site.head_switch}
                 <li class="hidden-xs" data-toggle="tooltip" data-placement="right" title="切换为{if $site.multiplenav}二{else}一{/if}级菜单模式">
                     <a href="{:url('index/index')}?act=switch-multiplenav-{if $site.multiplenav}off{else}on{/if}" style="padding-top:14px;padding-bottom:14px;">
                         <i class="fa fa-toggle-{if $site.multiplenav}on{else}off{/if}" style="font-size:20px;"></i>
@@ -34,7 +34,7 @@
                 {/if}
 
                 <!--相关链接-->
-                {if $easyadmin.show.head_links}
+                {if $site.head_links}
                 <li>
                     <a href="javascript:;" data-toggle="dropdown" title="相关链接">
                         <i class="fa fa-sitemap"></i>
@@ -52,14 +52,14 @@
                 {/if}
 
                 <!--首页-->
-                {if $easyadmin.show.head_home}
+                {if $site.head_home}
                 <li>
                     <a href="/" target="_blank"><i class="fa fa-home" style="font-size:14px;"></i></a>
                 </li>
                 {/if}
 
                 <!-- 检测更新 -->
-                {if $easyadmin.show.head_update}
+                {if $site.head_update}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="checkupdate" title="{:__('Check for updates')}">
                         <i class="fa fa-refresh"></i>
@@ -68,7 +68,7 @@
                 {/if}
 
                 <!-- 清除缓存 -->
-                {if $easyadmin.show.head_cache}
+                {if $site.head_cache}
                 <li>
                     <a href="javascript:;" data-toggle="dropdown" title="{:__('Wipe cache')}">
                         <i class="fa fa-trash"></i>
@@ -84,7 +84,7 @@
                 {/if}
 
                 <!-- 多语言列表 -->
-                {if $easyadmin.show.head_lan}
+                {if $site.head_lan}
                 {if $easyadmin.lang_switch_on}
                 <li class="hidden-xs">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i></a>
@@ -101,14 +101,14 @@
                 {/if}
 
                 <!-- 全屏按钮 -->
-                {if $easyadmin.show.head_max}
+                {if $site.head_max}
                 <li class="hidden-xs">
                     <a href="#" data-toggle="fullscreen"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 {/if}
 
                 <!-- 账号信息下拉框 -->
-                {if $easyadmin.show.head_user}
+                {if $site.head_user}
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{$admin.avatar|cdnurl}" class="user-image" alt="{$admin.nickname}">
@@ -125,7 +125,7 @@
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        {if $easyadmin.show.head_links}
+                        {if $site.head_links}
                         <li class="user-body">
                             <div class="row">
                                 <div class="col-xs-4 text-center">
@@ -156,7 +156,7 @@
                 {/if}
 
                 <!-- 控制栏切换按钮 -->
-                {if $easyadmin.show.head_skin}
+                {if $site.head_skin}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>

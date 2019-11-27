@@ -305,7 +305,7 @@ CREATE TABLE `ea_config` (
   `extend` varchar(255) NOT NULL DEFAULT '' COMMENT '扩展属性',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统配置';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统配置';
 
 -- ----------------------------
 -- Records of ea_config
@@ -319,7 +319,7 @@ INSERT INTO `ea_config` VALUES ('6', 'forbiddenip', 'basic', 'Forbidden ip', '�
 INSERT INTO `ea_config` VALUES ('7', 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
 INSERT INTO `ea_config` VALUES ('8', 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
 INSERT INTO `ea_config` VALUES ('9', 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
-INSERT INTO `ea_config` VALUES ('10', 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\"}', '', '', '');
+INSERT INTO `ea_config` VALUES ('10', 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\",\"control\":\"Control\"}', '', '', '');
 INSERT INTO `ea_config` VALUES ('11', 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
 INSERT INTO `ea_config` VALUES ('12', 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
 INSERT INTO `ea_config` VALUES ('13', 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
@@ -329,6 +329,19 @@ INSERT INTO `ea_config` VALUES ('16', 'mail_verify_type', 'email', 'Mail vertify
 INSERT INTO `ea_config` VALUES ('17', 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
 INSERT INTO `ea_config` VALUES ('18', 'skin', 'basic', '皮肤', '选择皮肤', 'select', 'skin-black', '{\"skin-blue\":\"蓝黑\",\"skin-black\":\"纯黑\",\"skin-purple\":\"紫黑\",\"skin-green\":\"绿黑\",\"skin-red\":\"红黑\",\"skin-yellow\":\"黄黑\",\"skin-blue-light\":\"蓝白\",\"skin-white-light\":\"纯白\",\"skin-purple-light\":\"紫白\",\"skin-green-light\":\"绿白\",\"skin-red-light\":\"红白\",\"skin-yellow-light\":\"黄白\",\"skin-blue-full\":\"纯蓝\",\"skin-silver-full\":\"纯银\",\"skin-purple-full\":\"纯紫\",\"skin-green-full\":\"纯绿\",\"skin-red-full\":\"纯红\",\"skin-yellow-full\":\"纯黄\",\"skin-season\":\"海洋\",\"skin-earth\":\"大地\",\"skin-universe\":\"宇宙\",\"skin-mountain\":\"高山\",\"skin-snow\":\"雪花\",\"skin-forest\":\"森林\"}', '', '');
 INSERT INTO `ea_config` VALUES ('19', 'multiplenav', 'basic', '多级菜单导航', '是否启用多级菜单导航', 'switch', '0', '', '', '');
+INSERT INTO `ea_config` VALUES ('20', 'head_switch', 'control', '顶部菜单模式', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('21', 'head_links', 'control', '顶部相关链接', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('22', 'head_home', 'control', '顶部前台首页', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('23', 'head_update', 'control', '顶部检测更新', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('24', 'head_cache', 'control', '顶部清空缓存', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('25', 'head_lan', 'control', '顶部多语言', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('26', 'head_max', 'control', '顶部全屏模式', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('27', 'head_user', 'control', '顶部用户信息', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('28', 'head_skin', 'control', '顶部皮肤设置', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('29', 'side_user', 'control', '侧边栏用户信息', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('30', 'side_search', 'control', '侧边栏菜单搜索', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('31', 'side_links', 'control', '侧边栏相关链接', '', 'switch', '1', '', '', '');
+INSERT INTO `ea_config` VALUES ('32', 'menu_flag', 'control', '菜单栏菜单标识', '', 'switch', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for ea_ems

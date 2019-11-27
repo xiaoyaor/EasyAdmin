@@ -24,25 +24,6 @@ return [
     'lang_switch_on'         => true,
     //版本号
     'version'             => '0.0.8.20191125_dev',
-    //后台功能按键开启
-    'show'             => [
-        //头部
-        'head_switch' => true,//菜单模式切换
-        'head_links'  => true,//相关链接
-        'head_home'   => true,//前台首页
-        'head_update' => true,//检测更新
-        'head_cache'  => true,//清空缓存
-        'head_lan'    => true,//多语言
-        'head_max'    => true,//全屏模式
-        'head_user'   => true,//用户信息
-        'head_skin'   => true,//皮肤设置
-        //侧边栏
-        'side_user'   => true,//用户信息
-        'side_search' => true,//菜单搜索
-        'side_links'  => true,//相关链接
-        //菜单标识
-        'menu_flag'   => true,//菜单标识
-    ],
     //框架名称
     'url'   => 'https://www.easyadmin.vip',
     //官方文档
