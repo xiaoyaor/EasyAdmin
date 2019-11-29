@@ -14,6 +14,8 @@ namespace think;
 
 /**
  * 判断根目录是否为public
+ * 安装及加载vendor时调用
+ * 安装完成后可删除此函数及相关代码
  * @return string
  */
 function prefix(){

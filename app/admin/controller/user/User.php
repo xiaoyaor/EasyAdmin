@@ -15,13 +15,17 @@ use think\facade\View;
 class User extends Backend
 {
 
-    protected $relationSearch = true;
+    /**
+     * 是否关联查询
+     * @var bool
+     */
+    protected $relationSearch = false;
 
-//
-//    /**
-//     * @var \app\admin\model\User
-//     */
-//    protected $model = null;
+
+    /**
+     * @var \app\admin\model\User
+     */
+    protected $model = null;
 
     public function _initialize()
     {
@@ -44,13 +48,12 @@ class User extends Backend
             }
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model
-                ->alias('User')
                 ->with('group')
                 ->where($where)
                 ->order($sort, $order)
                 ->count();
             $list = $this->model
-                ->alias('User')
+                //->alias('User')
                 ->with('group')
                 ->where($where)
                 ->order($sort, $order)
