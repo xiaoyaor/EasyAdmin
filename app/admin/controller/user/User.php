@@ -53,7 +53,6 @@ class User extends Backend
                 ->order($sort, $order)
                 ->count();
             $list = $this->model
-                //->alias('User')
                 ->with('group')
                 ->where($where)
                 ->order($sort, $order)

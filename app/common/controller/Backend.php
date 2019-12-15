@@ -221,6 +221,8 @@ class Backend extends BaseController
             'referer'        => Session::get("referer")
         ];
 
+        $config = array_merge($config, Config::get("view.tpl_replace_string"));
+
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
         // 配置信息后
         event_trigger("configInit", $config);
