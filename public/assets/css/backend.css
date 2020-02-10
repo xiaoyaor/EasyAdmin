@@ -1,16 +1,16 @@
 @import url("../css/bootstrap.css");
-@import url("../css/fastadmin.css");
+@import url("../css/easyadmin.css");
 @import url("../css/skins/skin-green.css");
 @import url("../css/iconfont.css");
 @import url("../libs/font-awesome/css/font-awesome.min.css");
 @import url("../libs/toastr/toastr.min.css");
-@import url("../libs/fastadmin-layer/dist/theme/default/layer.css");
+@import url("../libs/easyadmin-layer/dist/theme/default/layer.css");
 @import url("../libs/bootstrap-table/dist/bootstrap-table.min.css");
 @import url("../libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css");
 @import url("../libs/bootstrap-daterangepicker/daterangepicker.css");
 @import url("../libs/nice-validator/dist/jquery.validator.css");
 @import url("../libs/bootstrap-select/dist/css/bootstrap-select.min.css");
-@import url("../libs/fastadmin-selectpage/selectpage.css");
+@import url("../libs/easyadmin-selectpage/selectpage.css");
 @import url("../libs/bootstrap-slider/slider.css");
 html,
 body {
@@ -856,7 +856,7 @@ table.table-nowrap thead > tr > th {
 }
 .layui-layer-fast .layui-layer-setwin .layui-layer-close2,
 .layui-layer-fast .layui-layer-setwin .layui-layer-close2:hover {
-  background: url('../libs/fastadmin-layer/dist/theme/default/icon.png') no-repeat -149px -31px !important;
+  background: url('../libs/easyadmin-layer/dist/theme/default/icon.png') no-repeat -149px -31px !important;
   top: -30px;
   right: -30px;
 }

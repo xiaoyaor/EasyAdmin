@@ -425,6 +425,7 @@ if (!function_exists('event_trigger')) {
     {
         $result = Event::trigger($event, $params, $once);
 
-        return join('', $result);
+        //return join('', $result);
+        return $result;
     }
 }

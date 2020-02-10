@@ -2,16 +2,17 @@
 
 namespace app\common\controller;
 
-use app\admin\library\Auth;
 use app\BaseController;
 use think\App;
 use think\facade\Config;
 use think\facade\Lang;
+use think\facade\Log;
 use think\facade\Session;
 use think\facade\Validate;
 use think\facade\View;
 use think\facade\Event;
 use xiaoyaor\think\Jump;
+use app\admin\library\Auth;
 
 /**
  * 后台控制器基类
@@ -121,7 +122,6 @@ class Backend extends BaseController
     public function _initialize()
     {
         $this->app     = app();
-        $this->request = $this->app->request;
         $modulename = get_modulename(Config::get('app.app_map'));
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
@@ -137,33 +137,39 @@ class Backend extends BaseController
         // 定义是否AJAX请求
         !defined('IS_AJAX') && define('IS_AJAX', request()->isAjax());
 
+        //授权验证hook
+        if (Event::trigger('Auth')){
         $this->auth = Auth::instance();
-
-        // 设置当前请求的URI
-        $this->auth->setRequestUri($path);
-        // 检测是否需要验证登录
-        if (!$this->auth->match($this->noNeedLogin)) {
-            //检测是否登录
-            if (!$this->auth->isLogin()) {
-                event_trigger('adminNologin', $this);
-                $url = Session::get('referer');
-                $url = $url ? $url : request()->url();
-                if ($url == '/') {
-                    $this->redirect('index/login', 302, ['referer' => $url]);
-                    exit;
-                }
-                $this->error(__('Please login first'), url('index/login', ['url' => $url]));
-            }
-            // 判断是否需要验证权限
-            if (!$this->auth->match($this->noNeedRight)) {
-                // 判断控制器和方法判断是否有对应权限
-                if (!$this->auth->check($path)) {
-                    event_trigger('adminNopermission', $this);
-                    $this->error(__('You have no permission'), '');
-                }
-            }
         }
 
+        if ($this->auth){
+            // 设置当前请求的URI
+            $this->auth->setRequestUri($path);
+            // 检测是否需要验证登录
+            if (!$this->auth->match($this->noNeedLogin)) {
+                //检测是否登录
+                if (!$this->auth->isLogin()) {
+                    event_trigger('adminNologin', $this);
+                    $url = Session::get('referer');
+                    $url = $url ? $url : request()->url();
+                    $url2='/'.$modulename.'/';
+                    if ($url == $url2) {
+                        $this->redirect('login/index', 302, ['referer' => $url]);
+                        exit;
+                    }
+                    $this->error(__('Please login first'), url('login/index', ['url' => $url]));
+                }
+                // 判断是否需要验证权限
+                if (!$this->auth->match($this->noNeedRight)) {
+                    // 判断控制器和方法判断是否有对应权限
+                    if (!$this->auth->check($path)) {
+                        event_trigger('adminNopermission', $this);
+                        $this->error(__('You have no permission'), '');
+                    }
+                }
+            }
+
+        }
         // 非选项卡时重定向
         if (!request()->isPost() && !IS_AJAX && !IS_ADDTABS && !IS_DIALOG && input("ref") == 'addtabs') {
             $url = preg_replace_callback("/([\?|&]+)ref=addtabs(&?)/i", function ($matches) {
@@ -180,15 +186,19 @@ class Backend extends BaseController
         }
 
         // 设置面包屑导航数据
-        $breadcrumb = $this->auth->getBreadCrumb($path);
-        array_pop($breadcrumb);
+        if ($this->auth){
+            $breadcrumb = $this->auth->getBreadCrumb($path);
+            View::assign('breadcrumb' , $breadcrumb);
+        }else{
+            $breadcrumb = getBreadCrumb($path);
+        }
         View::assign('breadcrumb' , $breadcrumb);
 
         // 语言检测
         $lang = strip_tags(Config::get("lang.default_lang"));
 
-        if($this->request->get('act')){
-            $multiplenav=$this->request->get('act');
+        if(request()->get('act')){
+            $multiplenav=request()->get('act');
             if ($multiplenav=='switch-multiplenav-on'){
                 Config::set(['multiplenav' => 1],'site');
                 change_site('multiplenav','1');
@@ -202,9 +212,10 @@ class Backend extends BaseController
         //站点信息
         $site = Config::get("site");
         //上传信息
-        $upload = \app\common\model\Config::upload();
+        //$upload = \app\common\model\Config::upload();
+        $upload = Config::get('upload');
         // 上传信息配置后触发
-        event_trigger("uploadConfigInit", $upload);
+        //event_trigger("uploadConfigInit", $upload);
         // 配置信息
         $config = [
             'site'           => array_intersect_key($site, array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
@@ -224,20 +235,31 @@ class Backend extends BaseController
         $config = array_merge($config, Config::get("view.tpl_replace_string"));
 
         Config::set(array_merge(Config::get('upload'), $upload),'upload');
+        //初始化更改日志级别配置项
+        event_trigger("AddonsInit", $config);
         // 配置信息后
         event_trigger("configInit", $config);
         //加载当前控制器语言包
         $this->loadlang($controllername);
+        //后台映射模块地址名称
+        View::assign('modulename', $modulename);
         //渲染站点配置
         View::assign('site', $site);
         //框架信息
         View::assign('easyadmin', Config::get("easyadmin"));
         //渲染配置信息
         View::assign('config', $config);
-        //渲染权限对象
-        View::assign('auth', $this->auth);
-        //渲染管理员对象
-        View::assign('admin', Session::get('admin'));
+        if ($this->auth){
+            //渲染权限对象
+            View::assign('auth', $this->auth);
+            //渲染管理员对象
+            View::assign('admin', Session::get('admin'));
+        }else{
+            //渲染权限对象
+            View::assign('auth', null);
+            //渲染管理员对象
+            View::assign('admin', null);
+        }
     }
 
     /**

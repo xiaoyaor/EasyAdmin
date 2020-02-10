@@ -23,7 +23,7 @@ class Menu
         } else {
             $pid = $parent;
         }
-        $allow = array_flip(['file', 'name', 'title', 'icon', 'condition', 'remark', 'ismenu']);
+        $allow = array_flip(['file', 'name', 'title', 'icon', 'condition', 'remark', 'ismenu','weigh']);
         foreach ($menu as $k => $v) {
             $hasChild = isset($v['sublist']) && $v['sublist'] ? true : false;
 
@@ -34,9 +34,16 @@ class Menu
             $data['pid'] = $pid;
             $data['status'] = 'normal';
             try {
-                $menu = AuthRule::create($data);
-                if ($hasChild) {
-                    self::create($v['sublist'], $menu->id);
+                $rule = AuthRule::getByName($data['name']);
+                if (!$rule) {
+                    $menu = AuthRule::create($data);
+                    if ($hasChild) {
+                        self::create($v['sublist'], $menu->id);
+                    }
+                }else{
+                    if ($hasChild) {
+                        self::create($v['sublist'], $rule->id);
+                    }
                 }
             } catch (PDOException $e) {
                 throw new Exception($e->getMessage());

@@ -34,22 +34,22 @@ require.config({
         'bootstrap-table-mobile': '../libs/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile',
         'bootstrap-table-lang': '../libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN',
         'tableexport': '../libs/tableExport.jquery.plugin/tableExport.min',
-        'dragsort': '../libs/fastadmin-dragsort/jquery.dragsort',
+        'dragsort': '../libs/easyadmin-dragsort/jquery.dragsort',
         'sortable': '../libs/Sortable/Sortable.min',
-        'addtabs': '../libs/fastadmin-addtabs/jquery.addtabs',
+        'addtabs': '../libs/easyadmin-addtabs/jquery.addtabs',
         'slimscroll': '../libs/jquery-slimscroll/jquery.slimscroll',
         'validator-core': '../libs/nice-validator/dist/jquery.validator',
         'validator-lang': '../libs/nice-validator/dist/local/zh-CN',
         'plupload': '../libs/plupload/js/plupload.min',
         'toastr': '../libs/toastr/toastr',
         'jstree': '../libs/jstree/dist/jstree.min',
-        'layer': '../libs/fastadmin-layer/dist/layer',
+        'layer': '../libs/easyadmin-layer/dist/layer',
         'cookie': '../libs/jquery.cookie/jquery.cookie',
-        'cxselect': '../libs/fastadmin-cxselect/js/jquery.cxselect',
+        'cxselect': '../libs/easyadmin-cxselect/js/jquery.cxselect',
         'template': '../libs/art-template/dist/template-native',
-        'selectpage': '../libs/fastadmin-selectpage/selectpage',
-        'citypicker': '../libs/fastadmin-citypicker/dist/js/city-picker.min',
-        'citypicker-data': '../libs/fastadmin-citypicker/dist/js/city-picker.data'
+        'selectpage': '../libs/easyadmin-selectpage/selectpage',
+        'citypicker': '../libs/easyadmin-citypicker/dist/js/city-picker.min',
+        'citypicker-data': '../libs/easyadmin-citypicker/dist/js/city-picker.data'
     },
     // shim依赖配置
     shim: {
@@ -110,11 +110,11 @@ require.config({
             deps: ['../libs/plupload/js/moxie.min'],
             exports: "plupload"
         },
-//        'layer': ['css!../libs/fastadmin-layer/dist/theme/default/layer.css'],
+//        'layer': ['css!../libs/easyadmin-layer/dist/theme/default/layer.css'],
 //        'validator-core': ['css!../libs/nice-validator/dist/jquery.validator.css'],
         'validator-lang': ['validator-core'],
-//        'selectpage': ['css!../libs/fastadmin-selectpage/selectpage.css'],
-        'citypicker': ['citypicker-data', 'css!../libs/fastadmin-citypicker/dist/css/city-picker.css']
+//        'selectpage': ['css!../libs/easyadmin-selectpage/selectpage.css'],
+        'citypicker': ['citypicker-data', 'css!../libs/easyadmin-citypicker/dist/css/city-picker.css']
     },
     baseUrl: requirejs.s.contexts._.config.config.site.cdnurl + '/assets/js/', //资源基础路径
     map: {

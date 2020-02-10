@@ -2,16 +2,11 @@
 
 namespace app\admin\controller;
 
-use app\admin\model\AdminLog;
 use app\common\controller\Backend;
-use app\common\model\Config as ConfigModel;
 use think\facade\Config;
-use think\facade\Event;
 use think\facade\Request;
-use think\Validate;
 use xiaoyaor\think\Jump;
 use think\facade\View;
-use think\facade\Session;
 
 /**
  * 后台首页
@@ -27,9 +22,7 @@ class Index extends Backend
     public function __construct()
     {
         parent::__construct();
-        // 控制器初始化
-        parent::_initialize();
-        Config::set(['layout_on'=>'','layout_name'=>''],'view');
+        View::engine()->layout(false);
     }
 
     /**
@@ -40,8 +33,12 @@ class Index extends Backend
     {
         //菜单标识
         Config::get('site.menu_flag')?$flag=['dashboard' => 'hot','addon' => ['new', 'red', 'badge'],'auth/rule' => __('Menu'),'general' => ['new', 'purple']]:$flag=[];
-        //左侧菜单
-        list($menulist, $navlist, $fixedmenu, $referermenu) = $this->auth->getSidebar($flag, Config::get('site.fixedpage'));
+        //左侧菜单,有无权限
+        if (!$this->auth){
+            list($menulist, $navlist, $fixedmenu, $referermenu) = getSidebar($flag, Config::get('site.fixedpage'));
+        }else{
+            list($menulist, $navlist, $fixedmenu, $referermenu) = $this->auth->getSidebar($flag, Config::get('site.fixedpage'));
+        }
         $action = Request::request('action');
         if (Request::isPost()) {
             if ($action == 'refreshmenu') {
@@ -55,96 +52,6 @@ class Index extends Backend
         View::assign('referermenu', $referermenu);
         View::assign('title', __('Home'));
         return View::fetch();
-    }
-
-    /**
-     * 管理员登录
-     * @throws \Exception
-     */
-    public function login()
-    {
-        $url = Request::get('url', 'index/index');
-        if ($this->auth->isLogin()) {
-            $data=[
-                'url' =>$url,
-                'id' =>$this->auth->id,
-                'username' =>$this->auth->username,
-                'avatar' =>$this->auth->avatar,
-            ];
-            $this->success(__("You've logged in, do not login again"), $url,$data);
-        }
-        if (Request::isPost()) {
-            $username = Request::post('username');
-            $password = Request::post('password');
-            $keeplogin = Request::post('keeplogin');
-            $token = Request::post('__token__');
-            $rule = [
-                'username'  => 'require|length:3,30',
-                'password'  => 'require|length:3,30',
-                '__token__' => 'require|token',
-            ];
-            $data = [
-                'username'  => $username,
-                'password'  => $password,
-                '__token__' => $token,
-            ];
-
-            if (Config::get('easyadmin.login_captcha')){
-                $captcha=Request::post('captcha') ;
-                if(!captcha_check($captcha)){
-                    Config::set(['default_return_type'=>'json'],'app');
-                    $this->error(__('Captcha fault'));
-                }
-            }
-
-            $validate = new Validate();
-            $result = $validate->check($data,$rule);
-            if (!$result) {
-                $this->error($validate->getError(), $url, '');
-            }
-            $result = $this->auth->login($username, $password, $keeplogin ? 86400 : 0);
-            if ($result === true) {
-                event_trigger("AdminLoginAfter", request());
-                $this->success(__('Login successful'), $url, ['url' => $url, 'id' => $this->auth->id, 'username' => $username, 'avatar' => $this->auth->avatar]);
-            } else {
-                event_trigger("AdminLoginErrorAfter", request());
-                $msg = $this->auth->getError();
-                $msg = $msg ? $msg : __('Username or password is incorrect');
-                $this->error($msg, $url, '');
-            }
-        }
-
-        // 根据客户端的cookie,判断是否可以自动登录
-        if ($this->auth->autologin()) {
-            $this->redirect($url);
-        }
-
-        $background = Config::get('easyadmin.login_background');
-        $background = stripos($background, 'http') === 0 ? $background : config('site.cdnurl') . $background;
-        View::assign('background', $background);
-        View::assign('title', __('Login'));
-        View::assign('easyadmin', Config::get('easyadmin'));
-        event_trigger("adminLoginInit", request());
-        return View::fetch();
-    }
-
-    /**
-     * 注销登录
-     */
-    public function logout()
-    {
-        event_trigger("AdminLogoutAfter", request());
-        $this->auth->logout();
-        $this->success(__('Logout successful'), 'index/login');
-    }
-
-    /*
-     * 验证码
-     *
-     */
-    public function captcha()
-    {
-        return captcha();
     }
 
     /*

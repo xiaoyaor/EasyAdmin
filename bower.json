@@ -27,12 +27,12 @@
     "art-template": "^3.1.3",
     "requirejs-plugins": "~1.0.3",
     "bootstrap-daterangepicker": "~2.1.25",
-    "fastadmin-citypicker": "~1.3.1",
-    "fastadmin-cxselect": "~1.4.0",
-    "fastadmin-dragsort": "~1.0.0",
-    "fastadmin-addtabs": "~1.0.3",
-    "fastadmin-selectpage": "~1.0.0",
-    "fastadmin-layer": "~3.1.2",
+    "easyadmin-citypicker": "git://github.com/xiaoyaor/easyadmin-citypicker.git#~1.3.1",
+    "easyadmin-cxselect": "git://github.com/xiaoyaor/easyadmin-cxselect.git#~1.4.0",
+    "easyadmin-dragsort": "git://github.com/xiaoyaor/easyadmin-dragsort.git#~1.0.0",
+    "easyadmin-addtabs": "git://github.com/xiaoyaor/easyadmin-addtabs.git#~1.0.3",
+    "easyadmin-selectpage": "git://github.com/xiaoyaor/easyadmin-selectpage.git#~1.0.0",
+    "easyadmin-layer": "git://github.com/xiaoyaor/easyadmin-layer.git#~3.1.2",
     "bootstrap-slider": "*"
   }
 }

@@ -7,12 +7,13 @@
 ## 主要新特性
 
 * 采用thinkPHP 6.0+AdminLTE 开发
-* 参考了fastadmin，初期可看作fa的tp6.0升级版
+* 参考了fastadmin，初期可看作fa的tp6.0升级版(已完成)
+* 实现了插件化开发，除核心框架外所有功能均已插件化
 
 ## 安装
 
 ~~~
-composer create-project xiaoyaor/easyadmin ea 0.0.*
+composer create-project xiaoyaor/easyadmin ea 1.0.*
 ~~~
 
 如果需要更新框架使用

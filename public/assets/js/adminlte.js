@@ -423,7 +423,7 @@ function _init() {
                 else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
                     //Get the parent menu
                     var parent = $this.parents('ul').first();
-                    // modified by FastAdmin
+                    // modified by EasyAdmin
                     if ($(".show-submenu", menu).size() == 0) {
                         //Close all open menus within the parent
                         var ul = parent.find('ul:visible').slideUp(animationSpeed);
@@ -446,7 +446,7 @@ function _init() {
                     if (!$this.parent().hasClass("active")) {
                         $this.parent().addClass("active");
                     }
-                    // modified by FastAdmin
+                    // modified by EasyAdmin
                     if ($(".show-submenu", menu).size() == 0) {
                         $this.parent().siblings().find("ul.menu-open").slideUp();
                     }

@@ -59,7 +59,7 @@
                 {/if}
 
                 <!-- 检测更新 -->
-                {if $site.head_update}
+                {if $site.head_update&&hook('Version')}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="checkupdate" title="{:__('Check for updates')}">
                         <i class="fa fa-refresh"></i>
@@ -108,7 +108,7 @@
                 {/if}
 
                 <!-- 账号信息下拉框 -->
-                {if $site.head_user}
+                {if $site.head_user&&$admin}
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{$admin.avatar|cdnurl}" class="user-image" alt="{$admin.nickname}">
@@ -147,7 +147,7 @@
                                     {:__('Profile')}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{:url('index/logout')}" class="btn btn-danger"><i class="fa fa-sign-out"></i>
+                                <a href="{:url('login/logout')}" class="btn btn-danger"><i class="fa fa-sign-out"></i>
                                     {:__('Logout')}</a>
                             </div>
                         </li>

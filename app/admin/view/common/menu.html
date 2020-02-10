@@ -4,10 +4,10 @@
     {if $site.side_user}
     <div class="user-panel hidden-xs">
         <div class="pull-left image">
-            <a href="general.profile.html?ref=addtabs" class="addtabsit"><img src="{$admin.avatar}" class="img-circle" /></a>
+            <a {$admin?' href="general.profile.html?ref=addtabs" class="addtabsit"':null}><img src="{if $admin}{$admin.avatar|cdnurl}{else}__CDN__/assets/img/avatar.png{/if}" class="img-circle" /></a>
         </div>
         <div class="pull-left info">
-            <p>{$admin.nickname}</p>
+            <p>{if $admin}{$admin.nickname}{else}{:__('Guest Name')}{/if}</p>
             <i class="fa fa-circle text-success"></i> {:__('Online')}
         </div>
     </div>

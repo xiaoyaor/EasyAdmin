@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2019 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006-2018 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -12,29 +12,7 @@
 // [ 应用入口文件 ]
 namespace think;
 
-/**
- * 判断根目录是否为public
- * 安装及加载vendor时调用
- * 安装完成后可删除此函数及相关代码
- * @return string
- */
-function prefix(){
-    if(substr_compare(__DIR__, 'public', -6)==0){
-        return '/..';
-    }
-    return '';
-};
-
-$prefix=prefix();
-
-// 判断是否安装EasyAdmin
-if (!is_file(__DIR__ . $prefix .'/app/admin/command/Install/install.lock'))
-{
-    header("location:/install.php");
-    exit;
-}
-
-require __DIR__ . $prefix .'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // 执行HTTP应用并响应
 $http = (new App())->http;

@@ -290,9 +290,15 @@
         <% }%>
         <% }%>
         <% if(addon.config){ %>
+        <a href="javascript:;" class="btn btn-xs btn-primary btn-warning" title="插件"><i class="fa fa-puzzle-piece"></i>
+            插件</a>
+        <% } %>
+        <% if(addon.config){ %>
         <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
             {:__('Setting')}</a>
         <% } %>
+        <a href="javascript:;" class="btn btn-xs btn-primary btn-info" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
+            文件</a>
         <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
             {:__('Uninstall')}</a>
         <% } %>

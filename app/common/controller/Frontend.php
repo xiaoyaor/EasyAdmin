@@ -56,42 +56,44 @@ class Frontend extends BaseController
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
-        $this->auth = Auth::instance();
-        $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
+        if (hook('User')){
+            $this->auth = Auth::instance();
+            $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
 
-        $path = str_replace('.', '/', $controllername) . '/' . $actionname;
-        // 设置当前请求的URI
-        $this->auth->setRequestUri($path);
-        // 检测是否需要验证登录
-        if (!$this->auth->match($this->noNeedLogin)) {
-            //初始化
-            $this->auth->init($token);
-            //检测是否登录
-            if (!$this->auth->isLogin()) {
-                $this->error(__('Please login first'), 'index/user/login');
-            }
-            // 判断是否需要验证权限
-            if (!$this->auth->match($this->noNeedRight)) {
-                // 判断控制器和方法判断是否有对应权限
-                if (!$this->auth->check($path)) {
-                    $this->error(__('You have no permission'));
+            $path = str_replace('.', '/', $controllername) . '/' . $actionname;
+            // 设置当前请求的URI
+            $this->auth->setRequestUri($path);
+            // 检测是否需要验证登录
+            if (!$this->auth->match($this->noNeedLogin)) {
+                //初始化
+                $this->auth->init($token);
+                //检测是否登录
+                if (!$this->auth->isLogin()) {
+                    $this->error(__('Please login first'), 'index/user/login');
+                }
+                // 判断是否需要验证权限
+                if (!$this->auth->match($this->noNeedRight)) {
+                    // 判断控制器和方法判断是否有对应权限
+                    if (!$this->auth->check($path)) {
+                        $this->error(__('You have no permission'));
+                    }
+                }
+            } else {
+                // 如果有传递token才验证是否登录状态
+                if ($token) {
+                    $this->auth->init($token);
                 }
             }
-        } else {
-            // 如果有传递token才验证是否登录状态
-            if ($token) {
-                $this->auth->init($token);
-            }
+
+            View::assign('user', $this->auth->getUser());
         }
-
-        View::assign('user', $this->auth->getUser());
-
         // 语言检测
         $lang = strip_tags(Config::get("lang.default_lang"));
 
         $site = Config::get("site");
 
-        $upload = \app\common\model\Config::upload();
+        //$upload = \app\common\model\Config::upload();
+        $upload = Config::get('upload');
 
         // 上传信息配置后
         event_listen("uploadConfigInit", $upload);
@@ -109,9 +111,6 @@ class Frontend extends BaseController
         ];
 
         Config::set(array_merge(Config::get('upload'), $upload), 'upload');
-
-        //设置layout
-        Config::set(['layout_on'=>'true','layout_name'=>'layout/default'],'view');
 
         // 配置信息后
         event_trigger("configInit", $config);

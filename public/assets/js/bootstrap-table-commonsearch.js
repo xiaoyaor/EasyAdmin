@@ -1,11 +1,11 @@
 /**
- * FastAdmin通用搜索
+ * EasyAdmin通用搜索
  *
- * @author: pppscn <35696959@qq.com>
- * @update 2017-05-07 <https://gitee.com/pp/fastadmin>
+ * @author: pppscn <747976016@qq.com>
+ * @update 2017-05-07 <https://gitee.com/xiaoyaor/easyadmin>
  *
- * @author: Karson <karsonzhang@163.com>
- * @update 2018-04-05 <https://gitee.com/karson/fastadmin>
+ * @author: Karson <747976016@qq.com>
+ * @update 2018-04-05 <https://gitee.com/xiaoyaor/easyadmin>
  */
 
 !function ($) {
