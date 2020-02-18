@@ -28,6 +28,7 @@ return array (
     'user' => 'User',
     'example' => 'Example',
     'control' => 'Control',
+    'backend' => 'Backend',
   ),
   'mail_type' => '1',
   'mail_smtp_host' => 'smtp.qq.com',
@@ -51,4 +52,5 @@ return array (
   'side_search' => '1',
   'side_links' => '1',
   'menu_flag' => '1',
+  'backend_name' => 'XnZUrsbCijk',
 );

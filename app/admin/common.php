@@ -540,3 +540,23 @@ if (!function_exists('delDirAndFile')){
         return true;
     }
 }
+
+if (!function_exists('replaceFileContent')){
+
+    /**
+     * 替换文件内容文件
+     * @access public
+     * @param string      $path 文件路径
+     * @param string      $str  搜索内容
+     * @param string      $str2 替换内容
+     * @return boolean
+     */
+    function replaceFileContent(string $path, string $str = null, string $str2 = null)
+    {
+        $content=file_get_contents($path);
+        $content=str_replace($str,$str2,$content);
+        file_put_contents($path,$content);
+        return true;
+
+    }
+}
