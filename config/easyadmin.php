@@ -37,7 +37,7 @@ return [
     //Github开源
     'github_url'         => 'https://github.com/xiaoyaor/EasyAdmin',
     //插件市场
-    'store_url'          => 'https://addons.easyadmin.vip',
+    'addons_url'          => 'https://addons.easyadmin.vip',
     //API接口地址
     'api_url'            => 'http://api.easyadmin.vip',
     //QQ交流群
