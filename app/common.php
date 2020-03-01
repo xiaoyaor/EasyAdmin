@@ -6,6 +6,7 @@ use think\facade\Config;
 use think\facade\Db;
 use think\facade\Event;
 use think\facade\Lang;
+use think\helper\Str;
 use think\Model;
 
 if (!function_exists('__')) {
@@ -423,6 +424,7 @@ if (!function_exists('event_trigger')) {
      */
     function event_trigger($event, $params = null, bool $once = false)
     {
+        $event = Str::camel($event);
         $result = Event::trigger($event, $params, $once);
 
         //return join('', $result);

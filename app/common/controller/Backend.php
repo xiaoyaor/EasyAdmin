@@ -213,13 +213,13 @@ class Backend extends BaseController
         $site = Config::get("site");
         //上传信息
         //$upload = \app\common\model\Config::upload();
-        $upload = Config::get('upload');
+        //$upload = Config::get('upload');
         // 上传信息配置后触发
-        //event_trigger("uploadConfigInit", $upload);
+        //event("upload_config_init", $upload);
         // 配置信息
         $config = [
-            'site'           => array_intersect_key($site, array_flip(['name', 'indexurl', 'cdnurl', 'version', 'timezone', 'languages'])),
-            'upload'         => $upload,
+            'site'           => array_intersect_key($site, array_flip(['name', 'cdnurl', 'version', 'timezone', 'languages'])),
+            'upload'         => Config::get('upload'),
             'modulename'     => $modulename,
             'controllername' => $controllername,
             'actionname'     => $actionname,
@@ -234,7 +234,7 @@ class Backend extends BaseController
 
         $config = array_merge($config, Config::get("view.tpl_replace_string"));
 
-        Config::set(array_merge(Config::get('upload'), $upload),'upload');
+        //Config::set(array_merge(Config::get('upload'), $upload),'upload');
         //初始化更改日志级别配置项
         event_trigger("AddonsInit", $config);
         // 配置信息后
