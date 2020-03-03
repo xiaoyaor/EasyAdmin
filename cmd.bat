@@ -1,2 +1,0 @@
-cd %cd%
-@cmd.exe
