@@ -16,8 +16,6 @@ return [
     'login_unique'        => false,
     //登录页默认背景图
     'login_background'    => "/assets/img/loginbg.jpg",
-    //根目录是否位于public目录
-    'web_dir'             => Env::get('easyadmin.web_dir', 'public/'),
     //自动检测更新
     'checkupdate'         => false,
     // 是否开启多语言

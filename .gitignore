@@ -4,8 +4,9 @@
 *.log
 .env
 /启动.bat
+/cmd.bat
 /composer.lock
-/public/storage/
 /addons/
 /app/admin/command/Install/install.lock
-/public/assets/libs/
+/assets/libs/
+/storage/
