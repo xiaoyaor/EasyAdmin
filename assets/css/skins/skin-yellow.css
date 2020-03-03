@@ -43,7 +43,7 @@
   }
 }
 .skin-yellow .main-header .logo {
-  background-color: #e08e0b;
+  background-color: #f39c12;
   color: #fff;
   border-bottom: 0 solid transparent;
 }
@@ -72,7 +72,7 @@
 .skin-yellow .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-yellow .sidebar-menu > li:hover > a,
+/*.skin-yellow .sidebar-menu > li:hover > a,*/
 .skin-yellow .sidebar-menu > li.active > a {
   color: #fff;
   background: #1e282c;
@@ -94,6 +94,7 @@
 .skin-yellow .treeview-menu > li.active > a,
 .skin-yellow .treeview-menu > li > a:hover {
   color: #fff;
+  background: #f39c12;
 }
 .skin-yellow .sidebar-form {
   border-radius: 3px;

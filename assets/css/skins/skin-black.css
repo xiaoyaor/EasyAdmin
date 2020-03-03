@@ -72,11 +72,11 @@
 .skin-black .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-black .sidebar-menu > li:hover > a,
+/*.skin-black .sidebar-menu > li:hover > a,*/
 .skin-black .sidebar-menu > li.active > a {
   color: #fff;
-  background: #1e282c;
-  border-left-color: #222d32;
+  background: #222d32;
+  border-left-color: black;
 }
 .skin-black .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
@@ -94,6 +94,7 @@
 .skin-black .treeview-menu > li.active > a,
 .skin-black .treeview-menu > li > a:hover {
   color: #fff;
+  background: black;
 }
 .skin-black .sidebar-form {
   border-radius: 3px;

@@ -48,7 +48,7 @@
   border-bottom: 0 solid transparent;
 }
 .skin-purple-full .main-header .logo:hover {
-  background-color: #545096;
+  background-color: #504e8d;
 }
 .skin-purple-full .main-header li.user-header {
   background-color: #605ca8;
@@ -72,11 +72,11 @@
 .skin-purple-full .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-purple-full .sidebar-menu > li:hover > a,
+/*.skin-purple-full .sidebar-menu > li:hover > a,*/
 .skin-purple-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #555299;
-  border-left-color: #605ca8;
+  background: #605ca8;
+  border-left-color: #444081;
 }
 .skin-purple-full .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
@@ -94,6 +94,7 @@
 .skin-purple-full .treeview-menu > li.active > a,
 .skin-purple-full .treeview-menu > li > a:hover {
   color: #fff;
+  background: #444081;
 }
 .skin-purple-full .sidebar-form {
   border-radius: 3px;
@@ -104,7 +105,7 @@
 .skin-purple-full .sidebar-form input[type="text"],
 .skin-purple-full .sidebar-form .btn {
   box-shadow: none;
-  background-color: #555299;
+  background-color: #444081;
   border: 1px solid transparent;
   height: 35px;
 }

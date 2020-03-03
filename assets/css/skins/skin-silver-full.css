@@ -72,11 +72,11 @@
 .skin-silver-full .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-silver-full .sidebar-menu > li:hover > a,
+/*.skin-silver-full .sidebar-menu > li:hover > a,*/
 .skin-silver-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #adadad;
-  border-left-color: #C0C0C0;
+  background: #C0C0C0;
+  border-left-color: #adadad;
 }
 .skin-silver-full .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
@@ -94,6 +94,7 @@
 .skin-silver-full .treeview-menu > li.active > a,
 .skin-silver-full .treeview-menu > li > a:hover {
   color: #fff;
+  background-color: #adadad;
 }
 .skin-silver-full .sidebar-form {
   border-radius: 3px;

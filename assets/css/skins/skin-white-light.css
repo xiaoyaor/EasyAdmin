@@ -102,10 +102,11 @@
   border-left: 3px solid transparent;
   font-weight: 600;
 }
-.skin-white-light .sidebar-menu > li:hover > a,
+/*.skin-white-light .sidebar-menu > li:hover > a,*/
 .skin-white-light .sidebar-menu > li.active > a {
   color: #000;
-  background: #f4f4f5;
+  background: #f9fafc;
+  border-left-color: white;
 }
 .skin-white-light .sidebar-menu > li.active {
   border-left-color: #fff;
@@ -128,6 +129,7 @@
 .skin-white-light .treeview-menu > li.active > a,
 .skin-white-light .treeview-menu > li > a:hover {
   color: #000;
+  background-color: white;
 }
 .skin-white-light .treeview-menu > li.active > a {
   font-weight: 600;

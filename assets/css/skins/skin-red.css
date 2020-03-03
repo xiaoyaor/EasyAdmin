@@ -72,7 +72,7 @@
 .skin-red .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-red .sidebar-menu > li:hover > a,
+/*.skin-red .sidebar-menu > li:hover > a,*/
 .skin-red .sidebar-menu > li.active > a {
   color: #fff;
   background: #1e282c;
@@ -94,6 +94,7 @@
 .skin-red .treeview-menu > li.active > a,
 .skin-red .treeview-menu > li > a:hover {
   color: #fff;
+  background: #e74c3c;
 }
 .skin-red .sidebar-form {
   border-radius: 3px;

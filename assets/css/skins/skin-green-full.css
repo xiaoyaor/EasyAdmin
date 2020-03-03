@@ -3,7 +3,7 @@
  * -----------
  */
 .skin-green-full .main-header .navbar {
-  background-color: #18bc9c;
+  background-color: #00a65a;
 }
 .skin-green-full .main-header .navbar .nav > li > a {
   color: #fff;
@@ -29,7 +29,7 @@
   color: #fff;
 }
 .skin-green-full .main-header .navbar .sidebar-toggle:hover {
-  background-color: #15a589;
+  background-color: #00a65a;
 }
 @media (max-width: 767px) {
   .skin-green-full .main-header .navbar .dropdown-menu li.divider {
@@ -39,19 +39,19 @@
     color: #fff;
   }
   .skin-green-full .main-header .navbar .dropdown-menu li a:hover {
-    background: #15a589;
+    background: #00a65a;
   }
 }
 .skin-green-full .main-header .logo {
-  background-color: #15a589;
+  background-color: #019954;
   color: #fff;
   border-bottom: 0 solid transparent;
 }
 .skin-green-full .main-header .logo:hover {
-  background-color: #15a185;
+  background-color: #019350;
 }
 .skin-green-full .main-header li.user-header {
-  background-color: #18bc9c;
+  background-color: #00a65a;
 }
 .skin-green-full .content-header {
   background: transparent;
@@ -59,7 +59,7 @@
 .skin-green-full .wrapper,
 .skin-green-full .main-sidebar,
 .skin-green-full .left-side {
-  background-color: #18bc9c;
+  background-color: #00a65a;
 }
 .skin-green-full .user-panel > .info,
 .skin-green-full .user-panel > .info > a {
@@ -67,20 +67,20 @@
 }
 .skin-green-full .sidebar-menu > li.header {
   color: #eee;
-  background: #15a589;
+  background: #00a65a;
 }
 .skin-green-full .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.skin-green-full .sidebar-menu > li:hover > a,
+/*.skin-green-full .sidebar-menu > li:hover > a,*/
 .skin-green-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #15a589;
-  border-left-color: #18bc9c;
+  background: #00a65a;
+  border-left-color: #008548;
 }
 .skin-green-full .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
-  background: #15a589;
+  background: #00a65a;
 }
 .skin-green-full .sidebar a {
   color: #b8c7ce;
@@ -94,22 +94,23 @@
 .skin-green-full .treeview-menu > li.active > a,
 .skin-green-full .treeview-menu > li > a:hover {
   color: #fff;
+  background-color: #008548;
 }
 .skin-green-full .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #15a88c;
-  background-color: #15a88c;
+  border: 1px solid #07b967;
+  background-color: #07b967;
   margin: 10px 10px;
 }
 .skin-green-full .sidebar-form input[type="text"],
 .skin-green-full .sidebar-form .btn {
   box-shadow: none;
-  background-color: #15a88c;
+  background-color: #008548;
   border: 1px solid transparent;
   height: 35px;
 }
 .skin-green-full .sidebar-form input[type="text"] {
-  color: #15a88c;
+  color: #07b967;
   border-top-left-radius: 2px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -118,7 +119,7 @@
 .skin-green-full .sidebar-form input[type="text"]:focus,
 .skin-green-full .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
   background-color: #fff;
-  color: #15a88c;
+  color: #07b967;
 }
 .skin-green-full .sidebar-form input[type="text"]:focus + .input-group-btn {
   background: #fff;
