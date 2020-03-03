@@ -72,15 +72,15 @@
 .skin-red-full .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-/*.skin-red-full .sidebar-menu > li:hover > a,*/
+.skin-red-full .sidebar-menu > li:hover > a,
 .skin-red-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #e74c3c;
+  background: #d24638;
   border-left-color: #bb2516;
 }
 .skin-red-full .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
-  background: #e43725;
+  background: #d83120;
 }
 .skin-red-full .sidebar a {
   color: #b8c7ce;
@@ -137,5 +137,10 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.layui-layer-fast .layui-layer-title {
+  background: #e74c3c !important;
+  color: #fff !important;
+  border-bottom: none;
 }
 /*# sourceMappingURL=skin-red-full.css.map */

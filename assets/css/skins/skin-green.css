@@ -72,7 +72,7 @@
 .skin-green .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-/*.skin-green .sidebar-menu > li:hover > a,*/
+.skin-green .sidebar-menu > li:hover > a,
 .skin-green .sidebar-menu > li.active > a {
   color: #ffffff;
   background: #1e282c;
@@ -129,4 +129,9 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.layui-layer-fast .layui-layer-title {
+  background: #00a65a !important;
+  color: #fff !important;
+  border-bottom: none;
 }

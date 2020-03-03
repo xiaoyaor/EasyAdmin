@@ -82,10 +82,10 @@
   border-left: 3px solid transparent;
   font-weight: 600;
 }
-/*.skin-blue-light .sidebar-menu > li:hover > a,*/
+.skin-blue-light .sidebar-menu > li:hover > a,
 .skin-blue-light .sidebar-menu > li.active > a {
   color: #000;
-  background: #f9fafc;
+  background: #e2e2e2;
   border-left-color: #007bff;
 }
 .skin-blue-light .sidebar-menu > li.active {
@@ -163,5 +163,10 @@
 }
 .skin-blue.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
+}
+.layui-layer-fast .layui-layer-title {
+  background: #007bff !important;
+  color: #fff !important;
+  border-bottom: none;
 }
 /*# sourceMappingURL=skin-blue-light.css.map */

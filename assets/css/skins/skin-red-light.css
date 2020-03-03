@@ -82,10 +82,10 @@
   border-left: 3px solid transparent;
   font-weight: 600;
 }
-/*.skin-red-light .sidebar-menu > li:hover > a,*/
+.skin-red-light .sidebar-menu > li:hover > a,
 .skin-red-light .sidebar-menu > li.active > a {
   color: #000;
-  background: #f9fafc;
+  background: #e2e2e2;
   border-left-color: #e74c3c;
 }
 .skin-red-light .sidebar-menu > li.active {
@@ -152,5 +152,10 @@
   .skin-red-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
     border-left: 1px solid #d2d6de;
   }
+}
+.layui-layer-fast .layui-layer-title {
+  background: #e74c3c !important;
+  color: #fff !important;
+  border-bottom: none;
 }
 /*# sourceMappingURL=skin-red-light.css.map */

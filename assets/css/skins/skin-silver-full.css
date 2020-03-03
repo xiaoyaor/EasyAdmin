@@ -72,15 +72,15 @@
 .skin-silver-full .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-/*.skin-silver-full .sidebar-menu > li:hover > a,*/
+.skin-silver-full .sidebar-menu > li:hover > a,
 .skin-silver-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #C0C0C0;
+  background: #b9b6b6;
   border-left-color: #adadad;
 }
 .skin-silver-full .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
-  background: #C0C0C0;
+  background: #d6d5d5;
 }
 .skin-silver-full .sidebar a {
   color: #8aa4af;
@@ -137,5 +137,10 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
+}
+.layui-layer-fast .layui-layer-title {
+  background: #adadad !important;
+  color: #fff !important;
+  border-bottom: none;
 }
 /*# sourceMappingURL=skin-silver-full.css.map */

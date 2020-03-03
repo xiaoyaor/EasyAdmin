@@ -45,7 +45,6 @@ class Index extends Backend
                 $this->success('', null, ['menulist' => $menulist, 'navlist' => $navlist]);
             }
         }
-        View::assign('skin', Config::get('site.skin'));
         View::assign('menulist', $menulist);
         View::assign('navlist', $navlist);
         View::assign('fixedmenu', $fixedmenu);

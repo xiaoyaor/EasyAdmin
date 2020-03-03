@@ -1,6 +1,5 @@
 @import url("../css/bootstrap.css");
 @import url("../css/easyadmin.css");
-@import url("../css/skins/skin-green.css");
 @import url("../css/iconfont.css");
 @import url("../libs/font-awesome/css/font-awesome.min.css");
 @import url("../libs/toastr/toastr.min.css");
@@ -759,9 +758,9 @@ table.table-nowrap thead > tr > th {
   /*自定义底部灰色操作区*/
 }
 .layui-layer-fast .layui-layer-title {
-  background: #2c3e50 !important;
-  color: #fff !important;
-  border-bottom: none;
+  /*background: #2c3e50 !important;*/
+  /*color: #fff !important;*/
+  /*border-bottom: none;*/
 }
 .layui-layer-fast .layui-layer-title ~ .layui-layer-setwin {
   top: 0px;

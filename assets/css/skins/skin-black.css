@@ -72,10 +72,10 @@
 .skin-black .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-/*.skin-black .sidebar-menu > li:hover > a,*/
+.skin-black .sidebar-menu > li:hover > a,
 .skin-black .sidebar-menu > li.active > a {
   color: #fff;
-  background: #222d32;
+  background: #1e282c;
   border-left-color: black;
 }
 .skin-black .sidebar-menu > li > .treeview-menu {
@@ -145,5 +145,10 @@
 }
 .skin-black.layout-top-nav .main-header > .logo:hover {
   background-color: #4b646f;
+}
+.layui-layer-fast .layui-layer-title {
+  background: black !important;
+  color: #fff !important;
+  border-bottom: none;
 }
 /*# sourceMappingURL=skin-black.css.map */
