@@ -45,5 +45,12 @@
 
         <!-- 加载JS脚本 -->
         {include file="common/script" /}
+
+        <!-- 侧边栏切换按钮 -->
+        {if $site.head_skin}
+        <a href="javascript:;" data-toggle="control-sidebar" class="btn btn-info right-side-float right-side-float-skin">
+            <i class="fa fa-gears fa-lg"></i>
+        </a>
+        {/if}
     </body>
 </html>

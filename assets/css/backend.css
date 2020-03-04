@@ -345,6 +345,14 @@ form.form-horizontal .control-label {
 .multiplenav .right-side {
   padding-top: 94px;
 }
+.right-side-float{
+  padding: 6px 8px;
+  border-radius: 5px 0 0 5px;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  z-index: 9999;
+}
 .multiplenav #firstnav .nav-addtabs {
   padding-right: 450px;
 }

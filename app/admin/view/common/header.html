@@ -71,7 +71,7 @@
                 {if $site.head_cache}
                 <li>
                     <a href="javascript:;" data-toggle="dropdown" title="{:__('Wipe cache')}">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash"></i><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu wipecache">
                         <li><a href="javascript:;" data-type="all"><i class="fa fa-trash"></i> {:__('Wipe all cache')}</a></li>
@@ -87,11 +87,12 @@
                 {if $site.head_lan}
                 {if $easyadmin.lang_switch_on}
                 <li class="hidden-xs">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="{$config['language']=='zh-cn'?'active':''}">
                             <a href="?ref=addtabs&lang=zh-cn">简体中文</a>
                         </li>
+                        <li class="divider"></li>
                         <li class="{$config['language']=='en'?'active':''}">
                             <a href="?ref=addtabs&lang=en">English</a>
                         </li>
@@ -109,58 +110,62 @@
 
                 <!-- 账号信息下拉框 -->
                 {if $site.head_user&&$admin}
-                <li class="dropdown user user-menu">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{$admin.avatar|cdnurl}" class="user-image" alt="{$admin.nickname}">
-                        <span class="hidden-xs">{$admin.nickname}</span>
+                        <i class="fa fa-user"></i><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <img src="{$admin.avatar|cdnurl}" class="img-circle" alt="">
-
-                            <p>
-                                {$admin.nickname}
-                                <small>{$admin.logintime|date="Y-m-d H:i:s"}</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        {if $site.head_links}
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="{$easyadmin.url}" target="_blank">{:__('EasyAdmin')}</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="{$easyadmin.ask_url}" target="_blank">{:__('Forum')}</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="{$easyadmin.doc_url}" target="_blank">{:__('Docs')}</a>
-                                </div>
-                            </div>
-                        </li>
-                        {/if}
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="general.profile.html?ref=addtabs" class="btn btn-primary addtabsit"><i class="fa fa-user"></i>
-                                    {:__('Profile')}</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="{:url('login/logout')}" class="btn btn-danger"><i class="fa fa-sign-out"></i>
-                                    {:__('Logout')}</a>
-                            </div>
-                        </li>
+                        <li><a href="general.profile.html?ref=addtabs"><i class="fa fa-user"></i>{:__('Profile')}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{:url('login/logout')}"><i class="fa fa-sign-out"></i>{:__('Logout')}</a></li>
                     </ul>
                 </li>
                 {/if}
 
-                <!-- 控制栏切换按钮 -->
-                {if $site.head_skin}
-                <li class="hidden-xs">
-                    <a href="javascript:;" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <!--  主控制台 -->
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="{:__('Console')}">
+                        <i class="fa fa-cog"></i>
+<!--                        <span class="label label-warning">10</span>-->
+                        {:__('Console')}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">{:__('You have application', '10')}</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                        page and may cause design problems
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-users text-red"></i> 5 new members joined
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-user text-red"></i> You changed your username
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">{:__('View all')}</a></li>
+                    </ul>
                 </li>
-                {/if}
 
             </ul>
         </div>
@@ -179,5 +184,4 @@
         </ul>
     </div>
     {/if}
-
 </nav>
