@@ -76,19 +76,19 @@
                 <div class="widget-body no-padding">
                     <div id="toolbar" class="toolbar">
                         {:build_toolbar('refresh')}
-                        <button type="button" id="plupload-addon" class="btn btn-danger plupload" data-url="addon/local"
+                        <button type="button" id="plupload-addon" class="btn btn-danger plupload" data-url="addon.program/local"
                                 data-mimetype="application/zip" data-multiple="false"><i class="fa fa-upload"></i>
                             {:__('Offline install')}
                         </button>
                         <div class="btn-group">
                             <a href="#" class="btn btn-info btn-switch active" data-type="all"
-                               data-url="{$api_url}/addon/index"><i class="fa fa-list"></i>
+                               data-url="{$api_url}/addon.program/index"><i class="fa fa-list"></i>
                                 {:__('All')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="free"
-                               data-url="{$api_url}/addon/index"><i class="fa fa-gift"></i>
+                               data-url="{$api_url}/addon.program/index"><i class="fa fa-gift"></i>
                                 {:__('Free')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="price"
-                               data-url="{$api_url}/addon/index"><i class="fa fa-rmb"></i>
+                               data-url="{$api_url}/addon.program/index"><i class="fa fa-rmb"></i>
                                 {:__('Paying')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="local" data-url="addon.program/downloaded"><i
                                     class="fa fa-laptop"></i> {:__('Local addon')}</a>

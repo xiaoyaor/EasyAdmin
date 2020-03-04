@@ -1004,4 +1004,8 @@ table.table-nowrap thead > tr > th {
 .btn-switcher .text-gray {
   color: #d2d6de !important;
 }
+.favicon-style{
+  width: 30px !important;
+  height: 30px !important;
+}
 /*# sourceMappingURL=backend.css.map */

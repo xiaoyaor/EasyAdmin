@@ -276,7 +276,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
                 Fast.api.ajax({
-                    url: 'addon/install',
+                    url: 'addon.addon/install',
                     data: {
                         name: name,
                         force: force ? 1 : 0,
@@ -350,7 +350,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
 
             var uninstall = function (name, force) {
                 Fast.api.ajax({
-                    url: 'addon/uninstall',
+                    url: 'addon.addon/uninstall',
                     data: {name: name, force: force ? 1 : 0}
                 }, function (data, ret) {
                     delete Config['addons'][name];
@@ -383,7 +383,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
 
             var operate = function (name, action, force) {
                 Fast.api.ajax({
-                    url: 'addon/state',
+                    url: 'addon.addon/state',
                     data: {name: name, action: action, force: force ? 1 : 0}
                 }, function (data, ret) {
                     var addon = Config['addons'][name];
@@ -420,7 +420,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
                 Fast.api.ajax({
-                    url: 'addon/upgrade',
+                    url: 'addon.addon/upgrade',
                     data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
@@ -474,13 +474,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 点击配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/config?name=" + name, __('Setting'));
+                Fast.api.open("addon.addon/config?name=" + name, __('Setting'));
             });
 
             // 依赖插件
             $(document).on("click", ".btn-warning", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/addons?name=" + name, __('Setting'));
+                Fast.api.open("addon.addon/addons?name=" + name, __('Setting'));
             });
 
             // 点击启用/禁用
@@ -805,7 +805,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
                 Fast.api.ajax({
-                    url: 'addon/install',
+                    url: 'addon.addon/install',
                     data: {
                         name: name,
                         force: force ? 1 : 0,
@@ -879,7 +879,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
 
             var uninstall = function (name, force) {
                 Fast.api.ajax({
-                    url: 'addon/uninstall',
+                    url: 'addon.addon/uninstall',
                     data: {name: name, force: force ? 1 : 0}
                 }, function (data, ret) {
                     delete Config['addons'][name];
@@ -912,7 +912,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
 
             var operate = function (name, action, force) {
                 Fast.api.ajax({
-                    url: 'addon/state',
+                    url: 'addon.addon/state',
                     data: {name: name, action: action, force: force ? 1 : 0}
                 }, function (data, ret) {
                     var addon = Config['addons'][name];
@@ -949,7 +949,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
                 Fast.api.ajax({
-                    url: 'addon/upgrade',
+                    url: 'addon.addon/upgrade',
                     data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
@@ -1003,13 +1003,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 点击配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/config?name=" + name, __('Setting'));
+                Fast.api.open("addon.addon/config?name=" + name, __('Setting'));
             });
 
             // 依赖插件
             $(document).on("click", ".btn-warning", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/addons?name=" + name, __('Setting'));
+                Fast.api.open("addon.addon/addons?name=" + name, __('Setting'));
             });
 
             // 点击启用/禁用
