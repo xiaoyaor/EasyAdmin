@@ -210,7 +210,7 @@
 }
 .skin-blue-light .content-wrapper,
 .skin-blue-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-blue-light .user-panel > .info,
 .skin-blue-light .user-panel > .info > a {
@@ -261,7 +261,7 @@
 }
 .skin-blue-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-blue-light .sidebar-form input[type="text"],
@@ -295,7 +295,7 @@
 }
 @media (min-width: 768px) {
   .skin-blue-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 .skin-blue-light .main-footer {
@@ -560,7 +560,7 @@
 }
 .skin-white-light .content-wrapper,
 .skin-white-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-white-light .user-panel > .info,
 .skin-white-light .user-panel > .info > a {
@@ -611,7 +611,7 @@
 }
 .skin-white-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-white-light .sidebar-form input[type="text"],
@@ -645,7 +645,7 @@
 }
 @media (min-width: 768px) {
   .skin-white-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 /*
@@ -852,7 +852,7 @@
 }
 .skin-green-light .content-wrapper,
 .skin-green-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-green-light .user-panel > .info,
 .skin-green-light .user-panel > .info > a {
@@ -903,7 +903,7 @@
 }
 .skin-green-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-green-light .sidebar-form input[type="text"],
@@ -937,7 +937,7 @@
 }
 @media (min-width: 768px) {
   .skin-green-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 /*
@@ -1144,7 +1144,7 @@
 }
 .skin-red-light .content-wrapper,
 .skin-red-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-red-light .user-panel > .info,
 .skin-red-light .user-panel > .info > a {
@@ -1195,7 +1195,7 @@
 }
 .skin-red-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-red-light .sidebar-form input[type="text"],
@@ -1229,7 +1229,7 @@
 }
 @media (min-width: 768px) {
   .skin-red-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 /*
@@ -1436,7 +1436,7 @@
 }
 .skin-yellow-light .content-wrapper,
 .skin-yellow-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-yellow-light .user-panel > .info,
 .skin-yellow-light .user-panel > .info > a {
@@ -1487,7 +1487,7 @@
 }
 .skin-yellow-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-yellow-light .sidebar-form input[type="text"],
@@ -1521,7 +1521,7 @@
 }
 @media (min-width: 768px) {
   .skin-yellow-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 /*
@@ -1728,7 +1728,7 @@
 }
 .skin-purple-light .content-wrapper,
 .skin-purple-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-purple-light .user-panel > .info,
 .skin-purple-light .user-panel > .info > a {
@@ -1779,7 +1779,7 @@
 }
 .skin-purple-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-purple-light .sidebar-form input[type="text"],
@@ -1813,7 +1813,7 @@
 }
 @media (min-width: 768px) {
   .skin-purple-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 /*# sourceMappingURL=_all-skins.css.map */

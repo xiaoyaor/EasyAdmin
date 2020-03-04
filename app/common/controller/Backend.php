@@ -126,7 +126,8 @@ class Backend extends BaseController
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
-        $path = str_replace('.', '/', $controllername) . '/' . $actionname;
+        //$path = str_replace('.', '/', $controllername) . '/' . $actionname;
+        $path = $controllername . '/' . $actionname;
 
         // 定义是否Addtabs请求
         !defined('IS_ADDTABS') && define('IS_ADDTABS', input("addtabs") ? true : false);
@@ -181,7 +182,7 @@ class Backend extends BaseController
 //                }
 //                $url = url($url, [], false);
 //            }
-            $this->redirect('index/index',  302, ['referer' => $url]);
+            $this->redirect('/'.$modulename.'/index/index',  302, ['referer' => $url]);
             exit;
         }
 

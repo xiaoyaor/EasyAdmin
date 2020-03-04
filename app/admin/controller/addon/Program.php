@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\admin\controller\addon;
 
 use app\common\controller\Backend;
 use easy\Http;
@@ -9,7 +9,6 @@ use think\facade\Cache;
 use think\facade\Config;
 use think\Exception;
 use think\facade\View;
-use easy\Hash;
 
 /**
  * 插件管理
@@ -17,7 +16,7 @@ use easy\Hash;
  * @icon   fa fa-cube
  * @remark 可在线安装、卸载、禁用、启用插件，同时支持添加本地插件。EasyAdmin已上线插件商店 ，你可以发布你的免费或付费插件：<a href="https://addons.easyadmin.vip" target="_blank">https://addons.easyadmin.vip</a>
  */
-class Addon extends Backend
+class Program extends Backend
 {
     protected $model = null;
 

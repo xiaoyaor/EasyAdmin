@@ -46,7 +46,7 @@ return [
     'QQ qun'                                                     => 'QQ交流群',
     'Captcha'                                                    => '验证码',
     'Captcha fault'                                              => '验证码错误',
-    'Console'                                                    => '控制台',
+    'Console'                                                    => '应用',
     'You have application'                                       => '你当前安装了%s个应用',
     'View all'                                                   => '查看全部',
 ];

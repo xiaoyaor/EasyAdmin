@@ -16,7 +16,7 @@ body {
   height: 100%;
 }
 body {
-  background: #f1f4f6;
+  background: #fcfcfc;
   font-size: 13px;
 }
 body.is-dialog {
@@ -105,7 +105,7 @@ html.ios-fix body {
 .fixed-footer {
   position: fixed;
   bottom: 0;
-  background-color: #ecf0f1;
+  background-color: #fcfcfc;
   width: 100%;
   margin-bottom: 0;
   padding: 10px;
@@ -184,7 +184,7 @@ form.form-horizontal .control-label {
 .panel-intro > .panel-heading {
   padding: 15px;
   padding-bottom: 0;
-  background: #e8edf0;
+  /*background: #e8edf0;*/
   border-color: #e8edf0;
   position: relative;
 }
@@ -219,7 +219,7 @@ form.form-horizontal .control-label {
 .panel-intro > .panel-heading .nav-tabs > li > a {
   margin-right: 4px;
   color: #95a5a6;
-  background-color: #d8e0e6;
+  /*background-color: #d8e0e6;*/
   border: 1px solid #e8edf0;
   border-bottom-color: transparent;
 }
@@ -227,7 +227,7 @@ form.form-horizontal .control-label {
 .panel-intro > .panel-heading .nav-tabs > li > a:focus {
   border: 1px solid #e8edf0;
   color: #7b8a8b;
-  background-color: #c9d4dc;
+  /*background-color: #c9d4dc;*/
 }
 .panel-intro > .panel-heading .nav-tabs > li.active > a,
 .panel-intro > .panel-heading .nav-tabs > li.active > a:hover,
@@ -248,13 +248,13 @@ form.form-horizontal .control-label {
 .panel-nav .panel-heading {
   padding: 0px;
   padding-bottom: 0;
-  background: #f1f4f6;
-  border-color: #f1f4f6;
+  background: #fcfcfc;
+  border-color: #fcfcfc;
 }
 .panel-nav .nav-tabs > li > a {
   padding: 12px 15px;
   background-color: #e8edf0;
-  border: 1px solid #f1f4f6;
+  border: 1px solid #fcfcfc;
 }
 .panel-nav .nav-tabs > li > a:hover,
 .panel-nav .nav-tabs > li > a:focus {
@@ -264,7 +264,7 @@ form.form-horizontal .control-label {
 .panel-nav .nav-tabs > li.active > a,
 .panel-nav .nav-tabs > li.active > a:hover,
 .panel-nav .nav-tabs > li.active > a:focus {
-  border-color: #f1f4f6;
+  border-color: #fcfcfc;
   border-bottom-color: transparent;
 }
 /*顶栏addtabs*/
@@ -301,7 +301,7 @@ form.form-horizontal .control-label {
   border-radius: 0;
   border: none;
   border-right: 1px solid rgba(0, 0, 0, 0.05);
-  background: #f1f4f6;
+  background: #fcfcfc;
   color: #2c3e50;
   overflow: hidden;
 }
@@ -309,7 +309,7 @@ form.form-horizontal .control-label {
 .nav-addtabs > li.active > a:focus {
   border: none;
   color: #2c3e50;
-  background: #f1f4f6;
+  background: #fcfcfc;
   border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 .nav-addtabs > li .close-tab {

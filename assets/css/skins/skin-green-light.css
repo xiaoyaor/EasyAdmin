@@ -59,11 +59,11 @@
 .skin-green-light .wrapper,
 .skin-green-light .main-sidebar,
 .skin-green-light .left-side {
-  background-color: #f9fafc;
+  background-color: #fcfcfc;
 }
 .skin-green-light .content-wrapper,
 .skin-green-light .main-footer {
-  border-left: 1px solid #d2d6de;
+  border-left: 1px solid #e8e8e8;
 }
 .skin-green-light .user-panel > .info,
 .skin-green-light .user-panel > .info > a {
@@ -76,7 +76,7 @@
 }
 .skin-green-light .sidebar-menu > li.header {
   color: #848484;
-  background: #f9fafc;
+  background: #fcfcfc;
 }
 .skin-green-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
@@ -116,7 +116,7 @@
 }
 .skin-green-light .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #d2d6de;
+  border: 1px solid #e8e8e8;
   margin: 10px 10px;
 }
 .skin-green-light .sidebar-form input[type="text"],
@@ -150,7 +150,7 @@
 }
 @media (min-width: 768px) {
   .skin-green-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
-    border-left: 1px solid #d2d6de;
+    border-left: 1px solid #e8e8e8;
   }
 }
 .layui-layer-fast .layui-layer-title {

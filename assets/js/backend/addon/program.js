@@ -4,7 +4,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: Config.easyadmin.api_url + '/addon/index',
+                    index_url: Config.easyadmin.api_url + '/addon.program/index',
                     add_url: '',
                     edit_url: '',
                     del_url: '',
@@ -533,7 +533,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: Config.easyadmin.api_url + '/addon/index',
+                    index_url: Config.easyadmin.api_url + '/addon.program/index',
                     add_url: '',
                     edit_url: '',
                     del_url: '',
