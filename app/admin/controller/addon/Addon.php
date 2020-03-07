@@ -53,7 +53,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', $ids ? 'id' : 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         if (!is_dir(ADDON_PATH . $name)) {
@@ -111,7 +111,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', $ids ? 'id' : 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         if (!is_dir(ADDON_PATH . $name)) {
@@ -170,7 +170,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         try {
@@ -206,7 +206,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         try {
@@ -230,7 +230,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         try {
@@ -278,7 +278,7 @@ class Addon extends Backend
                 if (!$name) {
                     throw new Exception(__('Addon info file data incorrect'));
                 }
-                if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+                if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
                     throw new Exception(__('Addon name incorrect'));
                 }
 
@@ -335,7 +335,7 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', 'name'));
         }
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+        if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
         if (!is_dir($addonTmpDir)) {
@@ -457,7 +457,7 @@ class Addon extends Backend
                 if (!$name) {
                     throw new Exception(__('Addon info file data incorrect'));
                 }
-                if (!preg_match("/^[a-zA-Z0-9]+$/", $name)) {
+                if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
                     throw new Exception(__('Addon name incorrect'));
                 }
 
