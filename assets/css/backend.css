@@ -16,7 +16,8 @@ body {
   height: 100%;
 }
 body {
-  background: #fcfcfc;
+  /*background: #fcfcfc;*/
+  background: #fbfbfb;
   font-size: 13px;
 }
 body.is-dialog {

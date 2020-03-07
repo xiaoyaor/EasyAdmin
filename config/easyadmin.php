@@ -35,7 +35,7 @@ return [
     //插件市场
     'addons_url'          => 'https://addons.easyadmin.vip',
     //API接口地址
-    'api_url'            => 'http://api.easyadmin.vip',
+    'api_url'            => 'https://api.easyadmin.vip',
     //QQ交流群
     'QQqun'              => 'https://shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129',
 ];
