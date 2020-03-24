@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\common\controller\Backend;
 use think\facade\Config;
 use think\facade\Request;
+use think\facade\Session;
 use xiaoyaor\think\Jump;
 use think\facade\View;
 
@@ -45,11 +46,16 @@ class Index extends Backend
                 $this->success('', null, ['menulist' => $menulist, 'navlist' => $navlist]);
             }
         }
+        $app_list=get_app_list(true);
+        View::assign('app_list',$app_list);
+        View::assign('app_list_count', count($app_list));
         View::assign('menulist', $menulist);
         View::assign('navlist', $navlist);
         View::assign('fixedmenu', $fixedmenu);
         View::assign('referermenu', $referermenu);
         View::assign('title', __('Home'));
+        //应用
+        View::assign('app',Session::get('app') );
         return View::fetch();
     }
 

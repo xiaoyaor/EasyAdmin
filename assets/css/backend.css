@@ -23,6 +23,10 @@ body {
 body.is-dialog {
   background: #fff;
 }
+.form-control,
+.btn{
+  border-radius: 1px;
+}
 .selection {
   position: absolute;
   border: 1px solid #8B9;

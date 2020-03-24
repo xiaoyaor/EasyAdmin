@@ -14,8 +14,9 @@ class Menu
      * 创建菜单
      * @param array $menu
      * @param mixed $parent 父类的name或pid
+     * @param boolean $type 是否为安装应用
      */
-    public static function create($menu, $parent = 0)
+    public static function create($menu, $parent = 0 , $type = false)
     {
         if (!is_numeric($parent)) {
             $parentRule = AuthRule::getByName($parent);
@@ -29,7 +30,7 @@ class Menu
 
             $data = array_intersect_key($v, $allow);
 
-            $data['ismenu'] = isset($data['ismenu']) ? $data['ismenu'] : ($hasChild ? 1 : 0);
+            $data['ismenu'] = isset($data['ismenu']) ? $data['ismenu'] : ($hasChild ? $type? 2 : 1 : 0);
             $data['icon'] = isset($data['icon']) ? $data['icon'] : ($hasChild ? 'fa fa-list' : 'fa fa-circle-o');
             $data['pid'] = $pid;
             $data['status'] = 'normal';
@@ -117,11 +118,31 @@ class Menu
     }
 
     /**
-     * 根据名称获取规则IDS
+     * 导出指定名称的菜单规则2
      * @param string $name
+     * @param boolean $withself 是否包含自身
      * @return array
      */
-    public static function getAuthRuleIdsByName($name)
+    public static function export2($name,$withself=true)
+    {
+        $ids = self::getAuthRuleIdsByName($name,$withself);
+        if (!$ids) {
+            return [];
+        }
+        $menu = AuthRule::getByName($name);
+        if ($menu) {
+            $ruleList = collection(AuthRule::where('id', 'in', $ids)->where('status', 'normal')->where('ismenu', 2)->select())->toArray();
+        }
+        return $ruleList;
+    }
+
+    /**
+     * 根据名称获取规则IDS
+     * @param string $name
+     * @param boolean $withself 是否包含自身
+     * @return array
+     */
+    public static function getAuthRuleIdsByName($name,$withself=true)
     {
         $ids = [];
         $menu = AuthRule::getByName($name);
@@ -129,7 +150,25 @@ class Menu
             // 必须将结果集转换为数组
             $ruleList = collection(AuthRule::order('weigh', 'desc')->field('id,pid,name')->select())->toArray();
             // 构造菜单数据
-            $ids = Tree::instance()->init($ruleList)->getChildrenIds($menu['id'], true);
+            $ids = Tree::instance()->init($ruleList)->getChildrenIds($menu['id'], $withself);
+        }
+        return $ids;
+    }
+
+    /**
+     * 根据名称获取规则IDS
+     * @param string $name
+     * @return array
+     */
+    public static function getAuthRuleByName($name)
+    {
+        $ids = [];
+        $menu = AuthRule::getByName($name);
+        if ($menu) {
+            // 必须将结果集转换为数组
+            $ruleList = collection(AuthRule::order('weigh', 'desc')->field('id,pid,name')->select())->toArray();
+            // 构造菜单数据
+            $ids = Tree::instance()->init($ruleList)->getChild($menu['id']);
         }
         return $ids;
     }

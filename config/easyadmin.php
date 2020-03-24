@@ -20,6 +20,10 @@ return [
     'checkupdate'         => false,
     // 是否开启多语言
     'lang_switch_on'      => true,
+    // 插件网址前缀
+    'addons_url_prefix'   => 'addon',
+    // 插件网址前缀
+    'app_url_prefix'      => 'web',
     //版本号
     'version'             => '1.0.0.20200210_dev',
     //框架名称

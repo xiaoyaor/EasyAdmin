@@ -40,6 +40,7 @@ class Addon extends Backend
         $this->assignconfig('addons',$addons);
         $address=Config::get('easyadmin.api_url');
         View::assign(['api_url' => $address]);
+        View::engine()->layout(true);
         return View::fetch();
     }
 
@@ -268,7 +269,7 @@ class Addon extends Backend
                 Service::unzip($tmpName);
                 unset($info);
                 @unlink($tmpFile);
-                $infoFile = $tmpAddonDir . 'info.ini';
+                $infoFile = $tmpAddonDir . 'addon.ini';
                 if (!is_file($infoFile)) {
                     throw new Exception(__('Addon info file was not found'));
                 }

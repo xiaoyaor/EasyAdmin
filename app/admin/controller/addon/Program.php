@@ -40,6 +40,7 @@ class Program extends Backend
         $this->assignconfig('addons',$addons);
         $address=Config::get('easyadmin.api_url');
         View::assign(['api_url' => $address]);
+        View::engine()->layout(true);
         return View::fetch();
     }
 
@@ -268,7 +269,7 @@ class Program extends Backend
                 Service::unzip($tmpName);
                 unset($info);
                 @unlink($tmpFile);
-                $infoFile = $tmpAddonDir . 'info.ini';
+                $infoFile = $tmpAddonDir . 'app.ini';
                 if (!is_file($infoFile)) {
                     throw new Exception(__('Addon info file was not found'));
                 }
@@ -387,7 +388,7 @@ class Program extends Backend
             Cache::set("onlineaddons", $onlineaddons, 600);
         }
         $filter = (array)json_decode($filter, true);
-        $addons = get_addon_list();
+        $addons = get_app_list();
         $list = [];
         foreach ($addons as $k => $v) {
             if ($search && stripos($v['name'], $search) === false && stripos($v['intro'], $search) === false) {

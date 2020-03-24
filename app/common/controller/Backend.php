@@ -117,6 +117,7 @@ class Backend extends BaseController
         parent::__construct(app());
         // 控制器初始化
         $this->_initialize();
+        View::engine()->layout(true);
     }
 
     public function _initialize()

@@ -3,7 +3,7 @@
     <!-- 迷你模式下Logo的大小为50X50 -->
     <span class="logo-mini">{$site.name|mb_substr=0,4,'utf-8'|mb_strtoupper='utf-8'}</span>
     <!-- 普通模式下Logo -->
-    <span class="logo-lg"><b>{$site.name}</b></span>
+    <span class="logo-lg"><b>{if $app}{$app.title}{else}{$site.name}{/if}</b></span>
 </a>
 
 <!-- 顶部通栏样式 -->
@@ -126,16 +126,16 @@
                 <li class="dropdown  messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="{:__('Console')}">
                         <img src="/favicon.ico" class="user-image" style="height: 18px;">
-                        <span class="label label-warning">10</span>
-                        {:__('Console')}<span class="caret"></span>
+                        <span class="label label-warning">{$app_list_count}</span>
+                        {if $app}{$app.title}{else}{$site.name}{/if}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">{:__('You have application', '10')}</li>
+                        <li class="header">{:__('You have application', $app_list_count)}</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li><!-- start message -->
-                                    <a href="#">
+                                    <a href="/{$modulename}/app.html?app=easyadmin">
                                         <div class="pull-left">
                                             <img src="/favicon.ico" class="img-circle favicon-style" alt="User Image">
                                         </div>
@@ -143,58 +143,25 @@
                                             系统控制台
                                             <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                         </h4>
-                                        <p>系统控制台 <img src="/favicon.ico" class="img-circle" alt="User Image" style="height: 10px;"><img src="/favicon.ico" class="img-circle" alt="User Image" style="height: 10px;"><img src="/favicon.ico" class="img-circle" alt="User Image" style="height: 10px;"><img src="/favicon.ico" class="img-circle" alt="User Image" style="height: 10px;"></p>
+                                        <p>{$site.name}</p>
                                     </a>
                                 </li>
                                 <!-- end message -->
-                                <li>
-                                    <a href="#">
+                                {foreach app_list as $item}
+                                <li><!-- start message -->
+                                    <a href="/{$modulename}/app.html?app={$item.name}">
                                         <div class="pull-left">
                                             <img src="/favicon.ico" class="img-circle favicon-style" alt="User Image">
                                         </div>
                                         <h4>
-                                            AdminLTE Design Team
-                                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                            {$item.title}
+                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                         </h4>
-                                        <p>Why not buy a new awesome theme?</p>
+                                        <p>{$item.name}</p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="/favicon.ico" class="img-circle favicon-style" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Developers
-                                            <small><i class="fa fa-clock-o"></i> Today</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="/favicon.ico" class="img-circle favicon-style" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Sales Department
-                                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="/favicon.ico" class="img-circle favicon-style" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Reviewers
-                                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
+                                <!-- end message -->
+                                {/foreach}
                             </ul>
                         </li>
                         <li class="footer"><a href="#">{:__('View all')}</a></li>

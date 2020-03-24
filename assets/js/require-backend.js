@@ -11,6 +11,7 @@ require.config({
     paths: {
         'lang': "empty:",
         'form': 'require-form',
+        'fast': 'easy',
         'table': 'require-table',
         'upload': 'require-upload',
         'validator': 'require-validator',
