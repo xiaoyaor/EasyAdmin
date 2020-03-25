@@ -155,22 +155,4 @@ class Menu
         return $ids;
     }
 
-    /**
-     * 根据名称获取规则IDS
-     * @param string $name
-     * @return array
-     */
-    public static function getAuthRuleByName($name)
-    {
-        $ids = [];
-        $menu = AuthRule::getByName($name);
-        if ($menu) {
-            // 必须将结果集转换为数组
-            $ruleList = collection(AuthRule::order('weigh', 'desc')->field('id,pid,name')->select())->toArray();
-            // 构造菜单数据
-            $ids = Tree::instance()->init($ruleList)->getChild($menu['id']);
-        }
-        return $ids;
-    }
-
 }
