@@ -2,7 +2,7 @@
 
 namespace app\common\library;
 
-use app\admin\model\AuthRule;
+use addons\auth\app\admin\model\AuthRule;
 use easy\Tree;
 use think\Exception;
 use think\exception\PDOException;

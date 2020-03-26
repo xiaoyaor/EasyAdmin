@@ -14,6 +14,7 @@ use app\common\model\Category;
 use easy\Form;
 use easy\Tree;
 use think\facade\Db;
+use addons\auth\app\admin\library\Auth;
 
 if (!function_exists('build_select')) {
 
@@ -112,7 +113,7 @@ if (!function_exists('build_toolbar')) {
     {
         //授权验证hook
         if (Event::trigger('Auth')){
-            $auth = \app\admin\library\Auth::instance();
+            $auth = Auth::instance();
         }
         $controller = str_replace('.', '/', strtolower(Request::instance()->controller()));
         $btns = $btns ? $btns : ['refresh', 'add', 'edit', 'del', 'import'];
@@ -297,25 +298,10 @@ if (!function_exists('getSidebar')) {
                 $ruleList[] = $v;
             }
         }
-        // 必须将结果集转换为数组
-        //$ruleList = Collection(\app\admin\model\AuthRule::where('status', 'normal')->where('ismenu', 1)->order('weigh', 'desc')->cache("__menu__")->select())->toArray();
-//        $indexRuleList = \app\admin\model\AuthRule::where('status', 'normal')
-//            ->where('ismenu', 0)
-//            ->where('name', 'like', '%/index')
-//            ->column('name,pid');
         $pidArr = array_filter(array_unique(array_map(function ($item) {
             return $item['pid'];
         }, $ruleList)));
         foreach ($ruleList as $k => &$v) {
-//            if (!in_array($v['name'], $userRule)) {
-//                unset($ruleList[$k]);
-//                continue;
-//            }
-//            $indexRuleName = $v['name'] . '/index';
-//            if (isset($indexRuleList[$indexRuleName]) && !in_array($indexRuleName, $userRule)) {
-//                unset($ruleList[$k]);
-//                continue;
-//            }
             $v['icon'] = $v['icon'] . ' fa-fw';
             $v['url'] = '/' . $modulename . '/' . $v['name'];
             $v['badge'] = isset($badgeList[$v['name']]) ? $badgeList[$v['name']] : '';

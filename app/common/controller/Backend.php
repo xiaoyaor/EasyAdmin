@@ -12,7 +12,7 @@ use think\facade\Validate;
 use think\facade\View;
 use think\facade\Event;
 use xiaoyaor\think\Jump;
-use app\admin\library\Auth;
+use addons\auth\app\admin\library\Auth;
 
 /**
  * 后台控制器基类
