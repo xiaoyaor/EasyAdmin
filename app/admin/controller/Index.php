@@ -91,7 +91,7 @@ class Index extends Backend
             $app=get_addon_info($app);
             $app=array_intersect_key($app, array_flip(['name', 'title', 'intro', 'author', 'website', 'version', 'website', 'first_menu']));
             Session::set('app',$app);
-            $this->redirect($app['first_menu'].'.html?ref=addtabs',  302);
+            $this->redirect(DIRECTORY_SEPARATOR.get_modulename(Config::get('app.app_map')).DIRECTORY_SEPARATOR.$app['first_menu'].'.html?ref=addtabs',  302);
         }
     }
 
