@@ -11,8 +11,8 @@ use think\facade\Session;
 use think\File;
 use think\Model;
 use app\common\model\Category;
-use easy\Form;
-use easy\Tree;
+use easyadmin\Form;
+use easyadmin\Tree;
 use think\facade\Db;
 use addons\auth\app\admin\library\Auth;
 

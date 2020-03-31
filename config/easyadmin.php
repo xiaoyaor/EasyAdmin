@@ -24,6 +24,8 @@ return [
     'addons_url_prefix'   => 'addon',
     // 插件网址前缀
     'app_url_prefix'      => 'web',
+    // 权限系统路径
+    'auth_path'           => '\addons\auth\app\admin\library\Auth',
     //版本号
     'version'             => '1.0.0.20200210_dev',
     //框架名称

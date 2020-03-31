@@ -31,7 +31,13 @@
         "ext-json": "*",
         "ext-zip": "*",
         "ext-gd": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "casbin/think-authz": "^1.0",
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "wenhainan/thinkphp6-auth": "^1.0",
+        "xiaoyaor/think-auth": "^1.0",
+        "xiaoyaor/easyadmin-tools": "^1.0",
+        "thans/tp-jwt-auth": "^1.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

@@ -12,6 +12,14 @@
 return [
     'autoload' => true,
     'hooks' => [],
-    'route' => [],
+    'route' => [
+        [
+            'domain'=>'www.0001d.com',
+            'rule' => [
+                '/'=>'app_demo/index/index',
+                'post/:id'=>'app_demo/index/index/post',
+            ]
+        ]
+    ],
     'service' => [],
 ];

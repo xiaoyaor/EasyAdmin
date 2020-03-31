@@ -76,7 +76,7 @@ if (!function_exists('human_date')) {
      */
     function human_date($time, $local = null)
     {
-        return \easy\Date::human($time, $local);
+        return \easyadmin\Date::human($time, $local);
     }
 
 }
