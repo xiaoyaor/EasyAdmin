@@ -14,7 +14,7 @@ use app\common\model\Category;
 use easyadmin\Form;
 use easyadmin\Tree;
 use think\facade\Db;
-use addons\auth\app\admin\library\Auth;
+use app\admin\library\Auth;
 
 if (!function_exists('build_select')) {
 

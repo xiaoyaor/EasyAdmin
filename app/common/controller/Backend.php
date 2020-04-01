@@ -2,6 +2,7 @@
 
 namespace app\common\controller;
 
+use app\admin\library\Auth;
 use app\BaseController;
 use think\App;
 use think\facade\Config;
@@ -12,7 +13,6 @@ use think\facade\Validate;
 use think\facade\View;
 use think\facade\Event;
 use xiaoyaor\think\Jump;
-use addons\auth\app\admin\library\Auth;
 
 /**
  * 后台控制器基类
@@ -190,7 +190,6 @@ class Backend extends BaseController
         // 设置面包屑导航数据
         if ($this->auth){
             $breadcrumb = $this->auth->getBreadCrumb($path);
-            View::assign('breadcrumb' , $breadcrumb);
         }else{
             $breadcrumb = getBreadCrumb($path);
         }
