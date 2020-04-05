@@ -37,7 +37,7 @@ return array (
   'mail_smtp_pass' => 'password',
   'mail_verify_type' => '2',
   'mail_from' => '10000@qq.com',
-  'skin' => 'skin-blue-light',
+  'skin' => 'skin-black',
   'multiplenav' => false,
   'head_switch' => '1',
   'head_links' => '0',

@@ -140,8 +140,8 @@ class Backend extends BaseController
         !defined('IS_AJAX') && define('IS_AJAX', request()->isAjax());
 
         //授权验证hook
-        if (Event::trigger('Auth')){
-        $this->auth = Auth::instance();
+        if (open_auth()){
+            $this->auth = Auth::instance();
         }
 
         if ($this->auth){

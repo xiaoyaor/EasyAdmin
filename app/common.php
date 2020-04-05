@@ -431,3 +431,17 @@ if (!function_exists('event_trigger')) {
         return $result;
     }
 }
+
+if (!function_exists('open_auth')) {
+    /**
+     * 是否开启了授权系统
+     * @return boolean
+     */
+    function open_auth()
+    {
+        if (Event::trigger('Login')&&Event::trigger('Auth')){
+            return true;
+        }
+        return false;
+    }
+}

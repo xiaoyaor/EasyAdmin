@@ -3,6 +3,7 @@
 namespace app\admin\library;
 
 use addons\auth\app\admin\model\Admin;
+use addons\auth\app\admin\model\AuthGroup;
 use easyadmin\Random;
 use easyadmin\Tree;
 use Overtrue\Pinyin\Pinyin;
@@ -289,7 +290,7 @@ class Auth extends ThinkAuth
             }
         }
         // 取出所有分组
-        $groupList = \app\admin\model\AuthGroup::where(['status' => 'normal'])->select();
+        $groupList = AuthGroup::where(['status' => 'normal'])->select();
         $objList = [];
         foreach ($groups as $k => $v) {
             if ($v['rules'] === '*') {

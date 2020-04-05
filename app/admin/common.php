@@ -112,7 +112,7 @@ if (!function_exists('build_toolbar')) {
     function build_toolbar($btns = NULL, $attr = [])
     {
         //授权验证hook
-        if (Event::trigger('Auth')){
+        if (open_auth()){
             $auth = Auth::instance();
         }
         $controller = str_replace('.', '/', strtolower(Request::instance()->controller()));
