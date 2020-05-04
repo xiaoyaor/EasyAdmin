@@ -263,7 +263,7 @@ if (!function_exists('getSidebar')) {
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];
-        $modulename = get_modulename(Config::get('app.app_map'));
+        $modulename = request()->prefix;
         // 生成菜单的badge
         foreach ($params as $k => $v) {
             $url = $k;
@@ -303,7 +303,7 @@ if (!function_exists('getSidebar')) {
         }, $ruleList)));
         foreach ($ruleList as $k => &$v) {
             $v['icon'] = $v['icon'] . ' fa-fw';
-            $v['url'] = '/' . $modulename . '/' . $v['name'];
+            $v['url'] = $modulename . '/' . $v['name'];
             $v['badge'] = isset($badgeList[$v['name']]) ? $badgeList[$v['name']] : '';
             $v['py'] = $pinyin->abbr($v['title'], '');
             $v['pinyin'] = $pinyin->permalink($v['title'], '');

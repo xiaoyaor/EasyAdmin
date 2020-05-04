@@ -425,7 +425,7 @@ class Auth extends ThinkAuth
                 continue;
             }
             $v['icon'] = $v['icon'] . ' fa-fw';
-            $v['url'] = '/' . $modulename . '/' . $v['name'];
+            $v['url'] =  request()->prefix. '/' . $v['name'];
             $v['badge'] = isset($badgeList[$v['name']]) ? $badgeList[$v['name']] : '';
             $v['py'] = $pinyin->abbr($v['title'], '');
             $v['pinyin'] = $pinyin->permalink($v['title'], '');

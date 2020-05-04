@@ -123,7 +123,8 @@ class Backend extends BaseController
     public function _initialize()
     {
         $this->app     = app();
-        $modulename = get_modulename(Config::get('app.app_map'));
+        //$modulename = get_modulename(Config::get('app.app_map'));
+        $modulename=request()->prefix;
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
@@ -154,12 +155,12 @@ class Backend extends BaseController
                     event_trigger('adminNologin', $this);
                     $url = Session::get('referer');
                     $url = $url ? $url : request()->url();
-                    $url2='/'.$modulename.'/';
+                    $url2=$modulename.'/';
                     if ($url == $url2) {
-                        $this->redirect('login/index', 302, ['referer' => $url]);
+                        $this->redirect($modulename.'/login/index', 302, ['referer' => $url]);
                         exit;
                     }
-                    $this->error(__('Please login first'), url('login/index', ['url' => $url]));
+                    $this->error(__('Please login first'), url($modulename.'/login/index', ['url' => $url]));
                 }
                 // 判断是否需要验证权限
                 if (!$this->auth->match($this->noNeedRight)) {
@@ -183,7 +184,7 @@ class Backend extends BaseController
 //                }
 //                $url = url($url, [], false);
 //            }
-            $this->redirect('/'.$modulename.'/index/index',  302, ['referer' => $url]);
+            $this->redirect($modulename.'/index/index',  302, ['referer' => $url]);
             exit;
         }
 
@@ -225,7 +226,8 @@ class Backend extends BaseController
             'controllername' => $controllername,
             'actionname'     => $actionname,
             'jsname'         => 'backend/' . str_replace('.', '/', $controllername),
-            'moduleurl'      => rtrim(url("/{$modulename}", [], false), '/'),
+            'moduleurl'      => rtrim(url("$modulename", [], false), '/'),
+            //'moduleurl'     => '',
             'language'       => $lang,
             'easyadmin'      => Config::get('easyadmin'),
             'api_url'      => Config::get('easyadmin.api_url'),
