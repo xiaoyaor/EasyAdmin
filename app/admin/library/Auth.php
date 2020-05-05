@@ -106,8 +106,7 @@ class Auth extends ThinkAuth
             return false;
         }
         list($id, $keeptime, $expiretime, $key) = explode('|', $keeplogin);
-        $t=time();
-        if ($id && $keeptime && $expiretime && $key && $expiretime >$t ) {
+        if ($id && $keeptime && $expiretime && $key && $expiretime >time() ) {
             $admin = Admin::find($id);
             if (!$admin || !$admin->token) {
                 return false;
@@ -134,7 +133,7 @@ class Auth extends ThinkAuth
     /**
      * 刷新保持登录的Cookie
      *
-     * @param int $keeptime
+     * @param int $keeptime 86400
      * @return  boolean
      */
     protected function keeplogin($keeptime = 0)

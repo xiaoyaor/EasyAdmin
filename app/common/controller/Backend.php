@@ -226,7 +226,7 @@ class Backend extends BaseController
             'controllername' => $controllername,
             'actionname'     => $actionname,
             'jsname'         => 'backend/' . str_replace('.', '/', $controllername),
-            'moduleurl'      => rtrim(url("$modulename", [], false), '/'),
+            'moduleurl'      => $modulename,
             //'moduleurl'     => '',
             'language'       => $lang,
             'easyadmin'      => Config::get('easyadmin'),
