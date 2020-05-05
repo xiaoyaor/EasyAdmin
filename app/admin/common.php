@@ -263,7 +263,7 @@ if (!function_exists('getSidebar')) {
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];
-        $modulename = request()->prefix;
+        $modulename = request()->root();
         // 生成菜单的badge
         foreach ($params as $k => $v) {
             $url = $k;

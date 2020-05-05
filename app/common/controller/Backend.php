@@ -124,7 +124,7 @@ class Backend extends BaseController
     {
         $this->app     = app();
         //$modulename = get_modulename(Config::get('app.app_map'));
-        $modulename=request()->prefix;
+        $modulename=request()->root();
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
