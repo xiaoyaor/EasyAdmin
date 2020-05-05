@@ -157,8 +157,12 @@ if (!function_exists('build_heading')) {
         $title = $content = '';
         if (is_null($path)) {
             $action = request()->action();
-            $controller = str_replace('.', '/', request()->controller());
-            $path = strtolower($controller . ($action && $action != 'index' ? '/' . $action : ''));
+            //$controller = str_replace('.', '/', request()->controller());
+            //$addonsName = str_replace('.', '/', request()->addonsName);
+            $controller = request()->controller();
+            $addonsName = request()->addonsName;
+            $addonsName?$addonsName.='/':null;
+            $path = strtolower($addonsName.$controller . ($action && $action != 'index' ? '/' . $action : ''));
         }
         // 根据当前的URI自动匹配父节点的标题和备注
         // 验证表是否存在

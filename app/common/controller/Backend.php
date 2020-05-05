@@ -271,7 +271,15 @@ class Backend extends BaseController
      */
     protected function loadlang($name)
     {
-        Lang::load(app_path() .  '/lang/' . Config::get('lang.default_lang') . '/' . str_replace('.', '/', $name) . '.php');
+        $list=explode('!', $name);
+        $addonsName = key_exists(0,$list)?$list[0]:'';
+        $modulesName = key_exists(1,$list)?$list[1]:'';
+        if ($modulesName){
+            $path=ADDON_PATH.$addonsName.'\\app\\admin\\lang\\' . Config::get('lang.default_lang') . '\\' . str_replace('.', '\\', $modulesName) . '.php';
+        }else{
+            $path=app_path() .  '\\lang\\' . Config::get('lang.default_lang') . '\\' . str_replace('.', '\\', $addonsName) . '.php';
+        }
+        Lang::load($path);
     }
 
     /**
