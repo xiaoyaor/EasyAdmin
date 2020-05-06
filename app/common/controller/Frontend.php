@@ -96,7 +96,7 @@ class Frontend extends BaseController
         $upload = Config::get('upload');
 
         // 上传信息配置后
-        event_listen("uploadConfigInit", $upload);
+        listen("uploadConfigInit", $upload);
 
         // 配置信息
         $config = [
@@ -113,7 +113,7 @@ class Frontend extends BaseController
         Config::set(array_merge(Config::get('upload'), $upload), 'upload');
 
         // 配置信息后
-        event_trigger("configInit", $config);
+        trigger("configInit", $config);
         // 加载当前控制器语言包
         $this->loadlang($controllername);
         //渲染站点配置

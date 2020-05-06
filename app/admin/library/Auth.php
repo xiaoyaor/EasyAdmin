@@ -376,7 +376,7 @@ class Auth extends ThinkAuth
     public function getSidebar($params = [], $fixedPage = 'dashboard')
     {
         // 边栏开始
-        event_trigger("adminSidebarBegin", $params);
+        trigger("adminSidebarBegin", $params);
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];

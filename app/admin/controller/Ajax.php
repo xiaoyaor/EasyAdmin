@@ -64,7 +64,7 @@ class Ajax extends Backend
                     break;
         }
 
-        event_trigger("wipecacheAfter");
+        trigger("wipecacheAfter");
         $this->success();
     }
 

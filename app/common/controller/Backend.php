@@ -152,7 +152,7 @@ class Backend extends BaseController
             if (!$this->auth->match($this->noNeedLogin)) {
                 //检测是否登录
                 if (!$this->auth->isLogin()) {
-                    event_trigger('adminNologin', $this);
+                    trigger('adminNologin', $this);
                     $url = Session::get('referer');
                     $url = $url ? $url : request()->url();
                     $url2=$modulename.'/';
@@ -166,7 +166,7 @@ class Backend extends BaseController
                 if (!$this->auth->match($this->noNeedRight)) {
                     // 判断控制器和方法判断是否有对应权限
                     if (!$this->auth->check($path)) {
-                        event_trigger('adminNopermission', $this);
+                        trigger('adminNopermission', $this);
                         $this->error(__('You have no permission'), '');
                     }
                 }
@@ -239,9 +239,9 @@ class Backend extends BaseController
 
         //Config::set(array_merge(Config::get('upload'), $upload),'upload');
         //初始化更改日志级别配置项
-        event_trigger("AddonsInit", $config);
+        trigger("AddonsInit", $config);
         // 配置信息后
-        event_trigger("configInit", $config);
+        trigger("configInit", $config);
         //加载当前控制器语言包
         $this->loadlang($controllername);
         //后台映射模块地址名称

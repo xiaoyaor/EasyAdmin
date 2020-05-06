@@ -1,6 +1,7 @@
 <?php
 // 这是系统自动生成的公共文件
-use app\common\model\Config as ConfigModel;
+use addons\category\app\common\model\Category;
+use addons\conf\app\common\model\Config as ConfigModel;
 use Overtrue\Pinyin\Pinyin;
 use think\exception\FileException;
 use think\facade\Config;
@@ -10,7 +11,6 @@ use think\facade\Request;
 use think\facade\Session;
 use think\File;
 use think\Model;
-use app\common\model\Category;
 use easyadmin\Form;
 use easyadmin\Tree;
 use think\facade\Db;
@@ -206,7 +206,7 @@ if (!function_exists('change_site')) {
     function change_site($key='',$val='')
     {
         $config = [];
-        $config_exist=event_trigger('Config');//Config插件函数钩子，使用此函数判断是否将信息写入数据表
+        $config_exist=trigger('Config');//Config插件函数钩子，使用此函数判断是否将信息写入数据表
         if($config_exist){
             $model = new ConfigModel();
             foreach ($model->select() as $k => $v) {
@@ -263,7 +263,7 @@ if (!function_exists('getSidebar')) {
     function getSidebar($params = [], $fixedPage = 'dashboard')
     {
         // 边栏开始
-        event_trigger("adminSidebarBegin", $params);
+        trigger("adminSidebarBegin", $params);
         $colorArr = ['red', 'green', 'yellow', 'blue', 'teal', 'orange', 'purple'];
         $colorNums = count($colorArr);
         $badgeList = [];
