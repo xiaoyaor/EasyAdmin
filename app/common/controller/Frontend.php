@@ -2,8 +2,8 @@
 
 namespace app\common\controller;
 
+use addons\user\app\common\library\Auth;
 use app\BaseController;
-use app\common\library\Auth;
 use think\facade\Config;
 use think\facade\Event;
 use think\facade\Cookie;
@@ -56,7 +56,7 @@ class Frontend extends BaseController
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
-        if (hook('User')){
+        if (hook('open_user')){
             $this->auth = Auth::instance();
             $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
 
