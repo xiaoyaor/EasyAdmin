@@ -23,9 +23,11 @@
                                     <li><a href="{:url($modulename.'/dashboard')}" class="addtabsit"><i class="fa fa-dashboard"></i> {:__('Dashboard')}</a></li>
                                 </ol>
                                 <ol class="breadcrumb pull-right">
+                                    {if $breadcrumb}
                                     {foreach $breadcrumb as $vo}
                                     <li><a href="javascript:;" data-url="{$vo.url}">{$vo.title}</a></li>
                                     {/foreach}
+                                    {/if}
                                 </ol>
                             </div>
                             <!-- END RIBBON -->

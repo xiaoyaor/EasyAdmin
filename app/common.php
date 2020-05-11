@@ -401,11 +401,12 @@ if (!function_exists('collection')) {
 if (!function_exists('open_auth')) {
     /**
      * 是否开启了授权系统
+     * 必须安装Base、Login、Auth插件
      * @return boolean
      */
     function open_auth()
     {
-        if (Event::trigger('Login')&&Event::trigger('Auth')){
+        if (Event::trigger('Base')&&Event::trigger('Login')&&Event::trigger('Auth')){
             return true;
         }
         return false;

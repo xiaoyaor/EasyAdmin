@@ -275,9 +275,9 @@ class Backend extends BaseController
         $addonsName = key_exists(0,$list)?$list[0]:'';
         $modulesName = key_exists(1,$list)?$list[1]:'';
         if ($modulesName){
-            $path=ADDON_PATH.$addonsName.'\\app\\admin\\lang\\' . Config::get('lang.default_lang') . '\\' . str_replace('.', '\\', $modulesName) . '.php';
+            $path=ADDON_PATH.$addonsName. DIRECTORY_SEPARATOR.'app'. DIRECTORY_SEPARATOR.'admin'. DIRECTORY_SEPARATOR.'lang'. DIRECTORY_SEPARATOR . Config::get('lang.default_lang') . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $modulesName) . '.php';
         }else{
-            $path=app_path() .  '\\lang\\' . Config::get('lang.default_lang') . '\\' . str_replace('.', '\\', $addonsName) . '.php';
+            $path=app_path() .  'lang'.DIRECTORY_SEPARATOR . Config::get('lang.default_lang')  .DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $addonsName) . '.php';
         }
         Lang::load($path);
     }
