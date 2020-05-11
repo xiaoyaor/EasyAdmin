@@ -3,14 +3,9 @@
 namespace app\admin\controller;
 
 use app\common\controller\Backend;
-use easyadmin\Random;
 use think\addons\Service;
 use think\facade\Cache;
-use think\facade\Config;
-use think\facade\Db;
 use think\facade\Lang;
-use think\facade\Event;
-use app\common\model\Attachment;
 
 /**
  * Ajax异步请求接口

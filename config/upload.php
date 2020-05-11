@@ -5,7 +5,7 @@ return [
     /**
      * 上传地址,默认是本地上传
      */
-    'uploadurl' => 'ajax/upload',
+    'uploadurl' => 'attachment/ajax/upload',
     /**
      * local地址
      */
