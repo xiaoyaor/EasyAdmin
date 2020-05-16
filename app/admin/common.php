@@ -206,7 +206,7 @@ if (!function_exists('change_site')) {
     function change_site($key='',$val='')
     {
         $config = [];
-        $config_exist=trigger('Config');//Config插件函数钩子，使用此函数判断是否将信息写入数据表
+        $config_exist=trigger('open_config');//Config插件函数钩子，使用此函数判断是否将信息写入数据表
         if($config_exist){
             $model = new ConfigModel();
             foreach ($model->select() as $k => $v) {
