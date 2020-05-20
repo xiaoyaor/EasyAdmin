@@ -130,7 +130,7 @@ class Menu
         }
         $menu = AuthRule::getByName($name);
         if ($menu) {
-            $ruleList = collection(AuthRule::where('id', 'in', $ids)->where('status', 'normal')->where('ismenu', 2)->select())->toArray();
+            $ruleList = collection(AuthRule::whereIn('id', $ids)->where('status', 'normal')->where('ismenu', 2)->select())->toArray();
         }
         return $ruleList;
     }
@@ -152,6 +152,20 @@ class Menu
             $ids = Tree::instance()->init($ruleList)->getChildrenIds($menu['id'], $withself);
         }
         return $ids;
+    }
+
+    /**
+     * 根据名称获取规则ID
+     * @param string $name
+     * @return integer
+     */
+    public static function getAuthRuleIdByName($name)
+    {
+        $item = AuthRule::where(['name'=>$name])->find();
+        if (!$item) {
+            return 0;
+        }
+        return $item['pid'];
     }
 
 }
