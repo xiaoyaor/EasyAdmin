@@ -355,10 +355,8 @@ class Addon extends Backend
             ];
             //调用更新的方法
             Service::upgrade($name, $extend);
-            Cache::rm('__menu__');
+            Cache::delete('__menu__');
             $this->success(__('Operate successful'));
-        } catch (AddonException $e) {
-            $this->result($e->getData(), $e->getCode(), __($e->getMessage()));
         } catch (Exception $e) {
             $this->error(__($e->getMessage()));
         }
