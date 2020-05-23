@@ -2,8 +2,8 @@
 
 namespace app\common\controller;
 
+use app\admin\library\Auth;
 use app\BaseController;
-use app\common\library\Auth;
 use think\facade\Event;
 use think\facade\Config;
 use think\exception\HttpResponseException;
@@ -148,7 +148,8 @@ class Api extends BaseController
             }
         }
 
-        $upload = \app\common\model\Config::upload();
+        //$upload = \app\common\model\Config::upload();
+        $upload = Config::get('upload');
 
         // 上传信息配置后
         trigger("uploadConfigInit", $upload);
