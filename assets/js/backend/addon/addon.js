@@ -480,7 +480,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 依赖插件
             $(document).on("click", ".btn-warning", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon.addon/addons?name=" + name, __('Setting'));
+                //Fast.api.open("addon.addon/addons?name=" + name, __('Setting'));
             });
 
             // 点击启用/禁用

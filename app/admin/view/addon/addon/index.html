@@ -239,6 +239,8 @@
     <% var addon = item.addon; %>
 
     <div class="operate" data-id="<%=item.id%>" data-name="<%=item.name%>">
+
+        <!--安装插件-->
         <% if(!addon){ %>
         <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
         <span class="btn-group">
@@ -262,6 +264,7 @@
            data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
         <% } %>
 
+        <!--升级插件-->
         <% if(item.demourl){ %>
         <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
             <i class="fa fa-flash"></i> {:__('Demo')}
@@ -289,13 +292,35 @@
                 class="fa fa-cloud"></i> {:__('Upgrade')}</a>
         <% }%>
         <% }%>
-<!--        <a href="javascript:;" class="btn btn-xs btn-primary btn-warning" title="依赖"><i class="fa fa-puzzle-piece"></i>依赖</a>-->
+
+
+        <!--依赖插件-->
+        <% if(addon.depend){%>
+        <% if(typeof item.depend !="undefined" && item.depend.length>1){%>
+        <span class="btn-group">
+                                <a href="javascript:;" class="btn btn-xs btn-warning btn-depend"
+                                ><i class="fa fa-puzzle-piece"></i> {:__('依赖')}</a>
+                                <a class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"
+                                   href="javascript:;">
+                                    <span class="fa fa-caret-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <% for(var j=0;j< item.depend.length;j++){ %>
+                                    <li><a href="javascript:;" class="btn-depend"
+                                           data-version="<%=item.depend[j]%>"><%=item.depend[j]%></a></li>
+                                    <% } %>
+                                </ul>
+                            </span>
+        <% }%>
+        <% }%>
+
+        <!--配置插件-->
         <% if(addon.config){ %>
         <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
             {:__('Setting')}</a>
         <% } %>
-<!--        <a href="javascript:;" class="btn btn-xs btn-primary btn-info" title="{:__('Uninstall')}"><i class="fa fa-times"></i>-->
-<!--            文件</a>-->
+
+        <!--卸载插件-->
         <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
             {:__('Uninstall')}</a>
         <% } %>
