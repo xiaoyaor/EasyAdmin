@@ -296,7 +296,7 @@
 
         <!--依赖插件-->
         <% if(addon.depend){%>
-        <% if(typeof item.depend !="undefined" && item.depend.length>1){%>
+        <% if(typeof item.depend !="" && item.depend.length>0){%>
         <span class="btn-group">
                                 <a href="javascript:;" class="btn btn-xs btn-warning btn-depend"
                                 ><i class="fa fa-puzzle-piece"></i> {:__('依赖')}</a>
