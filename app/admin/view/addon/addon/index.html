@@ -82,13 +82,13 @@
                         </button>
                         <div class="btn-group">
                             <a href="#" class="btn btn-info btn-switch active" data-type="all"
-                               data-url="{$api_url}/addon.addon/index"><i class="fa fa-list"></i>
+                               data-url="{$api_url}/addins/addon"><i class="fa fa-list"></i>
                                 {:__('All')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="free"
-                               data-url="{$api_url}/addon.addon/index"><i class="fa fa-gift"></i>
+                               data-url="{$api_url}/addins/addon"><i class="fa fa-gift"></i>
                                 {:__('Free')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="price"
-                               data-url="{$api_url}/addon.addon/index"><i class="fa fa-rmb"></i>
+                               data-url="{$api_url}/addins/addon"><i class="fa fa-rmb"></i>
                                 {:__('Paying')}</a>
                             <a href="#" class="btn btn-info btn-switch" data-type="local" data-url="addon.addon/downloaded"><i
                                     class="fa fa-laptop"></i> {:__('Local addon')}</a>
@@ -240,89 +240,95 @@
 
     <div class="operate" data-id="<%=item.id%>" data-name="<%=item.name%>">
 
-        <!--安装插件-->
-        <% if(!addon){ %>
-        <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
-        <span class="btn-group">
-                <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
-                   data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
-                   data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
-                <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-                    <span class="fa fa-caret-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <% for(var j=0;j< item.releaselist.length;j++){ %>
-                    <li><a href="javascript:;" class="btn-install" data-type="<%=item.price<=0?'free':'price';%>"
-                           data-donateimage="<%=item.donateimage%>"
-                           data-version="<%=item.releaselist[j].version%>"><%=item.releaselist[j].version%></a></li>
-                    <% } %>
-                </ul>
-            </span>
-        <% }else{%>
-        <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
-           data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
-           data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
-        <% } %>
-
-        <!--升级插件-->
-        <% if(item.demourl){ %>
-        <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
-            <i class="fa fa-flash"></i> {:__('Demo')}
-        </a>
-        <% } %>
-        <% } else {%>
-        <% if(addon.version!=item.version){%>
-        <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
-        <span class="btn-group">
-                                <a href="javascript:;" class="btn btn-xs btn-info btn-success btn-upgrade"
-                                   data-version="<%=item.version%>"><i class="fa fa-cloud"></i> {:__('Upgrade')}</a>
-                                <a class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown"
-                                   href="javascript:;">
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <% for(var j=0;j< item.releaselist.length;j++){ %>
-                                    <li><a href="javascript:;" class="btn-upgrade"
-                                           data-version="<%=item.releaselist[j].version%>"><%=item.releaselist[j].version%></a></li>
-                                    <% } %>
-                                </ul>
-                            </span>
-        <% }else{%>
-        <a href="javascript:;" class="btn btn-xs btn-info btn-upgrade" title="{:__('Upgrade')}" data-version="<%=item.version%>"><i
-                class="fa fa-cloud"></i> {:__('Upgrade')}</a>
-        <% }%>
-        <% }%>
-
-
         <!--依赖插件-->
         <% if(item.depend){%>
-        <% if(typeof item.depend !="undefined" && item.depend.length>0){%>
-        <span class="btn-group">
-                                <a href="javascript:;" class="btn btn-xs btn-warning btn-depend"
-                                ><i class="fa fa-puzzle-piece"></i> {:__('依赖')}</a>
-                                <a class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"
-                                   href="javascript:;">
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <% for(var j=0;j< item.depend.length;j++){ %>
-                                    <li><a href="javascript:;" class="btn-depend"
-                                           data-version="<%=item.depend[j]%>"><%=item.depend[j]%></a></li>
-                                    <% } %>
-                                </ul>
-                            </span>
-        <% }%>
+            <% if(typeof item.depend !="undefined" && item.depend.length>0){%>
+                <span class="btn-group">
+                    <a href="javascript:;" class="btn btn-xs btn-warning btn-depend"
+                    ><i class="fa fa-puzzle-piece"></i> {:__('依赖')}</a>
+                    <a class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"
+                       href="javascript:;">
+                        <span class="fa fa-caret-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <% for(var j=0;j< item.depend.length;j++){ %>
+                        <li><a href="javascript:;" class="btn-depend"
+                               data-version="<%=item.depend[j]%>"><%=item.depend[j]%></a></li>
+                        <% } %>
+                    </ul>
+                </span>
+            <% }%>
         <% }%>
 
-        <!--配置插件-->
-        <% if(addon.config){ %>
-        <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
-            {:__('Setting')}</a>
-        <% } %>
+        <!--安装插件-->
+        <% if(!addon){ %>
+            <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
+                <span class="btn-group">
+                    <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
+                       data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
+                       data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
+                    <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                        <span class="fa fa-caret-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <% for(var j=0;j< item.releaselist.length;j++){ %>
+                        <li><a href="javascript:;" class="btn-install" data-type="<%=item.price<=0?'free':'price';%>"
+                               data-donateimage="<%=item.donateimage%>"
+                               data-version="<%=item.releaselist[j].version%>"><%=item.releaselist[j].version%></a></li>
+                        <% } %>
+                    </ul>
+                </span>
+            <% }else{%>
+                <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
+                    data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
+                    data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
+            <% } %>
 
-        <!--卸载插件-->
-        <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
-            {:__('Uninstall')}</a>
+            <!--演示插件-->
+            <% if(item.demourl){ %>
+                <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
+                    <i class="fa fa-flash"></i> {:__('Demo')}
+                </a>
+            <% } %>
+        <% } else {%>
+            <!--升级插件-->
+            <% if(addon.version!=item.version){%>
+                <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
+                    <span class="btn-group">
+                        <a href="javascript:;" class="btn btn-xs btn-info btn-success btn-upgrade"
+                           data-version="<%=item.version%>"><i class="fa fa-cloud"></i> {:__('Upgrade')}</a>
+                        <a class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown"
+                           href="javascript:;">
+                            <span class="fa fa-caret-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <% for(var j=0;j< item.releaselist.length;j++){ %>
+                            <li><a href="javascript:;" class="btn-upgrade"
+                                   data-version="<%=item.releaselist[j].version%>"><%=item.releaselist[j].version%></a></li>
+                            <% } %>
+                        </ul>
+                    </span>
+                <% }else{%>
+                    <a href="javascript:;" class="btn btn-xs btn-info btn-upgrade" title="{:__('Upgrade')}" data-version="<%=item.version%>"><i
+                        class="fa fa-cloud"></i> {:__('Upgrade')}</a>
+                <% }%>
+            <% }%>
+
+            <!--配置插件-->
+            <% if(addon.config){ %>
+            <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
+                {:__('Setting')}</a>
+            <% } %>
+
+            <!--卸载插件-->
+            <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
+                {:__('Uninstall')}</a>
+            <!--演示插件-->
+            <% if(item.demourl){ %>
+                <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
+                    <i class="fa fa-flash"></i> {:__('Demo')}
+                </a>
+            <% } %>
         <% } %>
 
 
