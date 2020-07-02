@@ -8,15 +8,17 @@
 .skin-purple-full .main-header .navbar .nav > li > a {
   color: #fff;
 }
-.skin-purple-full .main-header .navbar .nav > li > a:hover,
 .skin-purple-full .main-header .navbar .nav > li > a:active,
 .skin-purple-full .main-header .navbar .nav > li > a:focus,
 .skin-purple-full .main-header .navbar .nav .open > a,
-.skin-purple-full .main-header .navbar .nav .open > a:hover,
 .skin-purple-full .main-header .navbar .nav .open > a:focus,
 .skin-purple-full .main-header .navbar .nav > .active > a {
-  background: rgba(0, 0, 0, 0.1);
-  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0);
+  color: gold;
+}
+.skin-purple-full .main-header .navbar .nav > li > a:hover,
+.skin-purple-full .main-header .navbar .nav .open > a:hover{
+  background: rgba(0, 0, 0, 0);
 }
 .skin-purple-full .main-header .navbar .sidebar-toggle {
   color: #fff;

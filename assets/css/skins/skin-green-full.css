@@ -8,15 +8,17 @@
 .skin-green-full .main-header .navbar .nav > li > a {
   color: #fff;
 }
-.skin-green-full .main-header .navbar .nav > li > a:hover,
 .skin-green-full .main-header .navbar .nav > li > a:active,
 .skin-green-full .main-header .navbar .nav > li > a:focus,
 .skin-green-full .main-header .navbar .nav .open > a,
-.skin-green-full .main-header .navbar .nav .open > a:hover,
 .skin-green-full .main-header .navbar .nav .open > a:focus,
 .skin-green-full .main-header .navbar .nav > .active > a {
-  background: rgba(0, 0, 0, 0.1);
-  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0);
+  color: gold;
+}
+.skin-green-full .main-header .navbar .nav > li > a:hover,
+.skin-green-full .main-header .navbar .nav .open > a:hover{
+  background: rgba(0, 0, 0, 0);
 }
 .skin-green-full .main-header .navbar .sidebar-toggle {
   color: #fff;

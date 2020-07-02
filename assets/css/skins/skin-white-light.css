@@ -20,15 +20,17 @@
 .skin-white-light .main-header .navbar .nav > li > a {
   color: #333;
 }
-.skin-white-light .main-header .navbar .nav > li > a:hover,
 .skin-white-light .main-header .navbar .nav > li > a:active,
 .skin-white-light .main-header .navbar .nav > li > a:focus,
 .skin-white-light .main-header .navbar .nav .open > a,
-.skin-white-light .main-header .navbar .nav .open > a:hover,
 .skin-white-light .main-header .navbar .nav .open > a:focus,
 .skin-white-light .main-header .navbar .nav > .active > a {
-  background: #fff;
-  color: #999;
+  background: rgba(0, 0, 0, 0);
+  color: gold;
+}
+.skin-white-light .main-header .navbar .nav > li > a:hover,
+.skin-white-light .main-header .navbar .nav .open > a:hover{
+  background: rgba(0, 0, 0, 0);
 }
 .skin-white-light .main-header .navbar .sidebar-toggle {
   color: #333;
