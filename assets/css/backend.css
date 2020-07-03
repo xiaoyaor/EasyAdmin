@@ -377,7 +377,7 @@ form.form-horizontal .control-label {
 }
 #firstnav .nav-addtabs {
   position: absolute;
-  left: 45px;
+  /*left: 45px;*/
   z-index: 98;
 }
 #firstnav .navbar-custom-menu {
