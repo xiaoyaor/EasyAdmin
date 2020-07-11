@@ -6,9 +6,9 @@ use app\common\controller\Backend;
 use think\facade\View;
 
 /**
- *  常规管理
+ *  授权管理
  */
-class General extends Backend
+class License extends Backend
 {
 
     //构造方法

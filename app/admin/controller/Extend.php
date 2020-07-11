@@ -6,9 +6,9 @@ use app\common\controller\Backend;
 use think\facade\View;
 
 /**
- *  常规管理
+ *   扩展管理
  */
-class General extends Backend
+class Extend extends Backend
 {
 
     //构造方法

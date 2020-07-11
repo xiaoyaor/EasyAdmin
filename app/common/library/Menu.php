@@ -20,6 +20,10 @@ class Menu
         if (!is_numeric($parent)) {
             $parentRule = AuthRule::getByName($parent);
             $pid = $parentRule ? $parentRule['id'] : 0;
+            //更新$menu为name的分类状态,首次传入
+            if ($pid) {
+                AuthRule::update(['ismenu'=>1,'status'=>'normal'],['id'=>$pid]);
+            }
         } else {
             $pid = $parent;
         }
