@@ -432,8 +432,6 @@ form.form-horizontal .control-label {
 }
 #secondnav .nav-addtabs > li.active {
   background-color: #f7f7f7;
-  /*border: #000 0 solid;*/
-  /*border-bottom-color: #17b3a3;*/
   border-bottom-width: 2px;
   border-radius: 0;
 }
@@ -458,8 +456,6 @@ form.form-horizontal .control-label {
 #secondnav .nav-addtabs > li:hover,
 #secondnav .nav-addtabs > li:focus {
   background-color: #f7f7f7;
-  /*border: #000 0 solid;*/
-  /*border-bottom-color: #17b3a3;*/
   border-bottom-width: 2px;
   border-radius: 0;
 }
