@@ -1818,4 +1818,11 @@
     border-left: 1px solid #e8e8e8;
   }
 }
+#secondnav .nav-addtabs > li.active {
+  border: #007bff 0 solid;
+}
+#secondnav .nav-addtabs > li:hover,
+#secondnav .nav-addtabs > li:focus {
+  border: #007bff 0 solid;
+}
 /*# sourceMappingURL=_all-skins.css.map */

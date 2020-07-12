@@ -148,4 +148,11 @@
 .right-side-float-skin{
   background: #e08e0b !important;
 }
+#secondnav .nav-addtabs > li.active {
+  border: #e08e0b 0 solid;
+}
+#secondnav .nav-addtabs > li:hover,
+#secondnav .nav-addtabs > li:focus {
+  border: #e08e0b 0 solid;
+}
 /*# sourceMappingURL=skin-yellow.css.map */

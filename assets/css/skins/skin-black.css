@@ -156,4 +156,11 @@
 .right-side-float-skin{
   background: black !important;
 }
+#secondnav .nav-addtabs > li.active {
+  border: black 0 solid;
+}
+#secondnav .nav-addtabs > li:hover,
+#secondnav .nav-addtabs > li:focus {
+  border: black 0 solid;
+}
 /*# sourceMappingURL=skin-black.css.map */

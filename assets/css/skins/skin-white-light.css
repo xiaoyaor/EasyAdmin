@@ -181,6 +181,13 @@
   border-bottom: none;
 }
 .right-side-float-skin{
-  background: #fffcef !important;
+  background: black !important;
+}
+#secondnav .nav-addtabs > li.active {
+  border: black 0 solid;
+}
+#secondnav .nav-addtabs > li:hover,
+#secondnav .nav-addtabs > li:focus {
+  border: black 0 solid;
 }
 /*# sourceMappingURL=skin-white-light.css.map */
