@@ -396,7 +396,7 @@ form.form-horizontal .control-label {
   background: #fff;
   width: 100%;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  padding: 5px 10px;
+  /*padding: 5px 10px;*/
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -409,12 +409,12 @@ form.form-horizontal .control-label {
   display: none;
 }
 #secondnav .nav-addtabs > li {
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
   border-radius: 3px;
-  padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
-  margin: 2px 5px 2px 0;
+  padding: 0 20px;
+  height: 44px;
+  line-height: 44px;
+  /*margin: 0 5px 0 0;*/
   background: #fff;
 }
 #secondnav .nav-addtabs > li > a {
@@ -422,7 +422,7 @@ form.form-horizontal .control-label {
   color: #495060 !important;
   height: 100%;
   padding: 0;
-  line-height: 28px;
+  line-height: 44px;
   font-size: 12px;
   vertical-align: middle;
   opacity: 1;
@@ -431,8 +431,11 @@ form.form-horizontal .control-label {
   border: none;
 }
 #secondnav .nav-addtabs > li.active {
-  border-color: #bdbebd;
   background-color: #f7f7f7;
+  border: #000 0 solid;
+  border-bottom-color: #17b3a3;
+  border-bottom-width: 2px;
+  border-radius: 0;
 }
 #secondnav .nav-addtabs > li .close-tab {
   font-size: 10px;
@@ -454,14 +457,18 @@ form.form-horizontal .control-label {
 }
 #secondnav .nav-addtabs > li:hover,
 #secondnav .nav-addtabs > li:focus {
-  border-color: #bdbebd;
+  background-color: #f7f7f7;
+  border: #000 0 solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #17b3a3;
+  border-radius: 0;
 }
 #secondnav .nav-addtabs ul li {
   position: relative;
 }
 #secondnav .nav-addtabs li:hover > .close-tab {
   display: block;
-  border-color: #222e32;
+  border-bottom-color: #17b3a3;
   color: #222e32;
 }
 .main-sidebar .sidebar-form {
