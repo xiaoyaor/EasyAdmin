@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller\addon;
+namespace app\admin\controller;
 
 use app\common\controller\Backend;
 use easyadmin\Http;
