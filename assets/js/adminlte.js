@@ -418,6 +418,8 @@ function _init() {
                         //_this.layout.fix();
                     });
                     checkElement.parent("li").removeClass("active");
+                    $this.find('.fa-angle-down').addClass('fa-angle-left');
+                    $this.find('.fa-angle-down').removeClass('fa-angle-down');
                 }
                 //If the menu is not visible
                 else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
@@ -437,6 +439,8 @@ function _init() {
                     checkElement.slideDown(animationSpeed, function () {
                         //Add the class active to the parent li
                         checkElement.addClass('menu-open');
+                        $this.find('.fa-angle-left').addClass('fa-angle-down');
+                        $this.find('.fa-angle-left').removeClass('fa-angle-left');
                         //parent.find('li.active').removeClass('active');
                         //parent_li.addClass('active');
                         //Fix the layout in case the sidebar stretches over the height of the window
