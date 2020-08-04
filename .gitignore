@@ -3,7 +3,7 @@
 /vendor
 *.log
 .env
-/启动.bat
+/start.bat
 /cmd.bat
 /composer.lock
 /addons/
