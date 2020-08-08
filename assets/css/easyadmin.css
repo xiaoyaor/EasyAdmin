@@ -552,7 +552,9 @@ a:focus {
   font-size: 12px;
 }
 .sidebar-menu li > a > .fa-caret-left,
-.sidebar-menu li > a > .pull-right-container > .fa-caret-left {
+.sidebar-menu li > a > .fa-caret-down,
+.sidebar-menu li > a > .pull-right-container > .fa-caret-left,
+.sidebar-menu li > a > .pull-right-container > .fa-caret-down {
   width: auto;
   height: auto;
   padding: 0;
