@@ -46,9 +46,6 @@ class Index extends Backend
                 $this->success('', null, ['menulist' => $menulist, 'navlist' => $navlist]);
             }
         }
-        $app_list=get_app_list(true);
-        View::assign('app_list',$app_list);
-        View::assign('app_list_count', count($app_list));
         View::assign('menulist', $menulist);
         View::assign('navlist', $navlist);
         View::assign('fixedmenu', $fixedmenu);
