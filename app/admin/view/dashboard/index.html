@@ -151,18 +151,28 @@
         padding: 30px 0;
     }
 </style>
+
+<style type="text/css">
+    .adminix_news{list-style:none;padding:0 10px;margin:0;margin-top:-1px;}
+    .adminix_news li{list-style:square inside none;border-top:1px dashed #ddd;padding:10px 2px;}
+    .adminix_news a{color:#555;}
+</style>
+
 {if preg_match('/admin|XnZUrsbCijk/i', $modulename)}
 <div class="alert alert-danger-light">
     {:__('Security tips')}
 </div>
 {/if}
 <div class="panel panel-default panel-intro">
-    <div class="panel-heading">
+    <div class="panel-heading" id="dashboardnav">
         {:build_heading(null, false)}
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs nav-addtabs" role="tablist">
+            <li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"><i class="glyphicon glyphicon-align-justify"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu"></ul>
+            </li>
             <li class="active"><a href="#one" data-toggle="tab">{:__('Dashboard')}</a></li>
             {:hook('fetch_to_dashboard','tabTitle')}
-            <li><a href="#two" data-toggle="tab">{:__('Custom')}</a></li>
+            <li><a href="#" style="color: #18bc9c">{:__('Custom')}</a></li>
         </ul>
     </div>
     <div class="panel-body">
@@ -171,13 +181,6 @@
                 {:hook('fetch_to_dashboard','dashboard')}
             </div>
             {:hook('fetch_to_dashboard','tabContent')}
-            <div class="tab-pane fade" id="two">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {:__('Custom zone')}
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
