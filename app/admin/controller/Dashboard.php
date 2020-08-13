@@ -2,18 +2,9 @@
 
 namespace app\admin\controller;
 
-use addons\conf\app\common\model\Config as ConfigModel;
-use app\admin\model\Admin;
-use app\admin\model\AdminLog;
 use app\common\controller\Backend;
-use app\common\model\Attachment;
-use app\common\model\User;
-use think\Exception;
 use think\facade\Config;
-use think\facade\Db;
 use think\facade\View;
-use think\facade\Env;
-use \app\common\model\Category;
 
 /**
  * 控制台
@@ -56,43 +47,12 @@ class Dashboard extends Backend
      */
     public function config($name = null)
     {
-        if ($this->request->isPost()) {
-            $name = $this->request->param("addon_name");
-            if (!$name) {
-
-                $this->error("插件不存在");
-            }
-            if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
-                $this->error(__('Addon name incorrect'));
-            }
-            if (!is_dir(ADDON_PATH . $name)) {
-                $this->error(__('Directory not found'));
-            }
-            $info = get_addon_info($name);
-            $config = get_addon_fullconfig($name);
-            if (!$info) {
-                $this->error(__('No Results were found'));
-            }
-            $params = $this->request->post("row/a");
+        if (request()->isPost()) {
+            $params = request()->param("row/a");
             if ($params) {
-                foreach ($params as $k => &$v) {
-                    $v = is_array($v) ? implode(',', $v) : $v;
-                }
-                try {
-                    if (in_array($params['type'], ['select', 'selects', 'checkbox', 'radio', 'array'])) {
-                        $params['content'] = ConfigModel::decode($params['content']);
-                    } else {
-                        $params['content'] = '';
-                    }
-                    //更新配置文件
-                    $config = array_merge($config, array($params));
-
-                    set_addon_fullconfig($name, $config);
-                    \think\addons\Service::refresh();
-                    $this->success();
-                } catch (Exception $e) {
-                    $this->error($e->getMessage());
-                }
+                $info[$params['action']]=$params['value']?0:1;
+                set_addon_info($name,$info);
+                $this->success();
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }

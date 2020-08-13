@@ -89,7 +89,7 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
 
             var dashboard = function (name, action,value) {
                 Fast.api.ajax({
-                    url: 'addon/config/name/'+name,
+                    url: 'dashboard/config/name/'+name,
                     data: {'row[name]': name, 'row[action]': action, 'row[value]': value}
                 }, function (data, ret) {
                     Layer.closeAll();
