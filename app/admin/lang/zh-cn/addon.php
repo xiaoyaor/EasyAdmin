@@ -91,4 +91,9 @@ return [
     'Addon already exists'           => '上传的插件已经存在',
     'Unable to open the zip file'    => '无法打开ZIP文件',
     'Unable to extract the file'     => '无法解压ZIP文件',
+    'Name already exist'            => '变量名称已经存在',
+    'Send a test message'           => '发送测试邮件',
+    'This is a test mail content'   => '这是一封来自EasyAdmin校验邮件,用于校验邮件配置是否正常!',
+    'This is a test mail'           => '这是一封来自EasyAdmin的邮件',
+    'Please input your email'       => '请输入测试接收者邮箱',
 ];
