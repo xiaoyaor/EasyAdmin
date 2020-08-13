@@ -50,7 +50,7 @@ class Addon extends Backend
      */
     public function config($ids = null)
     {
-        $name = request()->get("name");
+        $name = request()->param("name");
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', $ids ? 'id' : 'name'));
         }
@@ -66,22 +66,11 @@ class Addon extends Backend
             $this->error(__('No Results were found'));
         }
         if (request()->isPost()) {
-            $params = request()->post("row/a");
+            $params = request()->param("row/a");
             if ($params) {
-                foreach ($config as $k => &$v) {
-                    if (isset($params[$v['name']])) {
-                        if ($v['type'] == 'array') {
-                            $params[$v['name']] = is_array($params[$v['name']]) ? $params[$v['name']] : (array)json_decode($params[$v['name']], true);
-                            $value = $params[$v['name']];
-                        } else {
-                            $value = is_array($params[$v['name']]) ? implode(',', $params[$v['name']]) : $params[$v['name']];
-                        }
-                        $v['value'] = $value;
-                    }
-                }
+                $info[$params['action']]=$params['value']?0:1;
+                set_addon_info($name,$info);
                 try {
-                    //更新配置文件
-                    set_addon_fullconfig($name, $config);
                     Service::refresh();
                     $this->success();
                 } catch (Exception $e) {
@@ -98,9 +87,71 @@ class Addon extends Backend
             }
         }
         View::assign("addon", ['info' => $info, 'config' => $config, 'tips' => $tips]);
+
+
+
+
+        $siteList = [];
+        $groupList =  $this->getGroupList($name);
+        foreach ($groupList as $k => $v) {
+            $siteList[$k]['name'] = $k;
+            $siteList[$k]['title'] = $v;
+            $siteList[$k]['list'] = [];
+        }
+        $ss=get_addon_fullconfig($name);
+        foreach ($ss as $k => $v) {
+            isset($v['group'])?null:$v['group']='default';
+            if (!isset($siteList[$v['group']])) {
+                //continue;
+                $siteList[$v['group']]='default';
+                $siteList[$v['group']]['list']='';
+            }
+            $value = $v;
+            $value['title'] = __($value['title']);
+            if (in_array($value['type'], ['select', 'selects', 'checkbox', 'radio'])) {
+                $value['value'] = explode(',', $value['value']);
+            }
+            $value['content'] = $value['content']?$value['content']:[];
+            $value['tip'] = htmlspecialchars($value['tip']);
+            $siteList[$v['group']]['list'][] = $value;
+        }
+        $index = 0;
+        foreach ($siteList as $k => &$v) {
+            $v['active'] = !$index ? true : false;
+            $index++;
+        }
+        View::assign('siteList', $siteList);
+        View::assign('groupList', $this->getGroupList($name));
+
+
+
+
+
+
+
         $configFile = ADDON_PATH . $name . DIRECTORY_SEPARATOR . 'config.html';
         $viewFile = is_file($configFile) ? $configFile : '';
         return View::fetch($viewFile);
+    }
+
+
+    /**
+     * 读取分类分组列表
+     * @param string $name
+     * @return array
+     */
+    public static function getGroupList($name)
+    {
+        $groupList =get_addon_config($name);
+//        foreach ($groupList as $k => &$v) {
+//            $v = __($v);
+//        }
+        if (array_key_exists('configgroup',$groupList)){
+
+            return $groupList['configgroup'];
+        }else{
+            return ['default'=>'默认设置'];
+        }
     }
 
     /**
@@ -408,6 +459,9 @@ class Addon extends Backend
             }
             $v['url'] = addons_url($v['name']);
             $v['url'] = str_replace(request()->server('SCRIPT_NAME'), '', $v['url']);
+            $v['createtime'] = filemtime(ADDON_PATH . $v['name']);
+//            $v['dashboard'] = !$v['dashboard']?0:$v['dashboard'];
+//            $v['tab'] = !$v['tab']?0:$v['tab'];
             $v['createtime'] = filemtime(ADDON_PATH . $v['name']);
             if ($filter && isset($filter['category_id']) && is_numeric($filter['category_id']) && $filter['category_id'] != $v['category_id']) {
                 continue;

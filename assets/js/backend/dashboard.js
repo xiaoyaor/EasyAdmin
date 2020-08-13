@@ -2,115 +2,15 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
 
     var Controller = {
         index: function () {
-            // 基于准备好的dom，初始化echarts实例
-            //var myChart = Echarts.init(document.getElementById('echart'), 'walden');
-
-            // 指定图表的配置项和数据
-            // var option = {
-            //     title: {
-            //         text: '',
-            //         subtext: ''
-            //     },
-            //     tooltip: {
-            //         trigger: 'axis'
-            //     },
-            //     legend: {
-            //         data: [__('SignupNum'), __('LoginNum')]
-            //     },
-            //     toolbox: {
-            //         show: false,
-            //         feature: {
-            //             magicType: {show: true, type: ['stack', 'tiled']},
-            //             saveAsImage: {show: true}
-            //         }
-            //     },
-            //     xAxis: {
-            //         type: 'category',
-            //         boundaryGap: false,
-            //         data: Orderdata.column
-            //     },
-            //     yAxis: {},
-            //     grid: [{
-            //         left: 'left',
-            //         top: 'top',
-            //         right: '10',
-            //         bottom: 30
-            //     }],
-            //     series: [{
-            //         name: __('SignupNum'),
-            //         type: 'line',
-            //         smooth: true,
-            //         areaStyle: {
-            //             normal: {}
-            //         },
-            //         lineStyle: {
-            //             normal: {
-            //                 width: 1.5
-            //             }
-            //         },
-            //         data: Orderdata.paydata
-            //     },
-            //         {
-            //             name: __('LoginNum'),
-            //             type: 'line',
-            //             smooth: true,
-            //             areaStyle: {
-            //                 normal: {}
-            //             },
-            //             lineStyle: {
-            //                 normal: {
-            //                     width: 1.5
-            //                 }
-            //             },
-            //             data: Orderdata.createdata
-            //         }]
-            // };
-            //
-            // // 使用刚指定的配置项和数据显示图表。
-            // myChart.setOption(option);
-
-            //动态添加数据，可以通过Ajax获取数据然后填充
-            // setInterval(function () {
-            //     Orderdata.column.push((new Date()).toLocaleTimeString().replace(/^\D*/, ''));
-            //     var amount = Math.floor(Math.random() * 200) + 20;
-            //     Orderdata.createdata.push(amount);
-            //     Orderdata.paydata.push(Math.floor(Math.random() * amount) + 1);
-            //
-            //     //按自己需求可以取消这个限制
-            //     if (Orderdata.column.length >= 20) {
-            //         //移除最开始的一条数据
-            //         Orderdata.column.shift();
-            //         Orderdata.paydata.shift();
-            //         Orderdata.createdata.shift();
-            //     }
-            //     myChart.setOption({
-            //         xAxis: {
-            //             data: Orderdata.column
-            //         },
-            //         series: [{
-            //             name: __('SignupNum'),
-            //             data: Orderdata.paydata
-            //         },
-            //             {
-            //                 name: __('LoginNum'),
-            //                 data: Orderdata.createdata
-            //             }]
-            //     });
-            //     if ($("#echart").width() != $("#echart canvas").width() && $("#echart canvas").width() < $("#echart").width()) {
-            //         myChart.resize();
-            //     }
-            // }, 2000);
-            // $(window).resize(function () {
-            //     myChart.resize();
-            // });
-            //
-            // $(document).on("click", ".btn-checkversion", function () {
-            //     top.window.$("[data-toggle=checkupdate]").trigger("click");
-            // });
-            // 点击配置
+            // 插件配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).data("name");
-                easy.api.open("addon/config?name=" + name, __('Setting'));
+                easy.api.open("addon/config?name=" + name, __('Custom'));
+            });
+
+            // 显示配置
+            $(document).on("click", "#custom-view", function () {
+                easy.api.open("dashboard/config?name=all", __('Custom'));
             });
 
             var firstnav = $("#dashboardnav .nav-addtabs");
@@ -121,6 +21,116 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
             });
             $(window).resize();
 
+        },
+        config: function () {
+            // 初始化表格参数配置
+            // 初始化表格参数配置
+            Table.api.init({
+                extend: {
+                    index_url: 'addon/downloaded',
+                    add_url: '',
+                    edit_url: '',
+                    del_url: ''
+                }
+            });
+
+            var table = $("#table");
+            var tableOptions = {
+                url: $.fn.bootstrapTable.defaults.extend.index_url,
+                escape: false,
+                pk: 'id',
+                sortName: 'weigh',
+                pagination: false,
+                commonSearch: false,
+                search: true,
+                templateView: false,
+                clickToSelect: false,
+                showColumns: false,
+                showToggle: false,
+                showExport: false,
+                showSearch: false,
+                searchFormVisible: true,
+                columns: [
+                    [
+                        {field: 'name', title: __('标识'), operate: false, visible: true, width: '120px'},
+                        {field: 'title', title: __('名称'), operate: 'LIKE', align: 'left'},
+                        {
+                            field: 'dashboard',
+                            title: __('控制台显示'),
+                            align: 'center',
+                            formatter: Controller.api.formatter.dashboard
+                        },
+                        {
+                            field: 'tab',
+                            title: __('标签页显示'),
+                            align: 'center',
+                            formatter: Controller.api.formatter.tab
+                        },
+                        {field: 'operate', title: __('Operate'),
+                            buttons: [
+                                {
+                                    name: 'config',
+                                    text: '配置',
+                                    title: function (row) {
+                                        return "["+row.title+"]插件配置";
+                                    },
+                                    icon: 'fa fa-cogs fa-fw',
+                                    classname: 'btn btn-xs btn-info btn-dialog ',
+                                    url: function (row) {
+                                        return 'addon/config?name='+row.name;
+                                    }
+                                }
+
+                            ],
+                            table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
+                    ]
+                ]
+            };
+
+            var dashboard = function (name, action,value) {
+                Fast.api.ajax({
+                    url: 'addon/config/name/'+name,
+                    data: {'row[name]': name, 'row[action]': action, 'row[value]': value}
+                }, function (data, ret) {
+                    Layer.closeAll();
+                    $('.btn-refresh').trigger('click');
+                }, function (data, ret) {
+                    return false;
+                });
+            };
+
+            // 点击启用/禁用
+            $(document).on("click", ".btn-change", function () {
+                var name = $(this).data("name");
+                var action = $(this).data("action");
+                var value = $(this).data("value");
+                dashboard(name, action,value);
+            });
+
+            // 初始化表格
+            table.bootstrapTable(tableOptions);
+
+            // 为表格绑定事件
+            Table.api.bindevent(table);
+            table.on('load-success.bs.table',function(data){
+                $(".btn-primary").data("area", ["80%","90%"]);
+            });
+        },
+        api: {
+            formatter: {
+                dashboard: function (value, row, index) {
+                    if (!row) {
+                        return '';
+                    }
+                    return '<a href="javascript:;" data-toggle="tooltip" title="' + __('Click to toggle status') + '" class="btn btn-change' + '" data-value="' + (value) + '" data-name="' + row.name+ '" data-action="dashboard"><i class="fa ' + (value == 0 ? 'fa-toggle-on fa-rotate-180 text-gray' : 'fa-toggle-on text-success') + ' fa-2x"></i></a>';
+                },
+                tab: function (value, row, index) {
+                    if (!row) {
+                        return '';
+                    }
+                    return '<a href="javascript:;" data-toggle="tooltip" title="' + __('Click to toggle status') + '" class="btn btn-change' + '" data-value="' + (value) + '" data-name="' + row.name + '" data-action="tab"><i class="fa ' + (value == 0 ? 'fa-toggle-on fa-rotate-180 text-gray' : 'fa-toggle-on text-success') + ' fa-2x"></i></a>';
+                },
+            },
         }
     };
 

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Custom'                  => '设置',
+    'Custom'                  => '控制台设置',
     'Pid'                     => '父ID',
     'Type'                    => '栏目类型',
     'Image'                   => '图片',
