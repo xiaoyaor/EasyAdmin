@@ -66,12 +66,23 @@ class Addon extends Backend
             $this->error(__('No Results were found'));
         }
         if (request()->isPost()) {
-            $params = request()->param("row/a");
+            $params = $this->request->post("row/a");
             if ($params) {
-                $info[$params['action']]=$params['value']?0:1;
-                set_addon_info($name,$info);
+                foreach ($config as $k => &$v) {
+                    if (isset($params[$v['name']])) {
+                        if ($v['type'] == 'array') {
+                            $params[$v['name']] = is_array($params[$v['name']]) ? $params[$v['name']] : (array)json_decode($params[$v['name']], true);
+                            $value = $params[$v['name']];
+                        } else {
+                            $value = is_array($params[$v['name']]) ? implode(',', $params[$v['name']]) : $params[$v['name']];
+                        }
+                        $v['value'] = $value;
+                    }
+                }
                 try {
-                    Service::refresh();
+                    //更新配置文件
+                    set_addon_fullconfig($name, $config);
+                    \think\addons\Service::refresh();
                     $this->success();
                 } catch (Exception $e) {
                     $this->error(__($e->getMessage()));
