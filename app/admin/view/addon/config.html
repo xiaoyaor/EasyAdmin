@@ -35,17 +35,18 @@
 
 
                     <form id="config-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
-                        {if $addon.tips}
-                        <div class="alert {$addon.tips.extend|default='alert-info-light'}" style="margin-bottom:10px;">
-                            <b>{$addon.tips.title}</b><br>
-                            {$addon.tips.value|RAW}
+                        {if $addoninfo.tips}
+                        <div class="alert {$addoninfo.tips.extend|default='alert-info-light'}" style="margin-bottom:10px;">
+                            <b>{$addoninfo.tips.title}</b><br>
+                            {$addoninfo.tips.value|RAW}
                         </div>
                         {/if}
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th width="15%">{:__('Title')}</th>
-                                <th width="85%">{:__('Value')}</th>
+                                <th width="25%">{:__('Title')}</th>
+                                <th width="50%">{:__('Value')}</th>
+                                <th width="25%">{:__('Method')}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -124,6 +125,7 @@
                                     </div>
 
                                 </td>
+                                <td>{literal}{$addon{/literal}.{$name}.{$item.name}{literal}}{/literal}</td>
                             </tr>
                             {/foreach}
                             </tbody>

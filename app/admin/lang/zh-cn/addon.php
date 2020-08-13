@@ -2,8 +2,9 @@
 
 return [
     'Id'                             => 'ID',
-    'Title'                          => '插件名称',
+    'Title'                          => '配置名称',
     'Value'                          => '配置值',
+    'Method'                         => '模板调用',
     'Array key'                      => '键',
     'Array value'                    => '值',
     'File'                           => '文件',

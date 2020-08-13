@@ -86,7 +86,8 @@ class Addon extends Backend
                 unset($config[$index]);
             }
         }
-        View::assign("addon", ['info' => $info, 'config' => $config, 'tips' => $tips]);
+        View::assign("addoninfo", ['info' => $info, 'config' => $config, 'tips' => $tips]);
+        View::assign('name', $name);
 
 
 

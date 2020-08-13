@@ -5,6 +5,9 @@ namespace app;
 
 use think\App;
 use think\exception\ValidateException;
+use think\facade\Cache;
+use think\facade\Config;
+use think\facade\View;
 use think\Validate;
 use xiaoyaor\think\Jump;
 
@@ -54,7 +57,9 @@ abstract class BaseController
 
     // 初始化
     protected function initialize()
-    {}
+    {
+        View::assign('addon', Cache::get('config_data_single_list',[]));
+    }
 
     /**
      * 验证数据
