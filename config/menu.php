@@ -23,7 +23,7 @@ return array (
             'type' => 'file',
             'pid' => 0,
             'name' => 'addon',
-            'title' => '应用中心',
+            'title' => '云端平台',
             'icon' => 'fa fa-cloud',
             'condition' => '',
             'remark' => 'Addon tips',
