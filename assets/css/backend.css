@@ -228,6 +228,10 @@ form.form-horizontal .control-label {
   border: 1px solid #e8edf0;
   border-bottom-color: transparent;
 }
+.panel-intro > .panel-heading .custom > li > a {
+  height: 40px;
+  line-height: 40px;
+}
 .panel-intro > .panel-heading .nav-tabs > li > a:hover,
 .panel-intro > .panel-heading .nav-tabs > li > a:focus {
   border: 1px solid #e8edf0;
