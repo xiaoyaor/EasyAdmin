@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function ($, undefined, Backend, Table, Form, Template) {
+define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template'], function ($, undefined, Backend, Table, clipboard, Form, Template) {
     var Controller = {
         index: function () {
             // 初始化表格参数配置
@@ -538,6 +538,25 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                     });
                 });
             });
+
+            //复制变量名称
+            window['Clipboard']=clipboard;
+            $(".btn-copy").mouseover(function(){
+                if (this.clip !== undefined) {
+                    this.clip.destroy();
+                }
+                var ids = $(this).attr("id");
+                this.clip = new Clipboard('#'+ids);
+                this.clip.on('success', function(e) {
+                    Toastr.success(__('复制成功！'));
+                    e.clearSelection();
+                });
+                this.clip.on('error', function(e) {
+                    Toastr.error(__('复制失败！'));
+                    e.clearSelection();
+                });
+            });
+
             Controller.api.bindevent();
         },
         addons: function () {
