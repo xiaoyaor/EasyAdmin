@@ -171,7 +171,7 @@ if (!function_exists('build_heading')) {
         $isTable=Db::query('SHOW TABLES LIKE '."'".$tableName."'");
         if($isTable){
             $data = Db::name('auth_rule')->where('name', $path)->field('title,remark')->find();
-            $data = !$data?Db::name('auth_rule')->where('name', $path.'/index')->field('title,remark')->find():'';
+            $data = !$data?Db::name('auth_rule')->where('name', $path.'/index')->field('title,remark')->find():$data;
         }else{
             $menu=Config::get('menu');
             foreach ($menu as $key=>$value){

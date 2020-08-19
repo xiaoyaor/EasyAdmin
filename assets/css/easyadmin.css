@@ -578,7 +578,7 @@ a:focus {
   padding-left: 5px;
 }
 .sidebar-menu .treeview-menu .treeview-menu {
-  padding-left: 20px;
+  /*padding-left: 20px;*/
 }
 .sidebar-menu .treeview-menu > li {
   margin: 0;

@@ -25,7 +25,7 @@ body.is-dialog {
 }
 .form-control,
 .btn{
-  border-radius: 1px;
+  border-radius: 3px;
 }
 .selection {
   position: absolute;
