@@ -15,9 +15,6 @@ use think\facade\View;
  */
 class Index extends Backend
 {
-    use Jump;
-    protected $noNeedLogin = ['login','captcha'];
-    protected $noNeedRight = ['index', 'logout'];
 
     //构造方法
     public function __construct()
@@ -71,24 +68,6 @@ class Index extends Backend
             else{
                 $this->success('');
             }
-        }
-    }
-
-    /*
-     * 切换应用
-     *
-     */
-    function changeApp()
-    {
-        $app=$this->request->param('app');
-        if ($app=='easyadmin'){
-            Session::delete('app');
-            $this->redirect(DIRECTORY_SEPARATOR.get_modulename(Config::get('app.app_map')),  302);
-        }else{
-            $app=get_addon_info($app);
-            $app=array_intersect_key($app, array_flip(['name', 'title', 'intro', 'author', 'website', 'version', 'website', 'first_menu']));
-            Session::set('app',$app);
-            $this->redirect(DIRECTORY_SEPARATOR.get_modulename(Config::get('app.app_map')).DIRECTORY_SEPARATOR.$app['first_menu'].'.html?ref=addtabs',  302);
         }
     }
 
