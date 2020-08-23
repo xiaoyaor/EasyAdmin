@@ -468,9 +468,9 @@ class Backend extends BaseController
         //搜索关键词,客户端输入以空格分开,这里接收为数组
         $word = (array)request()->request("q_word/a");
         //当前页
-        $page = request()->request("pageNumber");
+        $page = request()->request("pageNumber",1);
         //分页大小
-        $pagesize = request()->request("pageSize");
+        $pagesize = request()->request("pageSize",10);
         //搜索条件
         $andor = request()->request("andOr", "and", "strtoupper");
         //排序方式
