@@ -3,11 +3,13 @@
 /vendor
 *.log
 .env
+start.bat
 /start.bat
 /cmd.bat
 /composer.lock
 /addons/
 /app/admin/command/Install/install.lock
 /assets/libs/
+/assets/js/addons.js
 /desktop.ini
 /folderico-approved.ico
