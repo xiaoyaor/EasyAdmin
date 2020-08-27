@@ -228,7 +228,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <style>
         body {
-            background: #fff;
+            background: beige;
             margin: 0;
             padding: 0;
             line-height: 1.5;
@@ -239,11 +239,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         body, input, button {
             font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
             font-size: 14px;
-            color: #7E96B3;
+            color: #ffcece;
         }
 
         .container {
-            max-width: 480px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
@@ -290,7 +290,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .form-field input {
-            background: #EDF2F7;
+            background: #298846;
             margin: 0 0 1px;
             border: 2px solid transparent;
             transition: background 0.2s, border-color 0.2s, color 0.2s;
