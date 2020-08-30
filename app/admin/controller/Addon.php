@@ -568,4 +568,12 @@ class Addon extends Backend
             $this->error(__($file->getError()));
         }
     }
+
+    /**
+     * 引导推荐
+     */
+    public function guide()
+    {
+        return View::fetch();
+    }
 }

@@ -271,6 +271,11 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 }
             });
 
+            // 推荐安装
+            $(document).on("click", ".btn-guide", function () {
+                Fast.api.open('addon/guide',__('Guide'),{'width':'50%','heigh':'70%','maxmin':false});
+            });
+
             var install = function (name, version, force) {
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
@@ -1142,6 +1147,19 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         localStorage.setItem("easyadmin_userinfo", JSON.stringify(data));
                     } else {
                         localStorage.removeItem("easyadmin_userinfo");
+                    }
+                }
+            },
+            guide: {
+                get: function () {
+                    var guide = localStorage.getItem("easyadmin_guide");
+                    return guide ? JSON.parse(guide) : null;
+                },
+                set: function (data) {
+                    if (data) {
+                        localStorage.setItem("easyadmin_guide", JSON.stringify(data));
+                    } else {
+                        localStorage.removeItem("easyadmin_guide");
                     }
                 }
             }

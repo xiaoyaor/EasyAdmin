@@ -487,7 +487,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 if (typeof retArr[1] !== 'undefined' && retArr[1] !== '') {
                                     var url = location.href.replace(/install\.php/, retArr[1]);
-                                    $("#warmtips").html('温馨提示：请将以下后台登录入口添加到你的收藏夹，为了你的网站安全，不要泄漏或发送给他人！如有泄漏请及时修改！<a href="' + url + '">' + url + '</a>').show();
+                                    $("#warmtips").html('温馨提示：请将以下后台登录入口添加到你的收藏夹，为了你的网站安全，不要泄漏或发送给他人！可在后台系统设置修改！<a href="' + url + '">' + url + '</a>').show();
                                     $('<a class="btn" href="' + url + '" id="btn-admin" style="background:#18bc9c">访问后台</a>').appendTo($buttons);
                                 }
                                 localStorage.setItem("fastep", "installed");

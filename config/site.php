@@ -29,6 +29,7 @@ return array (
     'frontend' => 'Frontend',
   ),
   'skin' => 'skin-green',
+  'sidebar_collapse' => '0',
   'multiplenav' => '1',
   'head_switch' => '1',
   'head_links' => '1',
