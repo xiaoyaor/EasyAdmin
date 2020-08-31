@@ -8,7 +8,7 @@
 
 * 采用thinkPHP 6.0+AdminLTE 开发
 * 参考了fastadmin，初期可看作fa的tp6.0升级版(已完成)
-* 实现了插件化开发，除核心框架外所有功能均已插件化
+* 实现了插件化开发，除核心框架外所有功能均已插件化(已完成)
 
 ## 安装
 
@@ -51,6 +51,6 @@ EasyAdmin遵循Apache2开源协议发布，并提供免费使用。
 
 All rights reserved。
 
-EasyAdmin® 商标和著作权所有者为山东神隐信息科技有限公司。
+EasyAdmin® 商标和著作权所有者为逍遥游(临沂)信息科技有限公司。
 
 更多细节参阅 [LICENSE.txt](LICENSE.txt)

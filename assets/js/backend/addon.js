@@ -81,7 +81,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             width: '50px',
                             formatter: Controller.api.formatter.home
                         },
-                        {field: 'name', title: __('Name'), operate: false, visible: true, width: '120px'},
+                        {field: 'name', title: __('Name'), operate: false, align: 'left', visible: true, width: '120px'},
                         {
                             field: 'title',
                             title: __('Title'),
@@ -130,10 +130,9 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         {
                             field: 'id',
                             title: __('Operate'),
-                            align: 'center',
+                            align: 'right',
                             table: table,
-                            formatter: Controller.api.formatter.operate,
-                            align: 'right'
+                            formatter: Controller.api.formatter.operate
                         },
                     ]
                 ],

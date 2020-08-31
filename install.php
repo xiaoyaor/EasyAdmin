@@ -124,23 +124,24 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $mysqlPassword = isset($_POST['mysqlPassword']) ? $_POST['mysqlPassword'] : '';
     $mysqlDatabase = isset($_POST['mysqlDatabase']) ? $_POST['mysqlDatabase'] : 'easyadmin';
     $mysqlPrefix = isset($_POST['mysqlPrefix']) ? $_POST['mysqlPrefix'] : 'ea_';
-    $adminUsername = isset($_POST['adminUsername']) ? $_POST['adminUsername'] : 'admin';
-    $adminPassword = isset($_POST['adminPassword']) ? $_POST['adminPassword'] : '123456';
-    $adminPasswordConfirmation = isset($_POST['adminPasswordConfirmation']) ? $_POST['adminPasswordConfirmation'] : '123456';
-    $adminEmail = isset($_POST['adminEmail']) ? $_POST['adminEmail'] : 'admin@admin.com';
 
-    if (!preg_match("/^\w{3,12}$/", $adminUsername)) {
-        echo "用户名只能由3-12位数字、字母、下划线组合";
-        exit;
-    }
-    if (!preg_match("/^[\S]{6,16}$/", $adminPassword)) {
-        echo "密码长度必须在6-16位之间，不能包含空格";
-        exit;
-    }
-    if ($adminPassword !== $adminPasswordConfirmation) {
-        echo "两次输入的密码不一致";
-        exit;
-    }
+//    $adminUsername = isset($_POST['adminUsername']) ? $_POST['adminUsername'] : 'admin';
+//    $adminPassword = isset($_POST['adminPassword']) ? $_POST['adminPassword'] : '123456';
+//    $adminPasswordConfirmation = isset($_POST['adminPasswordConfirmation']) ? $_POST['adminPasswordConfirmation'] : '123456';
+//    $adminEmail = isset($_POST['adminEmail']) ? $_POST['adminEmail'] : 'admin@admin.com';
+//
+//    if (!preg_match("/^\w{3,12}$/", $adminUsername)) {
+//        echo "用户名只能由3-12位数字、字母、下划线组合";
+//        exit;
+//    }
+//    if (!preg_match("/^[\S]{6,16}$/", $adminPassword)) {
+//        echo "密码长度必须在6-16位之间，不能包含空格";
+//        exit;
+//    }
+//    if ($adminPassword !== $adminPasswordConfirmation) {
+//        echo "两次输入的密码不一致";
+//        exit;
+//    }
 
     try {
         //检测能否读取安装文件
@@ -432,27 +433,27 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="form-field">
-                    <label>管理者用户名</label>
-                    <input name="adminUsername" value="admin" required=""/>
-                </div>
-
-                <div class="form-field">
-                    <label>管理者Email</label>
-                    <input name="adminEmail" value="admin@admin.com" required="">
-                </div>
-
-                <div class="form-field">
-                    <label>管理者密码</label>
-                    <input type="password" name="adminPassword" required="">
-                </div>
-
-                <div class="form-field">
-                    <label>重复密码</label>
-                    <input type="password" name="adminPasswordConfirmation" required="">
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <div class="form-field">-->
+<!--                    <label>管理者用户名</label>-->
+<!--                    <input name="adminUsername" value="admin" required=""/>-->
+<!--                </div>-->
+<!---->
+<!--                <div class="form-field">-->
+<!--                    <label>管理者Email</label>-->
+<!--                    <input name="adminEmail" value="admin@admin.com" required="">-->
+<!--                </div>-->
+<!---->
+<!--                <div class="form-field">-->
+<!--                    <label>管理者密码</label>-->
+<!--                    <input type="password" name="adminPassword" required="">-->
+<!--                </div>-->
+<!---->
+<!--                <div class="form-field">-->
+<!--                    <label>重复密码</label>-->
+<!--                    <input type="password" name="adminPasswordConfirmation" required="">-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="form-buttons">
                 <button type="submit" <?php echo $errInfo ? 'disabled' : '' ?>>点击安装</button>
