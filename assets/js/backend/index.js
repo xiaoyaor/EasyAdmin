@@ -461,9 +461,12 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
             $(function() {
                 var $demo, duration, remaining, tour;
                 $demo = $("#demo");
-                duration = 5000;
+                duration = false;
                 remaining = duration;
                 tour = new Tour({
+                    backdrop: true,
+                    backdropContainer: 'body',
+                    backdropPadding: 0,
                     onStart: function() {
                         return $demo.addClass("disabled", true);
                     },
