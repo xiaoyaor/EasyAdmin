@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template'], function ($, undefined, Backend, Table, clipboard, Form, Template) {
+define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template', 'bootstrap-tour'], function ($, undefined, Backend, Table, clipboard, Form, Template,Tour) {
     var Controller = {
         index: function () {
             // 初始化表格参数配置
@@ -221,7 +221,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         btn: [__('Login'), __('Register')],
                         yes: function (index, layero) {
                             Fast.api.ajax({
-                                url: Config.easyadmin.api_url + '/user/login',
+                                url: Config.easyadmin.api_url + '/user/index/login',
                                 dataType: 'jsonp',
                                 data: {
                                     account: $("#inputAccount", layero).val(),
@@ -239,12 +239,12 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             return false;
                         },
                         success: function (layero, index) {
-                            $(".layui-layer-btn1", layero).prop("href", "http://www.easyadmin.vip/user/register.html").prop("target", "_blank");
+                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/index/register.html").prop("target", "_blank");
                         }
                     });
                 } else {
                     Fast.api.ajax({
-                        url: Config.easyadmin.api_url + '/user/index',
+                        url: Config.easyadmin.api_url + '/user/index/index',
                         dataType: 'jsonp',
                         data: {
                             user_id: userinfo.id,
@@ -259,7 +259,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             btn: [__('Logout'), __('Cancel')],
                             yes: function () {
                                 Fast.api.ajax({
-                                    url: Config.easyadmin.api_url + '/user/logout',
+                                    url: Config.easyadmin.api_url + '/user/index/logout',
                                     dataType: 'jsonp',
                                     data: {uid: userinfo.id, token: userinfo.token}
                                 }, function (data, ret) {
@@ -283,9 +283,54 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 }
             });
 
-            // 推荐安装
-            $(document).on("click", ".btn-guide", function () {
-                Fast.api.open('addon/guide',__('Guide'),{'width':'50%','heigh':'70%','maxmin':false});
+
+
+            //安装提示
+            $(function() {
+                    var $demo, duration, remaining, tour;
+                    $demo = $("#demo");
+                    duration = 5000;
+                    remaining = duration;
+                tour = new Tour({
+                onStart: function() {
+                    return $demo.addClass("disabled", true);
+                },
+                onEnd: function() {
+                    return $demo.removeClass("disabled", true);
+                },
+                debug: true,
+                steps: [
+                    {
+                        element: "a[data-id=10]",
+                        placement: "bottom",
+                        title: "安装引导一",
+                        content: "请先安装<a style='color: red'>基础插件</a>下的所有插件，完成后刷新页面，跳转到后台登录页面进行登录操作"
+                    },{
+                        element: "a[data-id=1]",
+                        placement: "bottom",
+                        title: "安装引导二",
+                        content: "<a style='color: red'>完整应用</a>下的所有插件包含完整的前后台，安装前请安装相应的依赖插件，每个完整应用都可作为一个完整网站运营"
+                    },{
+                        element: "a[data-id=3]",
+                        placement: "bottom",
+                        title: "安装引导三",
+                        content: "<a style='color: red'>开发测试</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
+                    },
+                ],
+                    template:"<div class='popover'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'>" +
+                        "<div class='btn-group'><button class='btn btn-sm btn-default' data-role='prev'>« 上一步</button><button class='btn btn-sm btn-default' data-role='next'>下一步 »</button>" +
+                        "<button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>暂停</button></div><button class='btn btn-sm btn-default' data-role='end'>知道了</button></div></div>"
+                });
+
+                // Initialize the tour
+                tour.init();
+
+                // Start the tour
+                tour.start();
+
+                $(".btn-guide").on('click',function(){
+                    tour.restart();
+                })
             });
 
             var install = function (name, version, force) {
@@ -785,7 +830,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         btn: [__('Login'), __('Register')],
                         yes: function (index, layero) {
                             Fast.api.ajax({
-                                url: Config.easyadmin.api_url + '/user/login',
+                                url: Config.easyadmin.api_url + '/user/index/login',
                                 dataType: 'jsonp',
                                 data: {
                                     account: $("#inputAccount", layero).val(),
@@ -803,12 +848,12 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             return false;
                         },
                         success: function (layero, index) {
-                            $(".layui-layer-btn1", layero).prop("href", "http://www.easyadmin.vip/user/register.html").prop("target", "_blank");
+                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/index/register.html").prop("target", "_blank");
                         }
                     });
                 } else {
                     Fast.api.ajax({
-                        url: Config.easyadmin.api_url + '/user/index',
+                        url: Config.easyadmin.api_url + '/user/index/index',
                         dataType: 'jsonp',
                         data: {
                             user_id: userinfo.id,
@@ -823,7 +868,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             btn: [__('Logout'), __('Cancel')],
                             yes: function () {
                                 Fast.api.ajax({
-                                    url: Config.easyadmin.api_url + '/user/logout',
+                                    url: Config.easyadmin.api_url + '/user/index/logout',
                                     dataType: 'jsonp',
                                     data: {uid: userinfo.id, token: userinfo.token}
                                 }, function (data, ret) {
@@ -1162,19 +1207,6 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                     }
                 }
             },
-            guide: {
-                get: function () {
-                    var guide = localStorage.getItem("easyadmin_guide");
-                    return guide ? JSON.parse(guide) : null;
-                },
-                set: function (data) {
-                    if (data) {
-                        localStorage.setItem("easyadmin_guide", JSON.stringify(data));
-                    } else {
-                        localStorage.removeItem("easyadmin_guide");
-                    }
-                }
-            }
         }
     };
     return Controller;

@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], function ($, undefined, Backend, undefined, AdminLTE, Form) {
+define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootstrap-tour'], function ($, undefined, Backend, undefined, AdminLTE, Form,Tour) {
     var Controller = {
         index: function () {
             //双击重新加载页面
@@ -456,8 +456,64 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form'], functi
                 if (nav.hasClass('disable-top-badge')) {
                     $("[data-menu='disable-top-badge']").attr('checked', 'checked');
                 }
-
             }
+            //首页提示
+            $(function() {
+                var $demo, duration, remaining, tour;
+                $demo = $("#demo");
+                duration = 5000;
+                remaining = duration;
+                tour = new Tour({
+                    onStart: function() {
+                        return $demo.addClass("disabled", true);
+                    },
+                    onEnd: function() {
+                        return $demo.removeClass("disabled", true);
+                    },
+                    debug: true,
+                    steps: [
+                        {
+                            element: "#firstnav",
+                            placement: "bottom",
+                            title: "安装引导",
+                            content: "导航栏"
+                        },{
+                            element: "#secondnav",
+                            placement: "bottom",
+                            title: "安装引导",
+                            content: "当前打开窗口"
+                        },{
+                            element: ".fa-toggle-on",
+                            placement: "bottom",
+                            title: "安装引导",
+                            content: "切换顶级菜单"
+                        },{
+                            element: ".fa-sitemap",
+                            placement: "bottom",
+                            title: "安装引导二",
+                            content: "网址列表"
+                        },{
+                            element: ".fa-arrows-alt",
+                            placement: "bottom",
+                            title: "安装引导三",
+                            content: "全屏切换"
+                        }
+                    ],
+                    template:"<div class='popover'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'>" +
+                        "<div class='btn-group'><button class='btn btn-sm btn-default' data-role='prev'>« 上一步</button><button class='btn btn-sm btn-default' data-role='next'>下一步 »</button>" +
+                        "<button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>暂停</button></div><button class='btn btn-sm btn-default' data-role='end'>知道了</button></div></div>"
+                });
+
+                // Initialize the tour
+                tour.init();
+
+                // Start the tour
+                tour.start();
+
+                $(".fa-question-circle-o").on('click',function(){
+                    tour.restart();
+                })
+            });
 
             $(window).resize();
 

@@ -14,7 +14,7 @@ return [
     'Offline install'                => '离线安装',
     'Refresh addon cache'            => '刷新插件缓存',
     'Userinfo'                       => '会员信息',
-    'Guide'                          => '安装推荐',
+    'Guide'                          => '安装提示',
     'Online store'                   => '在线商店',
     'Local addon'                    => '本地插件',
     'Conflict tips'                  => '此插件中发现和现有系统中部分文件发现冲突！以下文件将会被影响，请备份好相关文件后再继续操作',

@@ -166,10 +166,10 @@
 <div class="panel panel-default panel-intro">
     <div class="panel-heading" id="dashboardnav">
         {:build_heading(null, false)}
-        <ul class="nav nav-tabs nav-addtabs custom" role="tablist">
-            <li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"><i class="glyphicon glyphicon-align-justify"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu"></ul>
-            </li>
+       <ul class="nav nav-tabs "> <!--nav-addtabs custom role="tablist"-->
+<!--            <li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"><i class="glyphicon glyphicon-align-justify"></i> <b class="caret"></b></a>-->
+<!--                <ul class="dropdown-menu"></ul>-->
+<!--            </li>-->
             <li class="active"><a href="#one" data-toggle="tab">{:__('Dashboard')}</a></li>
             {:hook('fetch_to_dashboard','tabTitle')}
             <li><a href="#" id="custom-view" style="color: #18bc9c">{:__('Custom')}</a></li>
