@@ -175,8 +175,9 @@ if (!function_exists('build_heading')) {
         }else{
             $menu=Config::get('menu');
             foreach ($menu as $key=>$value){
-                if ($path == $value['name']){
-                    $data=['title' => "Addon", 'remark' => "Addon tips"];
+                if ($path == $value['name']||$path.'/index' == $value['name']){
+                    $data=['title' => $value['title'], 'remark' => $value['remark']];
+                    break;
                 }
             }
         }

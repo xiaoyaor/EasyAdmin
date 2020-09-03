@@ -352,7 +352,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         #success {
-            background: #3C5675;
+            background: #18bc9c;
         }
 
         #error a, .error a {
