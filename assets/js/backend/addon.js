@@ -316,6 +316,26 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             placement: "bottom",
                             title: "安装引导三",
                             content: "<a style='color: red'>开发测试</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
+                        },{
+                            element: ".bootstrap-table",
+                            placement: "top",
+                            title: "安装引导四",
+                            content: "<a style='color: red'>插件列表</a>，提供插件安装、升级、卸载服务"
+                        },{
+                            element: ".plupload",
+                            placement: "top",
+                            title: "安装引导五",
+                            content: "<a style='color: red'>离线安装</a>，安装离线插件"
+                        },{
+                            element: "a[data-url='addon/downloaded']",
+                            placement: "top",
+                            title: "安装引导六",
+                            content: "<a style='color: red'>本地插件</a>，查看本地安装的所有插件"
+                        },{
+                            element: ".btn-userinfo",
+                            placement: "top",
+                            title: "安装引导七",
+                            content: "<a style='color: red'>登录会员</a>，登录easyadmin官方会员，提供付费下载服务"
                         },
                     ],
                     template:"<div class='popover'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'>" +
