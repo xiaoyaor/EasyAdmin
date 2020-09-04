@@ -305,7 +305,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             element: "a[data-id=10]",
                             placement: "bottom",
                             title: "安装引导一",
-                            content: "请先安装<a style='color: red'>基础插件</a>下的所有插件，完成后刷新页面，跳转到后台登录页面进行登录，登录后再继续安装插件操作"
+                            content: "请先安装<a style='color: red'>基础插件</a>下的所有插件，请按照插件依赖顺序安装，安装完权限管理插件后需要进行登录，请登录后再继续安装插件操作"
                         },{
                             element: "a[data-id=1]",
                             placement: "bottom",
