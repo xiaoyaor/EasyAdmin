@@ -165,9 +165,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         //新建数据库并导入sql
-        // $pdo->query("CREATE DATABASE IF NOT EXISTS `{$mysqlDatabase}` CHARACTER SET utf8 COLLATE utf8_general_ci;");
-        // $pdo->query("USE `{$mysqlDatabase}`");
-        // $pdo->exec($sql);
+         $pdo->query("CREATE DATABASE IF NOT EXISTS `{$mysqlDatabase}` CHARACTER SET utf8 COLLATE utf8_general_ci;");
+         //$pdo->query("USE `{$mysqlDatabase}`");
+         //$pdo->exec($sql);
 
         //新建随机后台地址
         $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
