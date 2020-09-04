@@ -1,7 +1,7 @@
 <?php
 // 这是系统自动生成的公共文件
 use addons\category\app\common\model\Category;
-use addons\conf\app\common\model\Config as ConfigModel;
+use addons\setting\app\common\model\Index as ConfigModel;
 use Overtrue\Pinyin\Pinyin;
 use think\exception\FileException;
 use think\facade\Config;
