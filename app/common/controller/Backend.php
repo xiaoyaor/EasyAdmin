@@ -4,6 +4,7 @@ namespace app\common\controller;
 
 use app\admin\library\Auth;
 use app\BaseController;
+use easyadmin\Tree;
 use think\App;
 use think\facade\Config;
 use think\facade\Lang;
