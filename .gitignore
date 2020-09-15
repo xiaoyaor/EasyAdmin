@@ -2,10 +2,8 @@
 /.vscode
 /vendor
 *.log
+*.bat
 .env
-start.bat
-/start.bat
-/cmd.bat
 /composer.lock
 /addons/
 /app/admin/command/Install/install.lock
