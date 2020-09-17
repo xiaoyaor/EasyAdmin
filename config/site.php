@@ -46,4 +46,5 @@ return array (
   'backend_name' => 'XnZUrsbCijk',
   'homepage' => '',
   'sidebar_collapse' => '0',
+  'default_app' => '',
 );
