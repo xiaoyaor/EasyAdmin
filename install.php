@@ -176,6 +176,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         //写入ENV
         $EnvData = array(
             'APP_DEBUG' => 'true',
+            'APP_HTML' => 'true',
             'APP' => array(
                 'DEFAULT_TIMEZONE' => 'Asia/Shanghai',
                 'ADMIN' => $adminName,

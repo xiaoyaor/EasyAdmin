@@ -12,6 +12,10 @@
 // [ 应用入口文件 ]
 namespace think;
 
+//判断输出静态文件
+require __DIR__ . '/static.php';
+
+//加载第三方引用
 require __DIR__ . '/vendor/autoload.php';
 
 // 执行HTTP应用并响应
