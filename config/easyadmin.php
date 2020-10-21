@@ -30,6 +30,8 @@ return [
     'version'             => '1.0.0.20200210_dev',
     //框架名称
     'url'                 => 'https://www.easyadmin.vip',
+    //演示
+    'demo_url'             => 'https://demo.easyadmin.vip',
     //官方文档
     'doc_url'             => 'https://doc.easyadmin.vip',
     //交流社区
