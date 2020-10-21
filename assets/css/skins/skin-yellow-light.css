@@ -82,7 +82,7 @@
 }
 .skin-yellow-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-yellow-light .sidebar-menu > li:hover > a,
 .skin-yellow-light .sidebar-menu > li.active > a {
@@ -94,7 +94,13 @@
   border-left-color: #f39c12;
 }
 .skin-yellow-light .sidebar-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
+}
+.skin-yellow-light .sidebar-menu > li:hover > a,
+.skin-yellow-light .sidebar-menu > li.active > a {
+  color: #000;
+  background: #e2e2e2;
+  border-left-color: #f39c12;
 }
 .skin-yellow-light .sidebar-menu > li > .treeview-menu {
   background: #f4f4f5;
@@ -106,19 +112,22 @@
   text-decoration: none;
 }
 .skin-yellow-light .treeview-menu > li > a {
-  color: #777;
+  color: #444;
 }
-.skin-yellow-light .treeview-menu > li.active > a,
-.skin-yellow-light .treeview-menu > li > a:hover {
-  color: #000;
+.skin-yellow-light .sidebar-menu  > li.active > a:last-child,
+.skin-yellow-light .sidebar-menu  > li > a:last-child:hover,
+.skin-yellow-light .treeview-menu > li.active > a:last-child,
+.skin-yellow-light .treeview-menu > li > a:last-child:hover {
+  color: #fff;
   background: #f39c12;
 }
 .skin-yellow-light .treeview-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-yellow-light .sidebar-form {
   border-radius: 3px;
   border: 1px solid #e8e8e8;
+  background: #e8e8e8;
   margin: 10px 10px;
 }
 .skin-yellow-light .sidebar-form input[type="text"],

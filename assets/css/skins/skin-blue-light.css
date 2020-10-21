@@ -82,7 +82,13 @@
 }
 .skin-blue-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  font-weight: 600;
+  /*font-weight: 600;*/
+}
+.skin-blue-light .sidebar-menu > li.active {
+  border-left-color: #007bff;
+}
+.skin-blue-light .sidebar-menu > li.active > a {
+  /*font-weight: 600;*/
 }
 .skin-blue-light .sidebar-menu > li:hover > a,
 .skin-blue-light .sidebar-menu > li.active > a {
@@ -90,13 +96,8 @@
   background: #e2e2e2;
   border-left-color: #007bff;
 }
-.skin-blue-light .sidebar-menu > li.active {
-  border-left-color: #007bff;
-}
-.skin-blue-light .sidebar-menu > li.active > a {
-  font-weight: 600;
-}
 .skin-blue-light .sidebar-menu > li > .treeview-menu {
+  /*margin: 0 1px;*/
   background: #f4f4f5;
 }
 .skin-blue-light .sidebar a {
@@ -106,19 +107,22 @@
   text-decoration: none;
 }
 .skin-blue-light .treeview-menu > li > a {
-  color: #777;
+  color: #444;
 }
-.skin-blue-light .treeview-menu > li.active > a,
-.skin-blue-light .treeview-menu > li > a:hover {
+.skin-blue-light .sidebar-menu  > li.active > a:last-child,
+.skin-blue-light .sidebar-menu  > li > a:last-child:hover,
+.skin-blue-light .treeview-menu > li.active > a:last-child,
+.skin-blue-light .treeview-menu > li > a:last-child:hover {
   color: white;
   background-color: #007bff;
 }
 .skin-blue-light .treeview-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-blue-light .sidebar-form {
   border-radius: 3px;
   border: 1px solid #e8e8e8;
+  background: #e8e8e8;
   margin: 10px 10px;
 }
 .skin-blue-light .sidebar-form input[type="text"],

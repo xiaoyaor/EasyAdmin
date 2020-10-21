@@ -48,7 +48,7 @@
 }
 .skin-white-light .main-header .navbar .navbar-custom-menu .navbar-nav > li > a,
 .skin-white-light .main-header .navbar .navbar-right > li > a {
-  border-left: 1px solid #eee;
+  /*border-left: 1px solid #eee;*/
   border-right-width: 0;
 }
 .skin-white-light .main-header > .logo {
@@ -102,19 +102,19 @@
 }
 .skin-white-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-white-light .sidebar-menu > li:hover > a,
 .skin-white-light .sidebar-menu > li.active > a {
-  color: #000;
-  background: #e2e2e2;
+  color: #444;
+  background: #ebe9e9;
   border-left-color: white;
 }
 .skin-white-light .sidebar-menu > li.active {
   border-left-color: #fff;
 }
 .skin-white-light .sidebar-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-white-light .sidebar-menu > li > .treeview-menu {
   background: #f4f4f5;
@@ -126,19 +126,22 @@
   text-decoration: none;
 }
 .skin-white-light .treeview-menu > li > a {
-  color: #777;
+  color: #444;
 }
-.skin-white-light .treeview-menu > li.active > a,
-.skin-white-light .treeview-menu > li > a:hover {
+.skin-white-light .sidebar-menu  > li.active > a:last-child,
+.skin-white-light .sidebar-menu  > li > a:last-child:hover,
+.skin-white-light .treeview-menu > li.active > a:last-child,
+.skin-white-light .treeview-menu > li > a:last-child:hover {
   color: #000;
-  background-color: white;
+  background-color: #fcfcfc;
 }
 .skin-white-light .treeview-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-white-light .sidebar-form {
   border-radius: 3px;
   border: 1px solid #e8e8e8;
+  background: #e8e8e8;
   margin: 10px 10px;
 }
 .skin-white-light .sidebar-form input[type="text"],
@@ -181,13 +184,17 @@
   border-bottom: none;
 }
 .right-side-float-skin{
-  background: black !important;
+  background: white !important;
 }
 #secondnav .nav-addtabs > li.active {
-  border: black 0 solid;
+  border: white 0 solid;
 }
 #secondnav .nav-addtabs > li:hover,
 #secondnav .nav-addtabs > li:focus {
-  border: black 0 solid;
+  border: white 0 solid;
+}
+.btn-info {
+  color: black !important;
+  border-color: white !important;
 }
 /*# sourceMappingURL=skin-white-light.css.map */

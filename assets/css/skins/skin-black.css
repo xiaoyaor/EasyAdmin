@@ -81,7 +81,7 @@
   border-left-color: black;
 }
 .skin-black .sidebar-menu > li > .treeview-menu {
-  margin: 0 1px;
+  /*margin: 0 1px;*/
   background: #2c3b41;
 }
 .skin-black .sidebar a {
@@ -93,8 +93,10 @@
 .skin-black .treeview-menu > li > a {
   color: #8aa4af;
 }
-.skin-black .treeview-menu > li.active > a,
-.skin-black .treeview-menu > li > a:hover {
+.skin-black .sidebar-menu  > li.active > a:last-child,
+.skin-black .sidebar-menu  > li > a:last-child:hover,
+.skin-black .treeview-menu > li.active > a:last-child,
+.skin-black .treeview-menu > li > a:last-child:hover {
   color: #fff;
   background: black;
 }

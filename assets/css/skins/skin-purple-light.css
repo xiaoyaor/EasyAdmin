@@ -1,5 +1,5 @@
 /*
- * Skin: Purple
+ * Skin: PurpleLight
  * ------------
  */
 .skin-purple-light .main-header .navbar {
@@ -82,7 +82,7 @@
 }
 .skin-purple-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-purple-light .sidebar-menu > li:hover > a,
 .skin-purple-light .sidebar-menu > li.active > a {
@@ -94,7 +94,13 @@
   border-left-color: #605ca8;
 }
 .skin-purple-light .sidebar-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
+}
+.skin-purple-light .sidebar-menu > li:hover > a,
+.skin-purple-light .sidebar-menu > li.active > a {
+  color: #000;
+  background: #e2e2e2;
+  border-left-color: #605ca8;
 }
 .skin-purple-light .sidebar-menu > li > .treeview-menu {
   background: #f4f4f5;
@@ -106,15 +112,17 @@
   text-decoration: none;
 }
 .skin-purple-light .treeview-menu > li > a {
-  color: #777;
+  color: #444;
 }
-.skin-purple-light .treeview-menu > li.active > a,
-.skin-purple-light .treeview-menu > li > a:hover {
-  color: #000;
+.skin-purple-light .sidebar-menu  > li.active > a:last-child,
+.skin-purple-light .sidebar-menu  > li > a:last-child:hover,
+.skin-purple-light .treeview-menu > li.active > a:last-child,
+.skin-purple-light .treeview-menu > li > a:last-child:hover {
+  color: #fff;
   background: #605ca8;
 }
 .skin-purple-light .treeview-menu > li.active > a {
-  font-weight: 600;
+  /*font-weight: 600;*/
 }
 .skin-purple-light .sidebar-form {
   border-radius: 3px;

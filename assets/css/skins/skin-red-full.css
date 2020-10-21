@@ -77,37 +77,39 @@
 .skin-red-full .sidebar-menu > li:hover > a,
 .skin-red-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #d24638;
-  border-left-color: #bb2516;
+  background: #e74c3c;
+  border-left-color: #e74c3c;
 }
 .skin-red-full .sidebar-menu > li > .treeview-menu {
-  margin: 0 1px;
+  /*margin: 0 1px;*/
   background: #d83120;
 }
 .skin-red-full .sidebar a {
-  color: #b8c7ce;
+  color: #f6e6e4;
 }
 .skin-red-full .sidebar a:hover {
   text-decoration: none;
 }
 .skin-red-full .treeview-menu > li > a {
-  color: #8aa4af;
+  color: #f6e6e4;
 }
-.skin-red-full .treeview-menu > li.active > a,
-.skin-red-full .treeview-menu > li > a:hover {
+.skin-red-full .sidebar-menu  > li.active > a:last-child,
+.skin-red-full .sidebar-menu  > li > a:last-child:hover,
+.skin-red-full .treeview-menu > li.active > a:last-child,
+.skin-red-full .treeview-menu > li > a:last-child:hover {
   color: #fff;
-  background-color: #bb2516;
+  background-color: #e74c3c;
 }
 .skin-red-full .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #e43725;
-  background-color: #e43725;
+  border: 1px solid #f95a48;
+  background-color: #f95a48;
   margin: 10px 10px;
 }
 .skin-red-full .sidebar-form input[type="text"],
 .skin-red-full .sidebar-form .btn {
   box-shadow: none;
-  background-color: #bb2516;
+  background-color: #f95a48;
   border: 1px solid transparent;
   height: 35px;
 }
@@ -117,6 +119,16 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 2px;
+}
+.skin-red-full .sidebar-form input[type="text"]::-moz-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.skin-red-full .sidebar-form input[type="text"]:-ms-input-placeholder {
+  color: #fff;
+}
+.skin-red-full .sidebar-form input[type="text"]::-webkit-input-placeholder {
+  color: #fff;
 }
 .skin-red-full .sidebar-form input[type="text"]:focus,
 .skin-red-full .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
@@ -134,7 +146,7 @@
   border-left-color: #fff;
 }
 .skin-red-full .sidebar-form .btn {
-  color: #999;
+  color: #fff;
   border-top-left-radius: 0;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;

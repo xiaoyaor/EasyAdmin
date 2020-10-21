@@ -81,7 +81,7 @@
   border-left-color: #007bff;
 }
 .skin-blue .sidebar-menu > li > .treeview-menu {
-  margin: 0 1px;
+  /*margin: 0 1px;*/
   background: #2c3b41;
 }
 .skin-blue .sidebar a {
@@ -93,8 +93,10 @@
 .skin-blue .treeview-menu > li > a {
   color: #8aa4af;
 }
-.skin-blue .treeview-menu > li.active > a,
-.skin-blue .treeview-menu > li > a:hover {
+.skin-blue .sidebar-menu  > li.active > a:last-child,
+.skin-blue .sidebar-menu  > li > a:last-child:hover,
+.skin-blue .treeview-menu > li.active > a:last-child,
+.skin-blue .treeview-menu > li > a:last-child:hover {
   color: #fff;
   background-color: #007bff;
 }

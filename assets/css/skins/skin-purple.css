@@ -77,11 +77,11 @@
 .skin-purple .sidebar-menu > li:hover > a,
 .skin-purple .sidebar-menu > li.active > a {
   color: #fff;
-  background: #1e282c;
+  background: #222d32;
   border-left-color: #605ca8;
 }
 .skin-purple .sidebar-menu > li > .treeview-menu {
-  margin: 0 1px;
+  /*margin: 0 1px;*/
   background: #2c3b41;
 }
 .skin-purple .sidebar a {
@@ -93,8 +93,10 @@
 .skin-purple .treeview-menu > li > a {
   color: #8aa4af;
 }
-.skin-purple .treeview-menu > li.active > a,
-.skin-purple .treeview-menu > li > a:hover {
+.skin-purple .sidebar-menu  > li.active > a:last-child,
+.skin-purple .sidebar-menu  > li > a:last-child:hover,
+.skin-purple .treeview-menu > li.active > a:last-child,
+.skin-purple .treeview-menu > li > a:last-child:hover {
   color: #fff;
   background: #605ca8;
 }

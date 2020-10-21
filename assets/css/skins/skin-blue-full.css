@@ -77,37 +77,39 @@
 .skin-blue-full .sidebar-menu > li:hover > a,
 .skin-blue-full .sidebar-menu > li.active > a {
   color: #fff;
-  background: #036dde;
-  border-left-color: #08618c;
+  background: #007bff;
+  border-left-color: #007bff;
 }
 .skin-blue-full .sidebar-menu > li > .treeview-menu {
-  margin: 0 1px;
-  background: #0376f0;
+  /*margin: 0 1px;*/
+  background: #0067d5;
 }
 .skin-blue-full .sidebar a {
-  color: #b8c7ce;
+  color: #acd4ff;
 }
 .skin-blue-full .sidebar a:hover {
   text-decoration: none;
 }
 .skin-blue-full .treeview-menu > li > a {
-  color: #8aa4af;
+  color: #acd4ff;
 }
-.skin-blue-full .treeview-menu > li.active > a,
-.skin-blue-full .treeview-menu > li > a:hover {
+.skin-blue-full .sidebar-menu  > li.active > a:last-child,
+.skin-blue-full .sidebar-menu  > li > a:last-child:hover,
+.skin-blue-full .treeview-menu > li.active > a:last-child,
+.skin-blue-full .treeview-menu > li > a:last-child:hover {
   color: #fff;
-  background-color: #08618c;
+  background-color: #007bff;
 }
 .skin-blue-full .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #08618c;
-  background-color: #08618c;
+  border: 1px solid #278fff;
+  background-color: #278fff;
   margin: 10px 10px;
 }
 .skin-blue-full .sidebar-form input[type="text"],
 .skin-blue-full .sidebar-form .btn {
   box-shadow: none;
-  background-color: #08618c;
+  background-color: #278fff;
   border: 1px solid transparent;
   height: 35px;
 }
@@ -117,6 +119,16 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 2px;
+}
+.skin-blue-full .sidebar-form input[type="text"]::-moz-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.skin-blue-full .sidebar-form input[type="text"]:-ms-input-placeholder {
+  color: #fff;
+}
+.skin-blue-full .sidebar-form input[type="text"]::-webkit-input-placeholder {
+  color: #fff;
 }
 .skin-blue-full .sidebar-form input[type="text"]:focus,
 .skin-blue-full .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
@@ -134,7 +146,7 @@
   border-left-color: #fff;
 }
 .skin-blue-full .sidebar-form .btn {
-  color: #999;
+  color: #fff;
   border-top-left-radius: 0;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
