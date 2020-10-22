@@ -1,4 +1,4 @@
-define(['easy', 'template', 'moment'], function (Fast, Template, Moment) {
+define(['easy', 'template', 'moment'], function (Easy, Template, Moment) {
     var Frontend = {
         api: Easy.api,
         init: function () {

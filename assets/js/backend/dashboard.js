@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', 'echarts', 'echarts-theme', 'template'], function ($, undefined, undefined, Backend, fast,Datatable, Table, Echarts, undefined, Template) {
+define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', 'echarts', 'echarts-theme', 'template'], function ($, undefined, undefined, Backend, Easy,Datatable, Table, Echarts, undefined, Template) {
 
     var Controller = {
         index: function () {
