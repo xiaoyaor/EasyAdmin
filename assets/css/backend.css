@@ -12,6 +12,9 @@
 @import url("../libs/bootstrap-select/dist/css/bootstrap-select.min.css");
 @import url("../libs/easyadmin-selectpage/selectpage.css");
 @import url("../libs/bootstrap-slider/slider.css");
+@import url("../libs/jquery-treegrid/css/jquery.treegrid.css");
+@import url("../libs/bootstrap-table/dist/extensions/tree-column/bootstrap-table-tree-column.css");
+@import url("../libs/jstree/dist/themes/default/style.min.css");
 html,
 body {
   height: 100%;

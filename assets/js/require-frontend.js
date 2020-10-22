@@ -7,7 +7,7 @@ require.config({
         }
     ],
     //在打包压缩时将会把include中的模块合并到主文件中
-    include: ['css', 'layer', 'toastr', 'fast', 'frontend', 'frontend-init'],
+    include: ['css', 'layer', 'toastr', 'easy', 'frontend', 'frontend-init'],
     paths: {
         'lang': "empty:",
         'form': 'require-form',

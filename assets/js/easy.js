@@ -1,5 +1,5 @@
 define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefined, Toastr, Layer, Lang) {
-    var Fast = {
+    var Easy = {
         config: {
             //toastr默认配置
             toastr: {
@@ -70,17 +70,17 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
                     dataType: "json",
                     success: function (ret) {
                         index && Layer.close(index);
-                        ret = Fast.events.onAjaxResponse(ret);
+                        ret = Easy.events.onAjaxResponse(ret);
                         if (ret.code === 1) {
-                            Fast.events.onAjaxSuccess(ret, success);
+                            Easy.events.onAjaxSuccess(ret, success);
                         } else {
-                            Fast.events.onAjaxError(ret, error);
+                            Easy.events.onAjaxError(ret, error);
                         }
                     },
                     error: function (xhr) {
                         index && Layer.close(index);
                         var ret = {code: xhr.status, msg: xhr.statusText, data: null};
-                        Fast.events.onAjaxError(ret, error);
+                        Easy.events.onAjaxError(ret, error);
                     }
                 }, options);
                 $.ajax(options);
@@ -124,9 +124,9 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
             //打开一个弹出窗口
             open: function (url, title, options) {
                 title = options && options.title ? options.title : (title ? title : "");
-                url = Fast.api.fixurl(url);
+                url = Easy.api.fixurl(url);
                 url = url + (url.indexOf("?") > -1 ? "&" : "?") + "dialog=1";
-                var area = Fast.config.openArea != undefined ? Fast.config.openArea : [$(window).width() > 800 ? '70%' : '95%', $(window).height() > 600 ? '95%' : '95%'];
+                var area = Easy.config.openArea != undefined ? Easy.config.openArea : [$(window).width() > 800 ? '70%' : '95%', $(window).height() > 600 ? '95%' : '95%'];
                 area = options && options.width && options.heigh ? [options.width , options.heigh] : area;
                 var shade = options && options.shade ? options.shade : 0.3;
                 var shadeClose = options && options.shadeClose ? options.shadeClose : false;
@@ -150,7 +150,7 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
                         try {
                             var frame = Layer.getChildFrame('html', index);
                             var layerfooter = frame.find(".layer-footer");
-                            Fast.api.layerfooter(layero, index, that);
+                            Easy.api.layerfooter(layero, index, that);
 
                             //绑定事件
                             if (layerfooter.size() > 0) {
@@ -162,7 +162,7 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
                                     var target = layerfooter[0];
                                     // 创建观察者对象
                                     var observer = new MutationObserver(function (mutations) {
-                                        Fast.api.layerfooter(layero, index, that);
+                                        Easy.api.layerfooter(layero, index, that);
                                         mutations.forEach(function (mutation) {
                                         });
                                     });
@@ -316,7 +316,7 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
             // 对相对地址进行处理
             $.ajaxSetup({
                 beforeSend: function (xhr, setting) {
-                    setting.url = Fast.api.fixurl(setting.url);
+                    setting.url = Easy.api.fixurl(setting.url);
                 }
             });
             Layer.config({
@@ -339,7 +339,7 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
 
             //公共代码
             //配置Toastr的参数
-            Toastr.options = Fast.config.toastr;
+            Toastr.options = Easy.config.toastr;
         }
     };
     //将Layer暴露到全局中去
@@ -347,11 +347,11 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
     //将Toastr暴露到全局中去
     window.Toastr = Toastr;
     //将语言方法暴露到全局中去
-    window.__ = Fast.lang;
-    //将Fast渲染至全局
-    window.Fast = Fast;
+    window.__ = Easy.lang;
+    //将Easy渲染至全局
+    window.Easy = Easy;
 
     //默认初始化执行的代码
-    Fast.init();
-    return Fast;
+    Easy.init();
+    return Easy;
 });

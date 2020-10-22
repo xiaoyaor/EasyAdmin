@@ -1,16 +1,16 @@
-define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', 'echarts', 'echarts-theme', 'template'], function ($, undefined, undefined, Backend, easy,Datatable, Table, Echarts, undefined, Template) {
+define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', 'echarts', 'echarts-theme', 'template'], function ($, undefined, undefined, Backend, fast,Datatable, Table, Echarts, undefined, Template) {
 
     var Controller = {
         index: function () {
             // 插件配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).data("name");
-                easy.api.open("addon/config?name=" + name, __('Custom'));
+                Easy.api.open("addon/config?name=" + name, __('Custom'));
             });
 
             // 显示配置
             $(document).on("click", "#custom-view", function () {
-                easy.api.open("dashboard/config?name=all", __('Custom'));
+                Easy.api.open("dashboard/config?name=all", __('Custom'));
             });
 
             var firstnav = $("#dashboardnav .nav-addtabs");
@@ -23,7 +23,6 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
 
         },
         config: function () {
-            // 初始化表格参数配置
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
@@ -88,7 +87,7 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
             };
 
             var dashboard = function (name, action,value) {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'dashboard/config/name/'+name,
                     data: {'row[name]': name, 'row[action]': action, 'row[value]': value}
                 }, function (data, ret) {

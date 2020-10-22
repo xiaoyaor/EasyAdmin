@@ -1,6 +1,6 @@
-define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
+define(['easy', 'template', 'moment'], function (Fast, Template, Moment) {
     var Frontend = {
-        api: Fast.api,
+        api: Easy.api,
         init: function () {
             var si = {};
             //发送验证码
@@ -56,7 +56,7 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
             $('body').popover({selector: '[data-toggle="popover"]'});
         }
     };
-    Frontend.api = $.extend(Fast.api, Frontend.api);
+    Frontend.api = $.extend(Easy.api, Frontend.api);
     //将Template渲染至全局,以便于在子框架中调用
     window.Template = Template;
     //将Moment渲染至全局,以便于在子框架中调用

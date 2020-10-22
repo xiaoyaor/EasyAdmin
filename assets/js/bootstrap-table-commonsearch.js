@@ -61,8 +61,8 @@
         for (var i in pColumns) {
             var vObjCol = pColumns[i];
             if (!vObjCol.checkbox && vObjCol.field !== 'operate' && vObjCol.searchable && vObjCol.operate !== false) {
-                var query = Fast.api.query(vObjCol.field);
-                var operate = Fast.api.query(vObjCol.field + "-operate");
+                var query = Easy.api.query(vObjCol.field);
+                var operate = Easy.api.query(vObjCol.field + "-operate");
 
                 vObjCol.defaultValue = that.options.renderDefault && query ? query : (typeof vObjCol.defaultValue === 'undefined' ? '' : vObjCol.defaultValue);
                 vObjCol.operate = that.options.renderDefault && operate ? operate : (typeof vObjCol.operate === 'undefined' ? '=' : vObjCol.operate);

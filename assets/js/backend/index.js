@@ -61,11 +61,11 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                     success: function (ret) {
                         require(['template'], function (Template) {
                             var install = function (name, title) {
-                                Fast.api.ajax({
+                                Easy.api.ajax({
                                     url: 'addon/install',
                                     data: {name: name, faversion: Config.easyadmin.version}
                                 }, function (data, ret) {
-                                    Fast.api.refreshmenu();
+                                    Easy.api.refreshmenu();
                                 });
                             };
                             $(document).on('click', '.btn-install', function () {
@@ -194,7 +194,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
 
             //刷新菜单事件
             $(document).on('refresh', '.sidebar-menu', function () {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'index/index',
                     data: {action: 'refreshmenu'}
                 }, function (data) {

@@ -41,7 +41,7 @@ $.AdminLTE.options = {
     navbarMenuHeight: "200px", //The height of the inner menu
     //General animation speed for JS animated elements such as box collapse/expand and
     //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
-    //'fast', 'normal', or 'slow'
+    //'easy', 'normal', or 'slow'
     animationSpeed: 300,
     //Sidebar push menu toggle button selector
     sidebarToggleSelector: "[data-toggle='offcanvas']",

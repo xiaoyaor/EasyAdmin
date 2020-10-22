@@ -220,7 +220,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         resize: false,
                         btn: [__('Login'), __('Register')],
                         yes: function (index, layero) {
-                            Fast.api.ajax({
+                            Easy.api.ajax({
                                 url: Config.easyadmin.api_url + '/user/index/login',
                                 dataType: 'jsonp',
                                 data: {
@@ -243,7 +243,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         }
                     });
                 } else {
-                    Fast.api.ajax({
+                    Easy.api.ajax({
                         url: Config.easyadmin.api_url + '/user/index/index',
                         dataType: 'jsonp',
                         data: {
@@ -258,7 +258,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             resize: false,
                             btn: [__('Logout'), __('Cancel')],
                             yes: function () {
-                                Fast.api.ajax({
+                                Easy.api.ajax({
                                     url: Config.easyadmin.api_url + '/user/index/logout',
                                     dataType: 'jsonp',
                                     data: {uid: userinfo.id, token: userinfo.token}
@@ -359,7 +359,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/install',
                     data: {
                         name: name,
@@ -378,7 +378,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         icon: 1
                     });
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     //如果是需要购买的插件则弹出二维码提示
                     if (ret && ret.code === -1) {
@@ -403,7 +403,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             $(".operate[data-name='" + name + "'] .btn-install").trigger("click");
                             return;
                         }
-                        top.Fast.api.open(ret.data.payurl, __('Pay now'), {
+                        top.Easy.api.open(ret.data.payurl, __('Pay now'), {
                             area: ["650px", "700px"],
                             end: function () {
                                 top.Layer.alert(__('Pay tips'));
@@ -433,14 +433,14 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             };
 
             var uninstall = function (name, force) {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/uninstall',
                     data: {name: name, force: force ? 1 : 0}
                 }, function (data, ret) {
                     delete Config['addons'][name];
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     if (ret && ret.code === -3) {
                         //插件目录发现影响全局的文件
@@ -466,7 +466,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             };
 
             var operate = function (name, action, force) {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/state',
                     data: {name: name, action: action, force: force ? 1 : 0}
                 }, function (data, ret) {
@@ -474,7 +474,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                     addon.state = action === 'enable' ? 1 : 0;
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     if (ret && ret.code === -3) {
                         //插件目录发现影响全局的文件
@@ -503,14 +503,14 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/upgrade',
                     data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     Layer.alert(ret.msg);
                     return false;
@@ -558,13 +558,13 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             // 点击配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/config?name=" + name, __('Setting'));
+                Easy.api.open("addon/config?name=" + name, __('Setting'));
             });
 
             // 依赖插件
             $(document).on("click", ".btn-warning", function () {
                 var name = $(this).closest(".operate").data("name");
-                //Fast.api.open("addon/addons?name=" + name, __('Setting'));
+                //Easy.api.open("addon/addons?name=" + name, __('Setting'));
             });
 
             // 点击启用/禁用
@@ -851,7 +851,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         resize: false,
                         btn: [__('Login'), __('Register')],
                         yes: function (index, layero) {
-                            Fast.api.ajax({
+                            Easy.api.ajax({
                                 url: Config.easyadmin.api_url + '/user/index/login',
                                 dataType: 'jsonp',
                                 data: {
@@ -874,7 +874,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         }
                     });
                 } else {
-                    Fast.api.ajax({
+                    Easy.api.ajax({
                         url: Config.easyadmin.api_url + '/user/index/index',
                         dataType: 'jsonp',
                         data: {
@@ -889,7 +889,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             resize: false,
                             btn: [__('Logout'), __('Cancel')],
                             yes: function () {
-                                Fast.api.ajax({
+                                Easy.api.ajax({
                                     url: Config.easyadmin.api_url + '/user/index/logout',
                                     dataType: 'jsonp',
                                     data: {uid: userinfo.id, token: userinfo.token}
@@ -918,7 +918,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/install',
                     data: {
                         name: name,
@@ -937,7 +937,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         icon: 1
                     });
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     //如果是需要购买的插件则弹出二维码提示
                     if (ret && ret.code === -1) {
@@ -962,7 +962,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             $(".operate[data-name='" + name + "'] .btn-install").trigger("click");
                             return;
                         }
-                        top.Fast.api.open(ret.data.payurl, __('Pay now'), {
+                        top.Easy.api.open(ret.data.payurl, __('Pay now'), {
                             area: ["650px", "700px"],
                             end: function () {
                                 top.Layer.alert(__('Pay tips'));
@@ -992,14 +992,14 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             };
 
             var uninstall = function (name, force) {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/uninstall',
                     data: {name: name, force: force ? 1 : 0}
                 }, function (data, ret) {
                     delete Config['addons'][name];
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     if (ret && ret.code === -3) {
                         //插件目录发现影响全局的文件
@@ -1025,7 +1025,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             };
 
             var operate = function (name, action, force) {
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/state',
                     data: {name: name, action: action, force: force ? 1 : 0}
                 }, function (data, ret) {
@@ -1033,7 +1033,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                     addon.state = action === 'enable' ? 1 : 0;
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     if (ret && ret.code === -3) {
                         //插件目录发现影响全局的文件
@@ -1062,14 +1062,14 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
-                Fast.api.ajax({
+                Easy.api.ajax({
                     url: 'addon/upgrade',
                     data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
                     Layer.closeAll();
                     $('.btn-refresh').trigger('click');
-                    Fast.api.refreshmenu();
+                    Easy.api.refreshmenu();
                 }, function (data, ret) {
                     Layer.alert(ret.msg);
                     return false;
@@ -1117,13 +1117,13 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             // 点击配置
             $(document).on("click", ".btn-config", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/config?name=" + name, __('Setting'));
+                Easy.api.open("addon/config?name=" + name, __('Setting'));
             });
 
             // 依赖插件
             $(document).on("click", ".btn-warning", function () {
                 var name = $(this).closest(".operate").data("name");
-                Fast.api.open("addon/addons?name=" + name, __('Setting'));
+                Easy.api.open("addon/addons?name=" + name, __('Setting'));
             });
 
             // 点击启用/禁用

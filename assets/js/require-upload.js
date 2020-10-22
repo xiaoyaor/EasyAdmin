@@ -180,7 +180,7 @@ define(['jquery', 'bootstrap', 'plupload', 'template'], function ($, undefined, 
 
                         //上传URL
                         url = url ? url : Config.upload.uploadurl;
-                        url = Fast.api.fixurl(url);
+                        url = Easy.api.fixurl(url);
                         //最大可上传文件大小
                         maxsize = typeof maxsize !== "undefined" ? maxsize : Config.upload.maxsize;
                         //文件类型
@@ -302,7 +302,7 @@ define(['jquery', 'bootstrap', 'plupload', 'template'], function ($, undefined, 
                                     if (!j) {
                                         return true;
                                     }
-                                    var data = {url: j, fullurl: Fast.api.cdnurl(j), data: $(that).data(), key: i, index: i, value: (json && typeof json[i] !== 'undefined' ? json[i] : null)};
+                                    var data = {url: j, fullurl: Easy.api.cdnurl(j), data: $(that).data(), key: i, index: i, value: (json && typeof json[i] !== 'undefined' ? json[i] : null)};
                                     var html = tpl ? Template(tpl, data) : Template.render(Upload.config.previewtpl, data);
                                     $("#" + preview_id).append(html);
                                 });

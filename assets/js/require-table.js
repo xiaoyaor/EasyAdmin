@@ -188,13 +188,13 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     if (url.indexOf("{ids}") !== -1) {
                         url = Table.api.replaceurl(url, {ids: ids.length > 0 ? ids.join(",") : 0}, table);
                     }
-                    Fast.api.open(url, __('Add'), $(this).data() || {});
+                    Easy.api.open(url, __('Add'), $(this).data() || {});
                 });
                 // 导入按钮事件
                 if ($(Table.config.importbtn, toolbar).size() > 0) {
                     require(['upload'], function (Upload) {
                         Upload.api.plupload($(Table.config.importbtn, toolbar), function (data, ret) {
-                            Fast.api.ajax({
+                            Easy.api.ajax({
                                 url: options.extend.import_url,
                                 data: {file: data.url},
                             }, function (data, ret) {
@@ -211,7 +211,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         var url = options.extend.edit_url;
                         row = $.extend({}, row ? row : {}, {ids: row[options.pk]});
                         var url = Table.api.replaceurl(url, row, table);
-                        Fast.api.open(url, __('Edit'), $(that).data() || {});
+                        Easy.api.open(url, __('Edit'), $(that).data() || {});
                     });
                 });
                 //清空回收站
@@ -219,7 +219,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     var that = this;
                     Layer.confirm(__('Are you sure you want to truncate?'), function () {
                         var url = $(that).data("url") ? $(that).data("url") : $(that).attr("href");
-                        Fast.api.ajax(url, function () {
+                        Easy.api.ajax(url, function () {
                             Layer.closeAll();
                             table.bootstrapTable('refresh');
                         }, function () {
@@ -232,7 +232,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                 $(document).on('click', Table.config.restoreallbtn + ',' + Table.config.restoreonebtn + ',' + Table.config.destroyonebtn, function () {
                     var that = this;
                     var url = $(that).data("url") ? $(that).data("url") : $(that).attr("href");
-                    Fast.api.ajax(url, function () {
+                    Easy.api.ajax(url, function () {
                         table.bootstrapTable('refresh');
                     });
                     return false;
@@ -284,7 +284,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                                     pk: options.pk
                                 }
                             };
-                            Fast.api.ajax(params, function (data, ret) {
+                            Easy.api.ajax(params, function (data, ret) {
                                 var success = $(element).data("success") || $.noop;
                                 if (typeof success === 'function') {
                                     if (false === success.call(element, data, ret)) {
@@ -320,7 +320,15 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     var row = Table.api.getrowbyid(table, ids);
                     row.ids = ids;
                     var url = Table.api.replaceurl(options.extend.edit_url, row, table);
-                    Fast.api.open(url, __('Edit'), $(this).data() || {});
+                    Easy.api.open(url, __('Edit'), $(this).data() || {});
+                });
+                $(table).on("click", "[data-id].btn-jsonform", function (e) {
+                    e.preventDefault();
+                    var ids = $(this).data("id");
+                    var row = Table.api.getrowbyid(table, ids);
+                    row.ids = ids;
+                    var url = Table.api.replaceurl(options.extend.jsonform_url, row, table);
+                    Easy.api.open(url, __('Jsonform'), $(this).data() || {});
                 });
                 $(table).on("click", "[data-id].btn-del", function (e) {
                     e.preventDefault();
@@ -348,7 +356,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                 url = this.replaceurl(url, {ids: ids}, table);
                 var params = typeof data.params !== "undefined" ? (typeof data.params == 'object' ? $.param(data.params) : data.params) : '';
                 var options = {url: url, data: {action: action, ids: ids, params: params}};
-                Fast.api.ajax(options, function (data, ret) {
+                Easy.api.ajax(options, function (data, ret) {
                     var success = $(element).data("success") || $.noop;
                     if (typeof success === 'function') {
                         if (false === success.call(element, data, ret)) {
@@ -376,7 +384,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         var ids = row[options.pk];
                         row = $.extend({}, row ? row : {}, {ids: ids});
                         var url = options.extend.edit_url;
-                        Fast.api.open(Table.api.replaceurl(url, row, table), __('Edit'), $(this).data() || {});
+                        Easy.api.open(Table.api.replaceurl(url, row, table), __('Edit'), $(this).data() || {});
                     },
                     'click .btn-delone': function (e, value, row, index) {
                         e.stopPropagation();
@@ -408,7 +416,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         value = value.split(",");
                         $.each(value, function (index, value) {
                             data.push({
-                                src: Fast.api.cdnurl(value),
+                                src: Easy.api.cdnurl(value),
                             });
                         });
                         Layer.photos({
@@ -434,7 +442,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                 image: function (value, row, index) {
                     value = value ? value : '/assets/img/blank.gif';
                     var classname = typeof this.classname !== 'undefined' ? this.classname : 'img-sm img-center';
-                    return '<a href="javascript:"><img class="' + classname + '" src="' + Fast.api.cdnurl(value) + '" /></a>';
+                    return '<a href="javascript:"><img class="' + classname + '" src="' + Easy.api.cdnurl(value) + '" /></a>';
                 },
                 images: function (value, row, index) {
                     value = value === null ? '' : value.toString();
@@ -443,7 +451,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     var html = [];
                     $.each(arr, function (i, value) {
                         value = value ? value : '/assets/img/blank.gif';
-                        html.push('<a href="javascript:"><img class="' + classname + '" src="' + Fast.api.cdnurl(value) + '" /></a>');
+                        html.push('<a href="javascript:"><img class="' + classname + '" src="' + Easy.api.cdnurl(value) + '" /></a>');
                     });
                     return html.join(' ');
                 },
@@ -510,12 +518,12 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                 addtabs: function (value, row, index) {
                     var url = Table.api.replaceurl(this.url, row, this.table);
                     var title = this.atitle ? this.atitle : __("Search %s", value);
-                    return '<a href="' + Fast.api.fixurl(url) + '" class="addtabsit" data-value="' + value + '" title="' + title + '">' + value + '</a>';
+                    return '<a href="' + Easy.api.fixurl(url) + '" class="addtabsit" data-value="' + value + '" title="' + title + '">' + value + '</a>';
                 },
                 dialog: function (value, row, index) {
                     var url = Table.api.replaceurl(this.url, row, this.table);
                     var title = this.atitle ? this.atitle : __("View %s", value);
-                    return '<a href="' + Fast.api.fixurl(url) + '" class="dialogit" data-value="' + value + '" title="' + title + '">' + value + '</a>';
+                    return '<a href="' + Easy.api.fixurl(url) + '" class="dialogit" data-value="' + value + '" title="' + title + '">' + value + '</a>';
                 },
                 flag: function (value, row, index) {
                     var that = this;
@@ -552,6 +560,12 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                 },
                 label: function (value, row, index) {
                     return Table.api.formatter.flag.call(this, value, row, index);
+                },
+                jsonform: function (value, row, index) {
+                    str = '<a href="javascript:;" data-toggle="tooltip" title="' + __('编辑') + '" data-id="' + row.id + '" data-edit_id="' + row.id +'" class="btn btn-xs btn-info btn-jsonform"><i class="fa fa-edit"></i></a>' + '&nbsp;';
+                    //str += '<a href="javascript:;" data-toggle="tooltip" title="' + __('预览') + '" data-id="' + row.id + '" data-edit_id="' + row.id +'" class="btn btn-xs btn-success btn-view"><i class="fa fa-eye"></i>预览</a>' + '&nbsp;';
+                    // str += '<a href="javascript:;" data-toggle="tooltip" title="' + __('复制') + '" data-id="' + row.id + '" data-copy_id="' + row.id +'" class="btn btn-xs btn-info btn-copy" style="border-radius: 1px">复制</a>' + '&nbsp;';
+                    return str;
                 },
                 datetime: function (value, row, index) {
                     var datetimeFormat = typeof this.datetimeFormat === 'undefined' ? 'YYYY-MM-DD HH:mm:ss' : this.datetimeFormat;
@@ -640,7 +654,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         }
                         dropdown = j.dropdown ? j.dropdown : '';
                         url = j.url ? j.url : '';
-                        url = typeof url === 'function' ? url.call(table, row, j) : (url ? Fast.api.fixurl(Table.api.replaceurl(url, row, table)) : 'javascript:;');
+                        url = typeof url === 'function' ? url.call(table, row, j) : (url ? Easy.api.fixurl(Table.api.replaceurl(url, row, table)) : 'javascript:;');
                         classname = j.classname ? j.classname : 'btn-primary btn-' + name + 'one';
                         icon = j.icon ? j.icon : '';
                         text = typeof j.text === 'function' ? j.text.call(table, row, j) : j.text ? j.text : '';

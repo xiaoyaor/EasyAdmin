@@ -7,11 +7,11 @@ require.config({
     }
     ],
     //在打包压缩时将会把include中的模块合并到主文件中
-    include: ['css', 'layer', 'toastr', 'fast', 'backend', 'backend-init', 'table', 'form', 'dragsort', 'drag', 'drop', 'addtabs', 'selectpage'],
+    include: ['css', 'layer', 'toastr', 'easy', 'backend', 'backend-init', 'table', 'form', 'dragsort', 'drag', 'drop', 'addtabs', 'selectpage'],
     paths: {
         'lang': "empty:",
         'form': 'require-form',
-        'fast': 'easy',
+        'easy': 'easy',
         'table': 'require-table',
         'upload': 'require-upload',
         'validator': 'require-validator',
@@ -32,6 +32,7 @@ require.config({
         'bootstrap-select-lang': '../libs/bootstrap-select/dist/js/i18n/defaults-zh_CN',
         'bootstrap-table': '../libs/bootstrap-table/dist/bootstrap-table.min',
         'bootstrap-table-export': '../libs/bootstrap-table/dist/extensions/export/bootstrap-table-export.min',
+        'bootstrap-table-treegrid': '../libs/bootstrap-table/dist/extensions/treegrid/bootstrap-table-treegrid',
         'bootstrap-table-mobile': '../libs/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile',
         'bootstrap-table-lang': '../libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN',
         'bootstrap-slider': '../libs/bootstrap-slider/bootstrap-slider',
@@ -46,6 +47,7 @@ require.config({
         'plupload': '../libs/plupload/js/plupload.min',
         'toastr': '../libs/toastr/toastr',
         'jstree': '../libs/jstree/dist/jstree.min',
+        'jquery-treegrid': '../libs/jquery-treegrid/js/jquery.treegrid.min',
         'layer': '../libs/easyadmin-layer/dist/layer',
         'cookie': '../libs/jquery.cookie/jquery.cookie',
         'cxselect': '../libs/easyadmin-cxselect/js/jquery.cxselect',
@@ -144,7 +146,7 @@ require(['jquery', 'bootstrap'], function ($, undefined) {
 
     // 初始化
     $(function () {
-        require(['fast'], function (Fast) {
+        require(['easy'], function (Easy) {
             require(['backend', 'backend-init', 'addons'], function (Backend, undefined, Addons) {
                 //加载相应模块
                 if (Config.jsname) {

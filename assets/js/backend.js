@@ -1,4 +1,4 @@
-define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
+define(['easy', 'template', 'moment'], function (Easy, Template, Moment) {
     var Backend = {
         api: {
             sidebar: function (params) {
@@ -6,7 +6,7 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
                 $colorNums = colorArr.length;
                 badgeList = {};
                 $.each(params, function (k, v) {
-                    $url = Fast.api.fixurl(k);
+                    $url = Easy.api.fixurl(k);
 
                     if ($.isArray(v)) {
                         $nums = typeof v[0] !== 'undefined' ? v[0] : 0;
@@ -34,7 +34,7 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
                 if (leftlink.size() > 0) {
                     leftlink.trigger("click");
                 } else {
-                    url = Fast.api.fixurl(url);
+                    url = Easy.api.fixurl(url);
                     leftlink = top.window.$(dom.replace(/\{url\}/, url));
                     if (leftlink.size() > 0) {
                         var event = leftlink.parent().hasClass("active") ? "dblclick" : "click";
@@ -71,7 +71,7 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
                     var dom = "a[url='{url}']"
                     var navlink = top.window.$(dom.replace(/\{url\}/, url));
                     if (navlink.size() === 0) {
-                        url = Fast.api.fixurl(url);
+                        url = Easy.api.fixurl(url);
                         navlink = top.window.$(dom.replace(/\{url\}/, url));
                         if (navlink.size() === 0) {
                         } else {
@@ -246,7 +246,7 @@ define(['fast', 'template', 'moment'], function (Fast, Template, Moment) {
             $('body').popover({selector: '[data-toggle="popover"]'});
         }
     };
-    Backend.api = $.extend(Fast.api, Backend.api);
+    Backend.api = $.extend(Easy.api, Backend.api);
     //将Template渲染至全局,以便于在子框架中调用
     window.Template = Template;
     //将Moment渲染至全局,以便于在子框架中调用

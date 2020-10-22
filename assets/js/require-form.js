@@ -228,7 +228,7 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                         var mimetype = $(this).data("mimetype") ? $(this).data("mimetype") : '';
                         var admin_id = $(this).data("admin-id") ? $(this).data("admin-id") : '';
                         var user_id = $(this).data("user-id") ? $(this).data("user-id") : '';
-                        parent.Fast.api.open("attachment/attachment/select?element_id=" + $(this).attr("id") + "&multiple=" + multiple + "&mimetype=" + mimetype + "&admin_id=" + admin_id + "&user_id=" + user_id, __('Choose'), {
+                        parent.Easy.api.open("attachment/attachment/select?element_id=" + $(this).attr("id") + "&multiple=" + multiple + "&mimetype=" + mimetype + "&admin_id=" + admin_id + "&user_id=" + user_id, __('Choose'), {
                             callback: function (data) {
                                 var button = $("#" + $(that).attr("id"));
                                 var maxcount = $(button).data("maxcount");
@@ -354,6 +354,251 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                     });
                 }
             },
+            datalist: function (form) {
+                //绑定datalist
+                if ($(".datalist", form).size() > 0) {
+                    require(['dragsort', 'template'], function (undefined, Template) {
+                        //刷新隐藏textarea的值
+                        var refresh = function (name) {
+                            var data = {};
+                            var textarea = $("textarea[name='" + name + "']", form);
+                            var container = textarea.closest("dl");
+                            var template = container.data("template");
+                            $.each($("input,select,textarea", container).serializeArray(), function (i, j) {
+                                var reg = /\[(\w+)\]\[(\w+)\]$/g;
+                                var match = reg.exec(j.name);
+                                if (!match)
+                                    return true;
+                                match[1] = "x" + parseInt(match[1]);
+                                if (typeof data[match[1]] == 'undefined') {
+                                    data[match[1]] = {};
+                                }
+                                data[match[1]][match[2]] = j.value;
+                            });
+                            var result = template ? [] : {};
+                            $.each(data, function (i, j) {
+                                if (j) {
+                                    if (!template) {
+                                        if (j.key != '') {
+                                            result[j.key] = j.value;
+                                        }
+                                    } else {
+                                        result.push(j);
+                                    }
+                                }
+                            });
+                            textarea.val(JSON.stringify(result));
+                        };
+                        //监听文本框改变事件
+                        $(document).on('change keyup', ".datalist input,.datalist textarea,.datalist select", function () {
+                            refresh($(this).closest("dl").data("name"));
+                        });
+                        //追加控制
+                        $(".datalist", form).on("click", ".add-field", function (e, row) {
+                            var that = this;
+                            var field_name = $(this).parents(".form-group").children("[name='field_name']").first().attr('value');
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            Layer.open({
+                                type:2,
+                                content: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'?dialog=1',
+                                //content: Template("table_html", {}),
+                                zIndex: 99,
+                                area: ['99%', '99%'],
+                                title: __('添加数据'),
+                                resize: false,
+                                //btn: [__('Login'), __('Register')],
+                                yes: function (index, layero) {},
+                                btn2: function () {
+                                    return false;
+                                },
+                                success: function (layero, index) {
+                                    var frame = Layer.getChildFrame('html', index);
+                                    var layerfooter = frame.find(".layer-footer");
+                                    Easy.api.layerfooter(layero, index, that);
+                                },
+                                cancel: function(){
+                                    // 右上角关闭事件的逻辑
+                                    //alert('eeeee');
+                                },
+                                end: function(){
+                                    // 右上角关闭事件的逻辑
+                                    //alert('ee4444eee');
+                                }
+                            });
+
+                        });
+                        //刷新控制
+                        $(".datalist", form).on("click", ".refresh-field", function (e, row) {
+                            var that = this;
+                            var field_name = $(that).parents('.form-group').children("[name='field_name']").first().attr("value");
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            $.ajax({
+                                url: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'/jsonform_type/refresh'+'?dialog=1',
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (ret) {
+                                    Backend.api.toastr.success('刷新成功！');
+                                }, error: function (e) {
+                                    Backend.api.toastr.error(e.message);
+                                }
+                            });
+                        });
+                        //编辑控制
+                        $(".datalist", form).on("click", ".edit-field", function (e, row) {
+                            var that = this;
+                            var field_name = $(that).parents(".form-group").children("[name='field_name']").first().attr('value');
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            var key = $(that).siblings().first().val();
+                            Layer.open({
+                                type:2,
+                                content: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'/jsonform_type/'+'edit/key/'+key+'?dialog=1',
+                                zIndex: 99,
+                                area: ['99%', '99%'],
+                                title: __('Login EasyAdmin'),
+                                resize: false,
+                                //btn: [__('确定'), __('取消')],
+                                yes: function (index, layero) {
+                                 },
+                                btn2: function () {
+                                    return false;
+                                },
+                                success: function (layero, index) {
+                                    var frame = Layer.getChildFrame('html', index);
+                                    var layerfooter = frame.find(".layer-footer");
+                                    Easy.api.layerfooter(layero, index, that);
+                                },
+                            });
+                        });
+
+                        function eleExchange(box, up, down, ele) {
+                            $(box).on('click', up, function() {
+                                var obj = $(ele);
+                                var prev = obj.prev();
+                                if (prev.length > 0) {
+                                    prev.before(obj)
+                                }
+                            });
+                            $(box).on('click', down, function() {
+                                var obj = $(ele);
+                                var next = obj.next();
+                                if (next.length > 0) {
+                                    next.after(obj)
+                                }
+                            })
+                        }
+
+                        //向上控制
+                        $(".datalist", form).on("click", ".up-field", function (e, row) {
+                            var obj = $(this);
+                            var obj2 = $(obj).parents('tr[id^="field_"]').eq(0).attr('name');
+                            eleExchange('#jsonform-form', '.glyphicon-arrow-up', '.glyphicon-arrow-down',
+                                '[name="'+obj2+'"]');
+
+                            var that = this;
+                            //var field_name = $(that).parents('.form-group').children("[name='field_name']").first().attr("value");
+                            var field_name = $(that).siblings().first().next().attr("value");
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            var key = $(that).siblings().first().val();
+                            $.ajax({
+                                url: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'/jsonform_type/'+'up/key/'+key+'?dialog=1',
+                                type: 'post',
+                                dataType: 'json',
+                                data: {'row[id]': ids},
+                                success: function (ret) {
+                                    Backend.api.toastr.success('移动成功！');
+                                }, error: function (e) {
+                                    Backend.api.toastr.error(e.message);
+                                }
+                            });
+                        });
+                        //向下控制
+                        $(".datalist", form).on("click", ".down-field", function (e, row) {
+                            var obj = $(this);
+                            var obj2 = $(obj).parents('tr[id^="field_"]').eq(0).attr('name');
+                            eleExchange('#jsonform-form', '.glyphicon-arrow-up', '.glyphicon-arrow-down',
+                                '[name="'+obj2+'"]');
+                            var that = this;
+                            //var field_name = $(that).parents('.form-group').children("[name='field_name']").first().attr("value");
+                            var field_name = $(that).siblings().first().next().attr("value");
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            var key = $(that).siblings().first().val();
+                            $.ajax({
+                                url: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'/jsonform_type/'+'down/key/'+key+'?dialog=1',
+                                type: 'post',
+                                dataType: 'json',
+                                data: {'row[id]': ids},
+                                success: function (ret) {
+                                    Backend.api.toastr.success('移动成功！');
+                                }, error: function (e) {
+                                    Backend.api.toastr.error(e.message);
+                                }
+                            });
+                        });
+                        //删除控制
+                        $(".datalist", form).on("click", ".del-field", function () {
+                            var obj = $(this);
+                            $(obj).parents('tr[id^="field_"]').eq(0).remove()
+                            var that = this;
+                            //var field_name = $(that).parents('.form-group').children("[name='field_name']").first().attr("value");
+                            var field_name = $(that).siblings().first().next().attr("value");
+                            var default_field = $("#default_field").val();
+                            var ids = $("#ids").val();
+                            var key = $(that).siblings().first().val();
+                            $.ajax({
+                                url: Config.modulename +'/'+Config.addonsName+'/'+Config.controllername2+'/jsonform/ids/'+ids+'/field_name/'+field_name+'/default_field/'+default_field+'/jsonform_type/'+'del/key/'+key+'?dialog=1',
+                                type: 'post',
+                                dataType: 'json',
+                                data: {'row[id]': ids},
+                                success: function (ret) {
+                                    Backend.api.toastr.success('删除成功！');
+                                }, error: function (e) {
+                                    Backend.api.toastr.error(e.message);
+                                }
+                            });
+                        });
+                        //移除控制
+                        $(".datalist", form).on("click", "dd .btn-remove", function () {
+                            var container = $(this).closest("dl");
+                            $(this).closest("dd").remove();
+                            refresh(container.data("name"));
+                        });
+                        //拖拽排序
+                        $("dl.datalist", form).dragsort({
+                            itemSelector: 'dd',
+                            dragSelector: ".btn-dragsort",
+                            dragEnd: function () {
+                                refresh($(this).closest("dl").data("name"));
+                            },
+                            placeHolderTemplate: "<dd></dd>"
+                        });
+                        //渲染数据
+                        $(".datalist", form).each(function () {
+                            var container = this;
+                            var textarea = $("textarea[name='" + $(this).data("name") + "']", form);
+                            if (textarea.val() == '') {
+                                return true;
+                            }
+                            var template = $(this).data("template");
+                            var json = {};
+                            try {
+                                json = JSON.parse(textarea.val());
+                            } catch (e) {
+                            }
+                            $.each(json, function (i, j) {
+                                $(".btn-append,.append", container).trigger('click', template ? j : {
+                                    key: i,
+                                    value: j
+                                });
+                            });
+                        });
+                    });
+                }
+            },
             switcher: function (form) {
                 form.on("click", "[data-toggle='switcher']", function () {
                     if ($(this).hasClass("disabled")) {
@@ -423,7 +668,7 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                     });
                 }
                 //调用Ajax请求方法
-                Fast.api.ajax({
+                Easy.api.ajax({
                     type: type,
                     url: url,
                     data: form.serialize() + (Object.keys(params).length > 0 ? '&' + $.param(params) : ''),
@@ -490,6 +735,8 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                 events.faselect(form);
 
                 events.fieldlist(form);
+
+                events.datalist(form);
 
                 events.slider(form);
 
