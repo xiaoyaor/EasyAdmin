@@ -14,8 +14,6 @@ return [
     'login_failure_retry' => true,
     //是否同一账号同一时间只能在一个地方登录
     'login_unique'        => false,
-    //登录页默认背景图
-    'login_background'    => "/assets/img/loginbg.jpg",
     //自动检测更新
     'checkupdate'         => false,
     // 是否开启多语言
