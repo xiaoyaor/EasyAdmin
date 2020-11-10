@@ -412,3 +412,258 @@ if (!function_exists('open_auth')) {
         return false;
     }
 }
+
+if (!function_exists('html')) {
+    /**
+     * 渲染模板输出
+     * @param  string $template 模板文件
+     * @param  array  $vars 模板变量
+     * @return mixed|null
+     */
+    function html(string $template = '', $vars = [])
+    {
+        //Cache::delete('html');
+        $html_list = Cache::get('html',[]);
+        $info=request()->request();
+        $name=md5(json_encode($info));
+        array_key_exists($name,$html_list)?$return = $html_list[$name]:$return='';
+        if (!$return){
+            $return = \think\facade\View::fetch( $template, $vars);
+            $html_list[$name] = $return;
+            Cache::set('html',$html_list);
+        }
+        return  $return;
+    }
+}
+
+
+if (!function_exists('getValueInfo')) {
+    /**
+     * 获取多级数组中单个元素取值信息
+     * @param array $data
+     * @param string $name
+     * @param string $value
+     * @param string $res
+     * @return string
+     */
+    function getValueInfo($data,$name='name',$value='value',$res='')
+    {
+        foreach ($data as $key=>$item) {
+            if ($item['name']!=$name){
+                if (key_exists('sublist',$item)&&count($item['sublist'])){
+                    $res=getValueInfo($item['sublist'],$name,$value,$res);
+                    if ($res)return $res;
+                }
+            }else{
+                return $data[$key][$value];
+            }
+        }
+        return $res;
+    }
+}
+
+if (!function_exists('getValueInfo2')) {
+    /**
+     * 获取多级数组中单个元素及其子元素整体信息
+     * @param array $data
+     * @param mixed $param
+     * @param boolean $isself 是否包含自身信息
+     * @param array $value
+     * @return array
+     */
+    function getValueInfo2($data,$param,$isself=true,$value=[])
+    {
+        foreach ($data as $key=>$item) {
+            if (is_array($param)) $param = $param['name'];
+            if ($item['name']!=$param){
+                if (key_exists('sublist',$item)&&count($item['sublist'])){
+                    $value=getValueInfo2($item['sublist'],$param,$isself);
+                    if ($value)return $value;
+                }
+            }else{
+                //$group=$data[$key]['group'];
+                //$type=$data[$key]['type'];
+                if ($isself){
+                    $value=$data[$key];
+                } else {
+                    if (array_key_exists('sublist',$data[$key])){
+                        $value = $data[$key]['sublist'];
+                    }else{
+                        $value = [];
+                    }
+                }
+                ;
+                //$data[$key]['group']=$group;
+                //$data[$key]['type']=$type;
+                return $value;
+                //return $data;
+            }
+        }
+        return $value;
+    }
+}
+
+if (!function_exists('is_ssl')) {
+    /**
+     * 判断是否SSL协议
+     * @return boolean
+     */
+    function is_ssl() {
+
+        if(isset($_SERVER['HTTPS']) && ('1' == $_SERVER['HTTPS'] || 'on' == strtolower($_SERVER['HTTPS']))){
+            return true;
+        }elseif(isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'] )) {
+            return true;
+        }
+        return false;
+
+    }
+}
+
+if (!function_exists('get_cur_url')) {
+    /**
+     *获得当前完整的网址
+     * @param $ishost string 只获取域名
+     * @return string
+     */
+    function get_cur_url($ishost=false)
+    {
+        $http =is_ssl()?'https://':'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        if(!empty($_SERVER["REQUEST_URI"]))
+        {
+            $scriptName = $_SERVER["REQUEST_URI"];
+            $nowurl = $scriptName;
+        }
+        else
+        {
+            $scriptName = $_SERVER["PHP_SELF"];
+            if(empty($_SERVER["QUERY_STRING"]))
+            {
+                $nowurl = $scriptName;
+            }
+            else
+            {
+                $nowurl = $scriptName."?".$_SERVER["QUERY_STRING"];
+            }
+        }
+        return $ishost?$http.$host:$http.$host.$nowurl;
+    }
+}
+
+if (!function_exists('get_key')) {
+    /**
+     * 获取数组前一个后一个元素
+     * @param $key
+     * @param $arr
+     * @param string $who
+     * @return string
+     * @throws Exception
+     */
+    function get_key($key2, $arr, $who='next')
+    {
+        //查找哪个元素，前一个或后一个？
+        $key3='';
+        if ('prev' == $who) {
+            foreach ($arr as $key=>$item) {
+                if ($key == $key2){
+                    break;
+                }else{
+                    $key3 = $key;
+                }
+            }
+        } else if ('next' == $who) {
+            foreach ($arr as $key=>$item) {
+                if ($key == $key2){
+                    $key3=$key;
+                }else{
+                    if ($key3){
+                        $key3=$key;
+                        break;
+                    }
+                }
+            }
+        } else {
+            throw new Exception("错误的参数");
+        }
+        return $key3;
+    }
+}
+
+if (!function_exists('curl_https')) {
+    /**
+     * curl方法获取http/htpps网址源码
+     * @param string $url 网址
+     * @param string $refurl 来路页面
+     * @param int $method 方法
+     * @param string $param 附带参数
+     * @return mixed
+     */
+    function curl_https($url = '', $refurl = '', $method = 0 , $param=''){
+        $ch = curl_init();//初始化curl
+        curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+        //判断https链接
+        if (substr($url, 0,5)=='https'){
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        }
+
+        curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+        if($refurl){
+            curl_setopt ($ch, CURLOPT_REFERER, $refurl);
+        }
+        if($method){
+            curl_setopt($ch, CURLOPT_POST, $method);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        }
+        $data = curl_exec($ch);//运行curl
+        curl_close($ch);
+
+        return $data;
+    }
+}
+
+if (!function_exists('get_https_html_source')) {
+    /**
+     * 获取https网页源码
+     * 非https直接用file_get_contents
+     * @param string $url
+     * @return string
+     */
+    function get_https_html_source($url)
+    {
+        $arrContextOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ]
+        ];
+        return file_get_contents($url, false, stream_context_create($arrContextOptions));
+
+    }
+}
+
+if (!function_exists('parseName')) {
+    /**
+     * 字符串命名风格转换
+     * type 0 将 Java 风格转换为 C 的风格 1 将 C 风格转换为 Java 的风格
+     * @access public
+     * @param  string  $name    字符串
+     * @param  integer $type    转换类型
+     * @param  bool    $ucfirst 首字母是否大写（驼峰规则）
+     * @return string
+     */
+    function parseName($name, $type = 0, $ucfirst = true)
+    {
+        if ($type) {
+            $name = preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+                return strtoupper($match[1]);
+            }, $name);
+
+            return $ucfirst ? ucfirst($name) : lcfirst($name);
+        }
+
+        return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+    }
+}

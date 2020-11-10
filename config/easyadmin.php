@@ -25,7 +25,7 @@ return [
     // 权限系统路径
     'auth_path'           => '\addons\auth\app\admin\library\Auth',
     //版本号
-    'version'             => '1.0.0.20200210_dev',
+    'version'             => '1.0.0.20201111_dev',
     //框架名称
     'url'                 => 'https://www.easyadmin.vip',
     //演示
@@ -38,8 +38,6 @@ return [
     'gitee_url'          => 'https://gitee.com/gitshenyin/EasyAdmin',
     //Github开源
     'github_url'         => 'https://github.com/xiaoyaor/EasyAdmin',
-    //插件市场
-    'addons_url'          => 'https://addons.easyadmin.vip',
     //插件市场
     'app_url'          => 'https://app.easyadmin.vip',
     //API接口地址

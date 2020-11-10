@@ -321,7 +321,7 @@ class Auth extends ThinkAuth
         $childrenAdminIds = [];
         if (!$this->isSuperAdmin()) {
             $groupIds = $this->getChildrenGroupIds(false);
-            $authGroupList = \app\admin\model\AuthGroupAccess::
+            $authGroupList = AuthGroupAccess::
             field('uid,group_id')
                 ->where('group_id', 'in', $groupIds)
                 ->select();
