@@ -58,7 +58,7 @@ abstract class BaseController
     // 初始化
     protected function initialize()
     {
-        View::assign('addon', Cache::get('config_data_single_list',[]));
+        View::assign('ea', Cache::get('config_data_single_list',[]));
     }
 
     /**
