@@ -19,7 +19,7 @@ return [
             // 磁盘路径
             'root'       => app()->getRootPath() . 'storage',
             // 磁盘路径对应的外部URL路径
-            'url'        => '\storage',
+            'url'        => '/storage',
             // 可见性
             'visibility' => 'public',
         ],
