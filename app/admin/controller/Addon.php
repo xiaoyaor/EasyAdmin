@@ -14,7 +14,7 @@ use think\facade\View;
  * 插件管理
  *
  * @icon   fa fa-cube
- * @remark 可在线安装、卸载、禁用、启用插件，同时支持添加本地插件。EasyAdmin已上线插件商店 ，你可以发布你的免费或付费插件：<a href="https://addons.easyadmin.vip" target="_blank">https://addons.easyadmin.vip</a>
+ * @remark 可在线安装、卸载、禁用、启用插件，同时支持添加本地插件。EasyAdmin已上线插件商店 ，你可以发布你的免费或付费插件：<a href="https://cloud.easyadmin.vip" target="_blank">https://addons.easyadmin.vip</a>
  */
 class Addon extends Backend
 {
