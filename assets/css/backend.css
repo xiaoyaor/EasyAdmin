@@ -21,7 +21,8 @@ body {
 }
 body {
   /*background: #fcfcfc;*/
-  background: #fbfbfb;
+  /*background: #fbfbfb;*/
+  background: #f5f5f5;
   font-size: 13px;
 }
 body.is-dialog {
@@ -193,7 +194,8 @@ form.form-horizontal .control-label {
 .panel-intro > .panel-heading {
   padding: 15px;
   padding-bottom: 0;
-  /*background: #e8edf0;*/
+  /*background-color: #e8edf0;*/
+  background-color: #fff;
   border-color: #e8edf0;
   position: relative;
 }
