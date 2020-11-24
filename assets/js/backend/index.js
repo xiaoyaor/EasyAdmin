@@ -152,6 +152,30 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                 e.stopPropagation();
             });
 
+            //切换左侧sidebar显示隐藏
+            $(document).on('click', ".btn-sidebar_collapse", function () {
+                $.ajax({
+                    url: 'ajax/sidebar_collapse',
+                    method:'post',
+                    dataType: 'json',
+                    data: {type: $(this).data("type")},
+                    cache: false,
+                    success: function (ret) {
+                        if (ret.hasOwnProperty("code")) {
+                            if (ret.code === 1) {
+                                console.log(ret.msg);
+                            } else {
+                                console.log(ret.msg);
+                            }
+                        } else {
+                            Toastr.error(__('Unknown data format'));
+                        }
+                    }, error: function () {
+                        Toastr.error(__('Network error'));
+                    }
+                });
+            });
+
             //清除缓存
             $(document).on('click', "ul.wipecache li a", function () {
                 $.ajax({

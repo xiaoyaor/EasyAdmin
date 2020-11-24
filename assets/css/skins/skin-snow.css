@@ -3,15 +3,15 @@
  * -----------
  */
 body.skin-snow {
-  background-image: url("/assets/img/skins/snow.jpg");
+  background-image: url("/assets/img/skins/snow.jpg") !important;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 #header{
-  background-color: #fff0;
+  background-color: #fff0 !important;
 }
 .content-wrapper, .right-side{
-  background-color: #fff0;
+  background-color: #fff0 !important;
 }
 /* skin-snow navbar */
 .skin-snow .main-header {
@@ -42,7 +42,7 @@ body.skin-snow {
   color: #fff;
 }
 .skin-snow .main-header .navbar .sidebar-toggle {
-  color: #333;
+  color: #fff;
 }
 .skin-snow .main-header .navbar .sidebar-toggle:hover {
   color: #999;

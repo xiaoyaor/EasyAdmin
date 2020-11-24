@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\common\controller\Backend;
 use think\addons\Service;
+use think\facade\Config;
 use think\facade\Db;
 use think\facade\Cache;
 use think\facade\Lang;
@@ -124,6 +125,28 @@ class Ajax extends Backend
 
         trigger("wipecacheAfter");
         $this->success();
+    }
+
+    /**
+     * 侧边栏收缩切换
+     * 默认0：展开 1：收缩
+     */
+    public function sidebar_collapse()
+    {
+        if(request()->isPost()){
+            $sidebar_collapse=Config::get('site.sidebar_collapse',1);
+            if (!$sidebar_collapse){
+                Config::set(['sidebar_collapse' => 1],'site');
+                change_site('sidebar_collapse','1');
+                $this->success('收缩成功');
+            }
+            else{
+                Config::set(['sidebar_collapse' => 0],'site');
+                change_site('sidebar_collapse','0');
+                $this->success('展开成功');
+            }
+            $this->error('切换失败');
+        }
     }
 
 }
