@@ -35,7 +35,7 @@ $Env = ROOT_PATH . '.env';
 
 $link = array(
     'qqun'  => "https://shang.qq.com/wpa/qunwpa?idkey=ce12bc3cbc9a2ccbca97d287609f61dffc0347a62a204780271be3ef12f70129",
-    'gitee' => 'https://gitee.com/',
+    'gitee' => 'https://gitee.com/gitshenyin/EasyAdmin',
     'github' => 'https://github.com/xiaoyaor/EasyAdmin',
     'home'  => 'https://www.easyadmin.vip?ref=install',
     'ask' => 'https://ask.easyadmin.vip?ref=install',
@@ -165,9 +165,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         //新建数据库并导入sql
-         $pdo->query("CREATE DATABASE IF NOT EXISTS `{$mysqlDatabase}` CHARACTER SET utf8 COLLATE utf8_general_ci;");
-         //$pdo->query("USE `{$mysqlDatabase}`");
-         //$pdo->exec($sql);
+        $pdo->query("CREATE DATABASE IF NOT EXISTS `{$mysqlDatabase}` CHARACTER SET utf8 COLLATE utf8_general_ci;");
+        //$pdo->query("USE `{$mysqlDatabase}`");
+        //$pdo->exec($sql);
 
         //新建随机后台地址
         $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -241,11 +241,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         body, input, button {
             font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
             font-size: 14px;
-            color: #ffcece;
+            color: #763636;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 660px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
@@ -292,7 +292,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .form-field input {
-            background: #298846;
+            background: #efefbd;
             margin: 0 0 1px;
             border: 2px solid transparent;
             transition: background 0.2s, border-color 0.2s, color 0.2s;
@@ -301,12 +301,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             box-sizing: border-box;
         }
 
-        .form-field input:focus {
-            border-color: #18bc9c;
-            background: #fff;
-            color: #444;
-            outline: none;
-        }
 
         .form-field label {
             float: left;
@@ -321,7 +315,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         button, .btn {
-            background: #3C5675;
+            background: #008a6f;
             color: #fff;
             border: 0;
             font-weight: bold;
@@ -368,7 +362,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         #warmtips a {
-            background: #ffffff7a;
+            background: #ffffff7;
             display: block;
             height: 30px;
             line-height: 30px;
@@ -434,27 +428,27 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-<!--            <div class="form-group">-->
-<!--                <div class="form-field">-->
-<!--                    <label>管理者用户名</label>-->
-<!--                    <input name="adminUsername" value="admin" required=""/>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="form-field">-->
-<!--                    <label>管理者Email</label>-->
-<!--                    <input name="adminEmail" value="admin@admin.com" required="">-->
-<!--                </div>-->
-<!---->
-<!--                <div class="form-field">-->
-<!--                    <label>管理者密码</label>-->
-<!--                    <input type="password" name="adminPassword" required="">-->
-<!--                </div>-->
-<!---->
-<!--                <div class="form-field">-->
-<!--                    <label>重复密码</label>-->
-<!--                    <input type="password" name="adminPasswordConfirmation" required="">-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="form-group">-->
+            <!--                <div class="form-field">-->
+            <!--                    <label>管理者用户名</label>-->
+            <!--                    <input name="adminUsername" value="admin" required=""/>-->
+            <!--                </div>-->
+            <!---->
+            <!--                <div class="form-field">-->
+            <!--                    <label>管理者Email</label>-->
+            <!--                    <input name="adminEmail" value="admin@admin.com" required="">-->
+            <!--                </div>-->
+            <!---->
+            <!--                <div class="form-field">-->
+            <!--                    <label>管理者密码</label>-->
+            <!--                    <input type="password" name="adminPassword" required="">-->
+            <!--                </div>-->
+            <!---->
+            <!--                <div class="form-field">-->
+            <!--                    <label>重复密码</label>-->
+            <!--                    <input type="password" name="adminPasswordConfirmation" required="">-->
+            <!--                </div>-->
+            <!--            </div>-->
 
             <div class="form-buttons">
                 <button type="submit" <?php echo $errInfo ? 'disabled' : '' ?>>点击安装</button>

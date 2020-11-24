@@ -16,4 +16,6 @@ return [
     'expire'         => 3600,
     // 前缀
     'prefix'         => '',
+    // 前缀
+    'path'         => runtime_path().'session',
 ];
