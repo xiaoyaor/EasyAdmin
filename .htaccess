@@ -1,6 +1,6 @@
 <FilesMatch (.*)\.(env)$>
-Order allow,deny
-deny from all
+  Order allow,deny
+  deny from all
 </FilesMatch>
 
 <IfModule mod_rewrite.c>
