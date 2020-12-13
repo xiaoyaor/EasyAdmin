@@ -42,6 +42,11 @@ abstract class BaseController
     protected $middleware = [];
 
     /**
+     * 所有插件配置信息
+     */
+    protected $ea;
+
+    /**
      * 构造方法
      * @access public
      * @param  App  $app  应用对象
@@ -58,7 +63,8 @@ abstract class BaseController
     // 初始化
     protected function initialize()
     {
-        View::assign('ea', Cache::get('config_data_single_list',[]));
+        $this->ea = Cache::get('config_data_single_list',[]);
+        View::assign('ea', $this->ea);
     }
 
     /**

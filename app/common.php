@@ -406,7 +406,7 @@ if (!function_exists('open_auth')) {
      */
     function open_auth()
     {
-        if (Event::trigger('Base')&&Event::trigger('Login')&&Event::trigger('Auth')){
+        if (trigger('base') && trigger('login') && trigger('auth')){
             return true;
         }
         return false;
