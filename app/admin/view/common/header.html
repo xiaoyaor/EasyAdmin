@@ -24,12 +24,28 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                <!--菜单模式切换-->
+                <!--导航菜单-->
                 {if $site.head_switch}
-                <li class="hidden-xs" data-toggle="tooltip" data-placement="right" title="切换为{if $site.multiplenav}二{else}一{/if}级菜单模式">
-                    <a href="{:url('index/index')}?act=switch-multiplenav-{if $site.multiplenav}off{else}on{/if}" style="padding-top:14px;padding-bottom:14px;">
-                        <i class="fa fa-toggle-{if $site.multiplenav}on{else}off{/if}" style="font-size:20px;"></i>
+                <li>
+                    <a href="javascript:;" data-toggle="dropdown" title="导航菜单">
+                        <i class="fa fa-toggle-on" style="font-size:14px;"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <!--应用管理状态切换-->
+                        {if open_auth()}
+                        <li class="hidden-xs" data-toggle="tooltip" data-placement="right" >
+                            <a href="{:url('index/index')}?app_act=switch-app-{if $site.multipleapp}off{else}on{/if}" style="padding-top:14px;padding-bottom:14px;">
+                                <i class="fa fa-toggle-{if $site.multipleapp}on{else}off{/if}" style="font-size:20px;"></i>{if $site.multipleapp}隐藏{else}开启{/if}应用管理菜单
+                            </a>
+                        </li>
+                        {/if}
+                        <!--菜单模式切换-->
+                        <li class="hidden-xs" data-toggle="tooltip" data-placement="right">
+                            <a href="{:url('index/index')}?act=switch-multiplenav-{if $site.multiplenav}off{else}on{/if}" style="padding-top:14px;padding-bottom:14px;">
+                                <i class="fa fa-toggle-{if $site.multiplenav}on{else}off{/if}" style="font-size:20px;"></i>切换为{if $site.multiplenav}二{else}一{/if}级菜单模式
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 {/if}
 

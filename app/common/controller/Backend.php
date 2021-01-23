@@ -200,6 +200,8 @@ class Backend extends BaseController
         // 语言检测
         $lang = strip_tags(Config::get("lang.default_lang"));
 
+
+        //菜单模式切换
         if(request()->get('act')){
             $multiplenav=request()->get('act');
             if ($multiplenav=='switch-multiplenav-on'){
@@ -211,7 +213,24 @@ class Backend extends BaseController
                 change_site('multiplenav','0');
             }
         }
+
+        //应用模式切换
+        if(request()->get('app_act')){
+            $multipleapp=request()->get('app_act');
+            if ($multipleapp=='switch-app-on'){
+                change_app(true);
+                Config::set(['multipleapp' => 1],'site');
+                change_site('multipleapp','1');
+            }
+            else if ($multipleapp=='switch-app-off'){
+                change_app(false);
+                Config::set(['multipleapp' => 0],'site');
+                change_site('multipleapp','0');
+            }
+        }
+        Config::set(['multipleapp' => (boolean)Config::get("site.multipleapp")],'site');
         Config::set(['multiplenav' => (boolean)Config::get("site.multiplenav")],'site');
+
         //站点信息
         $site = Config::get("site");
         //上传信息

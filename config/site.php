@@ -47,4 +47,5 @@ return array (
   'homepage' => '',
   'sidebar_collapse' => '0',
   'default_app' => '',
+  'multipleapp' => '1',
 );

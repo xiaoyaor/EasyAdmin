@@ -195,6 +195,70 @@ if (!function_exists('build_heading')) {
     }
 }
 
+if (!function_exists('change_app')) {
+
+    /**
+     * 开启/隐藏导航的应用管理菜单，将应用管理下子菜单提取到外部
+     * @param boolean $show
+     * @return boolean
+     */
+    function change_app($show)
+    {
+        if (open_auth()) {
+            $data = [];
+            $app = \addons\auth\app\admin\model\AuthRule::where('name','app')->find();
+            if ($show){
+                $list = \addons\auth\app\admin\model\AuthRule::where('pid',$app['id'])->select();
+                if ($list) {
+                    $data[]=[
+                        'id'=>$app['id'],
+                        'ismenu'=>0,
+                    ];
+                    foreach ($list as $key => $value){
+                        $data[]=[
+                            'id'=>$value['id'],
+                            'pid'=>0,
+                            'weigh'=>$value['weigh']+$app['weigh'],
+                        ];
+                    }
+                    (new \addons\auth\app\admin\model\AuthRule)->saveAll($data);
+                }
+            }else{
+                //应用列表及其菜单名称
+                $addons[]='app';
+                $cache = Cache::get('addons_list_data',[]);
+                foreach ($cache as $key => $value){
+                    if (isset($value['parent_menu'])&&isset($value['first_menu'])&&$value['parent_menu'] == 'app') {
+                        $addons[]=$value['first_menu'];
+                    }
+                }
+
+                $list = \addons\auth\app\admin\model\AuthRule::where('pid',0)->whereIn('name',$addons)->select();
+                if ($list) {
+                    foreach ($list as $key => $value){
+                        if ($value['name'] == 'app') {
+                            $data[]=[
+                                'id'=>$value['id'],
+                                'ismenu'=>1,
+                            ];
+                        }else{
+                            $data[]=[
+                                'id'=>$value['id'],
+                                'pid'=>$app['id'],
+                                'weigh'=>$value['weigh']-$app['weigh'],
+                            ];
+                        }
+                        (new \addons\auth\app\admin\model\AuthRule)->saveAll($data);
+                    }
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
 if (!function_exists('change_site')) {
 
     /**
