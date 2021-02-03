@@ -4,6 +4,7 @@ use addons\category\app\common\model\Category;
 use addons\setting\app\common\model\Index as ConfigModel;
 use Overtrue\Pinyin\Pinyin;
 use think\exception\FileException;
+use think\facade\Cache;
 use think\facade\Config;
 use think\facade\Env;
 use think\facade\Event;
