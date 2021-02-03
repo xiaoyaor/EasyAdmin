@@ -63,6 +63,7 @@ abstract class BaseController
     // 初始化
     protected function initialize()
     {
+        hook('addons_init',$this->request);//插件初始化事件
         $this->ea = Cache::get('config_data_single_list',[]);
         View::assign('ea', $this->ea);
     }
