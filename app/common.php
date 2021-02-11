@@ -406,7 +406,7 @@ if (!function_exists('open_auth')) {
      */
     function open_auth()
     {
-        if (trigger('base') && trigger('login') && trigger('auth')){
+        if (check_addon_install(['base','login','auth'])){
             return true;
         }
         return false;
