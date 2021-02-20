@@ -33,18 +33,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>
+                    <a class="navbar-brand page-scroll acolor" href="#page-top">{$site.name}</a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbar-collapse-menu"><ul class="nav navbar-nav navbar-right">
-                    <li><a href="{$easyadmin.url}" target="_blank">{:__('Home')}</a></li>
-                    <li><a href="{$easyadmin.cloud_url}/app" target="_blank">{:__('应用')}</a></li>
-                    <li><a href="{$easyadmin.cloud_url}/addon" target="_blank">{:__('插件')}</a></li>
-                    <li><a href="{$easyadmin.gitee_url}" target="_blank">{:__('开源')}</a></li>
-                    <li><a href="{$easyadmin.demo_url}" target="_blank">{:__('Demo')}</a></li>
-                    <li><a href="{$easyadmin.QQqun}" target="_blank">{:__('QQ群')}</a></li>
-                    <li><a href="{$easyadmin.ask_url}" target="_blank">{:__('Forum')}</a></li>
-                    <li><a href="{$easyadmin.doc_url}" target="_blank">{:__('Docs')}</a></li>
+                <div class="collapse navbar-collapse" id="navbar-collapse-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a class="acolor" href="{$easyadmin.url}" target="_blank">{:__('Home')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.cloud_url}/app" target="_blank">{:__('应用')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.cloud_url}/addon" target="_blank">{:__('插件')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.gitee_url}" target="_blank">{:__('开源')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.demo_url}" target="_blank">{:__('Demo')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.QQqun}" target="_blank">{:__('QQ群')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.ask_url}" target="_blank">{:__('Forum')}</a></li>
+                    <li><a class="acolor" href="{$easyadmin.doc_url}" target="_blank">{:__('Docs')}</a></li>
                 </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -55,10 +56,17 @@
         <main id="mainbody">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
+                        <div class="index-gallery">
+                            <div>
+                                <img src="/assets/img/index-back.png" width="462px" height="271px" style="float:left;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="index-text">
                             <div>
-                                <h1>{$site.name}</h1>
+                                <h1 class="acolor">{$site.name}</h1>
                                 <p style="color:#adb9e0;line-height:30px;">EasyAdmin是一款基于ThinkPHP6+Bootstrap3的全插件式框架，使用插件模式开发，拥有强大的扩展能力和完善的插件开发支持，可用于cms、商城、采集、微信、小程序、app、api等各种类型的网站开发，是一款全能型的开源框架。</p>
                                 <div>
                                     <a href="{$easyadmin.url}" target="_blank" class="btn bg-primary btn-xl btn-round-lg">{:__('官方网站')}</a>
@@ -67,19 +75,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-7">
-                        <div class="index-gallery">
-                            <div>
-                                <img src="/assets/img/index-back.png" width="652px" height="431px">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>
         <footer>
             <div class="container">
-                <p>Copyright @ 2019~{:date('Y',time())} <a class="site" href="{$easyadmin.url}" target="_blank">{$site.name} </a> 版权所有</p>
+                <p>Copyright @ 2019~{:date('Y',time())} <a class="site" href="{$easyadmin.url}" target="_blank">{$site.name} </a> 版权所有 <a class="site" href="https://beian.miit.gov.cn" target="_blank">{$site.beian}</a></p>
             </div>
         </footer>
 

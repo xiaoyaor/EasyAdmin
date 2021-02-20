@@ -120,7 +120,7 @@ p {
 
 #mainbody .index-gallery {
     text-align: center;
-    padding: 200px 0 50px;
+    padding: 272px 0 0;
     position: relative;
 }
 
@@ -200,10 +200,16 @@ footer p {
     margin-top: 20px;
     padding: 10px 45px;
     font-size: 14px;
+    background: linear-gradient(#008dff, #039bff);
 }
 .site,
 .site:hover,
 .site:focus{
-    color: gold;
+    color: dodgerblue;
     text-decoration: none;
+    font-weight: bolder;
+}
+.acolor{
+    color:dodgerblue !important;
+    font-weight: bolder !important;
 }
