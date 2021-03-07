@@ -1169,7 +1169,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
         api: {
             formatter: {
                 title: function (value, row, index) {
-                    var title = '<a class="title" href="' +Config.easyadmin.url + row.url + '" data-toggle="tooltip" title="' + __('View addon home page') + '" target="_blank">' + value + '</a>';
+                    var title = '<a class="title" href="' +Config.easyadmin.cloud_url + row.url + '" data-toggle="tooltip" title="' + __('View addon home page') + '" target="_blank">' + value + '</a>';
                     if (row.screenshots && row.screenshots.length > 0) {
                         title += ' <a href="javascript:;" data-index="' + index + '" class="view-screenshots text-success" title="' + __('View addon screenshots') + '" data-toggle="tooltip"><i class="fa fa-image"></i></a>';
                     }
