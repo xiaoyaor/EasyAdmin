@@ -56,7 +56,7 @@ class Frontend extends BaseController
         $controllername = strtolower(request()->controller());
         $actionname = strtolower(request()->action());
 
-        if (hook('open_user')){
+        if(addon_exist('user')){
             $this->auth = Auth::instance();
             $token = $this->request->server('HTTP_TOKEN', $this->request->request('token', Cookie::get('token')));
 

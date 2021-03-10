@@ -2,7 +2,7 @@
 
 namespace app\common\controller;
 
-use app\admin\library\Auth;
+use addons\user\app\common\library\Auth;
 use app\BaseController;
 use think\facade\Event;
 use think\facade\Config;
@@ -114,7 +114,9 @@ class Api extends BaseController
         //移除HTML标签
         Request::filter('trim,strip_tags,htmlspecialchars');
 
-        $this->auth = Auth::instance();
+        if(addon_exist('user')){
+            $this->auth = Auth::instance();
+        }
 
         $modulename = app('http')->getName();
         $controllername = strtolower(Request::controller());
