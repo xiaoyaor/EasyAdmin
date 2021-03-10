@@ -142,7 +142,7 @@ class Backend extends BaseController
         !defined('IS_AJAX') && define('IS_AJAX', request()->isAjax());
 
         //授权验证
-        if (addon_exist('auth')){
+        if (open_auth()){
             $this->auth = Auth::instance();
         }
 
