@@ -302,12 +302,12 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                     debug: true,
                     steps: [
                         {
-                            element: "a[data-id=10]",
+                            element: "a[data-id=1]",
                             placement: "bottom",
                             title: "安装引导一",
-                            content: "请先安装<a style='color: red'>基础插件</a>下的所有插件。按照插件依赖顺序依次安装，安装完权限管理插件后需要进行登录验证，登录后再继续安装剩余插件"
+                            content: "请先安装<a style='color: red'>基础插件</a>下的<a style='color: red'>所有插件</a>。按照插件依赖顺序依次安装，安装完<a style='color: red'>权限管理插件</a>后需要进行登录验证，登录后再继续安装剩余插件"
                         },{
-                            element: "a[data-id=1]",
+                            element: "a[data-id=7]",
                             placement: "bottom",
                             title: "安装引导二",
                             content: "<a style='color: red'>完整应用</a>下的所有插件包含完整的前后台，安装前请安装相应的依赖插件，每个完整应用都可作为一个完整网站运营"
@@ -315,7 +315,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             element: "a[data-id=3]",
                             placement: "bottom",
                             title: "安装引导三",
-                            content: "<a style='color: red'>开发测试</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
+                            content: "<a style='color: red'>开发工具</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
                         },{
                             element: ".bootstrap-table",
                             placement: "top",
@@ -1169,7 +1169,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
         api: {
             formatter: {
                 title: function (value, row, index) {
-                    var title = '<a class="title" href="' +Config.easyadmin.cloud_url + row.url + '" data-toggle="tooltip" title="' + __('View addon home page') + '" target="_blank">' + value + '</a>';
+                    var title = '<a class="title" href="' + Config.easyadmin.cloud_url + '/' + row.url + '" data-toggle="tooltip" title="' + __('View addon home page') + '" target="_blank">' + value + '</a>';
                     if (row.screenshots && row.screenshots.length > 0) {
                         title += ' <a href="javascript:;" data-index="' + index + '" class="view-screenshots text-success" title="' + __('View addon screenshots') + '" data-toggle="tooltip"><i class="fa fa-image"></i></a>';
                     }
@@ -1206,7 +1206,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                     return row.addon && row.addon.version != row.version ? '<a href="' + row.url + '?version=' + row.version + '" target="_blank"><span class="releasetips text-primary" data-toggle="tooltip" title="' + __('New version tips', row.version) + '">' + row.addon.version + '<i></i></span></a>' : row.version;
                 },
                 home: function (value, row, index) {
-                    return row.addon ? '<a href="' + row.addon.url + '" data-toggle="tooltip" title="' + __('View addon index page') + '" target="_blank"><i class="fa fa-home text-primary"></i></a>' : '<a href="javascript:;"><i class="fa fa-home text-gray"></i></a>';
+                    return row.addon ? '<a href="/index/' + row.addon.name + '.html" data-toggle="tooltip" title="' + __('View addon index page') + '" target="_blank"><i class="fa fa-home text-primary"></i></a>' : '<a href="javascript:;"><i class="fa fa-home text-gray"></i></a>';
                 },
                 subnode: function (value, row, index) {
                     return '<a href="javascript:;" data-toggle="tooltip" title="' + __('Toggle sub menu') + '" data-id="' + row.id + '" data-pid="' + row.pid + '" class="btn btn-xs '

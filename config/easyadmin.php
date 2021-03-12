@@ -21,7 +21,7 @@ return [
     // 权限系统路径
     'auth_path'           => '\addons\auth\app\admin\library\Auth',
     //版本号
-    'version'             => '1.1.0.20201124',
+    'version'             => '1.1.1.20210312',
     //框架名称
     'url'                 => 'https://www.easyadmin.vip',
     //演示
