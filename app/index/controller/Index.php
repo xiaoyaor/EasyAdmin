@@ -22,6 +22,9 @@ class Index extends Frontend
 
     public function index()
     {
+        if (!file_exists(root_path().'.env')){
+           $this->redirect('install.php');
+        }
         return View::fetch();
     }
 
