@@ -55,7 +55,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
             //读取首次登录推荐插件列表
             if (localStorage.getItem("fastep") == "installed") {
                 $.ajax({
-                    url: Config.easyadmin.api_url + '/addon/recommend',
+                    url: Config.easyadmin.api_url + '/addins/addon/recommend',
                     type: 'post',
                     dataType: 'jsonp',
                     success: function (ret) {
@@ -79,7 +79,10 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                                 Layer.closeAll();
                             });
                             Layer.open({
-                                type: 1, skin: 'layui-layer-page', area: ["860px", "620px"], title: '',
+                                title: ret.title,
+                                area: 'auto',      //宽高自适应
+                                maxWidth: '1000px',
+                                maxHeight:'800px',    //最大高度800像素
                                 content: Template.render(ret.tpl, {addonlist: ret.rows})
                             });
                             localStorage.setItem("fastep", "dashboard");
@@ -91,7 +94,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
             //版本检测
             var checkupdate = function (ignoreversion, tips) {
                 $.ajax({
-                    url: Config.easyadmin.api_url + '/version/check',
+                    url: Config.easyadmin.api_url + '/addins/version/check',
                     type: 'post',
                     data: {version: Config.easyadmin.version},
                     dataType: 'jsonp',

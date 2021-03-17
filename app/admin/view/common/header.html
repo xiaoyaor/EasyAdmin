@@ -75,7 +75,7 @@
                 {/if}
 
                 <!-- 检测更新 -->
-                {if $site.head_update&&hook('Version')}
+                {if $site.head_update}
                 <li class="hidden-xs">
                     <a href="javascript:;" data-toggle="checkupdate" title="{:__('Check for updates')}">
                         <i class="fa fa-refresh"></i>
