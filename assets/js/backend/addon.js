@@ -239,7 +239,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             return false;
                         },
                         success: function (layero, index) {
-                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/index/register.html").prop("target", "_blank");
+                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/register.html").prop("target", "_blank");
                         }
                     });
                 } else {
@@ -290,59 +290,59 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 duration = false;
                 remaining = duration;
                 tour = new Tour({
-                    backdrop: true,
-                    backdropContainer: 'body',
-                    backdropPadding: 0,
-                    onStart: function() {
-                        return $demo.addClass("disabled", true);
-                    },
-                    onEnd: function() {
-                        return $demo.removeClass("disabled", true);
-                    },
-                    debug: true,
-                    steps: [
-                        {
-                            element: "a[data-id=1]",
-                            placement: "bottom",
-                            title: "安装引导一",
-                            content: "请先安装<a style='color: red'>基础插件</a>下的<a style='color: red'>所有插件</a>。按照插件依赖顺序依次安装，安装完<a style='color: red'>权限管理插件</a>后需要进行登录验证，登录后再继续安装剩余插件"
-                        },{
-                            element: "a[data-id=7]",
-                            placement: "bottom",
-                            title: "安装引导二",
-                            content: "<a style='color: red'>完整应用</a>下的所有插件包含完整的前后台，安装前请安装相应的依赖插件，每个完整应用都可作为一个完整网站运营"
-                        },{
-                            element: "a[data-id=3]",
-                            placement: "bottom",
-                            title: "安装引导三",
-                            content: "<a style='color: red'>开发工具</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
-                        },{
-                            element: ".bootstrap-table",
-                            placement: "top",
-                            title: "安装引导四",
-                            content: "<a style='color: red'>插件列表</a>，提供插件安装、升级、卸载服务"
-                        },{
-                            element: ".plupload",
-                            placement: "top",
-                            title: "安装引导五",
-                            content: "<a style='color: red'>离线安装</a>，安装离线插件"
-                        },{
-                            element: "a[data-url='addon/downloaded']",
-                            placement: "top",
-                            title: "安装引导六",
-                            content: "<a style='color: red'>本地插件</a>，查看本地安装的所有插件"
-                        },{
-                            element: ".btn-userinfo",
-                            placement: "top",
-                            title: "安装引导七",
-                            content: "<a style='color: red'>登录会员</a>，登录easyadmin官方会员，提供付费下载服务"
+                        backdrop: true,
+                        backdropContainer: 'body',
+                        backdropPadding: 0,
+                        onStart: function() {
+                            return $demo.addClass("disabled", true);
                         },
-                    ],
-                    template:"<div class='popover'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'>" +
+                        onEnd: function() {
+                            return $demo.removeClass("disabled", true);
+                        },
+                        debug: true,
+                        steps: [
+                            {
+                                element: "a[data-id=1]",
+                                placement: "bottom",
+                                title: "安装引导一",
+                                content: "请先安装<a style='color: red'>基础插件</a>下的<a style='color: red'>所有插件</a>。按照插件依赖顺序依次安装，安装完<a style='color: red'>权限管理插件</a>后需要进行登录验证，登录后再继续安装剩余插件"
+                            },{
+                                element: "a[data-id=7]",
+                                placement: "bottom",
+                                title: "安装引导二",
+                                content: "<a style='color: red'>完整应用</a>下的所有插件包含完整的前后台，安装前请安装相应的依赖插件，每个完整应用都可作为一个完整网站运营"
+                            },{
+                                element: "a[data-id=3]",
+                                placement: "bottom",
+                                title: "安装引导三",
+                                content: "<a style='color: red'>开发工具</a>下的所有插件用于插件开发，easyadmin提供了功能丰富的插件开发插件，使开发更简单方便"
+                            },{
+                                element: ".bootstrap-table",
+                                placement: "top",
+                                title: "安装引导四",
+                                content: "<a style='color: red'>插件列表</a>，提供插件安装、升级、卸载服务"
+                            },{
+                                element: ".plupload",
+                                placement: "top",
+                                title: "安装引导五",
+                                content: "<a style='color: red'>离线安装</a>，安装离线插件"
+                            },{
+                                element: "a[data-url='addon/downloaded']",
+                                placement: "top",
+                                title: "安装引导六",
+                                content: "<a style='color: red'>本地插件</a>，查看本地安装的所有插件"
+                            },{
+                                element: ".btn-userinfo",
+                                placement: "top",
+                                title: "安装引导七",
+                                content: "<a style='color: red'>登录会员</a>，登录easyadmin官方会员，提供付费下载服务"
+                            },
+                        ],
+                        template:"<div class='popover'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'>" +
                             "<div class='btn-group'><button class='btn btn-sm btn-default' data-role='prev'>« 上一步</button><button class='btn btn-sm btn-default' data-role='next'>下一步 »</button>" +
                             "<button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>暂停</button></div><button class='btn btn-sm btn-default' data-role='end'>知道了</button></div></div>"
                     }
-                    );
+                );
 
                 // Initialize the tour
                 tour.init();
@@ -870,7 +870,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                             return false;
                         },
                         success: function (layero, index) {
-                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/index/register.html").prop("target", "_blank");
+                            $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/register.html").prop("target", "_blank");
                         }
                     });
                 } else {
