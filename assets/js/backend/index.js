@@ -52,8 +52,9 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                 Backend.api.addtabs($(this).data("url"));
             });
 
+            localStorage.setItem("easystep", "installed");
             //读取首次登录推荐插件列表
-            if (localStorage.getItem("fastep") == "installed") {
+            if (localStorage.getItem("easystep") === "installed" && Config.autotip === true) {
                 $.ajax({
                     url: Config.easyadmin.api_url + '/addins/addon/recommend',
                     type: 'post',
@@ -85,7 +86,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                                 maxHeight:'800px',    //最大高度800像素
                                 content: Template.render(ret.tpl, {addonlist: ret.rows})
                             });
-                            localStorage.setItem("fastep", "dashboard");
+                            localStorage.setItem("easystep", "dashboard");
                         });
                     }
                 });

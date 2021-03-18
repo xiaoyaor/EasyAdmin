@@ -29,6 +29,13 @@ class Index extends Backend
      */
     public function index()
     {
+        //弹窗提示
+        $autotip = true;
+        if (open_auth()){
+            $autotip = false;
+        }
+        $this->assignconfig('autotip',$autotip);
+
         //菜单标识
         Config::get('site.menu_flag')?$flag=['dashboard' => 'hot','addon' => ['new', 'red', 'badge'],'auth/rule' => __('Menu'),'general' => ['new', 'purple']]:$flag=[];
         //左侧菜单,有无权限

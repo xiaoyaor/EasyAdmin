@@ -486,7 +486,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $("#warmtips").html('温馨提示：请将以下后台登录入口添加到你的收藏夹，为了你的网站安全，不要泄漏或发送给他人！可在后台系统设置修改！<a href="' + url + '">' + url + '</a>').show();
                                     $('<a class="btn" href="' + url + '" id="btn-admin" style="background:#18bc9c">访问后台</a>').appendTo($buttons);
                                 }
-                                localStorage.setItem("fastep", "installed");
+                                localStorage.setItem("easystep", "installed");
                             } else {
                                 $('#error').show().text(ret);
                                 $button.prop('disabled', false).text('点击安装');
