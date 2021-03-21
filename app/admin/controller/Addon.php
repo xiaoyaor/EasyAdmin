@@ -241,12 +241,12 @@ class Addon extends Backend
             $uid = request()->post("uid");
             $token = request()->post("token");
             $version = request()->post("version");
-            $faversion = request()->post("faversion");
+            $eaversion = request()->post("eaversion");
             $extend = [
                 'uid'       => $uid,
                 'token'     => $token,
                 'version'   => $version,
-                'faversion' => $faversion
+                'eaversion' => $eaversion
             ];
             Service::install($name, $force, $extend);
             $info = get_addon_info($name);
@@ -409,12 +409,12 @@ class Addon extends Backend
             $uid = request()->post("uid");
             $token = request()->post("token");
             $version = request()->post("version");
-            $faversion = request()->post("faversion");
+            $eaversion = request()->post("eaversion");
             $extend = [
                 'uid'       => $uid,
                 'token'     => $token,
                 'version'   => $version,
-                'faversion' => $faversion
+                'eaversion' => $eaversion
             ];
             //调用更新的方法
             Service::upgrade($name, $extend);

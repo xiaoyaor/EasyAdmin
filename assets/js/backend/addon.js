@@ -367,7 +367,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         uid: uid,
                         token: token,
                         version: version,
-                        faversion: Config.easyadmin.version
+                        eaversion: Config.easyadmin.version
                     }
                 }, function (data, ret) {
                     Layer.closeAll();
@@ -505,7 +505,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var token = userinfo ? userinfo.token : '';
                 Easy.api.ajax({
                     url: 'addon/upgrade',
-                    data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
+                    data: {name: name, uid: uid, token: token, version: version, eaversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
                     Layer.closeAll();
@@ -926,7 +926,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                         uid: uid,
                         token: token,
                         version: version,
-                        faversion: Config.easyadmin.version
+                        eaversion: Config.easyadmin.version
                     }
                 }, function (data, ret) {
                     Layer.closeAll();
@@ -1064,7 +1064,7 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
                 var token = userinfo ? userinfo.token : '';
                 Easy.api.ajax({
                     url: 'addon/upgrade',
-                    data: {name: name, uid: uid, token: token, version: version, faversion: Config.easyadmin.version}
+                    data: {name: name, uid: uid, token: token, version: version, eaversion: Config.easyadmin.version}
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
                     Layer.closeAll();

@@ -64,7 +64,7 @@ define(['jquery', 'bootstrap', 'backend', 'addtabs', 'adminlte', 'form', 'bootst
                             var install = function (name, title) {
                                 Easy.api.ajax({
                                     url: 'addon/install',
-                                    data: {name: name, faversion: Config.easyadmin.version}
+                                    data: {name: name, eaversion: Config.easyadmin.version}
                                 }, function (data, ret) {
                                     Easy.api.refreshmenu();
                                 });
