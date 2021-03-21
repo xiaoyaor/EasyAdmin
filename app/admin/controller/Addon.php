@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\common\controller\Backend;
 use easyadmin\Http;
+use think\addons\AddonException;
 use think\addons\Service;
 use think\facade\Cache;
 use think\facade\Config;

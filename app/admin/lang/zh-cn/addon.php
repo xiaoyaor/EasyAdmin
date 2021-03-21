@@ -20,7 +20,7 @@ return [
     'Conflict tips'                  => '此插件中发现和现有系统中部分文件发现冲突！以下文件将会被影响，请备份好相关文件后再继续操作',
     'Login tips'                     => '此处登录账号为<a href="https://www.easyadmin.vip" target="_blank">EasyAdmin官网账号</a>',
     'Logined tips'                   => '你好！%s<br />当前你已经登录，将同步保存你的购买记录',
-    'Pay tips'                       => '扫码支付后如果仍然无法立即下载，请不要重复支付，请加<a href="https://jq.qq.com/?_wv=1027&k=487PNBb" target="_blank">QQ群：636393962</a>向管理员反馈',
+    'Pay tips'                       => '扫码支付后如果仍然无法立即下载，请不要重复支付，请加<a href="https://qm.qq.com/cgi-bin/qm/qr?k=VWMAv21kiiHy9uCgcluK1GA1DM_dXh37&jump_from=webapi" target="_blank">QQ群：863713643</a>向管理员反馈',
     'Pay click tips'                 => '请点击这里在新窗口中进行支付！',
     'Pay new window tips'            => '请在新弹出的窗口中进行支付，支付完成后再重新点击安装按钮进行安装！',
     'Uninstall tips'                 => '确认卸载<b>[%s]</b>？<p class="text-danger">卸载将会删除所有插件文件且不可找回!!! 插件如果有创建数据库表请手动删除!!!</p>如有重要数据请备份后再操作！',
