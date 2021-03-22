@@ -289,4 +289,20 @@ return array (
             'weigh' => 0,
             'status' => 'normal',
         ),
+    18 =>
+        array (
+            'id' => 19,
+            'type' => 'file',
+            'pid' => 2,
+            'name' => 'vendor/index',
+            'title' => 'Vendor market',
+            'icon' => 'fa fa-cloud-download',
+            'condition' => '',
+            'remark' => 'Vendor tips',
+            'ismenu' => 1,
+            'createtime' => '2019-08-07 00:05:09',
+            'updatetime' => '2019-08-07 00:05:09',
+            'weigh' => 0,
+            'status' => 'normal',
+        ),
 );
