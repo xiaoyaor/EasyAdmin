@@ -153,7 +153,7 @@ return [
     'Category'                                              => '分类管理',
     'Cloud'                                                 => '云端平台',
     'Addon market'                                          => '插件市场',
-    'Vendor market'                                         => '三方类库',
+    'Vendor market'                                         => '类库市场',
     'Auth'                                                  => '权限管理',
     'Config'                                                => '系统配置',
     'Attachment'                                            => '附件管理',
