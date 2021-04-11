@@ -667,3 +667,36 @@ if (!function_exists('parseName')) {
         return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
     }
 }
+
+if (!function_exists('check_cors_request')) {
+    /**
+     * 跨域检测
+     */
+    function check_cors_request()
+    {
+        if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN']) {
+            $info = parse_url($_SERVER['HTTP_ORIGIN']);
+            $domainArr = explode(',', config('fastadmin.cors_request_domain'));
+            $domainArr[] = request()->host(true);
+            if (in_array("*", $domainArr) || in_array($_SERVER['HTTP_ORIGIN'], $domainArr) || (isset($info['host']) && in_array($info['host'], $domainArr))) {
+                header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+            } else {
+                header('HTTP/1.1 403 Forbidden');
+                exit;
+            }
+
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Max-Age: 86400');
+
+            if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+                if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+                    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+                }
+                if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+                    header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+                }
+                exit;
+            }
+        }
+    }
+}
