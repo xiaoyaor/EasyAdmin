@@ -99,7 +99,7 @@ else
         } else {
             foreach ($checkDirs as $k => $v) {
                 if (!is_dir(ROOT_PATH . $v)) {
-                    $errInfo = '当前代码仅包含核心代码，请前往官网下载完整包或资源包覆盖后再尝试安装，<a href="https://www.easyadmin.vip/download.html?ref=install" target="_blank">立即前往下载</a>';
+                    $errInfo = '当前系统框架文件不完整，请尝试重新在线安装或者前往官网下载完整包后再安装，<a href="https://www.easyadmin.vip/download.html?ref=install" target="_blank">立即前往下载</a>';
                     break;
                 }
             }
