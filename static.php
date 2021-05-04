@@ -1,6 +1,7 @@
 <?php
 if(basename($_SERVER['PHP_SELF']) == basename(__FILE__)) die('禁止访问') ;
-
+//判断开启静态
+if (!parse_ini_file('.env')['APP_HTML']) return;
 /**
 * 判断是否SSL协议
 * @return boolean
@@ -52,6 +53,14 @@ $md5 = md5(GetCurUrl());
 //获取静态文件路径
 $filepath = html_path.substr($md5,0,2).DIRECTORY_SEPARATOR.substr($md5,2).'.html';
 if (file_exists($filepath)){
-    header("Content-Type: text/html; charset=utf-8");
-    die (file_get_contents($filepath));
+    $conent = file_get_contents($filepath);
+    $time = substr($conent,0,10);
+    if (time()<$time){
+        header("Content-Type: text/html; charset=utf-8");
+        $conent = substr($conent,10);
+        die ($conent);
+    }else{
+        //过期删除
+        unlink($filepath);
+    }
 }

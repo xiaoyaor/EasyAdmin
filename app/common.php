@@ -520,10 +520,32 @@ if (!function_exists('is_ssl')) {
     }
 }
 
+if (!function_exists('directory')) {
+    /**
+     * 创建多级路径
+     * @param string $dir 文件夹路径
+     * @return boolean
+     * @throws Exception
+     */
+    function directory($dir){
+
+        if(is_dir($dir) || @mkdir($dir,0777))
+        {
+            return true;
+        }else{
+            directory(dirname($dir));
+            if(@mkdir($dir,0777)){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 if (!function_exists('get_cur_url')) {
     /**
      *获得当前完整的网址
-     * @param $ishost string 只获取域名
+     * @param string $ishost  只获取域名
      * @return string
      */
     function get_cur_url($ishost=false)
@@ -550,6 +572,36 @@ if (!function_exists('get_cur_url')) {
         return $ishost?$http.$host:$http.$host.$nowurl;
     }
 }
+
+if (!function_exists('create_html')) {
+    /**
+     * 保存静态化文件
+     * @param string $data 内容
+     * @param integer $refreshtime 刷新时间(默认3分钟,单位为秒)
+     * @return string
+     * @throws Exception
+     */
+    function create_html($data,$refreshtime = 3*60)
+    {
+        //判断是否开启网站静态化
+        if (env('APP_HTML') == true){
+            //缓存文件保存路径
+            $html_path = root_path().'runtime'.DIRECTORY_SEPARATOR."static".DIRECTORY_SEPARATOR;
+            //获取完整URL并加密
+            $md5_url = md5(get_cur_url());
+            //获取文件路径
+            $filepath = $html_path.substr($md5_url,0,2).DIRECTORY_SEPARATOR;
+            //创建文件存储目录
+            directory($filepath);
+            //文件名称
+            $filename = substr($md5_url,2).'.html';
+            //添加过期时间并保存文件
+            file_put_contents($filepath . $filename,time()+$refreshtime.$data);
+        }
+        return $data;
+    }
+}
+
 
 if (!function_exists('get_key')) {
     /**

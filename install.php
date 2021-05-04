@@ -89,8 +89,8 @@ if (is_file($Env)) {
 }
 else
 {
-    if (version_compare(PHP_VERSION, '7.1.0', '<')) {
-        $errInfo = "当前版本(" . PHP_VERSION . ")过低，请使用PHP7.1以上版本";
+    if (version_compare(PHP_VERSION, '7.3.0', '<')) {
+        $errInfo = "当前版本(" . PHP_VERSION . ")过低，请使用PHP7.3以上版本";
     }
     else
     {
@@ -176,7 +176,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         //写入ENV
         $EnvData = array(
             'APP_DEBUG' => 'true',
-            'APP_HTML' => 'true',
+            'APP_HTML' => 'false',
             'APP' => array(
                 'DEFAULT_TIMEZONE' => 'Asia/Shanghai',
                 'ADMIN' => $adminName,
