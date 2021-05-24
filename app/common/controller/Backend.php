@@ -5,22 +5,16 @@ namespace app\common\controller;
 use app\admin\library\Auth;
 use app\BaseController;
 use easyadmin\Tree;
-use think\App;
 use think\facade\Config;
 use think\facade\Lang;
-use think\facade\Log;
 use think\facade\Session;
-use think\facade\Validate;
 use think\facade\View;
-use think\facade\Event;
-use xiaoyaor\think\Jump;
 
 /**
  * 后台控制器基类
  */
 class Backend extends BaseController
 {
-    use Jump;
     /**
      * 无需登录的方法,同时也就不需要鉴权了
      * @var array

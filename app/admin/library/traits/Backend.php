@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use think\db\exception\PDOException;
+use think\facade\Config;
 use think\facade\Db;
 use think\Exception;
 use think\exception\ValidateException;
@@ -119,9 +120,17 @@ trait Backend
                 try {
                     //是否采用模型验证
                     if ($this->modelValidate) {
-                        $name = str_replace("\\model\\", "\\validate\\", get_class($this->model));
-                        $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.add' : $name) : $this->modelValidate;
-                        $this->model->validateFailException(true)->validate($validate);
+                        $validate = str_replace("\\model\\", "\\validate\\", get_class($this->model));
+                        //$validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.add' : $name) : $this->modelValidate;
+                        //$this->model->validateFailException(true)->validate($validate);
+                        try {
+                            validate($validate)
+                                ->scene('add')
+                                ->check($params);
+                        } catch (ValidateException $e) {
+                            // 验证失败 输出错误信息
+                            dump($e->getError());
+                        }
                     }
                     $result = $this->model->save($params);
                     Db::commit();
@@ -170,9 +179,17 @@ trait Backend
                 try {
                     //是否采用模型验证
                     if ($this->modelValidate) {
-                        $name = str_replace("\\model\\", "\\validate\\", get_class($this->model));
-                        $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.edit' : $name) : $this->modelValidate;
-                        $row->validateFailException(true)->validate($validate);
+                        $validate = str_replace("\\model\\", "\\validate\\", get_class($this->model));
+                        //$validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.edit' : $name) : $this->modelValidate;
+                        //$row->validateFailException(true)->validate($validate);
+                        try {
+                            validate($validate)
+                                ->scene('edit')
+                                ->check($params);
+                        } catch (ValidateException $e) {
+                            // 验证失败 输出错误信息
+                            dump($e->getError());
+                        }
                     }
                     $result = $row->save($params);
                     Db::commit();
@@ -252,7 +269,7 @@ trait Backend
         try {
             $list = $this->model->onlyTrashed()->select();
             foreach ($list as $k => $v) {
-                $count += $v->delete(true);
+                $count += $v->force()->delete(true);
             }
             Db::commit();
         } catch (PDOException $e) {
@@ -396,7 +413,7 @@ trait Backend
         $importHeadType = isset($this->importHeadType) ? $this->importHeadType : 'comment';
 
         $table = $this->model->getQuery()->getTable();
-        $database = \think\Config::get('database.database');
+        $database = Config::get('database.connections.mysql.database');
         $fieldArr = [];
         $list = Db::query("SELECT COLUMN_NAME,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?", [$table, $database]);
         foreach ($list as $k => $v) {

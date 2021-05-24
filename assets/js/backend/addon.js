@@ -175,9 +175,47 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             // 离线安装
             require(['upload'], function (Upload) {
                 Upload.api.plupload("#plupload-addon", function (data, ret) {
-                    Config['addons'][data.addon.name] = data.addon;
-                    Toastr.success(ret.msg);
-                    operate(data.addon.name, 'enable', false);
+                    if ( data.module === 1 ){
+
+                        Layer.open({
+                            content: Template("apptpl", ret.data),
+                            zIndex: 99,
+                            area: ['400px', '270px'],
+                            title: __('Select Module Install'),
+                            resize: false,
+                            btn: [__('Ok'), __('Cancel')],
+                            yes: function (index, layero) {
+                                Easy.api.ajax({
+                                    url: Config.moduleurl + '/addon/local/type/module',
+                                    dataType: 'json',
+                                    data: {
+                                        module: $("#module", layero).val(),
+                                        _method: 'POST',
+                                        data:data,
+                                    }
+                                }, function (data, ret) {
+                                    Layer.closeAll();
+                                    Layer.alert(ret.msg);
+                                }, function (data, ret) {
+                                });
+                            },
+                            btn2: function () {
+                                return false;
+                            },
+                            success: function (layero, index) {
+                                $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/register.html").prop("target", "_blank");
+                            }
+                        });
+
+
+                    }else{
+
+                        Config['addons'][data.addon.name] = data.addon;
+                        Toastr.success(ret.msg);
+                        operate(data.addon.name, 'enable', false);
+
+                    }
+
                 });
             });
 

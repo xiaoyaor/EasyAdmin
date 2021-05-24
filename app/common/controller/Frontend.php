@@ -5,20 +5,14 @@ namespace app\common\controller;
 use addons\user\app\common\library\Auth;
 use app\BaseController;
 use think\facade\Config;
-use think\facade\Event;
 use think\facade\Cookie;
 use think\facade\View;
-use think\Lang;
-use think\Validate;
-use xiaoyaor\think\Jump;
 
 /**
  * 前台控制器基类
  */
 class Frontend extends BaseController
 {
-    use Jump;
-
     /**
      * 无需登录的方法,同时也就不需要鉴权了
      * @var array

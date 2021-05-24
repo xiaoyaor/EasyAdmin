@@ -155,6 +155,36 @@
         </div>
     </form>
 </script>
+<!--要安装的应用选择模板-->
+<script id="apptpl" type="text/html">
+    <div>
+        <form class="form-horizontal">
+            <fieldset>
+
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{:__('提示')}</strong>{:__('选择要安装的应用')}
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="input-group col-xs-12">
+
+                            <select id="module"  name="module" class="form-control selectpicker" style="display: block !important;">
+                                <option value="easyadmin" selected>easyadmin系统</option>
+                                <%for(var i=0;i < app.length;i++){%>
+                                <option value="<%=app[i][0]%>" selected><%=app[i][1]%></option>
+                                <%}%>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</script>
+<!--登录模板-->
 <script id="logintpl" type="text/html">
     <div>
         <form class="form-horizontal">
@@ -176,8 +206,8 @@
                     <div class="col-lg-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" id="inputPassword" value=""
-                               placeholder="{:__('Your password')}">
+                            <input type="password" class="form-control" id="inputPassword" value=""
+                                   placeholder="{:__('Your password')}">
                         </div>
                     </div>
                 </div>
@@ -185,6 +215,7 @@
         </form>
     </div>
 </script>
+<!--用户信息模板-->
 <script id="userinfotpl" type="text/html">
     <div>
         <form class="form-horizontal form-userinfo">
@@ -199,6 +230,7 @@
         </form>
     </div>
 </script>
+<!--支付模板-->
 <script id="paytpl" type="text/html">
     <div class="payimg" style="background:url('<%=payimg%>') 0 0 no-repeat;background-size:cover;">
         <%if(paycode){%>
@@ -211,6 +243,7 @@
         <%}%>
     </div>
 </script>
+<!--文件冲突模板-->
 <script id="conflicttpl" type="text/html">
     <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -233,6 +266,7 @@
         </tbody>
     </table>
 </script>
+<!--操作模板-->
 <script id="operatetpl" type="text/html">
     <% var labelarr = ['primary', 'success', 'info', 'danger', 'warning']; %>
     <% var label = labelarr[item.id % 5]; %>
@@ -242,8 +276,8 @@
 
         <!--依赖插件-->
         <% if(item.depend){%>
-            <% if(typeof item.depend !="undefined" && item.depend.length>0){%>
-                <span class="btn-group">
+        <% if(typeof item.depend !="undefined" && item.depend.length>0){%>
+        <span class="btn-group">
                     <a href="javascript:;" class="btn btn-xs btn-warning btn-depend"
                     ><i class="fa fa-puzzle-piece"></i> {:__('依赖')}</a>
                     <a class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown"
@@ -257,13 +291,13 @@
                         <% } %>
                     </ul>
                 </span>
-            <% }%>
+        <% }%>
         <% }%>
 
         <!--安装插件-->
         <% if(!addon){ %>
-            <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
-                <span class="btn-group">
+        <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
+        <span class="btn-group">
                     <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
                        data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
                        data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
@@ -278,23 +312,23 @@
                         <% } %>
                     </ul>
                 </span>
-            <% }else{%>
-                <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
-                    data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
-                    data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
-            <% } %>
+        <% }else{%>
+        <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
+           data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
+           data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
+        <% } %>
 
-            <!--演示插件-->
-            <% if(item.demourl){ %>
-                <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
-                    <i class="fa fa-flash"></i> {:__('Demo')}
-                </a>
-            <% } %>
+        <!--演示插件-->
+        <% if(item.demourl){ %>
+        <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
+            <i class="fa fa-flash"></i> {:__('Demo')}
+        </a>
+        <% } %>
         <% } else {%>
-            <!--升级插件-->
-            <% if(addon.version!=item.version){%>
-                <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
-                    <span class="btn-group">
+        <!--升级插件-->
+        <% if(addon.version!=item.version){%>
+        <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
+        <span class="btn-group">
                         <a href="javascript:;" class="btn btn-xs btn-info btn-success btn-upgrade"
                            data-version="<%=item.version%>"><i class="fa fa-cloud"></i> {:__('Upgrade')}</a>
                         <a class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown"
@@ -308,27 +342,27 @@
                             <% } %>
                         </ul>
                     </span>
-                <% }else{%>
-                    <a href="javascript:;" class="btn btn-xs btn-info btn-upgrade" title="{:__('Upgrade')}" data-version="<%=item.version%>"><i
-                        class="fa fa-cloud"></i> {:__('Upgrade')}</a>
-                <% }%>
-            <% }%>
+        <% }else{%>
+        <a href="javascript:;" class="btn btn-xs btn-info btn-upgrade" title="{:__('Upgrade')}" data-version="<%=item.version%>"><i
+                class="fa fa-cloud"></i> {:__('Upgrade')}</a>
+        <% }%>
+        <% }%>
 
-            <!--配置插件-->
-            <% if(addon.config){ %>
-            <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
-                {:__('Setting')}</a>
-            <% } %>
+        <!--配置插件-->
+        <% if(addon.config){ %>
+        <a href="javascript:;" class="btn btn-xs btn-primary btn-config" title="{:__('Setting')}"><i class="fa fa-pencil"></i>
+            {:__('Setting')}</a>
+        <% } %>
 
-            <!--卸载插件-->
-            <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
-                {:__('Uninstall')}</a>
-            <!--演示插件-->
-            <% if(item.demourl){ %>
-                <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
-                    <i class="fa fa-flash"></i> {:__('Demo')}
-                </a>
-            <% } %>
+        <!--卸载插件-->
+        <a href="javascript:;" class="btn btn-xs btn-danger btn-uninstall" title="{:__('Uninstall')}"><i class="fa fa-times"></i>
+            {:__('Uninstall')}</a>
+        <!--演示插件-->
+        <% if(item.demourl){ %>
+        <a href="<%=item.demourl%>" class="btn btn-xs btn-primary btn-info btn-demo" target="_blank">
+            <i class="fa fa-flash"></i> {:__('Demo')}
+        </a>
+        <% } %>
         <% } %>
 
 

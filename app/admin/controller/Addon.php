@@ -10,6 +10,7 @@ use think\facade\Cache;
 use think\facade\Config;
 use think\Exception;
 use think\facade\View;
+use think\helper\Str;
 
 /**
  * 插件管理
@@ -312,26 +313,117 @@ class Addon extends Backend
     }
 
     /**
-     * 本地上传
+     * 本地上传安装插件
      */
     public function local()
     {
+        if (request()->get('type','') != 'module'){
+
+            //文件名，即hash
+            $tmpName = request()->post('data','');
+            if (isset($tmpName['name'])){
+                $tmpName = $tmpName['name'];
+                //插件目录下的临时存放目录
+                $tmpAddonDir = ADDON_PATH . $tmpName . DIRECTORY_SEPARATOR;
+                try {
+                    $infoFile = $tmpAddonDir . 'addon.ini';
+                    if (!is_file($infoFile)) {
+                        throw new Exception(__('Addon info file was not found'));
+                    }
+
+                    //加载配置文件
+                    $config = (new \think\Config)->load($infoFile , $tmpName);
+
+                    //模块插件安装特殊处理
+                    if (isset($config['type']) && $config['type'] == 'module'){
+                        //要安装的应用名称
+                        $app = request()->post('module','');
+                        //插件名称
+                        $old_addon = $config['name'];
+                        //重新组合的插件名称
+                        $new_addon = str_replace('app_',$app.'_',$old_addon);
+                        //下划线转驼峰
+                        $oldaddon = Str::studly($old_addon);
+                        //下划线转驼峰
+                        $newaddon = Str::studly($new_addon);
+                        //遍历所有文件夹和文件
+                        $dirlist = getAllDir($tmpAddonDir);
+                        //替换所有特定信息
+                        replaceSignStr($tmpAddonDir,$dirlist,['app_',$oldaddon],[$app.'_',$newaddon]);
+                        //重命名主文件
+                        rename($tmpAddonDir.$oldaddon.'.php', $tmpAddonDir.$newaddon.'.php');
+                    }
+
+                    //再次加载配置文件
+                    $config = (new \think\Config)->load($infoFile , $tmpName);
+                    $name = isset($config['name']) ? $config['name'] : '';
+                    if (!$name) {
+                        throw new Exception(__('Addon info file data incorrect'));
+                    }
+                    if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
+                        throw new Exception(__('Addon name incorrect'));
+                    }
+
+                    $newAddonDir = ADDON_PATH . $name . DIRECTORY_SEPARATOR;
+                    if (is_dir($newAddonDir)) {
+                        throw new Exception(__('Addon already exists'));
+                    }
+
+                    //完成移动并重命名插件文件夹
+                    rename($tmpAddonDir, $newAddonDir);
+                    try {
+                        //默认禁用该插件copydirs
+                        $info = get_addon_info($name);
+                        if ($info['state']) {
+                            $info['state'] = 0;
+                            set_addon_info($name, $info);
+                        }
+
+                        //执行插件的安装方法
+                        $class = get_addon_class($name);
+                        if (class_exists($class)) {
+                            $addon = new $class(app());
+                            $addon->install();
+                        }
+
+                        //导入SQL
+                        Service::importsql($name);
+
+                        $info['config'] = get_addon_config($name) ? 1 : 0;
+                        $this->success(__('Offline installed tips'), null, ['addon' => $info]);
+                    } catch (Exception $e) {
+                        @rmdirs($newAddonDir);
+                        throw new Exception(__($e->getMessage()));
+                    }
+                } catch (Exception $e) {
+                    unset($info);
+                    @rmdirs($tmpAddonDir);
+                    $this->error(__($e->getMessage()));
+                }
+            }
+        }
         Config::set(['default_return_type'=>'json'],'app');
 
         $file = request()->file('file');
+        //临时文件存放目录
         $addonTmpDir = runtime_path() . 'addons' . DIRECTORY_SEPARATOR;
         if (!is_dir($addonTmpDir)) {
             @mkdir($addonTmpDir, 0755, true);
         }
-        //$info = $file->move($addonTmpDir,$file->getOriginalName());
+        //移动上传文件到临时文件夹下。文件名为hash值
         $info = moveFile($file->getPathname(),$addonTmpDir,$file->hash().'.zip');
         if ($info) {
+            //文件名，即hash
             $tmpName = substr($info->getFilename(), 0, stripos($info->getFilename(), '.'));
+            //插件目录下的临时存放目录
             $tmpAddonDir = ADDON_PATH . $tmpName . DIRECTORY_SEPARATOR;
+            //临时文件完整路径
             $tmpFile = $addonTmpDir . $info->getFilename();
             try {
+                //解压压缩包，带入名称
                 Service::unzip($tmpName);
                 unset($info);
+                //删除压缩包
                 @unlink($tmpFile);
                 $infoFile = $tmpAddonDir . 'addon.ini';
                 if (!is_file($infoFile)) {
@@ -339,6 +431,18 @@ class Addon extends Backend
                 }
 
                 $config = (new \think\Config)->load($infoFile , $tmpName);
+
+                //模块插件安装特殊处理
+                if (isset($config['type']) && $config['type'] == 'module'){
+                    //获取所有应用插件信息
+                    $data = [];
+                    $applist = getAllApp();
+                    foreach ($applist as $item) {
+                        $data[] = [$item['name'],$item['title']];
+                    }
+                    $this->success(__('Module Install'), null, ['name'=>$tmpName,'module'=>1,'app' => $data]);
+                }
+
                 $name = isset($config['name']) ? $config['name'] : '';
                 if (!$name) {
                     throw new Exception(__('Addon info file data incorrect'));
@@ -352,7 +456,117 @@ class Addon extends Backend
                     throw new Exception(__('Addon already exists'));
                 }
 
-                //重命名插件文件夹
+                //完成移动并重命名插件文件夹
+                rename($tmpAddonDir, $newAddonDir);
+                try {
+                    //默认禁用该插件copydirs
+                    $info = get_addon_info($name);
+                    if ($info['state']) {
+                        $info['state'] = 0;
+                        set_addon_info($name, $info);
+                    }
+
+                    //执行插件的安装方法
+                    $class = get_addon_class($name);
+                    if (class_exists($class)) {
+                        $addon = new $class(app());
+                        $addon->install();
+                    }
+
+                    //导入SQL
+                    Service::importsql($name);
+
+                    $info['config'] = get_addon_config($name) ? 1 : 0;
+                    $this->success(__('Offline installed tips'), null, ['addon' => $info]);
+                } catch (Exception $e) {
+                    @rmdirs($newAddonDir);
+                    throw new Exception(__($e->getMessage()));
+                }
+            } catch (Exception $e) {
+                unset($info);
+                @unlink($tmpFile);
+                @rmdirs($tmpAddonDir);
+                $this->error(__($e->getMessage()));
+            }
+        } else {
+            // 上传失败获取错误信息
+            $this->error(__($file->getError()));
+        }
+    }
+
+    /**
+     * 应用模块插件安装
+     */
+    public function module()
+    {
+        if (request()->get('type','') != 'module'){
+
+        }
+        Config::set(['default_return_type'=>'json'],'app');
+
+        $file = request()->file('file');
+        //临时文件存放目录
+        $addonTmpDir = runtime_path() . 'addons' . DIRECTORY_SEPARATOR;
+        if (!is_dir($addonTmpDir)) {
+            @mkdir($addonTmpDir, 0755, true);
+        }
+        //移动上传文件到临时文件夹下。文件名为hash值
+        $info = moveFile($file->getPathname(),$addonTmpDir,$file->hash().'.zip');
+        if ($info) {
+            //文件名，即hash
+            $tmpName = substr($info->getFilename(), 0, stripos($info->getFilename(), '.'));
+            //插件目录下的临时存放目录
+            $tmpAddonDir = ADDON_PATH . $tmpName . DIRECTORY_SEPARATOR;
+            //临时文件完整路径
+            $tmpFile = $addonTmpDir . $info->getFilename();
+            try {
+                //解压压缩包，带入名称
+                Service::unzip($tmpName);
+                unset($info);
+                //删除压缩包
+                @unlink($tmpFile);
+                $infoFile = $tmpAddonDir . 'addon.ini';
+                if (!is_file($infoFile)) {
+                    throw new Exception(__('Addon info file was not found'));
+                }
+
+                $config = (new \think\Config)->load($infoFile , $tmpName);
+                //模块插件安装特殊处理
+                if (isset($config['type']) && $config['type'] == 'model'){
+                    $app = 'easycms';
+                    //遍历所有文件夹和文件
+                    $dirlist = getAllDir($tmpAddonDir);
+
+
+
+                    //获取所有应用插件信息
+                    $applist = getAllApp();
+
+                    $data = [];
+                    foreach ($applist as $item) {
+                        $data[] = [$item['name'],$item['title']];
+                    }
+
+                    $this->success(__('55555'), null, ['model'=>1,'app' => $data]);
+
+
+
+                    $dd=1;
+                }
+                $name = isset($config['name']) ? $config['name'] : '';
+                if (!$name) {
+                    throw new Exception(__('Addon info file data incorrect'));
+                }
+                if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
+                    throw new Exception(__('Addon name incorrect'));
+                }
+
+                $newAddonDir = ADDON_PATH . $name . DIRECTORY_SEPARATOR;
+                if (is_dir($newAddonDir)) {
+                    throw new Exception(__('Addon already exists'));
+                }
+
+                //完成移动并重命名插件文件夹
                 rename($tmpAddonDir, $newAddonDir);
                 try {
                     //默认禁用该插件copydirs
