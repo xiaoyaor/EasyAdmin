@@ -163,16 +163,16 @@
 
                 <div class="alert alert-dismissable alert-success">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{:__('提示')}</strong>{:__('选择要安装的应用')}
+                    <strong>{:__('提示：')}</strong>{:__('请选择模块要安装的应用')}<br>默认安装在应用管理下,和应用同级
                 </div>
                 <div class="form-group">
                     <div class="col-lg-12">
                         <div class="input-group col-xs-12">
 
-                            <select id="module"  name="module" class="form-control selectpicker" style="display: block !important;">
-                                <option value="easyadmin" selected>easyadmin系统</option>
+                            <select id="app"  name="app" class="form-control selectpicker" style="display: block !important;">
+                                <option value="app" selected>默认应用</option>
                                 <%for(var i=0;i < app.length;i++){%>
-                                <option value="<%=app[i][0]%>" selected><%=app[i][1]%></option>
+                                <option value="<%=app[i][0]%>"><%=app[i][1]%></option>
                                 <%}%>
                             </select>
 

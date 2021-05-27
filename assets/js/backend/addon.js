@@ -175,47 +175,40 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
             // 离线安装
             require(['upload'], function (Upload) {
                 Upload.api.plupload("#plupload-addon", function (data, ret) {
-                    if ( data.module === 1 ){
-
+                    if ( data.appmodule === 1 ){
                         Layer.open({
                             content: Template("apptpl", ret.data),
                             zIndex: 99,
-                            area: ['400px', '270px'],
+                            area: ['400px', '300px'],
                             title: __('Select Module Install'),
                             resize: false,
                             btn: [__('Ok'), __('Cancel')],
                             yes: function (index, layero) {
                                 Easy.api.ajax({
-                                    url: Config.moduleurl + '/addon/local/type/module',
+                                    url: Config.moduleurl + '/addon/appmodule',
                                     dataType: 'json',
                                     data: {
-                                        module: $("#module", layero).val(),
+                                        app: $("#app", layero).val(),
                                         _method: 'POST',
                                         data:data,
                                     }
                                 }, function (data, ret) {
-                                    Layer.closeAll();
-                                    Layer.alert(ret.msg);
+                                    Config['addons'][data.addon.name] = data.addon;
+                                    operate(data.addon.name, 'enable', false);
                                 }, function (data, ret) {
+                                    return false;
                                 });
                             },
                             btn2: function () {
+                                Layer.closeAll();
                                 return false;
-                            },
-                            success: function (layero, index) {
-                                $(".layui-layer-btn1", layero).prop("href", Config.easyadmin.url+"/user/register.html").prop("target", "_blank");
                             }
                         });
-
-
                     }else{
-
                         Config['addons'][data.addon.name] = data.addon;
                         Toastr.success(ret.msg);
                         operate(data.addon.name, 'enable', false);
-
                     }
-
                 });
             });
 
@@ -390,85 +383,189 @@ define(['jquery', 'bootstrap', 'backend', 'table','clipboard', 'form', 'template
 
                 $(".btn-guide").on('click',function(){
                     tour.restart();
-                })
+                });
             });
 
             var install = function (name, version, force) {
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
-                Easy.api.ajax({
-                    url: 'addon/install',
-                    data: {
-                        name: name,
-                        force: force ? 1 : 0,
-                        uid: uid,
-                        token: token,
-                        version: version,
-                        eaversion: Config.easyadmin.version
-                    }
-                }, function (data, ret) {
-                    Layer.closeAll();
-                    Config['addons'][data.addon.name] = ret.data.addon;
-                    Layer.alert(__('Online installed tips'), {
-                        btn: [__('OK')],
-                        title: __('Warning'),
-                        icon: 1
-                    });
-                    $('.btn-refresh').trigger('click');
-                    Easy.api.refreshmenu();
-                }, function (data, ret) {
-                    //如果是需要购买的插件则弹出二维码提示
-                    if (ret && ret.code === -1) {
-                        //扫码支付
-                        Layer.open({
-                            content: Template("paytpl", ret.data),
-                            shade: 0.8,
-                            area: ['800px', '600px'],
-                            skin: 'layui-layer-msg layui-layer-pay',
-                            title: false,
-                            closeBtn: true,
-                            btn: false,
-                            resize: false,
-                            end: function () {
-                                Layer.alert(__('Pay tips'));
-                            }
-                        });
-                    } else if (ret && ret.code === -2) {
-                        //如果登录已经超时,重新提醒登录
-                        if (uid && uid != ret.data.uid) {
-                            Controller.api.userinfo.set(null);
-                            $(".operate[data-name='" + name + "'] .btn-install").trigger("click");
-                            return;
+                // 应用模块
+                if (name.substring(0,4) === 'app_'){
+                    Easy.api.ajax({
+                        url: 'addon/applist',
+                        data: {
+                            name: name,
                         }
-                        top.Easy.api.open(ret.data.payurl, __('Pay now'), {
-                            //area: ["650px", "700px"],
-                            area: ["800px", "600px"],
-                            end: function () {
-                                top.Layer.alert(__('Pay tips'));
-                            }
-                        });
-                    } else if (ret && ret.code === -3) {
-                        //插件目录发现影响全局的文件
+                    },function (data, ret) {
+
                         Layer.open({
-                            content: Template("conflicttpl", ret.data),
-                            shade: 0.8,
-                            area: ['800px', '600px'],
-                            title: __('Warning'),
-                            btn: [__('Continue install'), __('Cancel')],
-                            end: function () {
+                            content: Template("apptpl", ret.data),
+                            zIndex: 99,
+                            area: ['400px', '300px'],
+                            title: __('Select Module Install'),
+                            resize: false,
+                            btn: [__('Ok'), __('Cancel')],
+                            yes: function (index, layero) {
+                                Easy.api.ajax({
+                                    url: 'addon/install',
+                                    data: {
+                                        name: name,
+                                        force: force ? 1 : 0,
+                                        app: $("#app", layero).val(),
+                                        uid: uid,
+                                        token: token,
+                                        version: version,
+                                        eaversion: Config.easyadmin.version
+                                    }
+                                }, function (data, ret) {
+                                    Layer.closeAll();
+                                    Config['addons'][data.addon.name] = ret.data.addon;
+                                    Layer.alert(__('Online installed tips'), {
+                                        btn: [__('OK')],
+                                        title: __('Warning'),
+                                        icon: 1
+                                    });
+                                    $('.btn-refresh').trigger('click');
+                                    Easy.api.refreshmenu();
+                                }, function (data, ret) {
+                                    //如果是需要购买的插件则弹出二维码提示
+                                    if (ret && ret.code === -1) {
+                                        //扫码支付
+                                        Layer.open({
+                                            content: Template("paytpl", ret.data),
+                                            shade: 0.8,
+                                            area: ['800px', '600px'],
+                                            skin: 'layui-layer-msg layui-layer-pay',
+                                            title: false,
+                                            closeBtn: true,
+                                            btn: false,
+                                            resize: false,
+                                            end: function () {
+                                                Layer.alert(__('Pay tips'));
+                                            }
+                                        });
+                                    } else if (ret && ret.code === -2) {
+                                        //如果登录已经超时,重新提醒登录
+                                        if (uid && uid != ret.data.uid) {
+                                            Controller.api.userinfo.set(null);
+                                            $(".operate[data-name='" + name + "'] .btn-install").trigger("click");
+                                            return;
+                                        }
+                                        top.Easy.api.open(ret.data.payurl, __('Pay now'), {
+                                            //area: ["650px", "700px"],
+                                            area: ["800px", "600px"],
+                                            end: function () {
+                                                top.Layer.alert(__('Pay tips'));
+                                            }
+                                        });
+                                    } else if (ret && ret.code === -3) {
+                                        //插件目录发现影响全局的文件
+                                        Layer.open({
+                                            content: Template("conflicttpl", ret.data),
+                                            shade: 0.8,
+                                            area: ['800px', '600px'],
+                                            title: __('Warning'),
+                                            btn: [__('Continue install'), __('Cancel')],
+                                            end: function () {
+
+                                            },
+                                            yes: function () {
+                                                install(name, version, true);
+                                            }
+                                        });
+
+                                    } else {
+                                        Layer.alert(ret.msg);
+                                    }
+                                    return false;
+                                });
 
                             },
-                            yes: function () {
-                                install(name, version, true);
+                            btn2: function () {
+                                Layer.closeAll();
+                                return false;
                             }
                         });
+                    },{
 
-                    } else {
-                        Layer.alert(ret.msg);
-                    }
-                    return false;
-                });
+                    });
+
+
+                }else{
+                    Easy.api.ajax({
+                        url: 'addon/install',
+                        data: {
+                            name: name,
+                            force: force ? 1 : 0,
+                            uid: uid,
+                            token: token,
+                            version: version,
+                            eaversion: Config.easyadmin.version
+                        }
+                    }, function (data, ret) {
+                        Layer.closeAll();
+                        Config['addons'][data.addon.name] = ret.data.addon;
+                        Layer.alert(__('Online installed tips'), {
+                            btn: [__('OK')],
+                            title: __('Warning'),
+                            icon: 1
+                        });
+                        $('.btn-refresh').trigger('click');
+                        Easy.api.refreshmenu();
+                    }, function (data, ret) {
+                        //如果是需要购买的插件则弹出二维码提示
+                        if (ret && ret.code === -1) {
+                            //扫码支付
+                            Layer.open({
+                                content: Template("paytpl", ret.data),
+                                shade: 0.8,
+                                area: ['800px', '600px'],
+                                skin: 'layui-layer-msg layui-layer-pay',
+                                title: false,
+                                closeBtn: true,
+                                btn: false,
+                                resize: false,
+                                end: function () {
+                                    Layer.alert(__('Pay tips'));
+                                }
+                            });
+                        } else if (ret && ret.code === -2) {
+                            //如果登录已经超时,重新提醒登录
+                            if (uid && uid != ret.data.uid) {
+                                Controller.api.userinfo.set(null);
+                                $(".operate[data-name='" + name + "'] .btn-install").trigger("click");
+                                return;
+                            }
+                            top.Easy.api.open(ret.data.payurl, __('Pay now'), {
+                                //area: ["650px", "700px"],
+                                area: ["800px", "600px"],
+                                end: function () {
+                                    top.Layer.alert(__('Pay tips'));
+                                }
+                            });
+                        } else if (ret && ret.code === -3) {
+                            //插件目录发现影响全局的文件
+                            Layer.open({
+                                content: Template("conflicttpl", ret.data),
+                                shade: 0.8,
+                                area: ['800px', '600px'],
+                                title: __('Warning'),
+                                btn: [__('Continue install'), __('Cancel')],
+                                end: function () {
+
+                                },
+                                yes: function () {
+                                    install(name, version, true);
+                                }
+                            });
+
+                        } else {
+                            Layer.alert(ret.msg);
+                        }
+                        return false;
+                    });
+                }
             };
 
             var uninstall = function (name, force) {
