@@ -2,6 +2,9 @@
  * Skin: BlackYellow
  * ------------
  */
+.skin_main_color {
+  color: #f39c12;
+}
 .skin-black-yellow .main-header .navbar {
   background-color: #fff;
 }

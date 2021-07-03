@@ -2,6 +2,9 @@
  * Skin: Mountain
  * -----------
  */
+.skin_main_color {
+  color: #fff0;
+}
 body.skin-mountain{
   background-image: url("/assets/img/skins/mountain.jpg") !important;
   background-repeat: no-repeat;

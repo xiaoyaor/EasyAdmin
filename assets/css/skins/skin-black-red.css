@@ -2,6 +2,9 @@
  * Skin: BlackRed
  * ---------
  */
+.skin_main_color {
+  color: #e74c3c;
+}
 .skin-black-red .main-header .navbar {
   background-color: #fff;
 }

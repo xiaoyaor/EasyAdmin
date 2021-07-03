@@ -2,6 +2,9 @@
  * Skin: PinkWhite
  * -----------
  */
+.skin_main_color {
+  color: #993333;
+}
 .skin-brown-full .main-header .navbar {
   background-color: #993333;
 }

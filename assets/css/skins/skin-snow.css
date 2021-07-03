@@ -2,6 +2,9 @@
  * Skin: Snow
  * -----------
  */
+.skin_main_color {
+  color: #fff0;
+}
 body.skin-snow {
   background-image: url("/assets/img/skins/snow.jpg") !important;
   background-repeat: no-repeat;

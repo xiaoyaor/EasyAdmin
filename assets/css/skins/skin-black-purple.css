@@ -2,6 +2,9 @@
  * Skin: BlackPurple
  * ------------
  */
+.skin_main_color {
+  color: #605ca8;
+}
 .skin-black-purple .main-header .navbar {
   background-color: #fff;
 }

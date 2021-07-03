@@ -2,6 +2,9 @@
  * Skin: Yellow
  * ------------
  */
+.skin_main_color {
+  color: #C0C0C0;
+}
 .skin-silver-full .main-header .navbar {
   background-color: #C0C0C0;
 }

@@ -2,6 +2,9 @@
  * Skin: Green
  * -----------
  */
+.skin_main_color {
+  color: #00a65a;
+}
 .skin-green-full .main-header .navbar {
   background-color: #00a65a;
 }

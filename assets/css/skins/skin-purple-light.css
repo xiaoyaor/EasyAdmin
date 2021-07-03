@@ -2,6 +2,9 @@
  * Skin: PurpleLight
  * ------------
  */
+.skin_main_color {
+  color: #605ca8;
+}
 .skin-purple-light .main-header .navbar {
   background-color: #605ca8;
 }

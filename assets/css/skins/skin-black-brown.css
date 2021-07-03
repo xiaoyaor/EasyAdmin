@@ -2,6 +2,9 @@
  * Skin: BlackPink
  * ----------
  */
+.skin_main_color {
+  color: #993333;
+}
 .skin-black-brown .main-header .navbar {
   background-color: #fff;
 }

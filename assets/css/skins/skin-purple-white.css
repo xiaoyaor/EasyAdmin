@@ -2,6 +2,9 @@
  * Skin: PurpleWhite
  * ------------
  */
+.skin_main_color {
+  color: #605ca8;
+}
 .skin-purple-white .main-header .navbar {
   background-color: #fff;
 }

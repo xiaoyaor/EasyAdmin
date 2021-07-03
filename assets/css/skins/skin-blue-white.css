@@ -2,6 +2,9 @@
  * Skin: BlueWhite
  * ----------
  */
+.skin_main_color {
+  color: #007bff;
+}
 .skin-blue-white .main-header .navbar {
   background-color: #fff;
 }

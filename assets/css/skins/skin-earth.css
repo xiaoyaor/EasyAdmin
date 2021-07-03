@@ -2,6 +2,9 @@
  * Skin: Earth
  * -----------
  */
+.skin_main_color {
+  color: #fff0;
+}
 body.skin-earth {
   background-image: url("/assets/img/skins/earth.jpg") !important;
   background-repeat: no-repeat;

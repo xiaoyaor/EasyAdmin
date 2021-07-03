@@ -2,6 +2,9 @@
  * Skin: GreenWhite
  * -----------
  */
+.skin_main_color {
+  color: #00a65a;
+}
 .skin-green-white .main-header .navbar {
   background-color: #fff;
 }

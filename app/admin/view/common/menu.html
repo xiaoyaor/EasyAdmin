@@ -4,7 +4,7 @@
     {if $site.side_user}
     <div class="user-panel hidden-xs">
         <div class="pull-left image">
-            <a {$admin?' href="general.profile.html?ref=addtabs" class="addtabsit"':null}><img src="{if $admin}{$admin.avatar|cdnurl}{else}__CDN__/assets/img/avatar.png{/if}" class="img-circle" /></a>
+            <a {$admin?' href="auth/profile.html?ref=addtabs" class="addtabsit"':null}><img src="{if $admin}{$admin.avatar|cdnurl}{else}__CDN__/assets/img/avatar.png{/if}" class="img-circle" /></a>
         </div>
         <div class="pull-left info">
             <p>{if $admin}{$admin.nickname}{else}{:__('Guest Name')}{/if}</p>
