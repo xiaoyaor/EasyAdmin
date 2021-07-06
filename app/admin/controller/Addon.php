@@ -56,6 +56,9 @@ class Addon extends Backend
         if (!$name) {
             $this->error(__('Parameter %s can not be empty', $ids ? 'id' : 'name'));
         }
+        if (strpos($name,'.html') !== false) {
+            $name = substr($name,0,strrpos($name ,".html"));
+        }
         if (!preg_match("/^[a-zA-Z0-9_]+$/", $name)) {
             $this->error(__('Addon name incorrect'));
         }
