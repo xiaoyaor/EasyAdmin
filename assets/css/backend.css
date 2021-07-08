@@ -251,6 +251,7 @@ form.form-horizontal .control-label {
   background-color: #ffffff;
   border-bottom-color: transparent;
   cursor: default;
+  border-top: 2px solid #f39c12;
 }
 /*单表格*/
 .panel-tabs .panel-heading {
