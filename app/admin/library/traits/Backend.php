@@ -59,6 +59,7 @@ trait Backend
                 ->count();
 
             $list = $this->model
+                ->with($this->with)
                 ->where($where)
                 ->order($sort, $order)
                 ->limit($offset, $limit)

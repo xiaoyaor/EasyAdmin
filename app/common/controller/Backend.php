@@ -28,6 +28,12 @@ class Backend extends BaseController
     protected $noNeedRight = [];
 
     /**
+     * 关联查询
+     * @var array
+     */
+    protected $with = [];
+
+    /**
      * 权限控制类
      * @var Auth
      */

@@ -74,6 +74,8 @@
                 </li>
                 {/if}
 
+                {:hook('head_extend')}
+
                 <!-- 检测更新 -->
                 {if $site.head_update}
                 <li class="hidden-xs">
