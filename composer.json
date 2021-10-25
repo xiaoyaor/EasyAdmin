@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.2.5",
         "topthink/framework": "^6.0.0",
         "topthink/think-orm": "^2.0",
         "topthink/think-captcha": "^3.0",
@@ -37,6 +37,8 @@
         "ext-curl": "*"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest"
+        ,
         "symfony/var-dumper": "^4.2",
         "topthink/think-trace":"^1.0"
     },

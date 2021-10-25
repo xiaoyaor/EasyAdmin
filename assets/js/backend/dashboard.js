@@ -39,7 +39,7 @@ define(['jquery', 'bootstrap','addtabs', 'backend','easy', 'addtabs', 'table', '
                 escape: false,
                 pk: 'id',
                 sortName: 'weigh',
-                pagination: false,
+                pagination: true,
                 commonSearch: false,
                 search: true,
                 templateView: false,
