@@ -24,7 +24,7 @@ define('APP_PATH', ROOT_PATH . 'app' . DIRECTORY_SEPARATOR);
 // 定义应用目录
 define('CONFIG_PATH', ROOT_PATH . 'config' . DIRECTORY_SEPARATOR);
 // 安装包目录
-define('INSTALL_PATH', APP_PATH . 'admin' . DIRECTORY_SEPARATOR . 'command' . DIRECTORY_SEPARATOR . 'Install' . DIRECTORY_SEPARATOR);
+define('INSTALL_PATH', ROOT_PATH . 'install' . DIRECTORY_SEPARATOR);
 
 //错误信息
 $errInfo = '';
@@ -144,13 +144,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 //    }
 
     try {
-        //检测能否读取安装文件
-        // $sql = @file_get_contents(INSTALL_PATH . 'easyadmin.sql');
-        // if (!$sql) {
-        //     throw new Exception("无法读取app/admin/command/Install/easyadmin.sql文件，请检查是否有读权限");
-        // }
-        // $sql = str_replace("`ea_", "`{$mysqlPrefix}", $sql);
-
         //连接数据库
         $pdo = new PDO("mysql:host={$mysqlHostname};port={$mysqlHostport}", $mysqlUsername, $mysqlPassword, array(
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -164,10 +157,19 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             throw new Exception("当前数据库不支持innodb存储引擎，请开启后再重新尝试安装");
         }
 
-        //新建数据库并导入sql
+        //新建数据库并导入sql安装文件
         $pdo->query("CREATE DATABASE IF NOT EXISTS `{$mysqlDatabase}` CHARACTER SET utf8 COLLATE utf8_general_ci;");
-        //$pdo->query("USE `{$mysqlDatabase}`");
-        //$pdo->exec($sql);
+        //检测能否读取安装文件
+        $sql = @file_get_contents(INSTALL_PATH . 'easyadmin.sql');
+        if ($sql) {
+            try{
+                $sql = str_replace("`__PREFIX__", "`{$mysqlPrefix}", $sql);
+                $pdo->query("USE `{$mysqlDatabase}`");
+                $pdo->exec($sql);
+            }catch( PDOException $e ) {
+                echo $e->getMessage();
+            }
+        }
 
         //新建随机后台地址
         $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
