@@ -642,16 +642,17 @@ if (!function_exists('get_key')) {
     }
 }
 
-if (!function_exists('curl_https')) {
+if (!function_exists('file_curl_get_contents')) {
     /**
      * curl方法获取http/htpps网址源码
      * @param string $url 网址
      * @param string $refurl 来路页面
      * @param int $method 方法
+     * @param bool $gzip 压缩
      * @param string $param 附带参数
      * @return mixed
      */
-    function curl_https($url = '', $refurl = '', $method = 0 , $param=''){
+    function file_curl_get_contents($url = '', $refurl = '', $method = 0 , $gzip=false, $param=''){
         $ch = curl_init();//初始化curl
         curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
         //判断https链接
@@ -659,13 +660,16 @@ if (!function_exists('curl_https')) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
         }
-
+        //压缩内容
+        if ($gzip){
+            curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+        }
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
         if($refurl){
             curl_setopt ($ch, CURLOPT_REFERER, $refurl);
         }
-        if($method){
+        if($method == 'post'){
             curl_setopt($ch, CURLOPT_POST, $method);//post提交方式
             curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
         }
@@ -676,14 +680,14 @@ if (!function_exists('curl_https')) {
     }
 }
 
-if (!function_exists('get_https_html_source')) {
+if (!function_exists('file_get_https_contents')) {
     /**
      * 获取https网页源码
      * 非https直接用file_get_contents
      * @param string $url
      * @return string
      */
-    function get_https_html_source($url)
+    function file_get_https_contents($url)
     {
         $arrContextOptions = [
             'ssl' => [
