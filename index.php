@@ -12,17 +12,22 @@
 // [ 应用入口文件 ]
 namespace think;
 
-//判断输出静态文件
-require __DIR__ . '/static.php';
+if(!file_exists(__DIR__ . '/.env')){
+    //安装引导程序
+    header("location:/install.php");
+}else{
+    //判断输出静态文件
+    require __DIR__ . '/static.php';
 
-//加载第三方引用
-require __DIR__ . '/vendor/autoload.php';
+    //加载第三方引用
+    require __DIR__ . '/vendor/autoload.php';
 
-// 执行HTTP应用并响应
-$http = (new App())->http;
+    // 执行HTTP应用并响应
+    $http = (new App())->http;
 
-$response = $http->run();
+    $response = $http->run();
 
-$response->send();
+    $response->send();
 
-$http->end($response);
+    $http->end($response);
+}

@@ -106,23 +106,20 @@ class Ajax extends Backend
      */
     public function wipecache()
     {
-        $type = request()->request("type");
-        switch ($type) {
-            case 'all':
-            case 'content':
-                Cache::clear();
-                if ($type == 'content')
-                    break;
-            case 'template':
-                rmdirs(runtime_path() . 'temp' .DIRECTORY_SEPARATOR, false);
-                if ($type == 'template')
-                    break;
-            case 'addons':
-                Service::refresh();
-                if ($type == 'addons')
-                    break;
+        $type = request()->request("type",'all');
+        //清空缓冲池
+        if ($type ==='all' || $type === 'content') {
+            Cache::clear();
         }
-
+        //清除模板缓存
+        if ($type ==='all' || $type === 'template') {
+            rmdirs(runtime_path() . 'temp' .DIRECTORY_SEPARATOR, false);
+        }
+        //刷新插件缓存
+        if ($type ==='all' || $type === 'addons') {
+            Service::refresh();
+        }
+        //触发清空缓存后事件
         trigger("wipecacheAfter");
         $this->success();
     }

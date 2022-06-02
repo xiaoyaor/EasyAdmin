@@ -32,6 +32,24 @@ if (!function_exists('__')) {
 
 }
 
+if (!function_exists('__tip')) {
+
+    /**
+     * 获取提示变量值
+     * @param string $tipname 提示标题
+     * @param string $tipcontent 提示内容
+     * @return string
+     */
+    function __tip($tipname = '', $tipcontent = '')
+    {
+        $html = '';
+        if ($tipname && $tipcontent){
+            $html = ' <a href="#" data-toggle="popover" title="'.__($tipname).'" class="glyphicon glyphicon-info-sign" data-placement="left" data-container="body" data-content="'.__($tipcontent).'"></a>';
+        }
+        return $html;
+    }
+}
+
 if (!function_exists('format_bytes')) {
 
     /**

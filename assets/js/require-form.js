@@ -624,6 +624,27 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
             bindevent: function (form) {
 
             },
+            tip: function (form) {
+                $("[data-toggle='popover']").popover({
+                    template: '<div class="popover" role="tooltip"><h3 class="popover-title" style="border-bottom:none;"></h3><div class="arrow"></div><div class="popover-content"></div></div>',
+                    html: true,
+                    trigger: "hover",
+                    placement: "top",
+                    delay: {hide: 100}
+                }).on('shown.bs.popover', function (event) {
+                    var that = this;
+                    $(this).parent().find('div.popover').on('mouseenter', function () {
+                        $(that).attr('in', true);
+                    }).on('mouseleave', function () {
+                        $(that).removeAttr('in');
+                        $(that).popover('hide');
+                    });
+                }).on('hide.bs.popover', function (event) {
+                    if ($(this).attr('in')) {
+                        event.preventDefault();
+                    }
+                });
+            },
             slider: function (form) {
                 if ($(".slider", form).size() > 0) {
                     require(['bootstrap-slider'], function () {
@@ -715,6 +736,8 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                 var events = Form.events;
 
                 events.bindevent(form);
+
+                events.tip(form);
 
                 events.validator(form, success, error, submit);
 
